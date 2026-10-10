@@ -1,0 +1,13 @@
+/* Opción 1 · Color: crema + negro del logo + azul eléctrico de su carta + amarillo cheddar de apoyo */
+:root{
+  --je:#ffc62e; --je-fg:#0b0b0b;
+  --ink:#0b0b0b; --cream:#faf8f0; --card:#ffffff;
+  --accent:#1a00ad; --accent-fg:#ffffff;
+  --dark:#1a00ad; --dark-fg:#faf8f0; --dark-pop:#ffc62e;
+  --pop:#ffc62e; --pop-fg:#0b0b0b; --soft:#b9c6ff;
+  --band:#ffc62e; --band-fg:#0b0b0b;
+  --tag:#b9c6ff; --tag-fg:#0f0070; --focus:#ffc62e;
+}
+.sec--ink{background:var(--ink);color:var(--cream)}
+.dot.on{background:#17c964}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(23,201,100,0)}0%{box-shadow:0 0 0 0 rgba(23,201,100,.6)}100%{box-shadow:0 0 0 0 rgba(23,201,100,0)}}

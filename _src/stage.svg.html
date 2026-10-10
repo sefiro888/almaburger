@@ -1,0 +1,28 @@
+<svg id="stage" class="stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="200 90 620 810" role="img" aria-label="Alma Burger. Una hamburguesa con gafas asoma por detrás del nombre y saluda"><defs>
+<image id="source" width="1000" height="1000" href="img/logo-anim.png"/>
+<clipPath id="logo"><rect width="1000" height="492"/></clipPath>
+<clipPath id="glove-l"><rect x="357" y="497" width="58" height="72"/></clipPath>
+<clipPath id="glove-r"><path d="M610 623 H687 V702 H610Z"/></clipPath>
+<clipPath id="originalTongue"><path d="M486 591 C477 585 464 585 456 590 C448 598 450 609 458 616 C466 623 477 622 480 615 C484 608 475 603 486 594Z"/></clipPath><clipPath id="originalMouth"><rect x="482" y="584" width="60" height="20"/></clipPath>
+<filter id="ink" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 -1 0 2.85"/></filter>
+<g id="shoe" class="cf" stroke="black" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M-28 -2 Q-33 -20 -21 -28 Q-9 -33 5 -21 L23 -16 L23 3Z"/><path d="M-30 0 L25 5 Q31 9 26 12 L-30 6 Q-35 4 -30 0Z"/><path d="M2 -22 Q-13 -42 -7 -41 Q0 -42 4 -22 M4 -22 Q6 -43 11 -36 Q13 -28 4 -22" fill="none"/></g><filter id="logoOcclusion" filterUnits="userSpaceOnUse" x="200" y="190" width="620" height="302" color-interpolation-filters="sRGB"><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 -1 0 2.85" result="inkMask"/><feMorphology in="inkMask" operator="dilate" radius="6" result="outlineMask"/><feComposite in="SourceGraphic" in2="outlineMask" operator="in"/></filter></defs>
+
+<ellipse id="shadow" cx="510" cy="833" rx="78" ry="7" fill="#221c16" opacity="0"/><g id="traveler"><g id="character">
+<path id="legLeft" fill="none" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M480 665 Q478 714 466 751"/><path id="legRight" fill="none" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" d="M528 664 Q542 715 557 751"/>
+<use id="footLeft" xlink:href="#shoe" transform="translate(466 758)"/><use id="footRight" xlink:href="#shoe" transform="translate(557 758) scale(-1 1)"/>
+<path id="armLeft" d="M435 612 Q396 605 386 567" fill="none" stroke="black" stroke-width="7" stroke-linecap="round"/>
+<path id="armRight" d="M590 612 Q602 643 624 652" fill="none" stroke="black" stroke-width="7" stroke-linecap="round"/>
+<g id="handLeft"><use xlink:href="#source" filter="url(#ink)" clip-path="url(#glove-l)"/></g><g id="handRight"><use xlink:href="#source" filter="url(#ink)" clip-path="url(#glove-r)"/></g>
+<g class="cf" stroke="black" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+<path d="M430 643 C433 651 427 665 446 669 Q511 673 581 669 Q600 666 596 647Z"/>
+<path d="M426 637 Q420 643 430 648 C442 641 446 655 457 649 S474 647 485 650 S497 638 510 646 S526 655 539 648 S552 645 565 649 S584 648 598 644 Q605 638 594 633Z"/>
+<path d="M431 623 Q424 628 429 635 Q493 639 590 635 Q603 633 595 623Z"/>
+<path d="M432 615 C423 622 419 630 428 632 C438 623 446 640 458 633 S475 628 488 634 S500 618 514 628 S529 639 541 630 S557 625 571 632 S586 628 598 624 Q608 617 599 613Z"/>
+<path d="M426 603 Q418 616 430 620 Q501 621 593 620 Q607 618 601 605Z"/>
+<path d="M422 606 C427 557 462 532 502 533 C552 526 596 553 604 595 Q608 604 600 605Z"/>
+</g>
+<g stroke="black" stroke-width="1.7" class="cf"><circle cx="477" cy="554" r="18.3"/><circle cx="523" cy="554" r="18.3"/><circle cx="477" cy="554" r="15.3" fill="black"/><circle cx="523" cy="554" r="15.3" fill="black"/></g>
+<path d="M462 533 Q467 529 471 532 M526 531 Q530 527 533 532 M501 572 C488 568 488 582 501 578" fill="none" stroke="black" stroke-width="1.7" stroke-linecap="round"/>
+<use xlink:href="#source" clip-path="url(#originalMouth)"/>
+<g id="originalTongueMotion"><use xlink:href="#source" clip-path="url(#originalTongue)"/></g>
+</g></g><use xlink:href="#source" filter="url(#logoOcclusion)" clip-path="url(#logo)"/></svg>
