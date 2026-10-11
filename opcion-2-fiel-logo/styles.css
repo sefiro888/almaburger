@@ -523,6 +523,26 @@ html.lock .toast.on{translate:-50% 0}
 .teaser .statement{max-width:15em}
 .teaser__p{font-size:1.2rem;max-width:34em;margin:18px 0 26px}
 @media (max-width:980px){.story{grid-template-columns:1fr}.story__side{position:static;display:grid;max-width:300px}.story__pic{aspect-ratio:4/3}}
+/* ====== historia en portada ====== */
+.hstory__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.hstory__pics{position:relative;aspect-ratio:1/1.08}
+.hp{position:absolute;overflow:hidden;border:4px solid var(--dark-fg);border-radius:28px;box-shadow:8px 8px 0 var(--dark-pop);background:#222}
+.hp img{width:100%;height:100%;object-fit:cover}
+.hp--1{inset:0 26% 24% 0;transform:rotate(-3deg)}
+.hp--2{width:46%;aspect-ratio:3/4;right:0;top:8%;transform:rotate(4deg)}
+.hp--3{width:50%;aspect-ratio:1;left:18%;bottom:0;transform:rotate(-2deg)}
+.hp__stamp{position:absolute;width:24%;right:4%;bottom:6%;animation:spin 20s linear infinite}
+.hp__stamp circle{fill:var(--dark-pop)}.hp__stamp text{fill:var(--dark)}
+.hstory__text p{font-size:1.12rem;margin-top:16px;max-width:34em}
+.hstory__text .hstory__lead{font-family:var(--display);font-size:clamp(1.3rem,2.4vw,1.9rem);line-height:1.15;margin-top:6px}
+.hstory__more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s}
+.hstory__more>*{overflow:hidden;min-height:0}
+.hstory__more.open{grid-template-rows:1fr}
+.hstory__more{display:block;max-height:0;overflow:hidden;transition:max-height .6s ease}
+.hstory__more.open{max-height:700px}
+.hstory__end{font-family:var(--display);font-size:2rem!important;color:var(--dark-pop)}
+@media (max-width:980px){.hstory__grid{grid-template-columns:1fr}.hstory__pics{max-width:480px;margin-inline:auto;width:100%}}
+@media (prefers-reduced-motion:reduce){.hstory__more{transition:none}}
 
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{
