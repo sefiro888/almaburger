@@ -96,6 +96,8 @@ CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedid
 
 
 def shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
+    HOMEA = ' aria-current="page"' if active == 'home' else ''
+    CARTAA = ' aria-current="page"' if active == 'carta' else ''
     return f'''<!doctype html>
 <html lang="es">
 <head>
@@ -123,6 +125,12 @@ def shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 {CTA}
 {FOOT}
 {CART}
+<nav class="bnav" aria-label="Acceso rápido">
+  <a href="index.html"{HOMEA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Inicio</span></a>
+  <a href="carta.html"{CARTAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h10"/></svg><span>Carta</span></a>
+  <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Recoger</span><i id="bnavN" hidden>0</i></button>
+  <a class="bnav__je" href="{JE}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Domicilio</span></a>
+</nav>
 <script src="app.js"></script>
 </body>
 </html>'''
@@ -490,7 +498,7 @@ def main():
         shutil.copy(SRC / 'app.js', out / 'app.js')
         for k, fn in BODIES.items():
             title, desc = TITLES[k]
-            active = {'index': '', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
+            active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
             (out / FILES[k]).write_text(shell(active, title, desc, fn(), t['tcolor']), encoding='utf-8')
         (out / '404.html').write_text(shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor']), encoding='utf-8')
     (ROOT / 'index.html').write_text(SELECTOR, encoding='utf-8')

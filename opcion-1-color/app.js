@@ -297,6 +297,7 @@ function draw() {
     ${editing === k ? `<input class="noteinp" data-ni="${k}" maxlength="120" value="${esc(l.note)}" placeholder="Sin cebolla, poco hecha…">` : (l.note ? `<small class="note">“${esc(l.note)}”</small>` : '')}</li>`; }).join('');
   if (editing !== null) { const inp = $('[data-ni]'); if (inp) inp.focus(); }
   $('#orderbarN').textContent = n; $('#orderbarT').textContent = eur(t);
+  const bn = $('#bnavN'); if (bn) { bn.hidden = !n; bn.textContent = n; $('#bnavT').textContent = n ? eur(t) : 'Recoger'; }
   bar.hidden = !n || cartEl.classList.contains('open'); document.body.classList.toggle('has-bar', !!n);
   sync();
 }
@@ -319,6 +320,7 @@ $('#cartList').addEventListener('focusout', saveNote);
 $('#cartList').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-ni]')) { e.preventDefault(); saveNote(e); } });
 $('#cartClear').addEventListener('click', () => { if (!cart.length || confirm('¿Vaciar el pedido?')) { cart = []; persist(); draw(); } });
 $('#cartOpen').addEventListener('click', () => openCart(true));
+const bc = $('#bnavCart'); if (bc) bc.addEventListener('click', () => openCart(true));
 $('#cartClose').addEventListener('click', () => openCart(false));
 bar.addEventListener('click', () => openCart(true));
 scrim.addEventListener('click', () => openCart(false));
@@ -432,6 +434,8 @@ addEventListener('scroll', stuck, { passive: true }); stuck();
 burger.addEventListener('click', () => { const o = links.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
 $$('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+const revealNow = () => $$('.reveal:not(.in)').forEach(el => { if (el.getBoundingClientRect().top < innerHeight * 1.05) el.classList.add('in'); });
+revealNow(); setTimeout(revealNow, 350); addEventListener('load', revealNow); addEventListener('scroll', revealNow, { passive: true });
 const hv = $('#heroVisual');
 if (hv && matchMedia('(hover:hover)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
   const ph = $$('.hero__photo', hv);
