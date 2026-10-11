@@ -182,6 +182,15 @@ def home():
   </div>
 </section>
 
+<section class="sec">
+  <div class="wrap teaser">
+    <p class="kicker reveal">Nuestra historia</p>
+    <h2 class="statement reveal">Una buena hamburguesa es mucho más <span>que una comida.</span></h2>
+    <p class="teaser__p reveal">Es compartir momentos, reunirse con amigos y disfrutar de sabores que dejan huella. Cada hamburguesa que sale de nuestra cocina está preparada al momento, con dedicación y pasión por hacer las cosas bien.</p>
+    <a class="btn btn--solid reveal" href="el-alma.html">Leer nuestra historia →</a>
+  </div>
+</section>
+
 <section class="sec sec--ink" id="como-pedir">
   <div class="wrap">
     <p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2>
@@ -235,15 +244,28 @@ def home():
 
 
 def alma():
-    return phero('El alma', 'Donde cada hamburguesa tiene <em>alma</em>', 'Ingredientes elegidos, recetas únicas y un sabor que invita a volver. Esta es nuestra forma de entender la hamburguesa.', 'cabrona.jpg', 'Hamburguesa con queso de cabra y patatas fritas') + f'''
+    return phero('El alma', 'Donde cada hamburguesa tiene <em>alma</em>', 'Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
 <section class="sec">
+  <div class="wrap story">
+    <aside class="story__side"><p class="kicker reveal">Nuestra historia</p>
+      <figure class="story__pic reveal"><img src="img/dishes/me-derrito.jpg" alt="Una smash burger con salsa cheddar, preparada al momento" loading="lazy"></figure></aside>
+    <div class="story__text">
+      <p class="story__lead reveal">Todo comenzó con una idea sencilla: crear un lugar donde disfrutar de hamburguesas auténticas, elaboradas con ingredientes de calidad y mucho cariño.</p>
+      <p class="reveal">En Alma Burger creemos que una buena hamburguesa es mucho más que una comida. Es compartir momentos, reunirse con amigos y disfrutar de sabores que dejan huella.</p>
+      <p class="reveal">Por eso seleccionamos cuidadosamente cada ingrediente, desde la carne hasta el pan, para ofrecer una experiencia única en cada bocado.</p>
+      <p class="reveal">Cada hamburguesa que sale de nuestra cocina está preparada al momento, con dedicación y pasión por hacer las cosas bien.</p>
+      <p class="reveal">Hoy seguimos creciendo con la misma ilusión del primer día: convertir Alma Burger en un lugar donde nuestros clientes se sientan como en casa y siempre quieran volver.</p>
+      <p class="story__end reveal">Bienvenidos a Alma Burger.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
   <div class="wrap">
-    <p class="kicker reveal">Nuestra historia</p>
-    <h2 class="statement reveal">La hamburguesa es la excusa. <span>Lo que importa es compartir el momento.</span></h2>
     <div class="pillars">
-      <article class="pillar reveal"><span class="pillar__n">01</span><h3>Ingredientes con carácter</h3><p>Elegimos cada ingrediente, desde la carne hasta el pan. Sin atajos, con recetas únicas que te harán volver.</p></article>
-      <article class="pillar reveal"><span class="pillar__n">02</span><h3>Al momento, siempre</h3><p>Cada pedido se prepara cuando lo pides. Smash a la plancha, queso fundido y a la mesa mientras aún humea.</p></article>
-      <article class="pillar reveal"><span class="pillar__n">03</span><h3>Como en casa</h3><p>Una terraza tranquila, buen rollo y un equipo que te trata como a un amigo. Bienvenido a Alma Burger.</p></article>
+      <article class="pillar reveal"><span class="pillar__n">01</span><h3>Ingredientes seleccionados</h3><p>Elegimos cuidadosamente cada ingrediente, desde la carne hasta el pan, para ofrecer una experiencia única en cada bocado.</p></article>
+      <article class="pillar reveal"><span class="pillar__n">02</span><h3>Preparada al momento</h3><p>Cada hamburguesa que sale de nuestra cocina se prepara al momento, con dedicación y pasión por hacer las cosas bien.</p></article>
+      <article class="pillar reveal"><span class="pillar__n">03</span><h3>Como en casa</h3><p>Un lugar donde nuestros clientes se sientan como en casa y siempre quieran volver. Bienvenidos a Alma Burger.</p></article>
     </div>
   </div>
 </section>
@@ -356,7 +378,7 @@ def galeria():
           ('desayuno-capricho.jpg', '¿Desayuno o capricho?', 'Pancakes de nutella con fresas')]
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
     bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
-           ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
+           ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
     b = ''.join(f'<figure class="mi reveal"><img src="img/dishes/{s}.jpg" alt="{n}" loading="lazy"><figcaption>{n}</figcaption></figure>' for s, n in bur)
     return phero('Galería', 'Mejor verlo <em>que contarlo</em>', 'Un paseo por nuestros platos. Pulsa en cualquier foto para verla en grande.', 'trufadas.jpg', 'Patatas trufadas') + f'''
 <section class="sec sec--band">
@@ -423,7 +445,7 @@ def nf():
 
 TITLES = {
     'index': ('Alma Burger · Hamburguesas y desayunos en Ordizia', 'Smash burgers, picoteo, hot dogs, postres y desayunos en el corazón de Ordizia. Donde el sabor tiene alma.'),
-    'alma': ('El alma · Alma Burger', 'La historia de Alma Burger: ingredientes elegidos, recetas únicas y smash burgers hechas al momento en Ordizia.'),
+    'alma': ('El alma · Alma Burger', 'Donde cada hamburguesa tiene alma. Ingredientes seleccionados, recetas únicas y el sabor que te hará volver. La historia de Alma Burger en Ordizia.'),
     'carta': ('La carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
     'desayunos': ('Desayunos · Alma Burger', 'Desayunos hasta las 12:00 en Ordizia: tostadas, pancakes, bowls, bollería, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),

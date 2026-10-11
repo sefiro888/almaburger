@@ -11,7 +11,7 @@ const MENU = {
     P('La Golosa', 'Smash burger con panceta crujiente, cheddar fundido, cebolla caramelizada y un toque de crema de Lotus', 17.5, ['dulce'], 'la-golosa'),
     P('Dulce y Verde', 'Smash burger con queso edam, cebolla caramelizada, panceta crujiente y crema de pistacho', 17.5, ['dulce'], 'dulce-y-verde'),
     P('Gordi Deluxe', 'Smash burger con lechuga, tomate, panceta, huevo frito y nuestra salsa de pepinillos (opción vegetariana)', 14.5, ['veg'], 'gordi-deluxe'),
-    P('Me Derrito', 'Smash burger con queso, panceta, salsa mayonesa, chispas de bacon y MUUUUCHA salsa cheddar', 15.5),
+    P('Me Derrito', 'Smash burger con queso, panceta, salsa mayonesa, chispas de bacon y MUUUUCHA salsa cheddar', 15.5, [], 'me-derrito'),
     P('La Matru', 'Smash burger con queso, panceta crujiente, mayonesa de trufa y patatas paja', 14, ['trufa'], 'la-matru'),
     P('La Cabrona', 'Doble carne smash, queso de cabra, mermelada de bacon, cebolla caramelizada, mayonesa japonesa y salsa BBQ al whisky', 16.5, [], 'la-cabrona'),
     P('La Dori', 'Doble carne smash, queso cheddar, salsa de Doritos, mermelada de bacon, Doritos crocantes y salsa de queso cheddar', 17.5, [], 'la-dori'),
@@ -444,7 +444,7 @@ if (hv && matchMedia('(hover:hover)').matches && !matchMedia('(prefers-reduced-m
 
 /* ---------- Ficha del plato (ventana con la foto completa) ---------- */
 const JE = 'https://www.just-eat.es/restaurants-alma-burger-ordizia/menu';
-const AI_SLUGS = new Set(['la-basica', 'la-golosa', 'la-cabrona', 'la-diabla', 'tequenos', 'alitas', 'ensalada', 'panceta', 'hot-clasica', 'hot-gordita', 'hot-quesuda', 'hot-picantona', 'tarta-lotus', 'tarta-pistacha', 'tarta-ferrero', 'coulant', 'crepe']);
+const AI_SLUGS = new Set(['la-basica', 'la-golosa', 'la-diabla', 'tequenos', 'alitas', 'ensalada', 'panceta', 'hot-clasica', 'hot-gordita', 'hot-quesuda', 'hot-picantona', 'tarta-pistacha', 'tarta-ferrero', 'coulant', 'crepe']);
 const dm = document.createElement('div'); dm.className = 'modal dish'; dm.id = 'dishModal';
 dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labelledby="dishT">
   <button class="modal__x" type="button" aria-label="Cerrar">✕</button>
