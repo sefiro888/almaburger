@@ -136,16 +136,15 @@ Object.keys(catCount).forEach(k => { catPhotos[k] = (catPhotos[k] || 0) / catCou
 const byId = id => allItems.find(i => i.id === id);
 
 function card(i, idx) {
-  const tags = i.t.length ? `<div class="tags">${i.t.map(t => `<span class="tag ${t === 'nuevo' || t === 'mes' ? 'tag--new' : ''}">${TAGLABEL[t]}</span>`).join('')}</div>` : '';
-  let pic = '';
-  if (i.i) pic = `<div class="item__img"><img src="img/dishes/s/${i.i}.jpg" alt="${esc(i.n)}" loading="lazy" width="640" height="480"></div>`;
-  else if (catPhotos[i.cat]) pic = `<div class="item__img item__img--none">${RIG}</div>`;
-  return `<article class="item ${pic ? '' : 'item--compact'}" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" style="animation-delay:${Math.min(idx, 12) * 30}ms">${pic}
-    <div class="item__body"><h3>${esc(i.n)}</h3>
-    ${i.d ? `<p>${esc(i.d)}</p>` : '<p></p>'}${tags}
-    <div class="item__foot"><span class="price">${eur(i.p)}</span>
-    <button class="add" data-add="${esc(i.id)}" aria-label="Añadir ${esc(i.n)} al pedido">+<span class="add__n"></span></button></div></div>
-  </article>`;
+  const flag = i.t.filter(t => ['mes', 'nuevo', 'picante', 'veg', 'trufa'].includes(t)).slice(0, 2);
+  const flags = flag.length ? `<div class="flags">${flag.map(t => `<span class="flag ${t === 'mes' || t === 'nuevo' ? 'flag--hot' : ''}">${TAGLABEL[t]}</span>`).join('')}</div>` : '';
+  const btn = `<button class="add" data-add="${esc(i.id)}" aria-label="Añadir ${esc(i.n)} al pedido">+<span class="add__n"></span></button>`;
+  const delay = `style="animation-delay:${Math.min(idx, 10) * 35}ms"`;
+  if (i.i) return `<article class="item" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
+    <div class="item__img"><img src="img/dishes/s/${i.i}.jpg" alt="${esc(i.n)}" loading="lazy" width="640" height="640">${flags}<span class="pill">${eur(i.p)}</span>${btn}</div>
+    <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}</div></article>`;
+  return `<article class="item item--row" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
+    <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}${flags}</div><span class="price">${eur(i.p)}</span>${btn}</article>`;
 }
 
 /* ---------- Carta / desayunos ---------- */
@@ -168,7 +167,7 @@ if (menuEl) {
   };
   const filters = mode === 'desayunos' ? ['dulce', 'veg'] : FILTERS;
   const render = () => {
-    tabsEl.innerHTML = tabList.map(([k, l]) => `<button class="tab" role="tab" data-tab="${k}" aria-selected="${!state.q && k === state.tab}">${esc(l)}</button>`).join('');
+    tabsEl.innerHTML = tabList.map(([k, l]) => `<button class="tab" role="tab" data-tab="${k}" aria-selected="${!state.q && k === state.tab}">${esc(l)}${catCount[k] ? `<small>${catCount[k]}</small>` : ''}</button>`).join('');
     chipsEl.innerHTML = filters.map(f => `<button class="chip" data-f="${f}" aria-pressed="${state.filters.has(f)}">${TAGLABEL[f]}</button>`).join('');
     let html = '', n = 0;
     if (state.q) {
@@ -192,6 +191,7 @@ if (menuEl) {
   };
   tabsEl.addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; state.tab = b.dataset.tab; state.q = ''; qEl.value = ''; render(); });
   chipsEl.addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; state.filters.has(b.dataset.f) ? state.filters.delete(b.dataset.f) : state.filters.add(b.dataset.f); render(); });
+  const ft = $('#filtersBtn'); if (ft) ft.addEventListener('click', () => { const o = chipsEl.classList.toggle('open'); ft.setAttribute('aria-expanded', o); });
   qEl.addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
   render();
 }

@@ -27,3 +27,6 @@
 .pillar:nth-child(2){background:var(--ink);color:var(--cream)}
 .jebanner .btn--je{background:var(--cream);color:var(--ink)}
 .path--main .btn--je{background:var(--ink);color:var(--cream)}
+.menu .item h3{color:var(--cream)}
+.rail .item h3{color:var(--ink)}
+.menu .item--row .price{color:var(--cream)}

@@ -332,22 +332,18 @@ def alma():
 
 
 JEBANNER = f'''
-<section class="jebanner"><div class="wrap jebanner__in">
-  <div class="jebanner__main"><b>¿Lo quieres a domicilio?</b><span>Pídelo en Just Eat: es la forma más cómoda de recibirlo en casa.</span></div>
-  <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir a domicilio · Just Eat ↗</a>
-  <div class="jebanner__alt"><b>¿Para recoger?</b><span>Pulsa <b>+</b> en los platos y envía el pedido por WhatsApp.</span></div>
-</div></section>'''
+<div class="jebar"><div class="wrap jebar__in"><span><b>A domicilio:</b> Just Eat</span><a class="btn btn--je btn--sm" href="{JE}" target="_blank" rel="noopener">Pedir ↗</a><span class="jebar__sep"></span><span><b>Para recoger:</b> pulsa + y envía por WhatsApp</span></div></div>'''
 
 
 def carta():
-    return phero('Carta', 'Elige tu <em>perdición</em>', 'Smash burgers, picoteo, bocadillos, hot dogs y tartas de queso. A domicilio, pide en Just Eat. Para recoger, pulsa + y envía tu pedido por WhatsApp.') + JEBANNER + '''
-<section class="sec sec--dark" style="padding-top:34px">
+    return phero('Carta', 'Elige tu <em>perdición</em>', 'Smash burgers, picoteo, bocadillos, hot dogs y tartas de queso.') + JEBANNER + '''
+<section class="sec sec--dark carta" style="padding-top:30px">
   <div class="wrap">
-    <div class="carta__head reveal">
-      <a class="ribbon" href="#hamburguesas" onclick="document.querySelector('[data-tab=hamburguesas]').click()" style="margin:0"><span class="ribbon__tag">Burger del mes</span><b>La Puerquita</b><span>pulled pork · 18,50€</span></a>
-      <button class="btn btn--cream btn--sm" type="button" data-surprise>¿Indeciso? Sorpréndeme</button>
+    <div class="toolbar reveal">
       <label class="search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input id="q" type="search" placeholder="Busca: cabra, trufa, picante…" aria-label="Buscar en la carta" autocomplete="off"></label>
+      <button class="btn btn--line btn--sm" type="button" id="filtersBtn" aria-expanded="false" aria-controls="chips">Filtros</button>
+      <button class="btn btn--cream btn--sm" type="button" data-surprise>Sorpréndeme</button>
     </div>
     <div class="tabs" id="tabs" role="tablist" aria-label="Categorías de la carta"></div>
     <div class="chips" id="chips" aria-label="Filtros"></div>
