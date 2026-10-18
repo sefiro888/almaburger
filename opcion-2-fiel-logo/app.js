@@ -248,7 +248,7 @@ function toast(msg) {
 toastEl.addEventListener('click', e => { if (e.target.closest('[data-view]')) { toastEl.classList.remove('on'); openCart(true); } });
 const lock = o => document.documentElement.classList.toggle('lock', !!o);
 function openCart(o) {
-  cartEl.classList.toggle('open', o); scrim.classList.toggle('on', o); cartEl.setAttribute('aria-hidden', !o); lock(o);
+  cartEl.classList.toggle('open', o); if (o) toastEl.classList.remove('on'); scrim.classList.toggle('on', o); cartEl.setAttribute('aria-hidden', !o); lock(o);
   if (o) setTimeout(() => $('#cartClose').focus(), 50);
 }
 function push(id, opt = '', qty = 1) {
@@ -330,18 +330,24 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { openCart(f
 const ck = $('#checkout');
 $('#closedNote').hidden = openNow;
 $('#closedNote').textContent = `Ahora estamos cerrados. Puedes enviar el pedido y lo prepararemos al abrir (${nextOpen}).`;
-try { const c = JSON.parse(localStorage.getItem('alma-cust') || '{}'); if (c.nombre) ck.nombre.value = c.nombre; if (c.tel) ck.tel.value = c.tel; } catch (e) {}
-const syncForm = () => { $('#fHora').hidden = ck.cuando.value !== 'hora'; ck.hora.required = ck.cuando.value === 'hora'; };
+try { const c = JSON.parse(localStorage.getItem('alma-cust') || '{}'); if (c.nombre) ck.nombre.value = c.nombre; if (c.tel) ck.tel.value = c.tel; if (c.dir) ck.direccion.value = c.dir; } catch (e) {}
+const syncForm = () => {
+  const dom = ck.tipo.value === 'domicilio';
+  $('#fDir').hidden = !dom; ck.direccion.required = dom; $('#domNote').hidden = !dom;
+  $('#lCuando').firstChild.textContent = dom ? '¿Para cuándo lo quieres?' : '¿Cuándo lo recoges?';
+  $('#fHora').hidden = ck.cuando.value !== 'hora'; ck.hora.required = ck.cuando.value === 'hora';
+};
 ck.addEventListener('change', syncForm); syncForm();
 ck.addEventListener('submit', e => {
   e.preventDefault(); if (!cart.length) return;
   const v = Object.fromEntries(new FormData(ck));
-  try { localStorage.setItem('alma-cust', JSON.stringify({ nombre: v.nombre, tel: v.tel })); } catch (er) {}
+  try { localStorage.setItem('alma-cust', JSON.stringify({ nombre: v.nombre, tel: v.tel, dir: v.direccion || '' })); } catch (er) {}
   const cuando = v.cuando === 'hora' ? `a las ${v.hora}` : 'lo antes posible';
   const lines = cart.map(l => `• ${l.qty}x ${byId(l.id).n}${l.opt ? ` (${l.opt})` : ''} — ${eur(lineTotal(l))}${l.note ? `\n   ↳ ${l.note}` : ''}`);
-  const info = [`*Nombre:* ${v.nombre}`, v.tel && `*Teléfono:* ${v.tel}`, `*Tipo:* Para recoger en el local`, `*Recogida:* ${cuando}`].filter(Boolean);
+  const dom = v.tipo === 'domicilio';
+  const info = [`*Nombre:* ${v.nombre}`, `*Teléfono:* ${v.tel}`, `*Tipo:* ${dom ? 'A domicilio' : 'Recoger en el local'}`, dom && `*Dirección:* ${v.direccion}`, `*${dom ? 'Entrega' : 'Recogida'}:* ${cuando}`].filter(Boolean);
   const extra = [v.alergias && `*Alergias/intolerancias:* ${v.alergias}`, v.notas && `*Notas:* ${v.notas}`].filter(Boolean);
-  const msg = ['¡Hola Alma Burger! Quiero hacer un pedido para recoger 🍔', '', ...info, '', '*Pedido:*', ...lines, '', `*Total:* ${eur(total())} (IVA incluido)`, ...(extra.length ? ['', ...extra] : []), '', '¿Me confirmáis? ¡Gracias!'].join('\n');
+  const msg = [`¡Hola Alma Burger! Quiero hacer un pedido ${dom ? 'a domicilio' : 'para recoger'} 🍔`, '', ...info, '', '*Pedido:*', ...lines, '', `*Total:* ${eur(total())} (IVA incluido)`, ...(extra.length ? ['', ...extra] : []), '', '¿Me confirmáis el total y cómo pagar por Bizum? ¡Gracias!'].join('\n');
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
 });
 
@@ -460,7 +466,7 @@ dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labe
     <div class="choices" id="dishOpts"></div>
     <div class="dish__foot"><div class="dish__buy"><span class="price" id="dishPrice"></span><div class="stepper"><button type="button" data-q="-1" aria-label="Menos">−</button><span id="dishQ">1</span><button type="button" data-q="1" aria-label="Más">+</button></div></div>
     <button class="btn btn--solid btn--block" type="button" id="dishAdd"></button></div>
-    <p class="dish__fine">Pedido para recoger por WhatsApp. ¿A domicilio? <a href="${JE}" target="_blank" rel="noopener">Pídelo en Just Eat ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
+    <p class="dish__fine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local. <a href="${JE}" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
 document.body.appendChild(dm);
 const D = { list: [], k: 0, qty: 1, from: null };
 const dq = s => $(s, dm);

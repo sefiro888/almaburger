@@ -30,3 +30,5 @@
 .menu .item h3{color:var(--cream)}
 .rail .item h3{color:var(--ink)}
 .menu .item--row .price{color:var(--cream)}
+.bnav #bnavCart{background:var(--ink);color:var(--cream)}
+.bnav #bnavCart i{background:var(--cream);color:var(--ink)}
