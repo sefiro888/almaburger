@@ -31,7 +31,8 @@ def nav(active):
   <nav class="nav__links" aria-label="Principal">{links}</nav>
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
-    <button class="btn btn--je btn--sm nav__je" type="button" data-wa-order><span class="long">Pedir por WhatsApp</span><span class="short">Pedir</span></button>
+    <a class="btn btn--je btn--sm nav__je" href="{JE}" target="_blank" rel="noopener"><span class="long">Pedir en Just Eat</span><span class="short">Just Eat</span> ↗</a>
+    <button class="btn btn--solid btn--sm nav__wa" type="button" data-wa-order>Pedir por WhatsApp</button>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>'''
@@ -41,7 +42,8 @@ CTA = f'''<section class="sec cta" style="padding-bottom:140px;border-top:var(--
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
     <h2 class="sec__title reveal" style="margin:0">¿Te entra <em>el hambre</em>?</h2>
     <div class="btnrow reveal" style="margin:0">
-      <button class="btn btn--je" type="button" data-wa-order>Pedir por WhatsApp</button>
+      <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
+      <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
       <a class="btn" href="carta.html">Ver la carta</a>
     </div>
@@ -133,7 +135,8 @@ def shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
   <a href="index.html"{HOMEA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Inicio</span></a>
   <a href="carta.html"{CARTAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h10"/></svg><span>Carta</span></a>
   <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedido</span><i id="bnavN" hidden>0</i></button>
-  <a class="bnav__je" href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
+  <a class="bnav__jeat" href="{JE}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
+  <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
 </nav>
 <script src="app.js"></script>
 </body>
@@ -170,10 +173,11 @@ def home():
     <div class="stagewrap reveal">{STAGE}<div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
     <p class="hero__lead reveal">Donde el sabor tiene <em>alma</em>. Smash burgers de recetas propias, picoteo para compartir y desayunos de los que invitan a volver.</p>
     <div class="hero__cta reveal">
-      <button class="btn btn--je" type="button" data-wa-order>Pedir por WhatsApp</button>
+      <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
+      <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
     </div>
-    <p class="hero__alt reveal"><a href="carta.html">Ver la carta</a> · Recoger, domicilio y reservas por WhatsApp · <a href="tel:+34747486092">747 48 60 92</a></p>
+    <p class="hero__alt reveal"><a href="visitanos.html#reservar">Reservar mesa</a> · <a href="carta.html">Ver la carta</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
     <ul class="hero__facts reveal"><li><b>16</b> hamburguesas</li><li><b>8:00</b> desayunos</li><li><b>Kale Nagusia</b> 42</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
@@ -220,9 +224,9 @@ def home():
   <div class="wrap">
     <p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2>
     <div class="paths">
-      <div class="path path--main reveal"><span class="path__tag">Recoger o domicilio</span><b>Pide por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span><button class="btn btn--je" type="button" data-wa-order>Empezar mi pedido</button></div>
+      <div class="path path--main reveal"><span class="path__tag">A domicilio</span><b>En Just Eat</b><span>La forma habitual de recibir tu pedido en casa. Se abre nuestra página de Just Eat: eliges tus platos y pagas allí.</span><a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a></div>
+      <div class="path path--main path--wa reveal"><span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span><button class="btn btn--solid" type="button" data-wa-order>Empezar mi pedido</button></div>
       <div class="path reveal"><span class="path__tag">Mesa</span><b>Reserva tu mesa</b><span>Elige día, hora y personas y te preparamos el mensaje de WhatsApp.</span><a class="btn btn--line" href="visitanos.html#reservar">Reservar mesa</a></div>
-      <div class="path reveal"><span class="path__tag">Alternativa</span><b>Just Eat</b><span>Si lo prefieres, también puedes pedir a domicilio desde su plataforma.</span><a class="btn btn--line" href="{JE}" target="_blank" rel="noopener">Ir a Just Eat ↗</a></div>
     </div>
     <div class="steps" style="margin-top:52px">
       <div class="step reveal"><h3>1 · Elige tus platos</h3><p>Pulsa <b>+</b> en la carta. Si un plato tiene opciones (salsa, relleno…), te las preguntamos.</p></div>
@@ -345,7 +349,7 @@ def alma():
 
 
 JEBANNER = f'''
-<div class="jebar"><div class="wrap jebar__in"><span><b>Pide por WhatsApp:</b> recoger o a domicilio</span><button class="btn btn--je btn--sm" type="button" data-wa-order>Mi pedido</button><span class="jebar__sep"></span><span><b>Pago:</b> Bizum, lo confirma el local</span></div></div>'''
+<div class="jebar"><div class="wrap jebar__in"><a class="btn btn--je btn--sm" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a><span class="jebar__sep"></span><button class="btn btn--solid btn--sm" type="button" data-wa-order>Pedir por WhatsApp</button><span class="jebar__txt">Recoger o a domicilio · pago por Bizum</span></div></div>'''
 
 
 def carta():

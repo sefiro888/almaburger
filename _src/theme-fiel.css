@@ -32,3 +32,7 @@
 .menu .item--row .price{color:var(--cream)}
 .bnav #bnavCart{background:var(--ink);color:var(--cream)}
 .bnav #bnavCart i{background:var(--cream);color:var(--ink)}
+.bnav #bnavCart{background:transparent}
+.path--wa{background:var(--cream)}
+.bnav #bnavCart{background:transparent;color:var(--ink)}
+.bnav #bnavCart i{background:var(--ink);color:var(--cream)}

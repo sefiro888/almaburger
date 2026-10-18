@@ -670,6 +670,24 @@ input,select,textarea{font-size:16px}
 .bnav #bnavCart{background:var(--je);color:var(--je-fg);box-shadow:inset 0 0 0 2.5px var(--ink)}
 html.lock body .toast,html.lock body.has-bar .toast{bottom:auto;top:14px}
 .toast span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ====== Just Eat y WhatsApp al mismo nivel ====== */
+.nav__je,.nav__wa{white-space:nowrap}
+.hero__cta .btn--je{order:0}
+.jebar__txt{font-size:.88rem;opacity:.85}
+.path--wa{background:var(--cream);color:var(--ink)}
+.path--wa b{color:var(--accent)}
+.paths .path--main:first-child{box-shadow:8px 8px 0 var(--je)}
+.paths .path--wa{box-shadow:8px 8px 0 var(--dark-pop)}
+.paths{grid-template-columns:1fr 1fr 1fr}
+@media (max-width:980px){
+  .bnav{grid-template-columns:repeat(5,1fr);gap:2px}
+  .bnav a,.bnav button{font-size:.66rem}
+  .bnav .bnav__jeat{background:var(--je);color:var(--je-fg);box-shadow:inset 0 0 0 2.5px var(--ink)}
+  .nav__je,.nav__wa{display:none!important}
+  .bnav #bnavCart{background:transparent;box-shadow:none;color:var(--ink)}
+}
+@media (max-width:600px){.jebar__txt{display:none}}
+.hero__cta .btn--je,.hero__cta .btn--solid{flex:1 1 auto}
 
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{
@@ -705,3 +723,7 @@ html.lock body .toast,html.lock body.has-bar .toast{bottom:auto;top:14px}
 .menu .item--row .price{color:var(--cream)}
 .bnav #bnavCart{background:var(--ink);color:var(--cream)}
 .bnav #bnavCart i{background:var(--cream);color:var(--ink)}
+.bnav #bnavCart{background:transparent}
+.path--wa{background:var(--cream)}
+.bnav #bnavCart{background:transparent;color:var(--ink)}
+.bnav #bnavCart i{background:var(--ink);color:var(--cream)}
