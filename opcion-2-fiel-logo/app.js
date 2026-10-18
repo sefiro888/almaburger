@@ -595,17 +595,24 @@ if (stageEl) {
 
 /* ---------- Selector de tipografía (para probar) ---------- */
 (() => {
-  const FONTS = [['bagel', 'Bagel Fat One', 'actual', "'Bagel Fat One'"], ['unbounded', 'Unbounded', 'ancha y moderna', "'Unbounded'"], ['anton', 'ANTON', 'cartel, potente', "'Anton'"], ['syne', 'Syne', 'artística', "'Syne'"], ['serif', 'Instrument Serif', 'elegante', "'Instrument Serif'"], ['fraunces', 'Fraunces', 'retro y blanda', "'Fraunces'"], ['dela', 'Dela Gothic', 'gruesa y moderna', "'Dela Gothic One'"], ['bricolage', 'Bricolage', 'grotesca de diseño', "'Bricolage Grotesque'"], ['shrikhand', 'Shrikhand', 'cursiva retro', "'Shrikhand'"], ['shoulders', 'BIG SHOULDERS', 'cartel condensado', "'Big Shoulders Display'"]];
+  const COMBO = [['bagel', 'Bagel Fat One', 'actual', "'Bagel Fat One'"], ['unbounded', 'Unbounded', 'ancha y moderna', "'Unbounded'"], ['anton', 'ANTON', 'cartel, potente', "'Anton'"], ['syne', 'Syne', 'artística', "'Syne'"], ['serif', 'Instrument Serif', 'elegante', "'Instrument Serif'"], ['fraunces', 'Fraunces', 'retro y blanda', "'Fraunces'"], ['dela', 'Dela Gothic', 'gruesa y moderna', "'Dela Gothic One'"], ['bricolage', 'Bricolage', 'grotesca de diseño', "'Bricolage Grotesque'"], ['shrikhand', 'Shrikhand', 'cursiva retro', "'Shrikhand'"], ['shoulders', 'BIG SHOULDERS', 'cartel condensado', "'Big Shoulders Display'"]];
+  const MODERN = [['sora', 'Sora', 'geométrica y tecnológica', "'Sora'"], ['outfit', 'Outfit', 'redonda y limpia', "'Outfit'"], ['gabarito', 'Gabarito', 'amable y moderna', "'Gabarito'"], ['geist', 'Geist', 'minimalista, muy actual', "'Geist'"], ['funnel', 'Funnel Display', 'nueva, con carácter', "'Funnel Display'"], ['host', 'Host Grotesk', 'nueva, elegante', "'Host Grotesk'"], ['parkinsans', 'Parkinsans', 'nueva, amigable', "'Parkinsans'"], ['familjen', 'Familjen Grotesk', 'editorial y moderna', "'Familjen Grotesk'"]];
+  const FONTS = COMBO.concat(MODERN);
   const root = document.documentElement;
   const q = new URLSearchParams(location.search).get('font');
   let cur = root.dataset.font || 'bagel';
   if (q && FONTS.some(f => f[0] === q)) cur = q;
+  let all = 'on'; try { all = localStorage.getItem('alma-all') || 'on'; } catch (e) {}
+  const btn = f => `<button class="fsw__opt" type="button" data-f="${f[0]}" style="font-family:${f[3]},sans-serif" aria-pressed="false"><span>${f[1]}</span><small>${f[2]}</small></button>`;
   const apply = f => { cur = f; if (f === 'bagel') delete root.dataset.font; else root.dataset.font = f; try { localStorage.setItem('alma-font', f); } catch (e) {} paint(); };
   const box = document.createElement('div'); box.className = 'fsw';
-  box.innerHTML = `<div class="fsw__panel" id="fswPanel"><h4>Probar tipografía</h4><p>Pulsa una y cambia toda la letra de la web: títulos y textos.</p>${FONTS.map(f => `<button class="fsw__opt" type="button" data-f="${f[0]}" style="font-family:${f[3]},sans-serif" aria-pressed="false"><span>${f[1]}</span><small>${f[2]}</small></button>`).join('')}</div>
+  box.innerHTML = `<div class="fsw__panel" id="fswPanel"><h4>Probar tipografía</h4><p>Pulsa una y cambia toda la letra de la web.</p>
+    <label class="fsw__sw"><input type="checkbox" id="fswAll" ${all === 'on' ? 'checked' : ''}> Misma fuente en todo el texto</label>
+    <div class="fsw__grp">Modernas y nuevas</div>${MODERN.map(btn).join('')}<div class="fsw__grp">Más originales</div>${COMBO.map(btn).join('')}</div>
     <button class="fsw__btn" type="button" aria-expanded="false" aria-controls="fswPanel"><b>Aa</b><span>Tipografía</span></button>`;
   document.body.appendChild(box);
-  const paint = () => $$('.fsw__opt', box).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === cur)));
+  const paint = () => { $$('.fsw__opt', box).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === cur))); root.dataset.all = all; };
+  box.addEventListener('change', e => { if (e.target.id === 'fswAll') { all = e.target.checked ? 'on' : 'off'; try { localStorage.setItem('alma-all', all); } catch (er) {} paint(); } });
   box.addEventListener('click', e => {
     const o = e.target.closest('.fsw__opt'); if (o) { apply(o.dataset.f); return; }
     if (e.target.closest('.fsw__btn')) { const on = box.classList.toggle('open'); $('.fsw__btn', box).setAttribute('aria-expanded', on); }
