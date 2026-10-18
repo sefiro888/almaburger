@@ -1030,6 +1030,13 @@ html[data-font=anton] body,html[data-font=shoulders] body{font-size:1.06em}
 html[data-font=fraunces] .btn,html[data-font=fraunces] .tab,html[data-font=fraunces] .nav__links a{font-weight:700}
 html[data-font=syne] body{font-size:.97em}
 html[data-font=syne] .btn,html[data-font=syne] .tab,html[data-font=syne] .nav__links a,html[data-font=syne] .pillar h3,html[data-font=syne] .step h3{font-weight:700}
+/* sellos y tarjetas */
+.sticker text[font-family],.hp__stamp text[font-family],.sticker text:last-of-type,.hp__stamp text:last-of-type{font-family:var(--display)!important}
+.sticker textPath,.hp__stamp textPath{font-family:var(--body)}
+@media (max-width:980px){
+  .paths,.paths--2{grid-template-columns:1fr!important}
+  .steps{grid-template-columns:1fr}
+}
 
 /* Opción 1 · Color: crema + negro del logo + azul eléctrico de su carta + amarillo cheddar de apoyo */
 :root{
