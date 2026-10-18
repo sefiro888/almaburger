@@ -595,14 +595,14 @@ if (stageEl) {
 
 /* ---------- Selector de tipografía (para probar) ---------- */
 (() => {
-  const FONTS = [['bagel', 'Bagel Fat One', 'actual', "'Bagel Fat One'"], ['unbounded', 'Unbounded', 'ancha y moderna', "'Unbounded'"], ['anton', 'ANTON', 'cartel, potente', "'Anton'"], ['syne', 'Syne', 'artística', "'Syne'"], ['serif', 'Instrument Serif', 'elegante', "'Instrument Serif'"]];
+  const FONTS = [['bagel', 'Bagel Fat One', 'actual', "'Bagel Fat One'"], ['unbounded', 'Unbounded', 'ancha y moderna', "'Unbounded'"], ['anton', 'ANTON', 'cartel, potente', "'Anton'"], ['syne', 'Syne', 'artística', "'Syne'"], ['serif', 'Instrument Serif', 'elegante', "'Instrument Serif'"], ['fraunces', 'Fraunces', 'retro y blanda', "'Fraunces'"], ['dela', 'Dela Gothic', 'gruesa y moderna', "'Dela Gothic One'"], ['bricolage', 'Bricolage', 'grotesca de diseño', "'Bricolage Grotesque'"], ['shrikhand', 'Shrikhand', 'cursiva retro', "'Shrikhand'"], ['shoulders', 'BIG SHOULDERS', 'cartel condensado', "'Big Shoulders Display'"]];
   const root = document.documentElement;
   const q = new URLSearchParams(location.search).get('font');
   let cur = root.dataset.font || 'bagel';
   if (q && FONTS.some(f => f[0] === q)) cur = q;
   const apply = f => { cur = f; if (f === 'bagel') delete root.dataset.font; else root.dataset.font = f; try { localStorage.setItem('alma-font', f); } catch (e) {} paint(); };
   const box = document.createElement('div'); box.className = 'fsw';
-  box.innerHTML = `<div class="fsw__panel" id="fswPanel"><h4>Probar tipografía</h4><p>Pulsa una y toda la web cambia al momento.</p>${FONTS.map(f => `<button class="fsw__opt" type="button" data-f="${f[0]}" style="font-family:${f[3]},sans-serif" aria-pressed="false"><span>${f[1]}</span><small>${f[2]}</small></button>`).join('')}</div>
+  box.innerHTML = `<div class="fsw__panel" id="fswPanel"><h4>Probar tipografía</h4><p>Pulsa una y cambia toda la letra de la web: títulos y textos.</p>${FONTS.map(f => `<button class="fsw__opt" type="button" data-f="${f[0]}" style="font-family:${f[3]},sans-serif" aria-pressed="false"><span>${f[1]}</span><small>${f[2]}</small></button>`).join('')}</div>
     <button class="fsw__btn" type="button" aria-expanded="false" aria-controls="fswPanel"><b>Aa</b><span>Tipografía</span></button>`;
   document.body.appendChild(box);
   const paint = () => $$('.fsw__opt', box).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === cur)));
