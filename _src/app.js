@@ -592,4 +592,26 @@ if (stageEl) {
   mark();
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) { paused = true; auto = false; time = 7; pose(time); } else { pose(0); requestAnimationFrame(tick); }
 }
+
+/* ---------- Selector de tipografía (para probar) ---------- */
+(() => {
+  const FONTS = [['bagel', 'Bagel Fat One', 'actual', "'Bagel Fat One'"], ['unbounded', 'Unbounded', 'ancha y moderna', "'Unbounded'"], ['anton', 'ANTON', 'cartel, potente', "'Anton'"], ['syne', 'Syne', 'artística', "'Syne'"], ['serif', 'Instrument Serif', 'elegante', "'Instrument Serif'"]];
+  const root = document.documentElement;
+  const q = new URLSearchParams(location.search).get('font');
+  let cur = root.dataset.font || 'bagel';
+  if (q && FONTS.some(f => f[0] === q)) cur = q;
+  const apply = f => { cur = f; if (f === 'bagel') delete root.dataset.font; else root.dataset.font = f; try { localStorage.setItem('alma-font', f); } catch (e) {} paint(); };
+  const box = document.createElement('div'); box.className = 'fsw';
+  box.innerHTML = `<div class="fsw__panel" id="fswPanel"><h4>Probar tipografía</h4><p>Pulsa una y toda la web cambia al momento.</p>${FONTS.map(f => `<button class="fsw__opt" type="button" data-f="${f[0]}" style="font-family:${f[3]},sans-serif" aria-pressed="false"><span>${f[1]}</span><small>${f[2]}</small></button>`).join('')}</div>
+    <button class="fsw__btn" type="button" aria-expanded="false" aria-controls="fswPanel"><b>Aa</b><span>Tipografía</span></button>`;
+  document.body.appendChild(box);
+  const paint = () => $$('.fsw__opt', box).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.f === cur)));
+  box.addEventListener('click', e => {
+    const o = e.target.closest('.fsw__opt'); if (o) { apply(o.dataset.f); return; }
+    if (e.target.closest('.fsw__btn')) { const on = box.classList.toggle('open'); $('.fsw__btn', box).setAttribute('aria-expanded', on); }
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.fsw')) box.classList.remove('open'); });
+  if (cur !== 'bagel') root.dataset.font = cur;
+  paint();
+})();
 })();
