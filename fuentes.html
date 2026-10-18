@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alma Burger · Elegir tipografía</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Unbounded:wght@700;900&family=Anton&family=Syne:wght@700;800&family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:wght@400;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--ink:#0b0b0b;--cream:#faf8f0;--blue:#1a00ad;--yellow:#ffc62e}
+body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;padding:24px 16px 60px;line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto}
+h1.top{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.6rem;margin-bottom:4px}
+p.sub{opacity:.7;margin-bottom:26px}
+.opt{border:3px solid var(--ink);border-radius:28px;background:#fff;box-shadow:7px 7px 0 var(--ink);margin-bottom:34px;overflow:hidden}
+.opt__head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 22px;background:var(--ink);color:var(--cream);font-family:'Bricolage Grotesque';font-weight:800}
+.opt__head span{font-weight:500;opacity:.75;font-size:.9rem}
+.opt__body{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;padding:28px 26px}
+@media(max-width:760px){.opt__body{grid-template-columns:1fr}}
+.kick{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--blue);margin-bottom:8px;font-family:'Bricolage Grotesque'}
+.big{font-size:clamp(2.2rem,6vw,4rem);line-height:1;margin-bottom:14px}
+.big em{font-style:normal;color:var(--blue)}
+.lead{font-family:'Bricolage Grotesque';max-width:30em;margin-bottom:16px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:3px solid var(--ink);border-radius:999px;padding:10px 20px;box-shadow:0 4px 0 var(--ink);background:var(--yellow);font-size:1rem}
+.btn.b{background:var(--blue);color:#fff}
+.card{border:3px solid var(--ink);border-radius:22px;overflow:hidden;background:var(--cream);box-shadow:5px 5px 0 var(--ink)}
+.card .ph{aspect-ratio:4/3;background:url(opcion-1-color/img/dishes/s/la-puerquita.jpg) center/cover;position:relative}
+.card .pill{position:absolute;left:12px;bottom:12px;background:var(--cream);border:2.5px solid var(--ink);border-radius:999px;padding:3px 13px;font-weight:800}
+.card .bd{padding:14px 16px 16px}
+.card h3{font-size:1.4rem;line-height:1.1;margin-bottom:4px}
+.card p{font-family:'Bricolage Grotesque';font-size:.92rem;opacity:.8}
+.nums{display:flex;gap:18px;align-items:baseline;margin-top:12px;flex-wrap:wrap}
+.nums b{font-size:2rem}
+.f1{font-family:'Bagel Fat One',sans-serif;font-weight:400}
+.f2{font-family:'Unbounded',sans-serif;font-weight:900;letter-spacing:-.02em}
+.f2.big{font-size:clamp(1.9rem,5vw,3.3rem)}
+.f3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+.f3.big{font-size:clamp(2.6rem,7.5vw,5rem);line-height:.95}
+.f4{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.02em}
+.f5{font-family:'Instrument Serif',serif;font-weight:400}
+.f5.big{font-size:clamp(2.6rem,7vw,4.8rem);line-height:.95}
+.f5 em{font-style:italic}
+.f5.card h3{font-size:1.7rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1 class="top">Elegir la tipografía de Alma Burger</h1>
+<p class="sub">Cinco opciones aplicadas a lo que se ve en la web. La primera es la actual. Dime el número que más te guste.</p>
+
+<section class="opt"><div class="opt__head">1 · Actual: Bagel Fat One <span>redonda y gordita, como el logo</span></div>
+<div class="opt__body"><div class="f1"><p class="kick">Nuestra historia</p><h2 class="big f1">Donde cada hamburguesa <em>tiene alma</em></h2><p class="lead" style="font-weight:400">Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.</p><div class="btns"><span class="btn f1">Pedir en Just Eat</span><span class="btn b f1">Pedir por WhatsApp</span></div></div>
+<div class="card f1"><div class="ph"><span class="pill">18,50€</span></div><div class="bd"><h3>La Puerquita</h3><p>Doble carne smash, pulled pork y salsa Emmy</p></div></div></div></section>
+
+<section class="opt"><div class="opt__head">2 · Unbounded <span>ancha y moderna, muy de marca joven</span></div>
+<div class="opt__body"><div><p class="kick">Nuestra historia</p><h2 class="big f2">Donde cada hamburguesa <em>tiene alma</em></h2><p class="lead">Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.</p><div class="btns"><span class="btn f2" style="font-size:.9rem">Pedir en Just Eat</span><span class="btn b f2" style="font-size:.9rem">Pedir por WhatsApp</span></div></div>
+<div class="card"><div class="ph"><span class="pill f2" style="font-size:.85rem">18,50€</span></div><div class="bd"><h3 class="f2" style="font-size:1.15rem">La Puerquita</h3><p>Doble carne smash, pulled pork y salsa Emmy</p></div></div></div></section>
+
+<section class="opt"><div class="opt__head">3 · Anton <span>condensada y potente, estilo cartel de hamburguesería</span></div>
+<div class="opt__body"><div><p class="kick">Nuestra historia</p><h2 class="big f3">Donde cada hamburguesa <em>tiene alma</em></h2><p class="lead">Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.</p><div class="btns"><span class="btn f3">Pedir en Just Eat</span><span class="btn b f3">Pedir por WhatsApp</span></div></div>
+<div class="card"><div class="ph"><span class="pill f3">18,50€</span></div><div class="bd"><h3 class="f3" style="font-size:1.6rem">La Puerquita</h3><p>Doble carne smash, pulled pork y salsa Emmy</p></div></div></div></section>
+
+<section class="opt"><div class="opt__head">4 · Syne <span>artística y con personalidad, muy diseño actual</span></div>
+<div class="opt__body"><div><p class="kick">Nuestra historia</p><h2 class="big f4">Donde cada hamburguesa <em>tiene alma</em></h2><p class="lead">Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.</p><div class="btns"><span class="btn f4">Pedir en Just Eat</span><span class="btn b f4">Pedir por WhatsApp</span></div></div>
+<div class="card"><div class="ph"><span class="pill f4">18,50€</span></div><div class="bd"><h3 class="f4">La Puerquita</h3><p>Doble carne smash, pulled pork y salsa Emmy</p></div></div></div></section>
+
+<section class="opt"><div class="opt__head">5 · Instrument Serif <span>elegante y editorial, la tendencia gastro</span></div>
+<div class="opt__body"><div><p class="kick">Nuestra historia</p><h2 class="big f5">Donde cada hamburguesa <em>tiene alma</em></h2><p class="lead">Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.</p><div class="btns"><span class="btn f5" style="font-size:1.2rem">Pedir en Just Eat</span><span class="btn b f5" style="font-size:1.2rem">Pedir por WhatsApp</span></div></div>
+<div class="card f5"><div class="ph"><span class="pill f5">18,50€</span></div><div class="bd"><h3 class="f5">La Puerquita</h3><p>Doble carne smash, pulled pork y salsa Emmy</p></div></div></div></section>
+</div>
+</body>
+</html>
