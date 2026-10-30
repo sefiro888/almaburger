@@ -297,7 +297,7 @@ function draw() {
     ${editing === k ? `<input class="noteinp" data-ni="${k}" maxlength="120" value="${esc(l.note)}" placeholder="Sin cebolla, poco hecha…">` : (l.note ? `<small class="note">“${esc(l.note)}”</small>` : '')}</li>`; }).join('');
   if (editing !== null) { const inp = $('[data-ni]'); if (inp) inp.focus(); }
   $('#orderbarN').textContent = n; $('#orderbarT').textContent = eur(t);
-  const bn = $('#bnavN'); if (bn) { bn.hidden = !n; bn.textContent = n; $('#bnavT').textContent = n ? eur(t) : 'Recoger'; }
+  const bn = $('#bnavN'); if (bn) { bn.hidden = !n; bn.textContent = n; if (!window.ALMA_AGORA) $('#bnavT').textContent = n ? eur(t) : 'Pedido'; }
   bar.hidden = !n || cartEl.classList.contains('open'); document.body.classList.toggle('has-bar', !!n);
   sync();
 }
@@ -465,8 +465,8 @@ dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labe
   <div class="dish__info"><span class="dish__cat" id="dishCat"></span><h3 id="dishT"></h3><div class="tags" id="dishTags"></div><p class="dish__desc" id="dishDesc"></p>
     <div class="choices" id="dishOpts"></div>
     <div class="dish__foot"><div class="dish__buy"><span class="price" id="dishPrice"></span><div class="stepper"><button type="button" data-q="-1" aria-label="Menos">−</button><span id="dishQ">1</span><button type="button" data-q="1" aria-label="Más">+</button></div></div>
-    <button class="btn btn--solid btn--block" type="button" id="dishAdd"></button></div>
-    <p class="dish__fine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local. <a href="${JE}" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
+    <button class="btn btn--solid btn--block" type="button" id="dishAdd"></button><a class="btn btn--solid btn--block dish__agora" id="dishAgora" target="_blank" rel="noopener">Pedir online ↗</a></div>
+    <p class="dish__fine" id="dishFine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local. <a href="${JE}" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
 document.body.appendChild(dm);
 const D = { list: [], k: 0, qty: 1, from: null };
 const dq = s => $(s, dm);
@@ -494,6 +494,7 @@ function renderDish(dir) {
   box.scrollTop = 0; dq('.dish__info').scrollTop = 0;
   [1, -1].forEach(d => { const o = byId(D.list[(D.k + d + D.list.length) % D.list.length]); if (o && o.i) new Image().src = `img/dishes/${o.i}.jpg`; });
 }
+if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = 'Pide online para recoger o a domicilio. <a href="' + JE + '" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'; }
 const dishBtn = (done) => { const it = byId(D.list[D.k]); dq('#dishAdd').textContent = done ? 'Añadido ✓' : `Añadir al pedido · ${eur(it.p * D.qty)}`; };
 function openDish(id, from) {
   const vis = $$('.item[data-open]').filter(e => e.offsetParent !== null).map(e => e.dataset.open);

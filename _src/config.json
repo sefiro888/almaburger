@@ -1,0 +1,4 @@
+{
+  "agora_url": "",
+  "_ayuda": "Pega aquí el enlace de pedidos de Ágora (Delivery / Take Away) entre las comillas y ejecuta: python _src/build.py. Si está vacío, la web usa WhatsApp y Just Eat como hasta ahora."
+}

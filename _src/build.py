@@ -103,7 +103,46 @@ CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedid
 
 
 
-def shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
+
+import re as _re
+CFG = json.loads((SRC / 'config.json').read_text(encoding='utf-8')) if (SRC / 'config.json').exists() else {}
+AGORA = (CFG.get('agora_url') or '').strip()
+
+
+def agora(html):
+    """Con enlace de Ágora: los botones de pedir pasan a «Pedir online» y apuntan a Ágora."""
+    if not AGORA:
+        return html
+    u = AGORA.replace('&', '&amp;').replace('"', '&quot;')
+    html = _re.sub(r'<button class="([^"]*)" type="button" data-wa-order[^>]*>.*?</button>',
+                   lambda m: f'<a class="{m.group(1)}" href="{u}" target="_blank" rel="noopener">Pedir online ↗</a>', html, flags=_re.S)
+    html = _re.sub(r'<button class="lnk"[^>]*data-wa-order[^>]*>.*?</button>', f'<a class="lnk" href="{u}" target="_blank" rel="noopener" style="color:var(--dark-pop);font-size:1rem">Pedir online ↗</a>', html, flags=_re.S)
+    rep = [
+        ('<span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span>',
+         '<span class="path__tag">Recoger o domicilio</span><b>Pedir online</b><span>Elige tus platos, domicilio o recoger, y paga o confirma el pedido. Llega directo a la cocina.</span>'),
+        ('<span class="path__tag">A domicilio</span><b>En Just Eat</b>', '<span class="path__tag">Alternativa</span><b>En Just Eat</b>'),
+        ('<h3>3 · Envía y paga por Bizum</h3><p>Se abre WhatsApp con el pedido escrito. Te confirmamos el total, haces el Bizum y lo preparamos.</p>',
+         '<h3>3 · Confirma y listo</h3><p>Terminas el pedido en nuestra página de pedidos y llega directo a la cocina.</p>'),
+        ('<h3>2 · Completa tus datos</h3><p>Nombre, teléfono, si lo recoges o lo llevamos a casa, y tus alergias. Puedes añadir notas a cada plato.</p>',
+         '<h3>2 · Completa tus datos</h3><p>Nombre, teléfono, si lo recoges o lo llevamos a casa, y la hora.</p>'),
+        ('Pulsa <b>+</b> en la carta. Si un plato tiene opciones (salsa, relleno…), te las preguntamos.', 'Mira la carta y entra en «Pedir online». Allí eliges los platos con sus opciones.'),
+        ('<span class="jebar__txt">Recoger o a domicilio · pago por Bizum</span>', '<span class="jebar__txt">Recoger o a domicilio</span>'),
+        ('Sí. Haz tu pedido en la web, elige «A domicilio» y se enviará por WhatsApp. El local te confirmará si llegamos a tu dirección y el coste del envío. También puedes pedir en Just Eat.',
+         'Sí. Pulsa «Pedir online», elige «A domicilio» y pon tu dirección: te dirá si llegamos y el coste del envío. También puedes pedir en Just Eat.'),
+    ]
+    for a, b in rep:
+        html = html.replace(a, b)
+    # el acceso «Pedido» de la barra inferior pasa a enlazar con Ágora
+    html = _re.sub(r'<button type="button" id="bnavCart">(.*?)</button>', lambda m: f'<a id="bnavCart" href="{u}" target="_blank" rel="noopener">' + m.group(1).replace('id="bnavT">Pedido', 'id="bnavT">Pedir online') + '</a>', html, flags=_re.S)
+    html = html.replace('<head>', '<head>\n<script>window.ALMA_AGORA="' + AGORA.replace('"', '') + '";document.documentElement.dataset.agora="on"</script>', 1)
+    return html
+
+
+def shell(*a, **k):
+    return agora(_shell(*a, **k))
+
+
+def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
     HOMEA = ' aria-current="page"' if active == 'home' else ''
     CARTAA = ' aria-current="page"' if active == 'carta' else ''
     return f'''<!doctype html>
