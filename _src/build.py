@@ -1,6 +1,6 @@
 """Genera las dos versiones de la web (multipágina) a partir de la misma base.
    python _src/build.py  ->  opcion-1-color/  y  opcion-2-fiel-logo/  (+ index.html selector en la raíz)"""
-import shutil, pathlib, json
+import shutil, pathlib, json, os, subprocess
 
 SRC = pathlib.Path(__file__).parent
 ROOT = SRC.parent
@@ -106,7 +106,8 @@ CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedid
 
 import re as _re
 CFG = json.loads((SRC / 'config.json').read_text(encoding='utf-8')) if (SRC / 'config.json').exists() else {}
-AGORA = (CFG.get('agora_url') or '').strip()
+DEMO = os.environ.get('ALMA_DEMO') == '1'
+AGORA = 'simulacion.html' if DEMO else (CFG.get('agora_url') or '').strip()
 
 
 def agora(html):
@@ -134,6 +135,8 @@ def agora(html):
         html = html.replace(a, b)
     # el acceso «Pedido» de la barra inferior pasa a enlazar con Ágora
     html = _re.sub(r'<button type="button" id="bnavCart">(.*?)</button>', lambda m: f'<a id="bnavCart" href="{u}" target="_blank" rel="noopener">' + m.group(1).replace('id="bnavT">Pedido', 'id="bnavT">Pedir online') + '</a>', html, flags=_re.S)
+    if DEMO:
+        html = html.replace('<body>', '<body>\n<div class="demobar">PRUEBA · Así funcionará con Ágora. «Pedir online» lleva a una simulación del pedido.</div>', 1)
     html = html.replace('<head>', '<head>\n<script>window.ALMA_AGORA="' + AGORA.replace('"', '') + '";document.documentElement.dataset.agora="on"</script>', 1)
     return html
 
@@ -539,24 +542,38 @@ span.b{display:inline-block;margin-top:10px;background:#0b0b0b;color:#faf9f5;bor
 
 def main():
     t = THEMES['opcion-2-fiel-logo']
-    out = ROOT
+    out = ROOT / 'prueba-agora' if DEMO else ROOT
+    out.mkdir(exist_ok=True)
     if (out / 'img').exists():
         shutil.rmtree(out / 'img')
     shutil.copytree(SRC / 'img', out / 'img')
-    (out / 'styles.css').write_text((SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8'), encoding='utf-8')
+    css = (SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8')
+    if DEMO:
+        css += '\n.demobar{background:#ffe9a8;color:#5a4300;text-align:center;font-weight:700;font-size:.8rem;padding:6px 10px;position:relative;z-index:300;border-bottom:2px solid #e7cf84}\n'
+    (out / 'styles.css').write_text(css, encoding='utf-8')
     shutil.copy(SRC / 'app.js', out / 'app.js')
     for k, fn in BODIES.items():
         title, desc = TITLES[k]
         active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
         (out / FILES[k]).write_text(shell(active, title, desc, fn(), t['tcolor']), encoding='utf-8')
     (out / '404.html').write_text(shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor']), encoding='utf-8')
-    # enlaces antiguos de las dos versiones: redirigen a la web
-    for old in ('opcion-1-color', 'opcion-2-fiel-logo'):
-        (out / old).mkdir(exist_ok=True)
-        for f in ['index'] + [p.replace('.html', '') for p, _, _ in PAGES]:
-            dest = '../' + ('index.html' if f == 'index' else f + '.html')
-            (out / old / (f + '.html')).write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={dest}"><link rel="canonical" href="{dest}"><title>Alma Burger</title><a href="{dest}">Ir a Alma Burger</a>', encoding='utf-8')
-    print('ok')
+    if DEMO:
+        js = (SRC / 'app.js').read_text(encoding='utf-8')
+        a = js.index('const P = ')
+        b = js.index('const TAGLABEL')
+        code = js[a:b] + '\nprocess.stdout.write(JSON.stringify(MENU));'
+        r = subprocess.run(['node', '-e', code], capture_output=True, text=True, encoding='utf-8')
+        (out / 'menu.json').write_text(r.stdout, encoding='utf-8')
+        shutil.copy(SRC / 'sim.html', out / 'simulacion.html')
+        (out / 'index.html').write_text((out / 'index.html').read_text(encoding='utf-8').replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1), encoding='utf-8')
+    else:
+        # enlaces antiguos de las dos versiones: redirigen a la web
+        for old in ('opcion-1-color', 'opcion-2-fiel-logo'):
+            (out / old).mkdir(exist_ok=True)
+            for f in ['index'] + [p.replace('.html', '') for p, _, _ in PAGES]:
+                dest = '../' + ('index.html' if f == 'index' else f + '.html')
+                (out / old / (f + '.html')).write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={dest}"><link rel="canonical" href="{dest}"><title>Alma Burger</title><a href="{dest}">Ir a Alma Burger</a>', encoding='utf-8')
+    print('ok', 'prueba' if DEMO else '')
 
 
 main()
