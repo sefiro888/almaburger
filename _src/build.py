@@ -146,7 +146,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
     HOMEA = ' aria-current="page"' if active == 'home' else ''
     CARTAA = ' aria-current="page"' if active == 'carta' else ''
     return f'''<!doctype html>
-<html lang="es">
+<html lang="es" data-font="shoulders" data-all="on">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,9 +159,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Unbounded:wght@800;900&family=Anton&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Barlow:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Instrument+Serif:ital@0;1&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800;9..144,900&family=Dela+Gothic+One&family=Shrikhand&family=Big+Shoulders+Display:wght@800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
-<script>try{{var f=new URLSearchParams(location.search).get('font')||localStorage.getItem('alma-font');if(f&&f!=='bagel')document.documentElement.dataset.font=f;document.documentElement.dataset.all=localStorage.getItem('alma-all')||'on'}}catch(e){{}}</script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700;800&family=Outfit:wght@400;500;700;800&family=Gabarito:wght@400;500;700;900&family=Geist:wght@400;500;700;800&family=Funnel+Display:wght@400;500;700;800&family=Host+Grotesk:wght@400;500;700;800&family=Parkinsans:wght@400;500;700;800&family=Familjen+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v={VER}">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"}},"geo":{{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607}},"sameAs":["https://www.instagram.com/almaburgers/"]}}</script>
 </head>
@@ -540,20 +538,24 @@ span.b{display:inline-block;margin-top:10px;background:#0b0b0b;color:#faf9f5;bor
 
 
 def main():
-    for d, t in THEMES.items():
-        out = ROOT / d
-        if out.exists():
-            shutil.rmtree(out)
-        out.mkdir()
-        shutil.copytree(SRC / 'img', out / 'img')
-        (out / 'styles.css').write_text((SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8'), encoding='utf-8')
-        shutil.copy(SRC / 'app.js', out / 'app.js')
-        for k, fn in BODIES.items():
-            title, desc = TITLES[k]
-            active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
-            (out / FILES[k]).write_text(shell(active, title, desc, fn(), t['tcolor']), encoding='utf-8')
-        (out / '404.html').write_text(shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor']), encoding='utf-8')
-    (ROOT / 'index.html').write_text(SELECTOR, encoding='utf-8')
+    t = THEMES['opcion-2-fiel-logo']
+    out = ROOT
+    if (out / 'img').exists():
+        shutil.rmtree(out / 'img')
+    shutil.copytree(SRC / 'img', out / 'img')
+    (out / 'styles.css').write_text((SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8'), encoding='utf-8')
+    shutil.copy(SRC / 'app.js', out / 'app.js')
+    for k, fn in BODIES.items():
+        title, desc = TITLES[k]
+        active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
+        (out / FILES[k]).write_text(shell(active, title, desc, fn(), t['tcolor']), encoding='utf-8')
+    (out / '404.html').write_text(shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor']), encoding='utf-8')
+    # enlaces antiguos de las dos versiones: redirigen a la web
+    for old in ('opcion-1-color', 'opcion-2-fiel-logo'):
+        (out / old).mkdir(exist_ok=True)
+        for f in ['index'] + [p.replace('.html', '') for p, _, _ in PAGES]:
+            dest = '../' + ('index.html' if f == 'index' else f + '.html')
+            (out / old / (f + '.html')).write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={dest}"><link rel="canonical" href="{dest}"><title>Alma Burger</title><a href="{dest}">Ir a Alma Burger</a>', encoding='utf-8')
     print('ok')
 
 
