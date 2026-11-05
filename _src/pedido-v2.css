@@ -1192,3 +1192,20 @@ html[data-agora=on] .mtalk .x{display:none}
 .reelbox{position:relative}
 .reelbox::before{content:"Cargando desde Instagram…";position:absolute;inset:0;display:grid;place-items:center;font-weight:700;opacity:.6}
 .reelbox iframe{position:relative;z-index:1}
+
+/* ====== móviles con los reels a la vista ====== */
+.phones{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,5vw,60px);margin-top:8px}
+.phone{margin:0;width:min(350px,100%);display:grid;gap:14px;justify-items:center}
+.phone__bezel{position:relative;width:100%;aspect-ratio:350/720;background:#0b0b0b;border:3px solid #0b0b0b;border-radius:46px;padding:12px;box-shadow:0 0 0 2px #3a3a38,10px 12px 0 var(--ink),inset 0 0 0 2px #2a2a28;transform:rotate(-1.2deg);transition:transform .4s}
+.phone:nth-child(even) .phone__bezel{transform:rotate(1.2deg)}
+.phone:hover .phone__bezel{transform:rotate(0) translateY(-6px)}
+.phone__notch{position:absolute;left:50%;top:10px;translate:-50% 0;width:96px;height:24px;background:#0b0b0b;border-radius:0 0 16px 16px;z-index:3}
+.phone__screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#fff}
+.phone__screen iframe{position:relative;z-index:1;width:100%;height:100%;border:0;display:block}
+.phone__load{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;opacity:.55;text-align:center;padding:20px}
+.phone__bar{position:absolute;left:50%;bottom:7px;translate:-50% 0;width:110px;height:5px;border-radius:9px;background:#d9d9d4;z-index:3}
+.phone figcaption{text-align:center;font-weight:700;max-width:22em;line-height:1.25}
+.phone figcaption a{font-weight:800;text-decoration:underline}
+@media (max-width:420px){.phone__bezel{border-radius:38px;padding:10px}.phone__screen{border-radius:28px}}
+@media (prefers-reduced-motion:reduce){.phone__bezel,.phone:nth-child(even) .phone__bezel{transform:none}}
+@media (max-width:600px){.phone{width:min(350px,calc(100% - 6px))}.phone__bezel,.phone:nth-child(even) .phone__bezel{transform:none;box-shadow:0 0 0 2px #3a3a38,6px 8px 0 var(--ink)}}

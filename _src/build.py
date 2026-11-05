@@ -210,6 +210,16 @@ STAGE = (SRC / 'stage.svg.html').read_text(encoding='utf-8')
 IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="img/{f}" alt="" loading="lazy"></a>' for f in ['burger.jpg', 'picoteo.jpg', 'pancake.jpg', 'trufadas.jpg', 'matcha-2.jpg', 'tostada.jpg'])
 
 
+
+
+def phones():
+    items = [('DdMsBnEtk9_', 'Aquí no venimos a hacer hamburguesas sin más…'), ('Ddb6G-6NtoU', 'No sabemos si contratamos camareros o actores')]
+    f = ''.join(f'''<figure class="phone reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen"><span class="phone__load">Cargando desde Instagram…</span>
+      <iframe src="https://www.instagram.com/reel/{i}/embed/" title="Reel de Alma Burger: {t}" loading="lazy" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe></div><span class="phone__bar" aria-hidden="true"></span></div>
+      <figcaption>{t} · <a href="https://www.instagram.com/reel/{i}/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></figcaption></figure>''' for i, t in items)
+    return f'<div class="phones">{f}</div>'
+
+
 def home():
     marq = ''.join(f'<span>{t}</span><i>✶</i>' for t in ['Smash burgers', 'Desayunos', 'Picoteo', 'Tostadas', 'Hot dogs', 'Pancakes', 'Tartas de queso', 'Matcha', 'Café de especialidad'])
     return f'''<section class="hero">
@@ -291,6 +301,14 @@ def home():
     <div class="sec__head"><div><p class="kicker reveal">Desayunos · de 8:00 a 12:00</p><h2 class="sec__title reveal">Para empezar el día <em>con alma</em></h2></div>
       <a class="btn btn--solid reveal" href="desayunos.html">Todos los desayunos →</a></div>
     <div class="rail" id="featuredB"></div>
+  </div>
+</section>
+
+<section class="sec sec--band" id="videos">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
+      <a class="btn btn--solid reveal" href="galeria.html#reels">Más en la galería →</a></div>
+    {phones()}
   </div>
 </section>
 
@@ -569,6 +587,7 @@ def galeria():
              ('p', 'DeMkLEgNm_F', 'El picoteo también tiene ALMA', 'img/picoteo.jpg', 'Publicación'),
              ('p', 'DeCQKUYDb0k', '¿Desayuno o capricho?', 'img/desayuno-capricho.jpg', 'Publicación'),
              ('p', 'DeACh3SNset', 'Burger del mes: La Puerquita', 'img/burger.jpg', 'Publicación')]
+    reels = [r for r in reels if r[0] == 'p']
     rl = ''.join(f'<a class="rl reveal" href="https://www.instagram.com/{k}/{i}/" target="_blank" rel="noopener" data-ig="{k}/{i}" aria-label="Ver en Instagram: {t}">'
                  + (f'<img src="{im}" alt="" loading="lazy">' if im else '<span class="rl__mascot"><img src="img/mascot.png" alt=""></span>')
                  + f'<span class="rl__kind">{kd}</span><span class="rl__play" aria-hidden="true">▶</span><span class="rl__t">{t}</span></a>' for k, i, t, im, kd in reels)
@@ -594,8 +613,10 @@ def galeria():
   <div class="wrap">
     <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
       <a class="btn btn--solid reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">@almaburgers ↗</a></div>
+    {phones()}
+    <p class="chap__p reveal" style="margin:30px 0 8px;font-weight:700">Y más del Instagram</p>
     <div class="rail rl-rail">{rl}</div>
-    <p class="fine reveal" style="opacity:.7;margin-top:6px">Al pulsar se carga el contenido desde Instagram, con sus propias cookies.</p>
+    <p class="fine reveal" style="opacity:.7;margin-top:6px">Los vídeos se cargan desde Instagram, con sus propias cookies.</p>
   </div>
 </section>
 <section class="sec" id="stickers">
