@@ -770,4 +770,18 @@ if (stageEl) {
     const vw = e.target.closest('[data-qview]'); if (vw) { closeModals(); setTimeout(() => openDish(vw.dataset.qview), 60); }
   });
 })();
+
+/* ---------- Vídeo propio en el móvil: se reproduce al verlo ---------- */
+(() => {
+  const figs = $$('.phone--own'); if (!figs.length) return;
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  figs.forEach(fig => {
+    const v = $('video', fig); let userPaused = false;
+    const play = () => { if (userPaused) return; v.preload = 'auto'; const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const sync = () => fig.classList.toggle('paused', v.paused);
+    v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !reduce) play(); else v.pause(); }), { threshold: .45 }).observe(fig);
+    $('.phone__screen', fig).addEventListener('click', e => { if (v.paused) { userPaused = false; v.preload = 'auto'; v.play().catch(() => {}); } else { userPaused = true; v.pause(); } });
+  });
+})();
 })();

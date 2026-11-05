@@ -1521,6 +1521,14 @@ html[data-agora=on] .mtalk .x{display:none}
 @media (prefers-reduced-motion:reduce){.phone__bezel,.phone:nth-child(even) .phone__bezel{transform:none}}
 @media (max-width:600px){.phone{width:min(350px,calc(100% - 6px))}.phone__bezel,.phone:nth-child(even) .phone__bezel{transform:none;box-shadow:0 0 0 2px #3a3a38,6px 8px 0 var(--ink)}}
 
+/* ====== móvil con vídeo propio ====== */
+.phone__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:1}
+.phone__snd{position:absolute;right:12px;bottom:26px;z-index:4;border:2.5px solid #fff;background:rgba(0,0,0,.6);color:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-weight:800;font-size:.85rem;cursor:pointer;backdrop-filter:blur(4px)}
+.phone__snd[aria-pressed=true]{background:#fff;color:#000}
+.phone__play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;font-size:3rem;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);pointer-events:none;opacity:0;transition:opacity .2s}
+.phone--own.paused .phone__play{opacity:1}
+.phone--own .phone__screen{cursor:pointer;background:#000}
+
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{
   --je:#0b0b0b; --je-fg:#faf9f5;
