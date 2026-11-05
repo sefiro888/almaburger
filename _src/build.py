@@ -302,7 +302,7 @@ def home():
 
 <section class="sec sec--band">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">Desayunos · de 8:00 a 12:00</p><h2 class="sec__title reveal">Para empezar el día <em>con alma</em></h2></div>
+    <div class="sec__head"><div><p class="kicker reveal">Desayunos · de 8:00 a 12:00</p><h2 class="sec__title reveal">Desayunos <em>con pasión</em></h2></div>
       <a class="btn btn--solid reveal" href="desayunos.html">Todos los desayunos →</a></div>
     <div class="rail" id="featuredB"></div>
   </div>
@@ -544,7 +544,7 @@ def carta():
 
 
 def desayunos():
-    return phero('Desayunos', 'Desayunos <em>con alma</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha. Donde el café tiene alma y los desayunos también.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
+    return phero('Desayunos', 'Desayunos <em>con pasión</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha, hechos con las mismas ganas que nuestras hamburguesas.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
@@ -558,7 +558,7 @@ def desayunos():
 </section>
 <section class="sec sec--band">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">Los favoritos</p><h2 class="sec__title reveal">Para empezar el día <em>con alma</em></h2></div></div>
+    <div class="sec__head"><div><p class="kicker reveal">Los favoritos</p><h2 class="sec__title reveal">Desayunos <em>con pasión</em></h2></div></div>
     <div class="rail" id="featuredB"></div>
   </div>
 </section>
@@ -580,7 +580,7 @@ def galeria():
           ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas')]
     des = [('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'),
            ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
-           ('desayuno-revuelto.jpg', 'Desayuno con alma', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
+           ('desayuno-revuelto.jpg', 'Desayuno con pasión', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
     d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
     bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
@@ -690,7 +690,7 @@ TITLES = {
     'index': ('Alma Burger · Hamburguesas y desayunos en Ordizia', 'Hamburguesas y desayunos en Ordizia. No es solo comida. Es ALMA: smash burgers, tostadas, pancakes, matcha, cafés especiales y postres.'),
     'alma': ('El alma · Alma Burger', 'No es solo comida. Es ALMA. La historia de Alma Burger: nuestras raíces, nuestra familia y por qué hacemos hamburguesas y desayunos con identidad propia.'),
     'carta': ('Hamburguesas y carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
-    'desayunos': ('Desayunos · Alma Burger', 'Desayunos de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
+    'desayunos': ('Desayunos con pasión · Alma Burger', 'Desayunos con pasión de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),
     'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.'),
 }
