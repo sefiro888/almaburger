@@ -8,7 +8,7 @@ THEMES = {
     'opcion-1-color':     dict(css='theme-color.css', name='Opción 1 · Color', other='opcion-2-fiel-logo', tcolor='#1a00ad'),
     'opcion-2-fiel-logo': dict(css='theme-fiel.css',  name='Opción 2 · Fiel al logo', other='opcion-1-color', tcolor='#0b0b0b'),
 }
-PAGES = [('el-alma.html', 'El alma', 'alma'), ('carta.html', 'Carta', 'carta'), ('desayunos.html', 'Desayunos', 'desayunos'),
+PAGES = [('el-alma.html', 'El alma', 'alma'), ('carta.html', 'Hamburguesas', 'carta'), ('desayunos.html', 'Desayunos', 'desayunos'),
          ('galeria.html', 'Galería', 'galeria'), ('visitanos.html', 'Visítanos', 'visitanos')]
 JE = 'https://www.just-eat.es/restaurants-alma-burger-ordizia/menu'
 import time
@@ -42,12 +42,13 @@ def nav(active):
 
 CTA = f'''<section class="sec cta" style="padding-bottom:140px;border-top:var(--bw) solid var(--ink)">
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
-    <h2 class="sec__title reveal" style="margin:0">¿Te entra <em>el hambre</em>?</h2>
+    <h2 class="sec__title reveal" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>
     <div class="btnrow reveal" style="margin:0">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
-      <a class="btn" href="carta.html">Ver la carta</a>
+      <a class="btn" href="carta.html">Hamburguesas</a>
+      <a class="btn" href="desayunos.html">Desayunos</a>
     </div>
   </div>
 </section>'''
@@ -56,7 +57,7 @@ FOOT = f'''<footer class="foot">
   {walker(96, 30)}
   <img class="foot__word" src="img/wordmark-cream.png" alt="Alma Burger">
   <div class="foot__grid">
-    <div><h4>Donde el sabor tiene alma</h4><p>Smash burgers, picoteo, hot dogs, postres y desayunos en el corazón de Ordizia.</p></div>
+    <div><h4>No es solo comida. Es ALMA.</h4><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
     <div><h4>Explora</h4><ul><li><a href="index.html">Inicio</a></li>{''.join(f'<li><a href="{h}">{t}</a></li>' for h, t, k in PAGES)}</ul></div>
     <div><h4>Contacto</h4><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
       <li><a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a></li>
@@ -148,6 +149,7 @@ def shell(*a, **k):
 def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
     HOMEA = ' aria-current="page"' if active == 'home' else ''
     CARTAA = ' aria-current="page"' if active == 'carta' else ''
+    DESAA = ' aria-current="page"' if active == 'desayunos' else ''
     return f'''<!doctype html>
 <html lang="es" data-font="shoulders" data-all="on">
 <head>
@@ -176,8 +178,8 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 {FOOT}
 {CART}
 <nav class="bnav" aria-label="Acceso rápido">
-  <a href="index.html"{HOMEA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Inicio</span></a>
-  <a href="carta.html"{CARTAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h10"/></svg><span>Carta</span></a>
+  <a href="carta.html"{CARTAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a8 6 0 0 1 16 0Z"/><path d="M3 15h18"/><path d="M5 19h14a2 2 0 0 0 2-2H3a2 2 0 0 0 2 2Z"/></svg><span>Burgers</span></a>
+  <a href="desayunos.html"{DESAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
   <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedido</span><i id="bnavN" hidden>0</i></button>
   <a class="bnav__jeat" href="{JE}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
@@ -209,58 +211,86 @@ IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/
 
 
 def home():
-    marq = ''.join(f'<span>{t}</span><i>✶</i>' for t in ['Smash burgers', 'Picoteo', 'Hot dogs', 'Desayunos hasta las 12:00', 'Tartas de queso', 'Matcha'])
+    marq = ''.join(f'<span>{t}</span><i>✶</i>' for t in ['Smash burgers', 'Desayunos', 'Picoteo', 'Tostadas', 'Hot dogs', 'Pancakes', 'Tartas de queso', 'Matcha', 'Café de especialidad'])
     return f'''<section class="hero">
   <div class="hero__copy">
     <p class="eyebrow reveal"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
     <h1 class="sr-only">Alma Burger</h1>
     <div class="stagewrap reveal">{STAGE}<div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
-    <p class="hero__lead reveal">Donde el sabor tiene <em>alma</em>. Smash burgers de recetas propias, picoteo para compartir y desayunos de los que invitan a volver.</p>
+    <p class="hero__lead reveal">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
     <div class="hero__cta reveal">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
     </div>
-    <p class="hero__alt reveal"><a href="visitanos.html#reservar">Reservar mesa</a> · <a href="carta.html">Ver la carta</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
-    <ul class="hero__facts reveal"><li><b>16</b> hamburguesas</li><li><b>8:00</b> desayunos</li><li><b>Kale Nagusia</b> 42</li></ul>
+    <p class="hero__alt reveal"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
+    <ul class="hero__facts reveal"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
     <div class="blob"></div>
     <figure class="hero__photo"><img src="img/burger.jpg" alt="La Puerquita, la burger del mes: doble smash con pulled pork" fetchpriority="high"><a class="hero__tag" href="carta.html#hamburguesas">Burger del mes · La Puerquita</a></figure>
-    <figure class="hero__photo hero__photo--b"><img src="img/trufadas.jpg" alt="Patatas trufadas con parmesano y mayonesa de trufa"></figure>
-    <svg class="sticker" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#circ" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">SMASH BURGERS · AL MOMENTO · SIN ATAJOS · </textPath></text><text x="100" y="118" text-anchor="middle" font-size="62" font-family="Bagel Fat One">✶</text></svg>
+    <figure class="hero__photo hero__photo--b"><img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha"><a class="hero__tag hero__tag--b" href="desayunos.html">Desayunos · 8:00–12:00</a></figure>
+    <svg class="sticker" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#circ" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">HAMBURGUESAS · DESAYUNOS · ALMA · </textPath></text><text x="100" y="118" text-anchor="middle" font-size="62" font-family="Bagel Fat One">✶</text></svg>
   </div>
   <div class="heroline" aria-hidden="true">{walker(112, 22)}</div>
 </section>
 <div class="marquee" aria-hidden="true"><div class="marquee__track">{marq}{marq}</div></div>
 
+<section class="sec duosec" id="dos-caras">
+  <div class="wrap">
+    <p class="kicker reveal">Dos formas de disfrutar ALMA</p>
+    <h2 class="sec__title reveal">Hamburguesas <em>y desayunos</em></h2>
+    <div class="duo">
+      <a class="dcard dcard--b reveal" href="carta.html">
+        <img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy">
+        <div class="dcard__in"><span class="dcard__tag">Del mediodía a la noche</span><h3>Hamburguesas</h3>
+          <p>Smash burgers de recetas propias, pollo crispy, hot dogs, picoteo y tartas de queso.</p><span class="dcard__go">Ver hamburguesas →</span></div>
+      </a>
+      <a class="dcard dcard--d reveal" href="desayunos.html">
+        <img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy">
+        <div class="dcard__in"><span class="dcard__tag">De 8:00 a 12:00</span><h3>Desayunos</h3>
+          <p>Tostadas con toppings de verdad, pancakes, bowls, cafés especiales y los matchas del momento.</p><span class="dcard__go">Ver desayunos →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="sec sec--dark hstory" id="historia">
   <div class="wrap hstory__grid">
     <div class="hstory__pics">
       <figure class="hp hp--1 reveal"><img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure>
-      <figure class="hp hp--2 reveal"><img src="img/dishes/la-dori.jpg" alt="La Dori con doritos y cheddar" loading="lazy"></figure>
-      <figure class="hp hp--3 reveal"><img src="img/dishes/me-derrito.jpg" alt="Me Derrito, smash con salsa cheddar" loading="lazy"></figure>
-      <svg class="hp__stamp" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="c2" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#c2" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">ALMA BURGER · ORDIZIA · DESDE EL PRIMER DÍA · </textPath></text><text x="100" y="116" text-anchor="middle" font-size="58" font-family="Bagel Fat One">A</text></svg>
+      <figure class="hp hp--2 reveal"><img src="img/dishes/tostada-salmon.jpg" alt="Tostada de salmón con aguacate" loading="lazy"></figure>
+      <figure class="hp hp--3 reveal"><img src="img/dishes/pancakes-ferrero.jpg" alt="Pancakes con crema de Ferrero Rocher" loading="lazy"></figure>
+      <svg class="hp__stamp" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="c2" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#c2" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">ALMA · TODO LO QUE SOMOS · EN CADA BOCADO · </textPath></text><text x="100" y="116" text-anchor="middle" font-size="58" font-family="Bagel Fat One">A</text></svg>
     </div>
     <div class="hstory__text">
       <p class="kicker kicker--dark reveal">Nuestra historia</p>
-      <h2 class="sec__title reveal">Donde cada hamburguesa <em>tiene alma</em></h2>
-      <p class="hstory__lead reveal">Todo comenzó con una idea sencilla: crear un lugar donde disfrutar de hamburguesas auténticas, elaboradas con ingredientes de calidad y mucho cariño.</p>
-      <p class="reveal">En Alma Burger creemos que una buena hamburguesa es mucho más que una comida. Es compartir momentos, reunirse con amigos y disfrutar de sabores que dejan huella.</p>
-      <div class="hstory__more" id="hmore"><p>Por eso seleccionamos cuidadosamente cada ingrediente, desde la carne hasta el pan, para ofrecer una experiencia única en cada bocado.</p>
-        <p>Cada hamburguesa que sale de nuestra cocina está preparada al momento, con dedicación y pasión por hacer las cosas bien.</p>
-        <p>Hoy seguimos creciendo con la misma ilusión del primer día: convertir Alma Burger en un lugar donde nuestros clientes se sientan como en casa y siempre quieran volver.</p>
-        <p class="hstory__end">Bienvenidos a Alma Burger.</p></div>
-      <div class="btnrow reveal" style="margin-top:22px"><button class="btn btn--cream" type="button" id="hmoreBtn" aria-expanded="false" aria-controls="hmore">Seguir leyendo ↓</button><a class="btn btn--line" href="el-alma.html">Todo sobre nosotros</a></div>
+      <h2 class="sec__title reveal">No es solo comida. <em>Es ALMA.</em></h2>
+      <p class="hstory__lead reveal">ALMA no es simplemente el nombre de nuestra hamburguesería. Es una parte de nosotros, de nuestras raíces y de nuestra familia.</p>
+      <p class="reveal">Cada letra tiene un significado especial:</p>
+      <div class="letters reveal"><div><b>A</b><span>Abrahan</span></div><div><b>L</b><span>Lidia</span></div><div><b>M</b><span>Moreno, apellido del padre de Lidia</span></div><div><b>MA</b><span>Maritza, madre de Abrahan</span></div></div>
+      <div class="hstory__more" id="hmore"><p>De la unión de nuestros nombres y nuestras raíces nació ALMA, un proyecto que representa nuestra ilusión por emprender juntos y crear algo propio.</p>
+        <p>Queríamos construir mucho más que una hamburguesería. Un lugar con personalidad, donde la creatividad, los sabores atrevidos y las ganas de sorprender estuvieran presentes en cada detalle.</p>
+        <p>En ALMA nos gusta salir de lo convencional, experimentar con nuevas combinaciones y ofrecer experiencias diferentes, desde nuestras hamburguesas más originales hasta nuestros desayunos, cafés especiales y nuevas creaciones.</p>
+        <p class="hstory__end">ALMA nació de nuestras raíces, creció con nuestros sueños y hoy queremos compartirla contigo.</p></div>
+      <div class="btnrow reveal" style="margin-top:22px"><button class="btn btn--cream" type="button" id="hmoreBtn" aria-expanded="false" aria-controls="hmore">Seguir leyendo ↓</button><a class="btn btn--line" href="el-alma.html">Toda nuestra historia</a></div>
     </div>
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">Los destacados</p><h2 class="sec__title reveal">Para empezar <em>fuerte</em></h2></div>
-      <a class="btn btn--solid reveal" href="carta.html">Toda la carta →</a></div>
+    <div class="sec__head"><div><p class="kicker reveal">Hamburguesas · lo más pedido</p><h2 class="sec__title reveal">Para empezar <em>fuerte</em></h2></div>
+      <a class="btn btn--solid reveal" href="carta.html">Todas las hamburguesas →</a></div>
     <div class="rail" id="featured"></div>
+  </div>
+</section>
+
+<section class="sec sec--band">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Desayunos · de 8:00 a 12:00</p><h2 class="sec__title reveal">Para empezar el día <em>con alma</em></h2></div>
+      <a class="btn btn--solid reveal" href="desayunos.html">Todos los desayunos →</a></div>
+    <div class="rail" id="featuredB"></div>
   </div>
 </section>
 
@@ -299,7 +329,7 @@ def home():
   <div class="wrap">
     <p class="kicker reveal">Descubre</p><h2 class="sec__title reveal">Todo Alma, <em>en un vistazo</em></h2>
     <div class="tease" style="margin-top:30px">
-      <a class="tz tz--wide reveal" href="carta.html"><img src="img/dishes/la-triplona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>La carta</h3><p>Hamburguesas, picoteo, bocadillos, hot dogs y postres.</p></div></a>
+      <a class="tz tz--wide reveal" href="carta.html"><img src="img/dishes/la-triplona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Hamburguesas y carta</h3><p>Smash burgers, picoteo, bocadillos, hot dogs y postres.</p></div></a>
       <a class="tz tz--wide reveal" href="desayunos.html"><img src="img/tostada.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
       <a class="tz reveal" href="el-alma.html"><img src="img/cabrona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
       <a class="tz reveal" href="galeria.html"><img src="img/picoteo.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
@@ -318,38 +348,49 @@ def home():
 
 
 def alma():
-    return phero('El alma', 'Donde cada hamburguesa tiene <em>alma</em>', 'Ingredientes seleccionados, recetas únicas y el sabor que te hará volver.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
+    return phero('El alma', 'No es solo comida. <em>Es ALMA.</em>', 'Hamburguesas y desayunos con identidad propia, hechos con raíces, familia y muchas ganas.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
 <section class="sec">
   <div class="wrap story">
     <aside class="story__side"><p class="kicker reveal">Nuestra historia</p>
-      <figure class="story__pic reveal"><img src="img/dishes/me-derrito.jpg" alt="Una smash burger con salsa cheddar, preparada al momento" loading="lazy"></figure></aside>
+      <figure class="story__pic reveal"><img src="img/dishes/tostada-salmon.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy"></figure></aside>
     <div class="story__text">
-      <p class="story__lead reveal">Todo comenzó con una idea sencilla: crear un lugar donde disfrutar de hamburguesas auténticas, elaboradas con ingredientes de calidad y mucho cariño.</p>
-      <p class="reveal">En Alma Burger creemos que una buena hamburguesa es mucho más que una comida. Es compartir momentos, reunirse con amigos y disfrutar de sabores que dejan huella.</p>
-      <p class="reveal">Por eso seleccionamos cuidadosamente cada ingrediente, desde la carne hasta el pan, para ofrecer una experiencia única en cada bocado.</p>
-      <p class="reveal">Cada hamburguesa que sale de nuestra cocina está preparada al momento, con dedicación y pasión por hacer las cosas bien.</p>
-      <p class="reveal">Hoy seguimos creciendo con la misma ilusión del primer día: convertir Alma Burger en un lugar donde nuestros clientes se sientan como en casa y siempre quieran volver.</p>
-      <p class="story__end reveal">Bienvenidos a Alma Burger.</p>
+      <p class="story__lead reveal">ALMA no es simplemente el nombre de nuestra hamburguesería. Es una parte de nosotros, de nuestras raíces y de nuestra familia.</p>
+      <p class="reveal">Cada letra tiene un significado especial:</p>
+      <div class="letters letters--big reveal"><div><b>A</b><span>Abrahan</span></div><div><b>L</b><span>Lidia</span></div><div><b>M</b><span>Moreno, apellido del padre de Lidia</span></div><div><b>MA</b><span>Maritza, madre de Abrahan</span></div></div>
+      <p class="reveal">De la unión de nuestros nombres y nuestras raíces nació ALMA, un proyecto que representa nuestra ilusión por emprender juntos y crear algo propio.</p>
+      <p class="reveal">Queríamos construir mucho más que una hamburguesería. Un lugar con personalidad, donde la creatividad, los sabores atrevidos y las ganas de sorprender estuvieran presentes en cada detalle.</p>
+      <p class="reveal">En ALMA nos gusta salir de lo convencional, experimentar con nuevas combinaciones y ofrecer experiencias diferentes, desde nuestras hamburguesas más originales hasta nuestros desayunos, cafés especiales y nuevas creaciones.</p>
+      <p class="reveal">Detrás de todo esto hay esfuerzo, dedicación, ilusión y, sobre todo, muchísimas ganas de seguir creciendo.</p>
     </div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
-  <div class="wrap">
-    <div class="pillars">
-      <article class="pillar reveal"><span class="pillar__n">01</span><h3>Ingredientes seleccionados</h3><p>Elegimos cuidadosamente cada ingrediente, desde la carne hasta el pan, para ofrecer una experiencia única en cada bocado.</p></article>
-      <article class="pillar reveal"><span class="pillar__n">02</span><h3>Preparada al momento</h3><p>Cada hamburguesa que sale de nuestra cocina se prepara al momento, con dedicación y pasión por hacer las cosas bien.</p></article>
-      <article class="pillar reveal"><span class="pillar__n">03</span><h3>Como en casa</h3><p>Un lugar donde nuestros clientes se sientan como en casa y siempre quieran volver. Bienvenidos a Alma Burger.</p></article>
-    </div>
+<section class="sec sec--band">
+  <div class="wrap philo">
+    <div class="reveal"><p class="kicker">Nuestra filosofía</p>
+      <h2 class="sec__title">No queremos ser una hamburguesería <em>más</em></h2>
+      <p class="philo__p">Queremos que ALMA tenga identidad propia, que la gente nos recuerde por nuestros sabores, nuestra creatividad y nuestra manera de hacer las cosas.</p></div>
+    <div class="reveal"><p class="kicker">Nuestra personalidad</p>
+      <ul class="traits"><li>Moderna</li><li>Atrevida</li><li>Creativa</li><li>Cercana</li></ul>
+      <p class="philo__p">Pero sin perder nunca nuestra esencia familiar.</p></div>
   </div>
 </section>
 
+<section class="sec sec--dark">
+  <div class="wrap quote">
+    <p class="quote__t reveal">«ALMA nació de nuestras raíces, creció con nuestros sueños y hoy queremos compartirla contigo.»</p>
+    <p class="quote__s reveal">ALMA — Todo lo que somos, en cada bocado.</p>
+    <div class="btnrow reveal" style="justify-content:center;margin-top:26px"><a class="btn btn--cream" href="carta.html">Ver hamburguesas</a><a class="btn btn--line" href="desayunos.html">Ver desayunos</a></div>
+  </div>
+</section>
+
+''' + f'''
 <section class="sec sec--ink">
   <div class="wrap">
     <div class="stats">
       <div class="stat reveal"><b data-stat="burgers"></b><span>hamburguesas en carta</span></div>
-      <div class="stat reveal"><b data-stat="dishes"></b><span>platos y bebidas</span></div>
-      <div class="stat reveal"><b data-stat="8:00"></b><span>abrimos con desayunos</span></div>
+      <div class="stat reveal"><b data-stat="desa"></b><span>desayunos y bebidas</span></div>
+      <div class="stat reveal"><b data-stat="8:00"></b><span>abrimos con café y desayunos</span></div>
       <div class="stat reveal"><b data-stat="1"></b><span>mascota con gafas</span></div>
     </div>
   </div>
@@ -397,7 +438,7 @@ JEBANNER = f'''
 
 
 def carta():
-    return phero('Carta', 'Elige tu <em>perdición</em>', 'Smash burgers, picoteo, bocadillos, hot dogs y tartas de queso.') + JEBANNER + '''
+    return phero('Hamburguesas', 'Elige tu <em>perdición</em>', 'Smash burgers, pollo crispy, picoteo, bocadillos, hot dogs y tartas de queso.') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html" aria-current="page">Hamburguesas y carta</a><a href="desayunos.html">Desayunos</a></div></div>''' + JEBANNER + '''
 <section class="sec sec--dark carta" style="padding-top:30px">
   <div class="wrap">
     <div class="toolbar reveal">
@@ -415,7 +456,7 @@ def carta():
 
 
 def desayunos():
-    return phero('Desayunos', 'Desayunos <em>con alma</em>', 'De 8:00 a 12:00. Donde el café tiene alma y los desayunos también.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha') + '''
+    return phero('Desayunos', 'Desayunos <em>con alma</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha. Donde el café tiene alma y los desayunos también.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
@@ -425,6 +466,12 @@ def desayunos():
       <p class="reveal">Tostadas con toppings de verdad, pancakes golosos, bowls, zumos, smoothies y unos matchas que no vas a poder dejar de pedir.</p>
       <ul class="dots reveal"><li><span>Espresso</span><i></i><b>1,70€</b></li><li><span>Tostada de salmón y mascarpone</span><i></i><b>7,50€</b></li><li><span>Pancakes de Ferrero</span><i></i><b>6,30€</b></li><li><span>Matcha de mango</span><i></i><b>4,00€</b></li></ul>
     </div>
+  </div>
+</section>
+<section class="sec sec--band">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Los favoritos</p><h2 class="sec__title reveal">Para empezar el día <em>con alma</em></h2></div></div>
+    <div class="rail" id="featuredB"></div>
   </div>
 </section>
 <section class="sec sec--dark" style="padding-top:34px" id="menu-desayunos">
@@ -514,10 +561,10 @@ def nf():
 
 
 TITLES = {
-    'index': ('Alma Burger · Hamburguesas y desayunos en Ordizia', 'Smash burgers, picoteo, hot dogs, postres y desayunos en el corazón de Ordizia. Donde el sabor tiene alma.'),
-    'alma': ('El alma · Alma Burger', 'Donde cada hamburguesa tiene alma. Ingredientes seleccionados, recetas únicas y el sabor que te hará volver. La historia de Alma Burger en Ordizia.'),
-    'carta': ('La carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
-    'desayunos': ('Desayunos · Alma Burger', 'Desayunos hasta las 12:00 en Ordizia: tostadas, pancakes, bowls, bollería, zumos y matcha.'),
+    'index': ('Alma Burger · Hamburguesas y desayunos en Ordizia', 'Hamburguesas y desayunos en Ordizia. No es solo comida. Es ALMA: smash burgers, tostadas, pancakes, matcha, cafés especiales y postres.'),
+    'alma': ('El alma · Alma Burger', 'No es solo comida. Es ALMA. La historia de Alma Burger: nuestras raíces, nuestra familia y por qué hacemos hamburguesas y desayunos con identidad propia.'),
+    'carta': ('Hamburguesas y carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
+    'desayunos': ('Desayunos · Alma Burger', 'Desayunos de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),
     'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.'),
 }

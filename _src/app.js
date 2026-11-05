@@ -69,7 +69,7 @@ const MENU = {
     { g: 'Cafés y bebidas especiales', items: [
       P('Espresso', '', 1.7), P('Cortado', '', 1.8), P('Con leche', '', 1.9), P('Cola Cao', '', 2.2), P('Infusiones', '', 1.9),
       P('Ice Caramel Latte', '', 3.5), P('Ice Vainilla Latte', '', 3.5),
-      P('Matcha de Mango', '', 4), P('Matcha Berry', '', 4), P('Matcha goloso', '', 4)
+      P('Matcha de Mango', '', 4, [], 'matcha'), P('Matcha Berry', '', 4), P('Matcha goloso', '', 4, [], 'matcha-2')
     ]},
     { g: 'Bollería', items: [
       P('Croissant', '', 3), P('Croissant relleno de pistacho', '', 3.5, ['dulce']), P('Croissant relleno de nutella', '', 3.5, ['dulce']),
@@ -160,7 +160,7 @@ if (menuEl) {
 
   const tabList = mode === 'desayunos'
     ? [['todo', 'Todo'], ...groups.map((g, k) => ['g' + k, g.g])]
-    : Object.entries(MENU).map(([k, c]) => [k, c.label]);
+    : Object.entries(MENU).filter(([k]) => k !== 'desayunos').map(([k, c]) => [k, c.label]);
   const matches = i => {
     if (state.filters.size && ![...state.filters].every(f => i.t.includes(f))) return false;
     return state.q ? norm(i.n + ' ' + i.d + ' ' + i.t.join(' ')).includes(norm(state.q)) : true;
@@ -198,13 +198,15 @@ if (menuEl) {
 
 /* ---------- Destacados (los que Just Eat marca como destacados) ---------- */
 const feat = $('#featured');
+const featB = $('#featuredB');
+if (featB) featB.innerHTML = ['Salmón y mascarpone', 'Pancakes de Ferrero', 'Pancakes de Nutella', 'Matcha de Mango', 'Matcha goloso'].map((n, k) => { const it = allItems.find(i => i.n === n && i.cat === 'desayunos'); return it ? card(it, k) : ''; }).join('');
 if (feat) feat.innerHTML = ['Doble Dosis', 'La Puerquita', 'La Dori', 'La Triplona', 'Gordi Deluxe', 'Patatas trufadas']
   .map((n, k) => card(allItems.find(i => i.n === n), k)).join('');
 
 /* ---------- Contadores ---------- */
 $$('[data-stat]').forEach(el => {
   const k = el.dataset.stat;
-  el.textContent = k === 'burgers' ? MENU.hamburguesas.items.length : k === 'dishes' ? allItems.length : k;
+  el.textContent = k === 'burgers' ? MENU.hamburguesas.items.length : k === 'desa' ? MENU.desayunos.groups.flatMap(g => g.items).length : k === 'dishes' ? allItems.length : k;
 });
 
 /* ---------- Horario y estado (orientativo, según Toppings & Salads) ---------- */
