@@ -1382,6 +1382,10 @@ html[data-agora=on] .item--row{grid-template-columns:1fr auto}
 .duo-switch a[aria-current=page]{background:var(--accent);color:var(--accent-fg);box-shadow:0 4px 0 var(--ink)}
 @media (max-width:980px){.duo{grid-template-columns:1fr}.dcard{min-height:min(440px,100vw)}.philo{grid-template-columns:1fr}.duo-switch{top:52px}}
 @media (max-width:600px){.letters{grid-template-columns:repeat(2,1fr)}}
+.photogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.photogrid .mi{margin:0;aspect-ratio:4/5;break-inside:auto}
+.photogrid .mi img{height:100%;object-fit:cover}
+@media (max-width:980px){.photogrid{grid-template-columns:repeat(2,1fr);gap:12px}}
 
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{

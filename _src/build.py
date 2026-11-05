@@ -207,7 +207,7 @@ def phero(crumb, h1, lead, pic=None, pic_alt='', dark=False):
 STAGE = (SRC / 'stage.svg.html').read_text(encoding='utf-8')
 
 
-IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="img/{f}" alt="" loading="lazy"></a>' for f in ['burger.jpg', 'picoteo.jpg', 'pancake.jpg', 'trufadas.jpg', 'matcha.jpg', 'tostada.jpg'])
+IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="img/{f}" alt="" loading="lazy"></a>' for f in ['burger.jpg', 'picoteo.jpg', 'pancake.jpg', 'trufadas.jpg', 'matcha-2.jpg', 'tostada.jpg'])
 
 
 def home():
@@ -410,7 +410,7 @@ def alma():
 <section class="sec sec--band">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/picoteo.jpg" alt="Aros de cebolla, patatas y croquetas" loading="lazy"></figure>
-      <figure class="ph ph--2 reveal"><img src="img/matcha.jpg" alt="Matcha helado" loading="lazy"></figure>
+      <figure class="ph ph--2 reveal"><img src="img/matcha-2.jpg" alt="Matcha con leche" loading="lazy"></figure>
       <figure class="ph ph--3 reveal"><img src="img/pancake.jpg" alt="Pancakes de Ferrero" loading="lazy"></figure></div>
     <div><p class="kicker reveal">Más que hamburguesas</p><h2 class="sec__title reveal">De 8:00 de la mañana <em>a la noche</em></h2>
       <p class="reveal" style="font-size:1.1rem;max-width:30em">Empezamos el día con café, tostadas y pancakes, seguimos con bocadillos y hot dogs, y cerramos con smash burgers, picoteo y tartas de queso.</p>
@@ -460,7 +460,7 @@ def desayunos():
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
-      <figure class="ph ph--2 reveal"><img src="img/matcha.jpg" alt="Matcha helado" loading="lazy"></figure>
+      <figure class="ph ph--2 reveal"><img src="img/matcha-2.jpg" alt="Matcha con leche" loading="lazy"></figure>
       <figure class="ph ph--3 reveal"><img src="img/pancake.jpg" alt="Pancakes de Ferrero Rocher" loading="lazy"></figure></div>
     <div><p class="kicker reveal">Para empezar bien el día</p><h2 class="sec__title reveal">Tostadas, pancakes <em>y matcha</em></h2>
       <p class="reveal">Tostadas con toppings de verdad, pancakes golosos, bowls, zumos, smoothies y unos matchas que no vas a poder dejar de pedir.</p>
@@ -489,10 +489,10 @@ def desayunos():
 
 def galeria():
     ig = [('burger.jpg', 'La Puerquita', 'La Puerquita, burger del mes'), ('picoteo.jpg', 'Picoteo con alma', 'Aros de cebolla, patatas y croquetas'),
-          ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas'),
-          ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'), ('matcha.jpg', 'Matcha', 'Matcha helado'),
-          ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con Ferrero Rocher'), ('matcha-2.jpg', 'Un poquito de matcha', 'Matcha con leche'),
-          ('desayuno-capricho.jpg', '¿Desayuno o capricho?', 'Pancakes de nutella con fresas')]
+          ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas')]
+    des = [('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'),
+           ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso')]
+    d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
     bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
            ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
@@ -506,6 +506,13 @@ def galeria():
   </div>
 </section>
 <section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">8:00 a 12:00</p><h2 class="sec__title reveal" style="margin:0">Desayunos <em>en fotos</em></h2></div>
+      <a class="btn btn--solid reveal" href="desayunos.html">Ver los desayunos →</a></div>
+    <div class="photogrid">{d}</div>
+  </div>
+</section>
+<section class="sec sec--band">
   <div class="wrap">
     <p class="kicker reveal">De cerca</p><h2 class="sec__title reveal">Las hamburguesas, <em>una a una</em></h2>
     <div class="masonry" style="margin-top:30px">{b}</div>
