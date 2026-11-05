@@ -11,8 +11,9 @@ THEMES = {
 PAGES = [('el-alma.html', 'El alma', 'alma'), ('carta.html', 'Hamburguesas', 'carta'), ('desayunos.html', 'Desayunos', 'desayunos'),
          ('galeria.html', 'Galería', 'galeria'), ('visitanos.html', 'Visítanos', 'visitanos')]
 JE = 'https://www.just-eat.es/restaurants-alma-burger-ordizia/menu'
-import time
-VER = str(int(time.time()))
+import hashlib
+# versión para evitar la caché: cambia solo si cambian los estilos o el JS
+VER = hashlib.md5(b''.join((SRC / f).read_bytes() for f in ('app.js', 'base.css', 'pedido-v2.css', 'theme-fiel.css', 'theme-navy.css'))).hexdigest()[:8]
 
 
 def rig(w=150, extra=''):
@@ -65,6 +66,7 @@ FOOT = f'''<footer class="foot">
       <li><a href="{JE}" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
   </div>
   <div class="foot__row"><p>© <span class="yr"></span> Alma Burger · Consulta nuestra carta de alérgenos al personal</p><p><a href="__SWAP__">__SWAPNAME__</a> · Demo de diseño web</p></div>
+  <nav class="foot__legal" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button type="button" class="lnk" data-cookies>Configurar cookies</button></nav>
 </footer>'''
 
 CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedido">
@@ -108,6 +110,9 @@ CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedid
 import re as _re
 CFG = json.loads((SRC / 'config.json').read_text(encoding='utf-8')) if (SRC / 'config.json').exists() else {}
 DEMO = os.environ.get('ALMA_DEMO') == '1'
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location('legal', SRC / 'legal.py'); LEGAL = _ilu.module_from_spec(_spec); _spec.loader.exec_module(LEGAL)
+LCFG = CFG.get('legal', {})
 AGORA = 'simulacion.html' if DEMO else (CFG.get('agora_url') or '').strip()
 
 
@@ -178,9 +183,8 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{og}">
 <link rel="icon" type="image/png" href="img/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{{var h=+new Intl.DateTimeFormat("es-ES",{{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}}).format(new Date()),q=location.search.match(/[?&]hora=(\\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}}catch(e){{}}</script>
+<link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v={VER}">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"}},"geo":{{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607}},"sameAs":["https://www.instagram.com/almaburgers/"]}}</script>
 </head>
@@ -233,16 +237,40 @@ IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/
 
 
 
-def phones(all_reels=True):
-    def one(src, poster, label, cap):
+VIDEOS = [  # (archivo, descripción accesible, pie)
+    ('burger', 'Vídeo desde la cocina de ALMA: una burger con queso fundido', 'Desde la cocina de ALMA'),
+    ('desayunos', 'Desayunos con pasión: tostada de salmón, pancakes y matcha', 'Desayunos con pasión'),
+    ('chocolate', 'Chocolate caliente servido en una taza de ALMA', 'Llega el chocolate caliente'),
+    ('croquetas', 'Croquetas caseras de ALMA, recién abiertas', 'Croquetas caseras'),
+    ('halloween', 'Halloween en ALMA: calabazas, arañas y máscaras', 'This is Halloween en ALMA'),
+    ('oscuro', 'Algo muy oscuro: la burger negra de Halloween', 'Algo muy oscuro se cocina…'),
+]
+
+
+def phones(n=None):
+    def one(f, label, cap):
         return (f'''<figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="{poster}" aria-label="{label}"><source src="{src}" type="video/mp4"></video>
+      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/{f}-poster.jpg" aria-label="{label}"><source src="img/video/{f}.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>{cap}</figcaption></figure>''')
-    ig = '<a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Más en Instagram ↗</a>'
-    a = one('img/video/burger.mp4', 'img/video/burger-poster.jpg', 'Vídeo desde la cocina de ALMA: una burger con queso fundido', 'Desde la cocina de ALMA')
-    b = one('img/video/desayunos.mp4', 'img/video/desayunos-poster.jpg', 'Desayunos con pasión: tostada de salmón, pancakes y matcha', 'Desayunos con pasión · ' + ig)
-    return f'<div class="phones">{a}{b}</div>'
+    vs = VIDEOS[:n] if n else VIDEOS
+    return (f'<div class="phones phones--rail" tabindex="0" aria-label="Vídeos de ALMA, desliza para ver más">{"".join(one(*v) for v in vs)}</div>'
+            '<p class="phones__hint" aria-hidden="true">← Desliza para ver más vídeos →</p>')
+
+
+IGDATA = json.loads((SRC / 'data' / 'instagram.json').read_text(encoding='utf-8'))
+
+
+def igposts(n=12):
+    """Últimas publicaciones de Instagram (data/instagram.json, se actualiza con update_instagram.py)."""
+    def esc(t):
+        return t.replace('&', '&amp;').replace('<', '&lt;').replace('"', '&quot;')
+    out = ''
+    for p in IGDATA['publicaciones'][:n]:
+        kind = '<span class="igp__k">▶ Reel</span>' if p['tipo'] == 'reel' else ''
+        out += (f'<a class="igp reveal" href="{esc(p["url"])}" target="_blank" rel="noopener" aria-label="Ver en Instagram: {esc(p["texto"])}">'
+                f'<img src="{esc(p["img"])}" alt="" loading="lazy" width="540" height="675">{kind}<span class="igp__t">{esc(p["texto"])}</span></a>')
+    return f'<div class="igposts">{out}</div>'
 
 
 def home():
@@ -252,7 +280,8 @@ def home():
     <p class="eyebrow reveal"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
     <h1 class="sr-only">Alma Burger</h1>
     <div class="stagewrap reveal">{STAGE}<div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
-    <p class="hero__lead reveal">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
+    <p class="hero__lead reveal m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
+    <p class="hero__lead reveal m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
     <div class="hero__cta reveal">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
@@ -333,7 +362,7 @@ def home():
   <div class="wrap">
     <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
       <a class="btn btn--solid reveal" href="galeria.html#reels">Más en la galería →</a></div>
-    {phones(False)}
+    {phones(4)}
   </div>
 </section>
 
@@ -393,9 +422,9 @@ def home():
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">Síguenos</p><h2 class="sec__title reveal" style="margin:0">@almaburgers <em>en Instagram</em></h2></div>
+    <div class="sec__head"><div><p class="kicker reveal">Lo último en Instagram</p><h2 class="sec__title reveal" style="margin:0">Últimas <em>publicaciones</em></h2></div>
       <div class="btnrow reveal" style="margin:0"><a class="btn btn--solid btn--sm" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram ↗</a><a class="btn btn--sm" href="https://www.tiktok.com/@almaburgerss" target="_blank" rel="noopener">TikTok @almaburgerss ↗</a></div></div>
-    <div class="igrow">{IG}</div>
+    {igposts(6)}
   </div>
 </section>'''
 
@@ -482,6 +511,21 @@ def alma():
     <div class="reveal"><p class="kicker">Nuestra personalidad de marca</p>
       <ul class="traits"><li>Moderna</li><li>Atrevida</li><li>Creativa</li><li>Cercana</li></ul>
       <p class="philo__p">Pero sin perder nunca nuestra esencia familiar.</p></div>
+  </div>
+</section>
+
+<section class="sec team" id="equipo">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Las caras de ALMA</p><h2 class="sec__title reveal" style="margin:0">El <em>equipo</em></h2></div>
+      <span class="team__demo reveal">Ejemplo · pendiente de fotos y datos reales</span></div>
+    <p class="chap__p reveal" style="max-width:40em">Quién está detrás de cada burger y cada café. Aquí irán las fotos del equipo, su puesto y su plato favorito de la carta.</p>
+    <div class="team__grid">
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/carta.png" alt="" loading="lazy"></figure><h3>Abrahan</h3><p class="tm__role">Cofundador · cocina</p><p class="tm__fav">Su favorita: <b>por confirmar</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/desayunos.png" alt="" loading="lazy"></figure><h3>Lidia</h3><p class="tm__role">Cofundadora · desayunos y sala</p><p class="tm__fav">Su favorito: <b>por confirmar</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/galeria.png" alt="" loading="lazy"></figure><h3>Nombre</h3><p class="tm__role">Plancha y smash burgers</p><p class="tm__fav">Su favorita: <b>por confirmar</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/visitanos.png" alt="" loading="lazy"></figure><h3>Nombre</h3><p class="tm__role">Barra, cafés y matcha</p><p class="tm__fav">Su favorito: <b>por confirmar</b></p></article>
+    </div>
+    <p class="fine reveal" style="opacity:.7;margin-top:18px">¿Quieres trabajar con nosotros? Escríbenos por <a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a> o pásate por el local.</p>
   </div>
 </section>
 
@@ -607,15 +651,6 @@ def galeria():
     bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
            ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
 
-    reels = [('reel', 'DdMsBnEtk9_', 'Aquí no venimos a hacer hamburguesas sin más…', 'img/reels/desayuno.jpg', 'Reel'),
-             ('reel', 'Ddb6G-6NtoU', 'No sabemos si contratamos camareros o actores', '', 'Reel'),
-             ('p', 'DeMkLEgNm_F', 'El picoteo también tiene ALMA', 'img/picoteo.jpg', 'Publicación'),
-             ('p', 'DeCQKUYDb0k', '¿Desayuno o capricho?', 'img/desayuno-capricho.jpg', 'Publicación'),
-             ('p', 'DeACh3SNset', 'Burger del mes: La Puerquita', 'img/burger.jpg', 'Publicación')]
-    reels = [r for r in reels if r[0] == 'p']
-    rl = ''.join(f'<a class="rl reveal" href="https://www.instagram.com/{k}/{i}/" target="_blank" rel="noopener" data-ig="{k}/{i}" aria-label="Ver en Instagram: {t}">'
-                 + (f'<img src="{im}" alt="" loading="lazy">' if im else '<span class="rl__mascot"><img src="img/mascot.png" alt=""></span>')
-                 + f'<span class="rl__kind">{kd}</span><span class="rl__play" aria-hidden="true">▶</span><span class="rl__t">{t}</span></a>' for k, i, t, im, kd in reels)
     stk = [('hola', '¡Hola!'), ('marchando', '¡Marchando!'), ('buenos-dias', 'Buenos días'), ('esta-pica', '¡Esta pica!'), ('nam', 'Ñam'), ('gracias', 'Gracias'), ('hambre', 'Tengo hambre'), ('a-comer', '¡A comer!')]
     sk = ''.join(f'<figure class="sk reveal"><img src="img/stickers/{n}.png" alt="Sticker de la mascota: {t}" loading="lazy" width="256" height="256"><figcaption>{t}</figcaption><span><a href="img/stickers/{n}.png" download>PNG</a> · <a href="img/stickers/{n}.webp" download>WEBP</a></span></figure>' for n, t in stk)
     b = ''.join(f'<figure class="mi reveal"><img src="img/dishes/{s}.jpg" alt="{n}" loading="lazy"><figcaption>{n}</figcaption></figure>' for s, n in bur)
@@ -639,9 +674,13 @@ def galeria():
     <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
       <a class="btn btn--solid reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">@almaburgers ↗</a></div>
     {phones()}
-    <p class="chap__p reveal" style="margin:30px 0 8px;font-weight:700">Y más del Instagram</p>
-    <div class="rail rl-rail">{rl}</div>
-    <p class="fine reveal" style="opacity:.7;margin-top:6px">Los vídeos se cargan desde Instagram, con sus propias cookies.</p>
+  </div>
+</section>
+<section class="sec" id="ultimas">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Lo último en Instagram</p><h2 class="sec__title reveal" style="margin:0">Últimas <em>publicaciones</em></h2></div>
+      <a class="btn btn--solid reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Seguir en Instagram ↗</a></div>
+    {igposts(12)}
   </div>
 </section>
 <section class="sec" id="stickers">
@@ -679,7 +718,9 @@ def visitanos():
       <p class="fine">Horario orientativo: confirma por teléfono o WhatsApp antes de venir.</p>
       <div class="delivery reveal"><b>¿Pedir desde casa?</b><button class="lnk" type="button" data-wa-order style="color:var(--dark-pop);font-size:1rem">Por WhatsApp →</button><a href="{JE}" target="_blank" rel="noopener">Just Eat ↗</a></div>
     </div>
-    <div class="map reveal"><iframe title="Mapa de Alma Burger en Ordizia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.openstreetmap.org/export/embed.html?bbox=-2.1836%2C43.0515%2C-2.1736%2C43.0565&amp;layer=mapnik&amp;marker=43.054023%2C-2.178607"></iframe></div>
+    <div class="map reveal" data-ext-src="https://www.openstreetmap.org/export/embed.html?bbox=-2.1836%2C43.0515%2C-2.1736%2C43.0565&amp;layer=mapnik&amp;marker=43.054023%2C-2.178607" data-ext-title="Mapa de Alma Burger en Ordizia">
+      <div class="extph"><img src="img/ill/visitanos.png" alt="" loading="lazy"><p><b>Kale Nagusia 42, Ordizia</b></p><p class="extph__s">El mapa lo sirve OpenStreetMap. Se carga solo si lo pides.</p>
+        <button class="btn btn--solid btn--sm" type="button" data-ext-load>Cargar el mapa</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Alma+Burger+Kale+Nagusia+42+Ordizia" target="_blank" rel="noopener">Abrir en Google Maps ↗</a></div></div>
   </div>
 </section>
 <section class="sec" id="reservar">
@@ -714,9 +755,22 @@ TITLES = {
     'desayunos': ('Desayunos con pasión · Alma Burger', 'Desayunos con pasión de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),
     'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.'),
+    'aviso': ('Aviso legal · Alma Burger', 'Aviso legal y condiciones de uso de la web de ALMA Burger & Breakfast.'),
+    'privacidad': ('Política de privacidad · Alma Burger', 'Cómo trata ALMA Burger & Breakfast tus datos personales en pedidos, reservas y en la web.'),
+    'cookies': ('Política de cookies · Alma Burger', 'Qué guarda la web de ALMA Burger & Breakfast en tu navegador y cómo cambiarlo.'),
 }
-BODIES = {'index': home, 'alma': alma, 'carta': carta, 'desayunos': desayunos, 'galeria': galeria, 'visitanos': visitanos}
-FILES = {'index': 'index.html', 'alma': 'el-alma.html', 'carta': 'carta.html', 'desayunos': 'desayunos.html', 'galeria': 'galeria.html', 'visitanos': 'visitanos.html'}
+def lpage(kind):
+    h = {'aviso': ('Aviso <em>legal</em>', 'Quién está detrás de esta web y las condiciones para usarla.', LEGAL.aviso),
+         'privacidad': ('Política de <em>privacidad</em>', 'Qué datos tuyos usamos, para qué y cómo puedes controlarlos.', LEGAL.privacidad),
+         'cookies': ('Política de <em>cookies</em>', 'Lo que guarda esta web en tu navegador. Spoiler: muy poco.', LEGAL.cookies)}[kind]
+    crumb = {'aviso': 'Aviso legal', 'privacidad': 'Privacidad', 'cookies': 'Cookies'}[kind]
+    return phero(crumb, h[0], h[1]) + h[2](LCFG)
+
+
+BODIES = {'index': home, 'alma': alma, 'carta': carta, 'desayunos': desayunos, 'galeria': galeria, 'visitanos': visitanos,
+          'aviso': lambda: lpage('aviso'), 'privacidad': lambda: lpage('privacidad'), 'cookies': lambda: lpage('cookies')}
+FILES = {'index': 'index.html', 'alma': 'el-alma.html', 'carta': 'carta.html', 'desayunos': 'desayunos.html', 'galeria': 'galeria.html', 'visitanos': 'visitanos.html',
+         'aviso': 'aviso-legal.html', 'privacidad': 'privacidad.html', 'cookies': 'cookies.html'}
 
 SELECTOR = '''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Alma Burger · Elige versión</title>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bricolage+Grotesque:wght@500;800&display=swap" rel="stylesheet">
@@ -755,13 +809,14 @@ def main():
         out.mkdir()
         shutil.copytree(SRC / 'img', out / 'img')
         shutil.copytree(SRC / 'themes' / theme / 'img', out / 'img', dirs_exist_ok=True)
-        css = (SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8')
+        shutil.copytree(SRC / 'fonts', out / 'fonts')
+        css = (SRC / 'fonts' / 'fonts.css').read_text(encoding='utf-8') + chr(10) + (SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8')
         (out / 'styles.css').write_text(css, encoding='utf-8')
         shutil.copy(SRC / 'app.js', out / 'app.js')
         built = {}
         for k, fn in BODIES.items():
             title, desc = TITLES[k]
-            active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
+            active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}.get(k, '')
             built[FILES[k]] = shell(active, title, desc, fn(), t['tcolor'])
         built['404.html'] = shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor'])
         for name, html in built.items():

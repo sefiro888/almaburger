@@ -679,7 +679,8 @@ if (stageEl) {
   // al añadir al pedido
   document.addEventListener('click', e => { if (e.target.closest('[data-add]')) setTimeout(() => say(pick(['¡Anotado!', '¡Marchando!', 'Buena elección.']), 2400), 150); });
   // saludo según la página y la hora
-  const hello = { index: hr < 12 ? '¡Buenos días! ¿Desayuno o hamburguesa?' : hr < 20 ? '¡Hola! ¿Qué te apetece comer?' : '¡Buenas noches! Hoy toca burger.', carta: 'Toca un plato y te cuento algo.', desayunos: hr < 12 ? 'Buenos días. Café, tostada… ¿qué te apetece?' : 'Los desayunos son hasta las 12:00, pero mira, mira.', visitanos: '¡Te esperamos en Kale Nagusia 42!' }[page];
+  const morning = document.documentElement.dataset.momento === 'desayuno';
+  const hello = { index: morning ? '¡Buenos días! ¿Te apetece un desayuno?' : hr < 12 ? '¡Buenos días! ¿Desayuno o hamburguesa?' : hr < 20 ? '¡Hola! ¿Qué te apetece comer?' : '¡Buenas noches! Hoy toca burger.', carta: 'Toca un plato y te cuento algo.', desayunos: morning || hr < 12 ? 'Buenos días. Café, tostada… ¿qué te apetece?' : 'Los desayunos son hasta las 12:00, pero mira, mira.', visitanos: '¡Te esperamos en Kale Nagusia 42!' }[page];
   if (hello) firstT = setTimeout(() => say(hello, 4200), 2600);
 })();
 
@@ -784,4 +785,70 @@ if (stageEl) {
     $('.phone__screen', fig).addEventListener('click', e => { if (v.paused) { userPaused = false; v.preload = 'auto'; v.play().catch(() => {}); } else { userPaused = true; v.pause(); } });
   });
 })();
+})();
+
+/* ---------- De 8:00 a 12:00 la portada pone delante los desayunos ---------- */
+(() => {
+  if (document.documentElement.dataset.momento !== 'desayuno') return;
+  const q = s => document.querySelector(s);
+  const a = q('.hero__photo:not(.hero__photo--b)'), b = q('.hero__photo--b');
+  if (a && b) {
+    const ia = a.querySelector('img'), ib = b.querySelector('img'), ta = a.querySelector('a'), tb = b.querySelector('a');
+    [ia.src, ib.src] = [ib.src, ia.src]; [ia.alt, ib.alt] = [ib.alt, ia.alt];
+    [ta.textContent, tb.textContent] = [tb.textContent, ta.textContent]; [ta.href, tb.href] = [tb.href, ta.href];
+  }
+  const fb = q('#featuredB'), fa = q('#featured');
+  if (fa && fb) fa.closest('section').before(fb.closest('section'));
+})();
+
+/* ---------- «Pedir online»: la burger saluda y se abre la página de pedidos ---------- */
+(() => {
+  const target = window.ALMA_AGORA; if (!target) return;
+  let url; try { url = new URL(target, location.href).href; } catch (e) { return; }
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const ov = document.createElement('div'); ov.className = 'goorder'; ov.setAttribute('role', 'status'); ov.setAttribute('aria-live', 'polite');
+  ov.innerHTML = '<div class="goorder__in"><div class="goorder__rig" aria-hidden="true"><div class="rig" style="--w:150px"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></div><p class="goorder__t">¡Marchando!</p><p class="goorder__s">Abriendo la página de pedidos…</p></div>';
+  document.body.appendChild(ov);
+  let busy = false;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.href !== url || busy || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+    if (reduce) return;                       // sin animaciones: se abre directamente
+    e.preventDefault(); busy = true; ov.classList.add('on');
+    setTimeout(() => {
+      const w = window.open(url, '_blank', 'noopener');
+      if (!w) location.href = url;            // si el navegador bloquea la pestaña nueva, vamos en esta
+      setTimeout(() => { ov.classList.remove('on'); busy = false; }, 400);
+    }, 850);
+  });
+})();
+
+/* ---------- Aviso de cookies: solo pide permiso para el contenido externo (mapa) ---------- */
+(() => {
+  const KEY = 'alma-consent', MAX = 365 * 864e5;
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  let c = null; try { c = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (c && !(Date.now() - c.t < MAX)) c = null;
+  const loadExt = () => $$('[data-ext-src]').forEach(el => {
+    if (el.querySelector('iframe')) return;
+    const f = document.createElement('iframe'); f.src = el.dataset.extSrc; f.title = el.dataset.extTitle || ''; f.loading = 'lazy'; f.referrerPolicy = 'no-referrer';
+    const ph = el.querySelector('.extph'); if (ph) ph.remove(); el.appendChild(f);
+  });
+  const bar = document.createElement('div'); bar.className = 'ckbar'; bar.setAttribute('role', 'dialog'); bar.setAttribute('aria-label', 'Aviso de cookies');
+  bar.innerHTML = '<div class="ckbar__in"><p><b>Cookies, las justas.</b> No usamos cookies de publicidad ni de análisis. Solo guardamos en tu navegador lo necesario (tu pedido, el color elegido). Si aceptas, también cargamos el mapa de OpenStreetMap. <a href="cookies.html">Más información</a></p>'
+    + '<div class="ckbar__b"><button type="button" class="btn btn--sm" data-ck="0">Rechazar</button><button type="button" class="btn btn--sm" data-ck="1">Aceptar</button></div></div>';
+  document.body.appendChild(bar);
+  const show = () => { bar.classList.add('on'); const b = bar.querySelector('[data-ck="1"]'); setTimeout(() => b && b.focus({ preventScroll: true }), 50); };
+  const save = ext => {
+    const before = c && c.ext; c = { ext, t: Date.now(), v: 1 };
+    try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+    bar.classList.remove('on');
+    if (ext) loadExt(); else if (before) location.reload();   // al retirar el permiso se quita el mapa
+  };
+  bar.addEventListener('click', e => { const b = e.target.closest('[data-ck]'); if (b) save(b.dataset.ck === '1'); });
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-cookies]')) { e.preventDefault(); show(); }
+    if (e.target.closest('[data-ext-load]')) loadExt();        // cargar solo esta vez, sin guardar nada
+  });
+  if (!c) setTimeout(show, 900); else if (c.ext) loadExt();
 })();

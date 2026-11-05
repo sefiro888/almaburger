@@ -7,9 +7,11 @@
 <meta name="description" content="Hamburguesas y desayunos en Ordizia. No es solo comida. Es ALMA.">
 <meta name="theme-color" content="#fbecd8">
 <link rel="icon" type="image/png" href="negro/img/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" href="negro/fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(negro/fonts/bigshoulders-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(negro/fonts/bigshoulders-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 *{box-sizing:border-box;margin:0}
 :root{--cream:#fbecd8;--ink:#0b0b0b;--navy:#032164}
 html,body{min-height:100%}
@@ -59,6 +61,7 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
 .opt--azul{border-color:var(--navy);color:var(--navy);box-shadow:0 5px 0 var(--navy)}
 .opt--azul i{border-color:var(--navy)}
 .opt.last{outline:3px dashed currentColor;outline-offset:4px}
+.legalmini{margin-top:18px;font-size:.85rem;font-weight:700;opacity:.6}.legalmini a{color:inherit}
 .note{margin-top:12px;font-size:.95rem;opacity:.75;font-weight:500}
 .skip{position:fixed;top:14px;right:14px;z-index:5;border:2.5px solid var(--ink);background:#fff8ee;border-radius:999px;padding:6px 16px;font:inherit;font-weight:800;font-size:1rem;cursor:pointer;text-transform:uppercase}
 /* saltar o sin movimiento: estado final directo */
@@ -91,6 +94,7 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
         <a class="opt" href="negro/index.html" data-c="negro" style="--c:#0b0b0b"><i></i>Negro y crema</a>
       </div>
       <p class="note">Podrás cambiarlo cuando quieras desde el pie de la web.</p>
+      <p class="legalmini"><a href="negro/aviso-legal.html">Aviso legal</a> · <a href="negro/privacidad.html">Privacidad</a> · <a href="negro/cookies.html">Cookies</a></p>
     </div>
   </div>
 </main>

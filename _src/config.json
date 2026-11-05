@@ -1,4 +1,15 @@
 {
   "agora_url": "https://smartmenu.agorapos.com/?id=a5b87j3v&workplaceId=dae15wtg",
-  "_ayuda": "Pega aquí el enlace de pedidos de Ágora (Delivery / Take Away) entre las comillas y ejecuta: python _src/build.py. Si está vacío, la web usa WhatsApp y Just Eat como hasta ahora."
+  "_ayuda": "Pega aquí el enlace de pedidos de Ágora (Delivery / Take Away) entre las comillas y ejecuta: python _src/build.py. Si está vacío, la web usa WhatsApp y Just Eat como hasta ahora.",
+  "legal": {
+    "_ayuda": "Datos del titular para Aviso legal y Privacidad. Lo que quede vacío sale marcado en amarillo en la web como pendiente.",
+    "titular": "",
+    "nif": "",
+    "domicilio": "Kale Nagusia 42, 20240 Ordizia (Gipuzkoa)",
+    "email": "",
+    "telefono": "747 48 60 92",
+    "registro": "",
+    "dominio": "almaburgers.com",
+    "fecha": "5 de noviembre de 2026"
+  }
 }

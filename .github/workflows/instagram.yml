@@ -1,0 +1,40 @@
+# Actualiza «Últimas publicaciones» de Instagram una vez al día.
+# Solo hace algo cuando existe el secreto IG_TOKEN (Settings → Secrets → Actions).
+name: Instagram al día
+
+on:
+  schedule:
+    - cron: '15 6 * * *'   # 7:15 / 8:15 en Ordizia
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      IG_TOKEN: ${{ secrets.IG_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar token
+        id: tok
+        run: |
+          if [ -z "$IG_TOKEN" ]; then echo "Sin IG_TOKEN, nada que hacer."; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/setup-python@v5
+        if: steps.tok.outputs.skip != '1'
+        with:
+          python-version: '3.12'
+      - name: Leer Instagram y reconstruir la web
+        if: steps.tok.outputs.skip != '1'
+        run: |
+          pip install --quiet pillow
+          python _src/update_instagram.py
+          python _src/build.py
+      - name: Publicar cambios
+        if: steps.tok.outputs.skip != '1'
+        run: |
+          git config user.name "alma-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Instagram: últimas publicaciones" && git push)
