@@ -52,6 +52,10 @@ for theme, ink in INKS.items():
     if theme == 'azul':
         for f in ('mascot.png', 'mascot-body.png', 'mascot-legL.png', 'mascot-legR.png', 'favicon.png'):
             tint(IMG / f, ink).save(d / f, optimize=True)
+        (d / 'ill').mkdir(exist_ok=True)
+        for f in ('alma', 'carta', 'desayunos', 'galeria', 'visitanos'):
+            tint(IMG / 'ill' / f'{f}.png', ink).save(d / 'ill' / f'{f}.png', optimize=True)
+        tint(IMG / 'hotdog.png', ink).save(d / 'hotdog.png', optimize=True)
     print(theme, occ.size, round(pad, 1))
 cr = Image.new('RGBA', alpha.size, CREAM + (0,)); cr.putalpha(alpha); cr.thumbnail((900, 900), Image.LANCZOS)
 cr.save(IMG / 'logo-cream.png', optimize=True)

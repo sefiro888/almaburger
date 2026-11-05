@@ -205,15 +205,20 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 </html>'''
 
 
-def phero(crumb, h1, lead, pic=None, pic_alt='', dark=False):
+def phero(crumb, h1, lead, pic=None, pic_alt='', dark=False, ill=None, ill_alt=''):
+    if ill:
+        pic = None
     p = f'<figure class="phero__pic reveal"><img src="img/{pic}" alt="{pic_alt}"></figure>' if pic else ''
-    return f'''<section class="phero{' phero--dark' if dark else ''}{' phero--pic' if pic else ''}">
+    if ill:
+        p = f'<figure class="phero__ill reveal"><img src="img/ill/{ill}.png" alt="{ill_alt}"></figure>'
+    return f'''<section class="phero{' phero--dark' if dark else ''}{' phero--pic' if pic or ill else ''}{' phero--ill' if ill else ''}">
   <div class="wrap">
     <nav class="crumbs" aria-label="Migas de pan"><a href="index.html">Inicio</a><span>/</span><span>{crumb}</span></nav>
     <h1 class="reveal">{h1}</h1>
     <p class="lead reveal">{lead}</p>
+    {p if ill else ''}
   </div>
-  {p}
+  {'' if ill else p}
   <div class="phero__line"></div>
   {walker(104, 24)}
 </section>'''
@@ -396,7 +401,7 @@ def home():
 
 
 def alma():
-    return phero('El alma', 'No es solo comida. <em>Es ALMA.</em>', 'La historia de quienes estamos detrás: nuestras raíces, nuestra familia y las ganas de crear algo propio.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
+    return phero('El alma', 'No es solo comida. <em>Es ALMA.</em>', 'La historia de quienes estamos detrás: nuestras raíces, nuestra familia y las ganas de crear algo propio.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra', ill='alma', ill_alt='La mascota de ALMA, una hamburguesa, abrazando un corazón') + f'''
 <nav class="chapnav" aria-label="Capítulos de la historia"><div class="wrap">
   <a href="#nombre">El nombre</a><a href="#origen">El origen</a><a href="#mas">Más que una hamburguesería</a><a href="#convencional">Salir de lo convencional</a><a href="#detras">Detrás de todo</a><a href="#filosofia">Cómo somos</a>
 </div></nav>
@@ -541,7 +546,7 @@ JEBANNER = f'''
 
 
 def carta():
-    return phero('Hamburguesas', 'Elige tu <em>perdición</em>', 'Smash burgers, pollo crispy, picoteo, bocadillos, hot dogs y tartas de queso.') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html" aria-current="page">Hamburguesas y carta</a><a href="desayunos.html">Desayunos</a></div></div>''' + JEBANNER + '''
+    return phero('Hamburguesas', 'Elige tu <em>perdición</em>', 'Smash burgers, pollo crispy, picoteo, bocadillos, hot dogs y tartas de queso.', ill='carta', ill_alt='Un perrito caliente sonriente leyendo la carta') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html" aria-current="page">Hamburguesas y carta</a><a href="desayunos.html">Desayunos</a></div></div>''' + JEBANNER + '''
 <section class="sec sec--dark carta" style="padding-top:30px">
   <div class="wrap">
     <div class="toolbar reveal">
@@ -560,7 +565,7 @@ def carta():
 
 
 def desayunos():
-    return phero('Desayunos', 'Desayunos <em>con pasión</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha, hechos con las mismas ganas que nuestras hamburguesas.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
+    return phero('Desayunos', 'Desayunos <em>con pasión</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha, hechos con las mismas ganas que nuestras hamburguesas.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha', ill='desayunos', ill_alt='La mascota de ALMA sentada en un taburete con un café') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
@@ -614,7 +619,7 @@ def galeria():
     stk = [('hola', '¡Hola!'), ('marchando', '¡Marchando!'), ('buenos-dias', 'Buenos días'), ('esta-pica', '¡Esta pica!'), ('nam', 'Ñam'), ('gracias', 'Gracias'), ('hambre', 'Tengo hambre'), ('a-comer', '¡A comer!')]
     sk = ''.join(f'<figure class="sk reveal"><img src="img/stickers/{n}.png" alt="Sticker de la mascota: {t}" loading="lazy" width="256" height="256"><figcaption>{t}</figcaption><span><a href="img/stickers/{n}.png" download>PNG</a> · <a href="img/stickers/{n}.webp" download>WEBP</a></span></figure>' for n, t in stk)
     b = ''.join(f'<figure class="mi reveal"><img src="img/dishes/{s}.jpg" alt="{n}" loading="lazy"><figcaption>{n}</figcaption></figure>' for s, n in bur)
-    return phero('Galería', 'Mejor verlo <em>que contarlo</em>', 'Un paseo por nuestros platos. Pulsa en cualquier foto para verla en grande.', 'trufadas.jpg', 'Patatas trufadas') + f'''
+    return phero('Galería', 'Mejor verlo <em>que contarlo</em>', 'Un paseo por nuestros platos. Pulsa en cualquier foto para verla en grande.', 'trufadas.jpg', 'Patatas trufadas', ill='galeria', ill_alt='La mascota de ALMA con una cámara de fotos') + f'''
 <section class="sec sec--band">
   <div class="wrap">
     <div class="sec__head"><h2 class="sec__title reveal" style="margin:0">Desde la <em>cocina</em></h2>
@@ -657,7 +662,7 @@ def galeria():
 
 
 def visitanos():
-    return phero('Visítanos', 'Ven a <em>vernos</em>', 'En pleno centro de Ordizia, con terraza. Reserva mesa, pide por WhatsApp o déjate caer.') + f'''
+    return phero('Visítanos', 'Ven a <em>vernos</em>', 'En pleno centro de Ordizia, con terraza. Reserva mesa, pide por WhatsApp o déjate caer.', ill='visitanos', ill_alt='Un perrito caliente abriendo una puerta y saludando') + f'''
 <section class="sec sec--ink">
   <div class="wrap visit__grid">
     <div>
