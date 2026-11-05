@@ -228,15 +228,15 @@ IG = ''.join(f'<a class="ig reveal" href="https://www.instagram.com/almaburgers/
 
 
 def phones(all_reels=True):
-    own = """<figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/burger-poster.jpg" aria-label="Vídeo desde la cocina de ALMA: una burger con queso fundido"><source src="img/video/burger.mp4" type="video/mp4"></video>
+    def one(src, poster, label, cap):
+        return (f'''<figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
+      <video class="phone__video" muted loop playsinline preload="none" poster="{poster}" aria-label="{label}"><source src="{src}" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
-      <figcaption>Desde la cocina de ALMA</figcaption></figure>"""
-    items = [('Ddb6G-6NtoU', 'No sabemos si contratamos camareros o actores')] + ([('DdMsBnEtk9_', 'Aquí no venimos a hacer hamburguesas sin más…')] if all_reels else [])
-    f = ''.join(f'''<figure class="phone reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen"><span class="phone__load">Cargando desde Instagram…</span>
-      <iframe src="https://www.instagram.com/reel/{i}/embed/" title="Reel de Alma Burger: {t}" loading="lazy" allow="encrypted-media; autoplay; fullscreen" allowfullscreen></iframe></div><span class="phone__bar" aria-hidden="true"></span></div>
-      <figcaption>{t} · <a href="https://www.instagram.com/reel/{i}/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></figcaption></figure>''' for i, t in items)
-    return f'<div class="phones">{own}{f}</div>'
+      <figcaption>{cap}</figcaption></figure>''')
+    ig = '<a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Más en Instagram ↗</a>'
+    a = one('img/video/burger.mp4', 'img/video/burger-poster.jpg', 'Vídeo desde la cocina de ALMA: una burger con queso fundido', 'Desde la cocina de ALMA')
+    b = one('img/video/desayunos.mp4', 'img/video/desayunos-poster.jpg', 'Desayunos con pasión: tostada de salmón, pancakes y matcha', 'Desayunos con pasión · ' + ig)
+    return f'<div class="phones">{a}{b}</div>'
 
 
 def home():
