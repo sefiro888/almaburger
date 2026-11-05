@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es" data-font="shoulders" data-all="on">
 <head>
+<script>window.ALMA_AGORA="https://smartmenu.agorapos.com/?id=a5b87j3v&workplaceId=dae15wtg";document.documentElement.dataset.agora="on"</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Desayunos con pasión · Alma Burger</title>
@@ -13,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1793904337">
+<link rel="stylesheet" href="styles.css?v=1793904452">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -24,7 +25,7 @@
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
     <a class="btn btn--je btn--sm nav__je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><span class="long">Pedir en Just Eat</span><span class="short">Just Eat</span> ↗</a>
-    <button class="btn btn--solid btn--sm nav__wa" type="button" data-wa-order>Pedir por WhatsApp</button>
+    <a class="btn btn--solid btn--sm nav__wa" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
@@ -73,7 +74,7 @@
     <h2 class="sec__title reveal" data-nonum="1" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>
     <div class="btnrow reveal" style="margin:0">
       <a class="btn btn--je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
-      <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
+      <a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
       <a class="btn" href="carta.html">Hamburguesas</a>
       <a class="btn" href="desayunos.html">Desayunos</a>
@@ -130,10 +131,10 @@
 <nav class="bnav" aria-label="Acceso rápido">
   <a href="carta.html"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a8 6 0 0 1 16 0Z"/><path d="M3 15h18"/><path d="M5 19h14a2 2 0 0 0 2-2H3a2 2 0 0 0 2 2Z"/></svg><span>Burgers</span></a>
   <a href="desayunos.html" aria-current="page"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
-  <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedido</span><i id="bnavN" hidden>0</i></button>
+  <a id="bnavCart" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedir online</span><i id="bnavN" hidden>0</i></a>
   <a class="bnav__jeat" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
 </nav>
-<script src="app.js?v=1793904337"></script>
+<script src="app.js?v=1793904452"></script>
 </body>
 </html>

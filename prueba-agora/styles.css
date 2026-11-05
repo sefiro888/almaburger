@@ -1621,5 +1621,7 @@ html[data-agora=on] .mtalk .x{display:none}
 .path--wa{background:var(--cream)}
 .bnav #bnavCart{background:transparent;color:var(--ink)}
 .bnav #bnavCart i{background:var(--ink);color:var(--cream)}
+.jebar .btn,.jebar .btn--je,.jebar .btn--solid{background:var(--cream);color:var(--ink);border-color:var(--cream);box-shadow:none}
+.jebar{border-bottom-color:var(--cream)}
 
 .demobar{background:#ffe9a8;color:#5a4300;text-align:center;font-weight:700;font-size:.8rem;padding:6px 10px;position:relative;z-index:300;border-bottom:2px solid #e7cf84}

@@ -1621,3 +1621,5 @@ html[data-agora=on] .mtalk .x{display:none}
 .path--wa{background:var(--cream)}
 .bnav #bnavCart{background:transparent;color:var(--ink)}
 .bnav #bnavCart i{background:var(--ink);color:var(--cream)}
+.jebar .btn,.jebar .btn--je,.jebar .btn--solid{background:var(--cream);color:var(--ink);border-color:var(--cream);box-shadow:none}
+.jebar{border-bottom-color:var(--cream)}
