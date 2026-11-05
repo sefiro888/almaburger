@@ -1,0 +1,44 @@
+/* Versión azul marino y crema del logo ALMA Burger & Breakfast. */
+:root{
+  --je:#032164; --je-fg:#fbecd8;
+  --ink:#032164; --cream:#fbecd8; --card:#ffffff;
+  --accent:#032164; --accent-fg:#fbecd8;
+  --dark:#032164; --dark-fg:#fbecd8; --dark-pop:#fbecd8;
+  --pop:#032164; --pop-fg:#fbecd8; --soft:color-mix(in srgb,#fbecd8 60%,#032164);
+  --band:#fbecd8; --band-fg:#032164;
+  --tag:#032164; --tag-fg:#fbecd8; --focus:#6b7fb0;
+}
+.sec--ink{background:var(--ink);color:var(--cream)}
+.sec--band{background-image:radial-gradient(rgba(3,33,100,.16) 1.6px,transparent 1.8px);background-size:22px 22px}
+.hero__title img{filter:none}
+.blob{background:var(--ink)}
+.item h3,.pillar__n{color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--cream);color:var(--ink)}
+.tab[aria-selected=true]{box-shadow:0 4px 0 color-mix(in srgb,#fbecd8 45%,#032164)}
+.menu__group,.foot h4{color:var(--cream)}
+.hero__facts b,.hero__lead em,.sec__title em,.phero h1 em,.statement span,.dots b,.kicker{color:var(--ink)}
+.sec--dark .sec__title em,.phero--dark h1 em,.sec--dark .kicker,.sec--ink .kicker,.kicker--dark{color:var(--cream)}
+.phero h1 em,.sec__title em,.statement span,.hero__lead em{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.1em;text-decoration-skip-ink:none}
+.stat b{color:var(--cream)}
+.ribbon{background:var(--ink);color:var(--cream)}
+.ribbon__tag{background:var(--cream);color:var(--ink)}
+.tag--new{background:var(--cream);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.item .tag--new{background:var(--ink);color:var(--cream);box-shadow:none}
+.pillar:nth-child(2){background:var(--ink);color:var(--cream)}
+.jebanner .btn--je{background:var(--cream);color:var(--ink)}
+.path--main .btn--je{background:var(--ink);color:var(--cream)}
+.menu .item h3{color:var(--cream)}
+.rail .item h3{color:var(--ink)}
+.menu .item--row .price{color:var(--cream)}
+.bnav #bnavCart{background:var(--ink);color:var(--cream)}
+.bnav #bnavCart i{background:var(--cream);color:var(--ink)}
+.bnav #bnavCart{background:transparent}
+.path--wa{background:var(--cream)}
+.bnav #bnavCart{background:transparent;color:var(--ink)}
+.bnav #bnavCart i{background:var(--ink);color:var(--cream)}
+.jebar .btn,.jebar .btn--je,.jebar .btn--solid{background:var(--cream);color:var(--ink);border-color:var(--cream);box-shadow:none}
+.jebar{border-bottom-color:var(--cream)}
+:root{--card:#fff8ee}
+.stage #traveler{filter:url(#tintNavy)}
+.phone__bezel{background:#032164;border-color:#032164}
+.phone__notch{background:#032164}

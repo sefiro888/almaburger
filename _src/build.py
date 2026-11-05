@@ -29,7 +29,7 @@ def walker(w=100, t=26):
 def nav(active):
     links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if k == active else ""}>{t}</a>' for h, t, k in PAGES)
     return f'''<header class="nav" id="nav">
-  <a class="nav__logo" href="index.html" aria-label="Alma Burger, inicio">{rig(46, 'rig--still')}<span>Alma Burger</span></a>
+  <a class="nav__logo" href="index.html" aria-label="ALMA Burger &amp; Breakfast, inicio">{rig(46, 'rig--still')}<img class="nav__logoimg" src="img/logo.png" alt="ALMA Burger &amp; Breakfast" width="112" height="81"></a>
   <nav class="nav__links" aria-label="Principal">{links}</nav>
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
@@ -55,7 +55,7 @@ CTA = f'''<section class="sec cta" style="padding-bottom:140px;border-top:var(--
 
 FOOT = f'''<footer class="foot">
   {walker(96, 30)}
-  <img class="foot__word" src="img/wordmark-cream.png" alt="Alma Burger">
+  <img class="foot__word" src="img/logo-cream.png" alt="ALMA Burger &amp; Breakfast">
   <div class="foot__grid">
     <div><h4>No es solo comida. Es ALMA.</h4><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
     <div><h4>Explora</h4><ul><li><a href="index.html">Inicio</a></li>{''.join(f'<li><a href="{h}">{t}</a></li>' for h, t, k in PAGES)}</ul></div>
@@ -64,7 +64,7 @@ FOOT = f'''<footer class="foot">
       <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li>
       <li><a href="{JE}" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
   </div>
-  <div class="foot__row"><p>© <span class="yr"></span> Alma Burger · Consulta nuestra carta de alérgenos al personal</p><p>Demo de diseño web</p></div>
+  <div class="foot__row"><p>© <span class="yr"></span> Alma Burger · Consulta nuestra carta de alérgenos al personal</p><p><a href="__SWAP__">__SWAPNAME__</a> · Demo de diseño web</p></div>
 </footer>'''
 
 CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedido">
@@ -118,6 +118,7 @@ def agora(html):
     u = AGORA.replace('&', '&amp;').replace('"', '&quot;')
     html = _re.sub(r'<button class="([^"]*)" type="button" data-wa-order[^>]*>.*?</button>',
                    lambda m: f'<a class="{m.group(1)}" href="{u}" target="_blank" rel="noopener">Pedir online ↗</a>', html, flags=_re.S)
+    html = _re.sub(r'<button class="([^"]*)" type="button" data-add="[^"]*">[^<]*</button>', lambda m: f'<a class="{m.group(1)}" href="{u}" target="_blank" rel="noopener">Pedir online ↗</a>', html)
     html = _re.sub(r'<button class="lnk"[^>]*data-wa-order[^>]*>.*?</button>', f'<a class="lnk" href="{u}" target="_blank" rel="noopener" style="color:var(--dark-pop);font-size:1rem">Pedir online ↗</a>', html, flags=_re.S)
     rep = [
         ('<span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span>',
@@ -728,40 +729,51 @@ span.b{display:inline-block;margin-top:10px;background:#0b0b0b;color:#faf9f5;bor
 <div class="sw"><i style="background:#faf9f5"></i><i style="background:#0b0b0b"></i></div><span class="b">Ver opción 2</span></a></div></main></body></html>'''
 
 
+COLORS = {
+    'negro': dict(css='theme-fiel.css', tcolor='#0b0b0b', name='Negro y crema', other='azul', swap='Ver la web en azul'),
+    'azul': dict(css='theme-navy.css', tcolor='#032164', name='Azul y crema', other='negro', swap='Ver la web en negro'),
+}
+
+
+def redirect(dest):
+    return (f'<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>ALMA Burger &amp; Breakfast</title>'
+            f'<script>var c="negro";try{{c=localStorage.getItem("alma-color")||"negro"}}catch(e){{}}location.replace("{dest}".replace("{{c}}",c))</script>'
+            f'<meta http-equiv="refresh" content="1;url={dest.replace("{c}", "negro")}"><a href="{dest.replace("{c}", "negro")}">Entrar en ALMA</a>')
+
+
 def main():
-    t = THEMES['opcion-2-fiel-logo']
-    out = ROOT / 'prueba-agora' if DEMO else ROOT
-    out.mkdir(exist_ok=True)
-    if (out / 'img').exists():
-        shutil.rmtree(out / 'img')
-    shutil.copytree(SRC / 'img', out / 'img')
-    css = (SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8')
-    if DEMO:
-        css += '\n.demobar{background:#ffe9a8;color:#5a4300;text-align:center;font-weight:700;font-size:.8rem;padding:6px 10px;position:relative;z-index:300;border-bottom:2px solid #e7cf84}\n'
-    (out / 'styles.css').write_text(css, encoding='utf-8')
-    shutil.copy(SRC / 'app.js', out / 'app.js')
-    for k, fn in BODIES.items():
-        title, desc = TITLES[k]
-        active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
-        (out / FILES[k]).write_text(shell(active, title, desc, fn(), t['tcolor']), encoding='utf-8')
-    (out / '404.html').write_text(shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor']), encoding='utf-8')
-    if DEMO:
-        js = (SRC / 'app.js').read_text(encoding='utf-8')
-        a = js.index('const P = ')
-        b = js.index('const TAGLABEL')
-        code = js[a:b] + '\nprocess.stdout.write(JSON.stringify(MENU));'
-        r = subprocess.run(['node', '-e', code], capture_output=True, text=True, encoding='utf-8')
-        (out / 'menu.json').write_text(r.stdout, encoding='utf-8')
-        shutil.copy(SRC / 'sim.html', out / 'simulacion.html')
-        (out / 'index.html').write_text((out / 'index.html').read_text(encoding='utf-8').replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1), encoding='utf-8')
-    else:
-        # enlaces antiguos de las dos versiones: redirigen a la web
-        for old in ('opcion-1-color', 'opcion-2-fiel-logo'):
-            (out / old).mkdir(exist_ok=True)
-            for f in ['index'] + [p.replace('.html', '') for p, _, _ in PAGES]:
-                dest = '../' + ('index.html' if f == 'index' else f + '.html')
-                (out / old / (f + '.html')).write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={dest}"><link rel="canonical" href="{dest}"><title>Alma Burger</title><a href="{dest}">Ir a Alma Burger</a>', encoding='utf-8')
-    print('ok', 'prueba' if DEMO else '')
+    pages = list(FILES.values()) + ['404.html']
+    for theme, t in COLORS.items():
+        out = ROOT / theme
+        if out.exists():
+            shutil.rmtree(out)
+        out.mkdir()
+        shutil.copytree(SRC / 'img', out / 'img')
+        shutil.copytree(SRC / 'themes' / theme / 'img', out / 'img', dirs_exist_ok=True)
+        css = (SRC / 'base.css').read_text(encoding='utf-8') + '\n' + (SRC / 'pedido-v2.css').read_text(encoding='utf-8') + '\n' + (SRC / t['css']).read_text(encoding='utf-8')
+        (out / 'styles.css').write_text(css, encoding='utf-8')
+        shutil.copy(SRC / 'app.js', out / 'app.js')
+        built = {}
+        for k, fn in BODIES.items():
+            title, desc = TITLES[k]
+            active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}[k]
+            built[FILES[k]] = shell(active, title, desc, fn(), t['tcolor'])
+        built['404.html'] = shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor'])
+        for name, html in built.items():
+            html = html.replace('<html lang="es"', f'<html lang="es" data-theme="{theme}"', 1)
+            html = html.replace('__SWAP__', f'../{t["other"]}/{name}').replace('__SWAPNAME__', t['swap'])
+            html = html.replace('<head>', '<head>\n<script>try{localStorage.setItem("alma-color","' + theme + '")}catch(e){}</script>', 1)
+            (out / name).write_text(html, encoding='utf-8')
+    # raíz: intro con selector de color + redirecciones de los enlaces antiguos
+    (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8'), encoding='utf-8')
+    for name in pages:
+        if name != 'index.html':
+            (ROOT / name).write_text(redirect('{c}/' + name), encoding='utf-8')
+    for old, col in (('opcion-1-color', 'azul'), ('opcion-2-fiel-logo', 'negro')):
+        (ROOT / old).mkdir(exist_ok=True)
+        for name in pages:
+            (ROOT / old / name).write_text(redirect(f'../{col}/' + name), encoding='utf-8')
+    print('ok')
 
 
 main()

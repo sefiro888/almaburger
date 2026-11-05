@@ -1271,3 +1271,9 @@ html[data-agora=on] .mtalk .x{display:none}
 .sec--navy .lx__c:nth-child(even){background:var(--navycream)}
 .sec--navy .lx__c:hover{box-shadow:10px 12px 0 var(--navy)}
 .sec--navy .lx__c b,.sec--navy .lx__c h3,.sec--navy .lx__c p{color:var(--navy)}
+/* ====== logo nuevo ALMA Burger & Breakfast ====== */
+.nav__logoimg{height:40px;width:auto;display:block}
+.nav__logo{gap:8px}
+@media (max-width:600px){.nav__logoimg{height:34px}}
+.foot__word{width:min(380px,70%)}
+.stage__logo{pointer-events:none}

@@ -552,8 +552,8 @@ if (stageEl) {
     set('handLeft', 'transform', `translate(${lx - 386} ${ly - 567}) rotate(${leftAngle} 386 567)`); set('handRight', 'transform', `translate(${rx - 624} ${ry - 652}) rotate(${rightAngle} 624 652)`);
   }
   function pose(t) {
-    const c = t % 10; let x = 510, y = 360, scale = .65, angle = 0, stretch = 1, wide = 1, alpha = smooth((c - .2) / .35), raise = 0, hello = 0, bend = 0;
-    if (mode === 1) { x = 350; y = 355; } else if (mode === 2) { x = 660; y = 350; } else if (mode === 3) { scale = .58; y = 350; } else if (mode === 4) { x = 540; y = 350; scale = .62; }
+    const c = t % 10; let x = 510, y = 286, scale = .65, angle = 0, stretch = 1, wide = 1, alpha = smooth((c - .2) / .35), raise = 0, hello = 0, bend = 0;
+    if (mode === 1) { x = 380; y = 282; } else if (mode === 2) { x = 640; y = 280; } else if (mode === 3) { scale = .58; y = 284; } else if (mode === 4) { x = 540; y = 280; scale = .62; }
     const hidden = { x, y, scale };
     if (c < 2) { const p = smooth((c - .45) / .85), look = Math.sin(Math.max(0, c - .8) * Math.PI * 3) * 3; y -= 58 * p; angle = look; hello = mode === 4 ? p * Math.sin(c * 9) : 0; if (mode === 1) x -= 52 * p; if (mode === 2) x += 46 * p; }
     else if (c < 3.7) {
