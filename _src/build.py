@@ -348,42 +348,97 @@ def home():
 
 
 def alma():
-    return phero('El alma', 'No es solo comida. <em>Es ALMA.</em>', 'Hamburguesas y desayunos con identidad propia, hechos con raíces, familia y muchas ganas.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
-<section class="sec">
-  <div class="wrap story">
-    <aside class="story__side"><p class="kicker reveal">Nuestra historia</p>
-      <figure class="story__pic reveal"><img src="img/dishes/tostada-salmon.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy"></figure></aside>
-    <div class="story__text">
-      <p class="story__lead reveal">ALMA no es simplemente el nombre de nuestra hamburguesería. Es una parte de nosotros, de nuestras raíces y de nuestra familia.</p>
-      <p class="reveal">Cada letra tiene un significado especial:</p>
-      <div class="letters letters--big reveal"><div><b>A</b><span>Abrahan</span></div><div><b>L</b><span>Lidia</span></div><div><b>M</b><span>Moreno, apellido del padre de Lidia</span></div><div><b>MA</b><span>Maritza, madre de Abrahan</span></div></div>
-      <p class="reveal">De la unión de nuestros nombres y nuestras raíces nació ALMA, un proyecto que representa nuestra ilusión por emprender juntos y crear algo propio.</p>
-      <p class="reveal">Queríamos construir mucho más que una hamburguesería. Un lugar con personalidad, donde la creatividad, los sabores atrevidos y las ganas de sorprender estuvieran presentes en cada detalle.</p>
-      <p class="reveal">En ALMA nos gusta salir de lo convencional, experimentar con nuevas combinaciones y ofrecer experiencias diferentes, desde nuestras hamburguesas más originales hasta nuestros desayunos, cafés especiales y nuevas creaciones.</p>
-      <p class="reveal">Detrás de todo esto hay esfuerzo, dedicación, ilusión y, sobre todo, muchísimas ganas de seguir creciendo.</p>
+    return phero('El alma', 'No es solo comida. <em>Es ALMA.</em>', 'La historia de quienes estamos detrás: nuestras raíces, nuestra familia y las ganas de crear algo propio.', 'dishes/la-cabrona.jpg', 'La Cabrona, doble smash con queso de cabra') + f'''
+<nav class="chapnav" aria-label="Capítulos de la historia"><div class="wrap">
+  <a href="#nombre">El nombre</a><a href="#origen">El origen</a><a href="#mas">Más que una hamburguesería</a><a href="#convencional">Salir de lo convencional</a><a href="#detras">Detrás de todo</a><a href="#filosofia">Cómo somos</a>
+</div></nav>
+
+<section class="chap sec" id="nombre">
+  <div class="wrap">
+    <div class="chap__head"><span class="chap__n reveal">01</span><div><p class="kicker reveal">El nombre</p>
+      <h2 class="sec__title reveal">ALMA no es solo <em>un nombre</em></h2></div></div>
+    <p class="chap__lead reveal">ALMA no es simplemente el nombre de nuestra hamburguesería. Es una parte de nosotros, de nuestras raíces y de nuestra familia.</p>
+    <p class="chap__p reveal">Cada letra tiene un significado especial:</p>
+    <div class="lx">
+      <article class="lx__c reveal"><b>A</b><h3>Abrahan</h3></article>
+      <article class="lx__c reveal"><b>L</b><h3>Lidia</h3></article>
+      <article class="lx__c reveal"><b>M</b><h3>Moreno</h3><p>apellido del padre de Lidia</p></article>
+      <article class="lx__c reveal"><b>MA</b><h3>Maritza</h3><p>madre de Abrahan</p></article>
     </div>
   </div>
 </section>
 
-<section class="sec sec--band">
+<section class="chap sec sec--band" id="origen">
+  <div class="wrap chap__split">
+    <div>
+      <div class="chap__head"><span class="chap__n reveal">02</span><div><p class="kicker reveal">El origen</p>
+        <h2 class="sec__title reveal">Nuestros nombres, <em>nuestras raíces</em></h2></div></div>
+      <blockquote class="pullq reveal">De la unión de nuestros nombres y nuestras raíces nació ALMA.</blockquote>
+      <p class="chap__p reveal">Un proyecto que representa nuestra ilusión por emprender juntos y crear algo propio.</p>
+    </div>
+    <div class="chap__pics">
+      <figure class="ph ph--1 reveal"><img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure>
+      <figure class="ph ph--2 reveal"><img src="img/dishes/tostada-salmon.jpg" alt="Tostada de salmón con aguacate" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="chap sec" id="mas">
+  <div class="wrap">
+    <div class="chap__head"><span class="chap__n reveal">03</span><div><p class="kicker reveal">Más que una hamburguesería</p>
+      <h2 class="sec__title reveal">Un lugar con <em>personalidad</em></h2></div></div>
+    <p class="chap__lead reveal">Queríamos construir mucho más que una hamburguesería. Un lugar con personalidad, donde la creatividad, los sabores atrevidos y las ganas de sorprender estuvieran presentes en cada detalle.</p>
+    <div class="trio">
+      <div class="trio__c reveal"><span>01</span><b>La creatividad</b></div>
+      <div class="trio__c reveal"><span>02</span><b>Los sabores atrevidos</b></div>
+      <div class="trio__c reveal"><span>03</span><b>Las ganas de sorprender</b></div>
+    </div>
+    <p class="chap__p reveal" style="text-align:center;margin-inline:auto">Presentes en cada detalle.</p>
+  </div>
+</section>
+
+<section class="chap sec sec--dark" id="convencional">
+  <div class="wrap">
+    <div class="chap__head"><span class="chap__n chap__n--l reveal">04</span><div><p class="kicker kicker--dark reveal">Salir de lo convencional</p>
+      <h2 class="sec__title reveal">Nuevas combinaciones, <em>experiencias diferentes</em></h2></div></div>
+    <p class="chap__lead reveal">En ALMA nos gusta salir de lo convencional, experimentar con nuevas combinaciones y ofrecer experiencias diferentes, desde nuestras hamburguesas más originales hasta nuestros desayunos, cafés especiales y nuevas creaciones.</p>
+    <div class="tiles4">
+      <a class="t4 reveal" href="carta.html"><img src="img/dishes/la-dori.jpg" alt="" loading="lazy"><span>Hamburguesas más originales</span></a>
+      <a class="t4 reveal" href="desayunos.html"><img src="img/dishes/tostada-salmon.jpg" alt="" loading="lazy"><span>Desayunos</span></a>
+      <a class="t4 reveal" href="desayunos.html#menu-desayunos"><img src="img/dishes/matcha-2.jpg" alt="" loading="lazy"><span>Cafés especiales</span></a>
+      <a class="t4 reveal" href="carta.html#postres"><img src="img/dishes/me-derrito.jpg" alt="" loading="lazy"><span>Nuevas creaciones</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="chap sec" id="detras">
+  <div class="wrap">
+    <div class="chap__head"><span class="chap__n reveal">05</span><div><p class="kicker reveal">Detrás de todo esto</p>
+      <h2 class="sec__title reveal">Lo que nos <em>mueve</em></h2></div></div>
+    <div class="words">
+      <span class="reveal">Esfuerzo</span><span class="reveal w--o">Dedicación</span><span class="reveal">Ilusión</span><span class="reveal w--o">Y muchísimas ganas de seguir creciendo</span>
+    </div>
+  </div>
+</section>
+
+<section class="chap sec sec--band" id="filosofia">
   <div class="wrap philo">
     <div class="reveal"><p class="kicker">Nuestra filosofía</p>
       <h2 class="sec__title">No queremos ser una hamburguesería <em>más</em></h2>
       <p class="philo__p">Queremos que ALMA tenga identidad propia, que la gente nos recuerde por nuestros sabores, nuestra creatividad y nuestra manera de hacer las cosas.</p></div>
-    <div class="reveal"><p class="kicker">Nuestra personalidad</p>
+    <div class="reveal"><p class="kicker">Nuestra personalidad de marca</p>
       <ul class="traits"><li>Moderna</li><li>Atrevida</li><li>Creativa</li><li>Cercana</li></ul>
       <p class="philo__p">Pero sin perder nunca nuestra esencia familiar.</p></div>
   </div>
 </section>
 
-<section class="sec sec--dark">
+<section class="sec sec--dark finale">
   <div class="wrap quote">
     <p class="quote__t reveal">«ALMA nació de nuestras raíces, creció con nuestros sueños y hoy queremos compartirla contigo.»</p>
-    <p class="quote__s reveal">ALMA — Todo lo que somos, en cada bocado.</p>
+    <p class="quote__s reveal">ALMA — Todo lo que somos, en cada bocado. ♥</p>
     <div class="btnrow reveal" style="justify-content:center;margin-top:26px"><a class="btn btn--cream" href="carta.html">Ver hamburguesas</a><a class="btn btn--line" href="desayunos.html">Ver desayunos</a></div>
   </div>
 </section>
-
 ''' + f'''
 <section class="sec sec--ink">
   <div class="wrap">

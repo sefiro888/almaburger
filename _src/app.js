@@ -597,4 +597,16 @@ if (stageEl) {
 }
 
 
+
+/* ---------- índice de capítulos: marca el que estás leyendo ---------- */
+(() => {
+  const nav = $('.chapnav'); if (!nav) return;
+  const links = $$('a', nav), secs = links.map(a => $(a.getAttribute('href')));
+  const mark = () => {
+    let cur = 0; secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * .4) cur = i; });
+    links.forEach((a, i) => a.setAttribute('aria-current', String(i === cur)));
+    const on = links[cur]; if (on && nav.firstElementChild.scrollWidth > nav.firstElementChild.clientWidth) { const w = nav.firstElementChild; w.scrollTo({ left: on.offsetLeft - 20, behavior: 'smooth' }); }
+  };
+  addEventListener('scroll', mark, { passive: true }); mark();
+})();
 })();
