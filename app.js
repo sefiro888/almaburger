@@ -682,4 +682,92 @@ if (stageEl) {
   const hello = { index: hr < 12 ? '¡Buenos días! ¿Desayuno o hamburguesa?' : hr < 20 ? '¡Hola! ¿Qué te apetece comer?' : '¡Buenas noches! Hoy toca burger.', carta: 'Toca un plato y te cuento algo.', desayunos: hr < 12 ? 'Buenos días. Café, tostada… ¿qué te apetece?' : 'Los desayunos son hasta las 12:00, pero mira, mira.', visitanos: '¡Te esperamos en Kale Nagusia 42!' }[page];
   if (hello) firstT = setTimeout(() => say(hello, 4200), 2600);
 })();
+
+/* ---------- Reels de Instagram (se cargan al pulsar) ---------- */
+(() => {
+  const links = $$('[data-ig]'); if (!links.length) return;
+  const rm = document.createElement('div'); rm.className = 'modal'; rm.id = 'reelModal';
+  rm.innerHTML = `<div class="modal__box modal__box--reel" role="dialog" aria-modal="true" aria-label="Vídeo de Instagram"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div class="reelbox" id="reelBox"></div><p class="reelfoot"><a id="reelOpen" target="_blank" rel="noopener">Abrir en Instagram ↗</a></p></div>`;
+  document.body.appendChild(rm);
+  links.forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const p = a.dataset.ig;
+    $('#reelBox').innerHTML = `<iframe src="https://www.instagram.com/${p}/embed/" title="Instagram" loading="lazy" allowfullscreen allow="encrypted-media; autoplay"></iframe>`;
+    $('#reelOpen').href = a.href; rm.classList.add('on'); lock(true);
+  }));
+  rm.addEventListener('click', e => { if (e.target === rm || e.target.closest('.modal__x')) { $('#reelBox').innerHTML = ''; closeModals(); } });
+})();
+
+/* ---------- Test: ¿Qué burger eres? ---------- */
+(() => {
+  const Q = [
+    { q: '¿Cuánta hambre tienes?', o: [['Un picoteo', { size: 1 }], ['La normal', { size: 2 }], ['Mucha', { size: 3 }], ['¡Bestial!', { size: 3, big: 1 }]] },
+    { q: '¿Qué te tira más?', o: [['Lo clásico', { style: 'clasica' }], ['Queso fundido', { style: 'queso' }], ['Dulce y salado', { style: 'dulce' }], ['Algo diferente', { style: 'original' }]] },
+    { q: '¿Y el picante?', o: [['Nada', { spice: 0 }], ['Un poquito', { spice: 1 }], ['Dale fuerte', { spice: 2 }]] },
+    { q: '¿Carne o pollo?', o: [['Carne', { meat: 'carne' }], ['Pollo', { meat: 'pollo' }], ['Vegetariano', { meat: 'veg' }], ['Me da igual', { meat: 'any' }]] },
+    { q: '¿Cómo vienes hoy?', o: [['Tranquilo, de siempre', { mood: 'clasica' }], ['Con ganas de fiesta', { mood: 'queso' }], ['Curioso', { mood: 'original' }], ['Goloso', { mood: 'dulce' }]] }
+  ];
+  const PR = {
+    'La Básica': [1, 'clasica', 0, 'carne', 'Clásico de los de siempre. Sabes lo que te gusta.'],
+    'Doble Dosis': [3, 'clasica', 0, 'carne', 'Quien tiene hambre no se corta. Doble de todo.'],
+    'La Golosa': [2, 'dulce', 0, 'carne', 'Dulce y salado, sin remordimientos.'],
+    'Dulce y Verde': [2, 'dulce', 0, 'carne', 'Curioso y con pistacho. Te gusta sorprender.'],
+    'Gordi Deluxe': [2, 'clasica', 0, 'veg', 'Equilibrado y con huevo frito. Buen gusto.'],
+    'Me Derrito': [2, 'queso', 0, 'carne', 'Del equipo del queso. Cuanto más, mejor.'],
+    'La Matru': [2, 'original', 0, 'carne', 'Con un punto de trufa y elegancia.'],
+    'La Cabrona': [3, 'original', 0, 'carne', 'Atrevido y con carácter. Aquí no se viene a hacer amigos.'],
+    'La Dori': [3, 'queso', 0, 'carne', 'Divertido: nada de ser aburrido. Con Doritos, claro.'],
+    'La Triplona': [3, 'queso', 0, 'carne', 'Vas a por todas. Triple y sin miedo.'],
+    'Picantona': [2, 'original', 2, 'carne', 'Valiente. El picante no te asusta.'],
+    'Chickenesa': [2, 'clasica', 0, 'pollo', 'Fresco y crujiente. Te gusta lo ligero con sabor.'],
+    'La Diabla': [2, 'original', 2, 'pollo', 'Pícaro y con chispa. Un poco travieso.'],
+    'Furia de Pollo': [3, 'queso', 0, 'pollo', 'Hambre con carácter y mucho crujiente.'],
+    'La Picosita': [2, 'dulce', 1, 'pollo', 'Dulce y picante a la vez. No te decides y está bien.'],
+    'La Puerquita': [3, 'original', 0, 'carne', 'La estrella del mes. Potente y cremosa.']
+  };
+  const burgers = () => MENU.hamburguesas.items.filter(i => PR[i.n]);
+  let step = 0, ans = [];
+  const m = document.createElement('div'); m.className = 'modal'; m.id = 'quizModal';
+  m.innerHTML = `<div class="modal__box modal__box--wide quiz" role="dialog" aria-modal="true" aria-labelledby="qT"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div id="qBody"></div></div>`;
+  document.body.appendChild(m);
+  const body = $('#qBody', m);
+  function score(it) {
+    const [size, style, spice, meat] = PR[it.n]; let s = 0; const a = Object.assign({}, ...ans);
+    s += 3 - Math.abs(size - (a.size || 2)); if (a.big && it.n === 'La Triplona') s += 3; if (a.big && it.n === 'Doble Dosis') s += 1.5;
+    if (a.style === style) s += 3; if (a.mood === style) s += 2;
+    const w = a.spice ?? 0; if (w === 0) s += spice === 0 ? 2 : spice === 2 ? -3 : 0; else if (w === 1) s += spice === 1 ? 3 : spice === 2 ? 1 : 0; else s += spice === 2 ? 3 : spice === 1 ? 1 : -1;
+    const mt = a.meat || 'any'; if (mt === 'carne') s += meat === 'carne' || meat === 'veg' ? 2 : -2; else if (mt === 'pollo') s += meat === 'pollo' ? 3 : -3; else if (mt === 'veg') s += meat === 'veg' ? 8 : -6;
+    return s;
+  }
+  function ask() {
+    const q = Q[step];
+    body.innerHTML = `<div class="qprog"><i style="width:${(step / Q.length) * 100}%"></i></div><p class="qn">Pregunta ${step + 1} de ${Q.length}</p><h3 id="qT">${esc(q.q)}</h3>
+      <div class="qopts">${q.o.map((o, k) => `<button type="button" class="qopt" data-k="${k}">${esc(o[0])}</button>`).join('')}</div>
+      ${step ? '<button type="button" class="lnk qback">← Volver</button>' : ''}`;
+  }
+  function result() {
+    const ranked = burgers().map(it => ({ it, s: score(it) + Math.random() * .01 })).sort((a, b) => b.s - a.s);
+    const top = ranked[0].it, others = ranked.slice(1, 3).map(r => r.it); const veg = (Object.assign({}, ...ans).meat) === 'veg';
+    const [, , , , line] = PR[top.n]; const agora = !!window.ALMA_AGORA;
+    body.innerHTML = `<p class="qn">Tu resultado</p><div class="qres">
+      ${top.i ? `<img src="img/dishes/s/${top.i}.jpg" alt="${esc(top.n)}">` : ''}
+      <div><h3 id="qT">Eres <em>${esc(top.n)}</em></h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${eur(top.p)}${veg ? ' · con versión vegetariana' : ''}</p>
+      <div class="btnrow" style="margin:12px 0 0">${agora ? `<a class="btn btn--solid" href="${esc(window.ALMA_AGORA)}" target="_blank" rel="noopener">Pedir online ↗</a>` : `<button type="button" class="btn btn--solid" data-qadd="${esc(top.id)}">Añadir al pedido</button>`}<button type="button" class="btn" data-qview="${esc(top.id)}">Ver la ficha</button></div></div></div>
+      ${others.length ? `<p class="qn" style="margin-top:18px">También te pegan</p><div class="qchips">${others.map(o => `<button type="button" class="chip" data-qview="${esc(o.id)}">${esc(o.n)}</button>`).join('')}</div>` : ''}
+      <div class="btnrow" style="margin-top:16px"><a class="btn btn--sm" id="qShare" target="_blank" rel="noopener">Compartir mi resultado</a><button type="button" class="btn btn--sm btn--ghost" data-qrestart>Repetir el test</button></div>`;
+    const base = new URL('carta.html', location.href).href.split('#')[0] + '#test';
+    $('#qShare', m).href = 'https://wa.me/?text=' + encodeURIComponent(`¡Soy ${top.n}! ${line}\n¿Y tú, qué burger eres? Haz el test de Alma Burger: ${base}`);
+    m._top = top; m._veg = veg;
+  }
+  const open = () => { step = 0; ans = []; ask(); m.classList.add('on'); lock(true); };
+  document.addEventListener('click', e => { if (e.target.closest('[data-quiz]')) { e.preventDefault(); open(); } });
+  if (location.hash === '#test' && $('[data-quiz]')) setTimeout(open, 500);
+  m.addEventListener('click', e => {
+    if (e.target === m || e.target.closest('.modal__x')) { closeModals(); return; }
+    const o = e.target.closest('.qopt'); if (o) { ans[step] = Q[step].o[+o.dataset.k][1]; step++; step < Q.length ? ask() : result(); return; }
+    if (e.target.closest('.qback')) { step--; ans.length = step; ask(); return; }
+    if (e.target.closest('[data-qrestart]')) { open(); return; }
+    const ad = e.target.closest('[data-qadd]'); if (ad) { const it = byId(ad.dataset.qadd); closeModals(); if (m._veg && it.o) { push(it.id, 'Versión vegetariana'); toast(`<b>${esc(it.n)}</b> (versión vegetariana) añadido ✓`); } else addItem(it.id); return; }
+    const vw = e.target.closest('[data-qview]'); if (vw) { closeModals(); setTimeout(() => openDish(vw.dataset.qview), 60); }
+  });
+})();
 })();

@@ -294,6 +294,16 @@ def home():
   </div>
 </section>
 
+<section class="sec quizband" id="test">
+  <div class="wrap quizband__in">
+    <div class="quizband__txt"><p class="kicker reveal">Test de 30 segundos</p>
+      <h2 class="sec__title reveal">¿Qué burger <em>eres</em>?</h2>
+      <p class="reveal">Contesta cinco preguntas y te decimos cuál pedir. Puedes mandarle el resultado a quien quieras.</p>
+      <div class="btnrow reveal" style="margin-top:20px"><button class="btn btn--solid" type="button" data-quiz>Hacer el test</button><a class="btn" href="carta.html">Ver todas las burgers</a></div></div>
+    <div class="quizband__pic reveal"><img src="img/mascot.png" alt="" loading="lazy"><span>?</span></div>
+  </div>
+</section>
+
 <section class="sec sec--ink" id="como-pedir">
   <div class="wrap">
     <p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2>
@@ -500,6 +510,7 @@ def carta():
       <label class="search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input id="q" type="search" placeholder="Busca: cabra, trufa, picante…" aria-label="Buscar en la carta" autocomplete="off"></label>
       <button class="btn btn--line btn--sm" type="button" id="filtersBtn" aria-expanded="false" aria-controls="chips">Filtros</button>
+      <button class="btn btn--cream btn--sm" type="button" data-quiz>¿Qué burger eres?</button>
       <button class="btn btn--cream btn--sm" type="button" data-surprise>Sorpréndeme</button>
     </div>
     <div class="tabs" id="tabs" role="tablist" aria-label="Categorías de la carta"></div>
@@ -546,11 +557,23 @@ def galeria():
     ig = [('burger.jpg', 'La Puerquita', 'La Puerquita, burger del mes'), ('picoteo.jpg', 'Picoteo con alma', 'Aros de cebolla, patatas y croquetas'),
           ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas')]
     des = [('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'),
-           ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso')]
+           ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
+           ('desayuno-revuelto.jpg', 'Desayuno con alma', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
     d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
     bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
            ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
+
+    reels = [('reel', 'DdMsBnEtk9_', 'Aquí no venimos a hacer hamburguesas sin más…', 'img/reels/desayuno.jpg', 'Reel'),
+             ('reel', 'Ddb6G-6NtoU', 'No sabemos si contratamos camareros o actores', '', 'Reel'),
+             ('p', 'DeMkLEgNm_F', 'El picoteo también tiene ALMA', 'img/picoteo.jpg', 'Publicación'),
+             ('p', 'DeCQKUYDb0k', '¿Desayuno o capricho?', 'img/desayuno-capricho.jpg', 'Publicación'),
+             ('p', 'DeACh3SNset', 'Burger del mes: La Puerquita', 'img/burger.jpg', 'Publicación')]
+    rl = ''.join(f'<a class="rl reveal" href="https://www.instagram.com/{k}/{i}/" target="_blank" rel="noopener" data-ig="{k}/{i}" aria-label="Ver en Instagram: {t}">'
+                 + (f'<img src="{im}" alt="" loading="lazy">' if im else '<span class="rl__mascot"><img src="img/mascot.png" alt=""></span>')
+                 + f'<span class="rl__kind">{kd}</span><span class="rl__play" aria-hidden="true">▶</span><span class="rl__t">{t}</span></a>' for k, i, t, im, kd in reels)
+    stk = [('hola', '¡Hola!'), ('marchando', '¡Marchando!'), ('buenos-dias', 'Buenos días'), ('esta-pica', '¡Esta pica!'), ('nam', 'Ñam'), ('gracias', 'Gracias'), ('hambre', 'Tengo hambre'), ('a-comer', '¡A comer!')]
+    sk = ''.join(f'<figure class="sk reveal"><img src="img/stickers/{n}.png" alt="Sticker de la mascota: {t}" loading="lazy" width="256" height="256"><figcaption>{t}</figcaption><span><a href="img/stickers/{n}.png" download>PNG</a> · <a href="img/stickers/{n}.webp" download>WEBP</a></span></figure>' for n, t in stk)
     b = ''.join(f'<figure class="mi reveal"><img src="img/dishes/{s}.jpg" alt="{n}" loading="lazy"><figcaption>{n}</figcaption></figure>' for s, n in bur)
     return phero('Galería', 'Mejor verlo <em>que contarlo</em>', 'Un paseo por nuestros platos. Pulsa en cualquier foto para verla en grande.', 'trufadas.jpg', 'Patatas trufadas') + f'''
 <section class="sec sec--band">
@@ -565,6 +588,22 @@ def galeria():
     <div class="sec__head"><div><p class="kicker reveal">8:00 a 12:00</p><h2 class="sec__title reveal" style="margin:0">Desayunos <em>en fotos</em></h2></div>
       <a class="btn btn--solid reveal" href="desayunos.html">Ver los desayunos →</a></div>
     <div class="photogrid">{d}</div>
+  </div>
+</section>
+<section class="sec sec--band" id="reels">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
+      <a class="btn btn--solid reveal" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">@almaburgers ↗</a></div>
+    <div class="rail rl-rail">{rl}</div>
+    <p class="fine reveal" style="opacity:.7;margin-top:6px">Al pulsar se carga el contenido desde Instagram, con sus propias cookies.</p>
+  </div>
+</section>
+<section class="sec" id="stickers">
+  <div class="wrap">
+    <div class="sec__head"><div><p class="kicker reveal">Para tu móvil</p><h2 class="sec__title reveal" style="margin:0">Stickers de <em>ALMA</em></h2></div>
+      <a class="btn btn--solid reveal" href="img/stickers/stickers-alma.zip" download>Descargar todos (ZIP)</a></div>
+    <p class="chap__p reveal" style="margin:0 0 22px">La mascota para mandar por WhatsApp: guarda la imagen y compártela, o añade los archivos <b>.webp</b> con una app de stickers como Sticker Maker.</p>
+    <div class="sgrid">{sk}</div>
   </div>
 </section>
 <section class="sec sec--band">
