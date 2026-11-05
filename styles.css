@@ -1572,6 +1572,16 @@ html[data-agora=on] .mtalk .x{display:none}
 .photogrid .mi{aspect-ratio:4/5}
 @media (min-width:981px){.photogrid{grid-template-columns:repeat(5,1fr)!important}}
 @media (max-width:980px){.photogrid .mi:last-child:nth-child(odd){grid-column:1/-1;aspect-ratio:16/10}}
+/* ====== solo la sección «El nombre»: azul marino y crema del logo ====== */
+.sec--navy{--navy:#032164;--navycream:#fbecd8;background:var(--navycream);color:var(--navy);border-block:var(--bw) solid var(--navy)}
+.sec--navy .kicker{color:var(--navy)}
+.sec--navy .sec__title,.sec--navy .chap__lead,.sec--navy .chap__p{color:var(--navy)}
+.sec--navy .sec__title em{color:var(--navy)}
+.sec--navy .chap__n{-webkit-text-stroke-color:var(--navy)}
+.sec--navy .lx__c{background:#fff8ee;border-color:var(--navy);box-shadow:6px 6px 0 var(--navy);color:var(--navy)}
+.sec--navy .lx__c:nth-child(even){background:var(--navycream)}
+.sec--navy .lx__c:hover{box-shadow:10px 12px 0 var(--navy)}
+.sec--navy .lx__c b,.sec--navy .lx__c h3,.sec--navy .lx__c p{color:var(--navy)}
 
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{

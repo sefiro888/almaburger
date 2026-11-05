@@ -400,7 +400,7 @@ def alma():
   <a href="#nombre">El nombre</a><a href="#origen">El origen</a><a href="#mas">Más que una hamburguesería</a><a href="#convencional">Salir de lo convencional</a><a href="#detras">Detrás de todo</a><a href="#filosofia">Cómo somos</a>
 </div></nav>
 
-<section class="chap sec" id="nombre">
+<section class="chap sec sec--navy" id="nombre">
   <div class="wrap">
     <div class="chap__head"><span class="chap__n reveal">01</span><div><p class="kicker reveal">El nombre</p>
       <h2 class="sec__title reveal">ALMA no es solo <em>un nombre</em></h2></div></div>
