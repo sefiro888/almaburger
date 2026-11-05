@@ -1217,3 +1217,43 @@ html[data-agora=on] .mtalk .x{display:none}
 .phone__play{position:absolute;inset:0;z-index:3;display:grid;place-items:center;font-size:3rem;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);pointer-events:none;opacity:0;transition:opacity .2s}
 .phone--own.paused .phone__play{opacity:1}
 .phone--own .phone__screen{cursor:pointer;background:#000}
+
+/* ====== el estilo de «El nombre» en toda la web ====== */
+.chap__head--auto{display:flex;align-items:flex-end;gap:clamp(12px,2.6vw,30px);margin-bottom:6px}
+.chap__head--auto>div{min-width:0}
+.chap__head--auto .chap__n{font-size:clamp(3.6rem,9.5vw,7rem)}
+.chap__head--auto .sec__title{margin-bottom:0}
+.sec--dark .chap__n,.sec--ink .chap__n,.hstory .chap__n,.visit .chap__n{-webkit-text-stroke-color:var(--dark-fg)}
+.sec--ink .sec__title,.sec--dark .sec__title{color:var(--dark-fg)}
+.sec__head .chap__head--auto{margin-bottom:0}
+.carta__head .chap__head--auto{flex:1}
+/* los pasos y tarjetas con números grandes, como las letras A · L · M · MA */
+.step{padding:22px 22px 24px;display:grid;gap:4px;align-content:start;transition:transform .3s,box-shadow .3s}
+.step:hover{transform:translate(-3px,-6px) rotate(-1deg);box-shadow:9px 11px 0 var(--ink)}
+.step::before{position:static;width:auto;height:auto;border:0;background:none;border-radius:0;display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.6rem,7vw,5.6rem);line-height:.9;color:transparent;-webkit-text-stroke:2.5px var(--ink);margin-bottom:6px}
+.step h3{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1}
+.step p{font-size:1.02rem}
+.stats .stat{background:rgba(255,255,255,.04);transition:transform .3s}
+.stats .stat:hover{transform:translateY(-5px) rotate(-1deg)}
+.stat b{font-size:clamp(3rem,7vw,5.5rem)}
+.pillar{padding:26px 24px}
+.pillar__n{font-size:clamp(3.4rem,6vw,5rem);color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+.pillar:nth-child(2) .pillar__n{-webkit-text-stroke-color:var(--pop-fg);color:transparent}
+.phero p.lead{font-size:clamp(1.25rem,2.4vw,1.85rem);line-height:1.38;font-weight:600;max-width:30em}
+@media (max-width:600px){.chap__head--auto{flex-direction:column;align-items:flex-start;gap:4px}.chap__head--auto .chap__n{font-size:3.4rem}}
+.chap__head--auto{align-items:flex-start}
+.chap__head--auto .chap__n{margin-top:.18em}
+.chap__head--auto>div{padding-top:0}
+.hstory .chap__head--auto{margin-bottom:12px}
+.quizband__txt .chap__head--auto{margin-bottom:10px}
+.chap__head--auto .sec__title{line-height:1}
+.hstory .chap__head--auto .sec__title{margin-bottom:6px}
+@media (max-width:600px){.chap__head--auto{flex-direction:column;align-items:flex-start}.chap__head--auto .chap__n{margin-top:0}}
+.chap__head--auto .sec__title{line-height:1.05;padding-bottom:.06em}
+.chap__head--auto .sec__title em{padding-bottom:.04em}
+.quizband__txt .chap__head--auto{margin-bottom:18px}
+.quizband__txt .chap__head--auto .sec__title{font-size:clamp(2.4rem,5vw,4rem)}
+.visit__head{margin-bottom:22px}
+.visit__head .visit__title{margin-bottom:0}
+.phero p.lead{max-width:min(30em,calc(100% - min(32vw,380px) - 40px))}
+.phero:not(.phero--pic) p.lead{max-width:30em}

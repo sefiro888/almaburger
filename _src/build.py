@@ -142,8 +142,23 @@ def agora(html):
     return html
 
 
+
+
+def chapters(html):
+    """Cada título de sección lleva su número en contorno, como en «El alma»."""
+    pat = _re.compile(r'(<p class="kicker[^"]*">(?:(?!</p>).)*</p>\s*)?(<h2 class="sec__title[^>]*>.*?</h2>)', _re.S)
+    n = [html.count('class="chap__n')]
+    html = html.replace('<h2 class="sec__title reveal" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>', '<h2 class="sec__title reveal" data-nonum="1" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>')
+
+    def sub(m):
+        if 'chap__n' in html[max(0, m.start() - 90):m.start()] or 'data-nonum' in m.group(2) or 'class="cta"' in html[max(0, m.start() - 400):m.start()]:
+            return m.group(0)
+        n[0] += 1
+        return f'<div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">{n[0]:02d}</span><div>{m.group(1) or ""}{m.group(2)}</div></div>'
+    return pat.sub(sub, html)
+
 def shell(*a, **k):
-    return agora(_shell(*a, **k))
+    return agora(chapters(_shell(*a, **k)))
 
 
 def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
@@ -645,8 +660,8 @@ def visitanos():
 <section class="sec sec--ink">
   <div class="wrap visit__grid">
     <div>
-      <p class="kicker kicker--dark reveal">Dónde estamos</p>
-      <h2 class="visit__title reveal">Kale Nagusia, 42<br>Ordizia</h2>
+      <div class="chap__head chap__head--auto visit__head"><span class="chap__n reveal" aria-hidden="true">01</span><div><p class="kicker kicker--dark reveal">Dónde estamos</p>
+      <h2 class="visit__title reveal">Kale Nagusia, 42<br>Ordizia</h2></div></div>
       <p class="eyebrow reveal" style="color:var(--ink);margin-bottom:26px"><span class="dot"></span><span id="openStatus">Horario</span></p>
       <div class="btnrow reveal">
         <a class="btn btn--cream" href="https://www.google.com/maps/dir/?api=1&destination=43.054023,-2.178607" target="_blank" rel="noopener">Cómo llegar</a>
