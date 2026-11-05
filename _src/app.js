@@ -609,4 +609,77 @@ if (stageEl) {
   };
   addEventListener('scroll', mark, { passive: true }); mark();
 })();
+
+/* ---------- La mascota comenta la carta ---------- */
+(() => {
+  const page = location.pathname.split('/').pop().replace('.html', '') || 'index';
+  const hasItems = !!document.querySelector('[data-open], #menu, #featured, #featuredB');
+  if (!hasItems && !['index', 'visitanos'].includes(page)) return;
+  const BY_NAME = {
+    'La Puerquita': ['Pulled pork y salsa Emmy. Potente.', '¡La burger del mes!'],
+    'La Triplona': ['Tres carnes. Ven con hambre.'],
+    'La Dori': ['Con Doritos. Sí, con Doritos.'],
+    'La Cabrona': ['Queso de cabra, ¿te atreves?'],
+    'Me Derrito': ['Mucho cheddar. MUCHO.'],
+    'Doble Dosis': ['Doble de carne, doble de todo.'],
+    'La Golosa': ['Burger y postre a la vez.'],
+    'Dulce y Verde': ['Pistacho en una burger. Confía.'],
+    'Gordi Deluxe': ['Con huevo frito. Siempre gana.'],
+    'La Matru': ['Patatas paja y trufa. Un vicio.'],
+    'Salmón y mascarpone': ['Un clásico de las mañanas.'],
+    'Pancakes de Ferrero': ['Ferrero para desayunar. Sin culpa.'],
+    'Pancakes de Nutella': ['Con fresas, que son fruta.'],
+    'Matcha goloso': ['Verde que te quiero verde.'],
+    'Matcha de Mango': ['Matcha con mango. Atrévete.'],
+    'Espresso': ['Para despertar.'],
+    'Patatas trufadas': ['Huelen a trufa desde aquí.']
+  };
+  const BY_TAG = [['mes', ['¡La burger del mes! Pídela antes de que se acabe.']], ['nuevo', ['¡Novedad!']], ['picante', ['¡Esta pica!', 'Ojo, que pica. Ten agua cerca.']], ['trufa', ['Huele a trufa desde aquí.']],
+    ['dulce', ['Para los golosos.', 'Uy, qué dulce pinta.']], ['pollo', ['Crujiente por fuera, jugoso por dentro.']], ['veg', ['Esta también es para ti.']]];
+  const BY_CAT = { hamburguesas: ['¡Buena elección!', 'Esta tiene buena pinta.'], compartir: ['Para compartir. O no.'], bocadillos: ['Clásico y siempre acierta.'], hotdogs: ['Un hot dog con alma.'], postres: ['Siempre hay hueco para el postre.'], infantil: ['Para los peques.'], desayunos: ['Buenos días con ganas.', 'Así sí empieza el día.'] };
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  let last = '';
+  const lineFor = it => {
+    let pool = BY_NAME[it.n];
+    if (!pool) for (const [t, p] of BY_TAG) if (it.t.includes(t)) { pool = p; break; }
+    pool = pool || BY_CAT[it.cat] || ['¡Buena elección!'];
+    let l = pick(pool); if (pool.length > 1 && l === last) l = pick(pool.filter(x => x !== last)); return l;
+  };
+  let muted = false; try { muted = localStorage.getItem('alma-mascota') === 'off'; } catch (e) {}
+  const el = document.createElement('div'); el.className = 'mtalk' + (muted ? ' off' : '');
+  el.innerHTML = `<div class="mtalk__b" id="mtalkB" role="status" aria-live="polite"><span id="mtalkT"></span><button type="button" class="mtalk__x" aria-label="Callar a la mascota">Callar</button></div>
+    <button type="button" class="mtalk__m" aria-label="Mascota: activar o silenciar los comentarios" title="Mascota">${RIG}</button>`;
+  document.body.appendChild(el);
+  const rig = $('.rig', el), bub = $('#mtalkB', el), txt = $('#mtalkT', el);
+  let hideT, cool = 0, firstT;
+  const say = (msg, ms = 3400, force) => {
+    if (muted && !force) return;
+    if (document.documentElement.classList.contains('lock') || $('#cart.open')) return;
+    const n = Date.now(); if (!force && n - cool < 3600) return; cool = n; last = msg;
+    txt.textContent = msg; el.classList.add('on'); rig.classList.remove('rig--still');
+    clearTimeout(hideT); hideT = setTimeout(() => { el.classList.remove('on'); rig.classList.add('rig--still'); }, ms);
+  };
+  const setMuted = m => { muted = m; el.classList.toggle('off', m); try { localStorage.setItem('alma-mascota', m ? 'off' : 'on'); } catch (e) {} if (m) { el.classList.remove('on'); rig.classList.add('rig--still'); } };
+  el.addEventListener('click', e => {
+    if (e.target.closest('.mtalk__x')) { setMuted(true); return; }
+    if (e.target.closest('.mtalk__m')) { if (muted) { setMuted(false); say('¡Hola otra vez! Te voy contando.', 3200, true); } else say(pick(['¡Hola! Pasa el ratón o toca un plato.', 'Dime qué te apetece.', '¿Desayuno o hamburguesa?']), 3200, true); }
+  });
+  rig.classList.add('rig--still');
+  const itOf = n => { const id = n.dataset.open; return id && byId(id); };
+  // escritorio: al pasar por encima
+  let ht;
+  document.addEventListener('mouseover', e => { const c = e.target.closest('.item[data-open]'); if (!c || !matchMedia('(hover:hover)').matches) return; clearTimeout(ht); ht = setTimeout(() => { const it = itOf(c); if (it) say(lineFor(it)); }, 380); });
+  document.addEventListener('mouseout', e => { if (e.target.closest('.item[data-open]')) clearTimeout(ht); });
+  // móvil: al llegar a mitad de pantalla
+  if (!matchMedia('(hover:hover)').matches && 'IntersectionObserver' in window) {
+    const io2 = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const it = itOf(en.target); if (it) say(lineFor(it)); } }), { rootMargin: '-42% 0px -42% 0px', threshold: 0 });
+    const watch = () => $$('.item[data-open]').forEach(c => { if (!c._w) { c._w = 1; io2.observe(c); } });
+    addEventListener('menu-render', watch); watch(); new MutationObserver(watch).observe(document.body, { childList: true, subtree: true });
+  }
+  // al añadir al pedido
+  document.addEventListener('click', e => { if (e.target.closest('[data-add]')) setTimeout(() => say(pick(['¡Anotado!', '¡Marchando!', 'Buena elección.']), 2400), 150); });
+  // saludo según la página y la hora
+  const hello = { index: hr < 12 ? '¡Buenos días! ¿Desayuno o hamburguesa?' : hr < 20 ? '¡Hola! ¿Qué te apetece comer?' : '¡Buenas noches! Hoy toca burger.', carta: 'Toca un plato y te cuento algo.', desayunos: hr < 12 ? 'Buenos días. Café, tostada… ¿qué te apetece?' : 'Los desayunos son hasta las 12:00, pero mira, mira.', visitanos: '¡Te esperamos en Kale Nagusia 42!' }[page];
+  if (hello) firstT = setTimeout(() => say(hello, 4200), 2600);
+})();
 })();
