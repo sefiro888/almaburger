@@ -112,6 +112,7 @@ DEMO = os.environ.get('ALMA_DEMO') == '1'
 import importlib.util as _ilu
 _spec = _ilu.spec_from_file_location('legal', SRC / 'legal.py'); LEGAL = _ilu.module_from_spec(_spec); _spec.loader.exec_module(LEGAL)
 AGORA = 'simulacion.html' if DEMO else (CFG.get('agora_url') or '').strip()
+_spec2 = _ilu.spec_from_file_location('imgopt', SRC / 'imgopt.py'); IMGOPT = _ilu.module_from_spec(_spec2); _spec2.loader.exec_module(IMGOPT)
 LCFG = dict(CFG.get('legal', {}), _agora=bool(AGORA))
 
 
@@ -793,6 +794,17 @@ def redirect(dest):
             f'<meta http-equiv="refresh" content="1;url={dest.replace("{c}", "negro")}"><a href="{dest.replace("{c}", "negro")}">Entrar en ALMA</a>')
 
 
+def _small_pngs(out):
+    """Favicon a 96 px y la imagen de la animación con paleta de grises: mismo aspecto, menos peso."""
+    from PIL import Image
+    fv = out / 'img' / 'favicon.png'
+    im = Image.open(fv)
+    if im.width > 96:
+        im.convert('RGBA').resize((96, round(im.height * 96 / im.width)), Image.LANCZOS).save(fv, optimize=True)
+    la = out / 'img' / 'logo-anim.png'
+    Image.open(la).convert('L').quantize(colors=24, dither=Image.Dither.NONE).save(la, optimize=True)
+
+
 def main():
     pages = list(FILES.values()) + ['404.html']
     for theme, t in COLORS.items():
@@ -817,6 +829,8 @@ def main():
             html = html.replace('__SWAP__', f'../{t["other"]}/{name}').replace('__SWAPNAME__', t['swap'])
             html = html.replace('<head>', '<head>\n<script>try{localStorage.setItem("alma-color","' + theme + '")}catch(e){}</script>', 1)
             (out / name).write_text(html, encoding='utf-8')
+        IMGOPT.build(out, [out / n for n in built], [out / 'app.js'])
+        _small_pngs(out)
     # raíz: intro con selector de color + redirecciones de los enlaces antiguos
     (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8'), encoding='utf-8')
     for name in pages:

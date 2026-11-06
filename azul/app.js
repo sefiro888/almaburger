@@ -141,7 +141,7 @@ function card(i, idx) {
   const btn = `<button class="add" data-add="${esc(i.id)}" aria-label="Añadir ${esc(i.n)} al pedido">+<span class="add__n"></span></button>`;
   const delay = `style="animation-delay:${Math.min(idx, 10) * 35}ms"`;
   if (i.i) return `<article class="item" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
-    <div class="item__img"><img src="img/dishes/s/${i.i}.jpg" alt="${esc(i.n)}" loading="lazy" width="640" height="640">${flags}<span class="pill">${eur(i.p)}</span>${btn}</div>
+    <div class="item__img"><img src="img/dishes/s/${i.i}.webp" alt="${esc(i.n)}" loading="lazy" width="640" height="640">${flags}<span class="pill">${eur(i.p)}</span>${btn}</div>
     <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}</div></article>`;
   return `<article class="item item--row" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
     <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}${flags}</div><span class="price">${eur(i.p)}</span>${btn}</article>`;
@@ -388,7 +388,7 @@ function spin() {
     const iv = setInterval(() => {
       if (Date.now() - t0 > dur) {
         clearInterval(iv); const { it, opt } = picks[k]; el.classList.remove('spin'); el.classList.add('done');
-        v.innerHTML = `${it.i ? `<img src="img/dishes/s/${it.i}.jpg" alt="">` : ''}<b>${esc(it.n)}</b>${opt ? `<em>${esc(opt)}</em>` : ''}<span>${eur(it.p)}</span>`;
+        v.innerHTML = `${it.i ? `<img src="img/dishes/s/${it.i}.webp" alt="">` : ''}<b>${esc(it.n)}</b>${opt ? `<em>${esc(opt)}</em>` : ''}<span>${eur(it.p)}</span>`;
         if (k === 2) { spinning = false; $('#smAdd').disabled = false; $('#smTotal').textContent = 'Total ' + eur(picks.reduce((s, p) => s + p.it.p, 0)); }
       } else v.textContent = rnd(pools[k][1]).n;
     }, 70);
@@ -415,7 +415,7 @@ if (mis.length) {
   lb.innerHTML = '<button class="x" aria-label="Cerrar">✕</button><button class="p" aria-label="Anterior">‹</button><img alt="" hidden><button class="n" aria-label="Siguiente">›</button><p></p>';
   document.body.appendChild(lb);
   let cur = 0;
-  const show = k => { cur = (k + mis.length) % mis.length; const im = $('img', mis[cur]); $('img', lb).hidden = false; $('img', lb).src = im.currentSrc || im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = $('figcaption', mis[cur])?.textContent || im.alt; lb.classList.add('on'); };
+  const show = k => { cur = (k + mis.length) % mis.length; const im = $('img', mis[cur]); $('img', lb).hidden = false; $('img', lb).src = im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = $('figcaption', mis[cur])?.textContent || im.alt; lb.classList.add('on'); };
   mis.forEach((m, k) => m.addEventListener('click', () => show(k)));
   lb.addEventListener('click', e => { if (e.target === lb || e.target.matches('.x')) lb.classList.remove('on'); if (e.target.matches('.p')) show(cur - 1); if (e.target.matches('.n')) show(cur + 1); });
   document.addEventListener('keydown', e => { if (!lb.classList.contains('on')) return; if (e.key === 'Escape') lb.classList.remove('on'); if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
@@ -466,8 +466,8 @@ function renderDish(dir) {
   const img = dq('#dishImg'), bg = dq('#dishBg'), none = dq('#dishNone');
   if (it.i) {
     img.hidden = false; none.hidden = true; img.alt = it.n;
-    bg.style.backgroundImage = `url(img/dishes/s/${it.i}.jpg)`;
-    img.src = `img/dishes/${it.i}.jpg`;
+    bg.style.backgroundImage = `url(img/dishes/s/${it.i}.webp)`;
+    img.src = `img/dishes/${it.i}.webp`;
   } else { img.hidden = true; none.hidden = false; none.innerHTML = RIG; bg.style.backgroundImage = 'none'; }
   dq('#dishAi').hidden = !(it.i && AI_SLUGS.has(it.i));
   dq('#dishCat').textContent = MENU[it.cat].label;
@@ -480,7 +480,7 @@ function renderDish(dir) {
   dq('#dishCount').textContent = D.list.length > 1 ? `${D.k + 1} / ${D.list.length}` : '';
   $$('.dish__nav', dm).forEach(b => b.hidden = D.list.length < 2);
   box.scrollTop = 0; dq('.dish__info').scrollTop = 0;
-  [1, -1].forEach(d => { const o = byId(D.list[(D.k + d + D.list.length) % D.list.length]); if (o && o.i) new Image().src = `img/dishes/${o.i}.jpg`; });
+  [1, -1].forEach(d => { const o = byId(D.list[(D.k + d + D.list.length) % D.list.length]); if (o && o.i) new Image().src = `img/dishes/${o.i}.webp`; });
 }
 if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = 'Pide online para recoger o a domicilio. <a href="' + JE + '" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'; }
 const dishBtn = (done) => { const it = byId(D.list[D.k]); dq('#dishAdd').textContent = done ? 'Añadido ✓' : `Añadir al pedido · ${eur(it.p * D.qty)}`; };
@@ -736,7 +736,7 @@ if (stageEl) {
     const top = ranked[0].it, others = ranked.slice(1, 3).map(r => r.it); const veg = (Object.assign({}, ...ans).meat) === 'veg';
     const [, , , , line] = PR[top.n]; const agora = !!window.ALMA_AGORA;
     body.innerHTML = `<p class="qn">Tu resultado</p><div class="qres">
-      ${top.i ? `<img src="img/dishes/s/${top.i}.jpg" alt="${esc(top.n)}">` : ''}
+      ${top.i ? `<img src="img/dishes/s/${top.i}.webp" alt="${esc(top.n)}">` : ''}
       <div><h3 id="qT">Eres <em>${esc(top.n)}</em></h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${eur(top.p)}${veg ? ' · con versión vegetariana' : ''}</p>
       <div class="btnrow" style="margin:12px 0 0">${agora ? `<a class="btn btn--solid" href="${esc(window.ALMA_AGORA)}" target="_blank" rel="noopener">Pedir online ↗</a>` : `<button type="button" class="btn btn--solid" data-qadd="${esc(top.id)}">Añadir al pedido</button>`}<button type="button" class="btn" data-qview="${esc(top.id)}">Ver la ficha</button></div></div></div>
       ${others.length ? `<p class="qn" style="margin-top:18px">También te pegan</p><div class="qchips">${others.map(o => `<button type="button" class="chip" data-qview="${esc(o.id)}">${esc(o.n)}</button>`).join('')}</div>` : ''}
@@ -762,8 +762,12 @@ if (stageEl) {
 (() => {
   const figs = $$('.phone--own'); if (!figs.length) return;
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // portadas: se cargan al acercarse al vídeo
+  const setPoster = v => { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; };
+  const pio = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const rail = e.target.closest('.phones'); (rail ? rail.querySelectorAll('video') : [e.target]).forEach(v => { setPoster(v); pio.unobserve(v); }); } }), { rootMargin: '600px 600px' }) : null;
   figs.forEach(fig => {
     const v = $('video', fig); let userPaused = false;
+    if (pio) pio.observe(v); else setPoster(v);
     const play = () => { if (userPaused) return; v.preload = 'auto'; const p = v.play(); if (p && p.catch) p.catch(() => {}); };
     const sync = () => fig.classList.toggle('paused', v.paused);
     v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
@@ -780,7 +784,7 @@ if (stageEl) {
   const a = q('.hero__photo:not(.hero__photo--b)'), b = q('.hero__photo--b');
   if (a && b) {
     const ia = a.querySelector('img'), ib = b.querySelector('img'), ta = a.querySelector('a'), tb = b.querySelector('a');
-    [ia.src, ib.src] = [ib.src, ia.src]; [ia.alt, ib.alt] = [ib.alt, ia.alt];
+    [ia.srcset, ib.srcset] = [ib.srcset, ia.srcset]; [ia.src, ib.src] = [ib.src, ia.src]; [ia.alt, ib.alt] = [ib.alt, ia.alt];
     [ta.textContent, tb.textContent] = [tb.textContent, ta.textContent]; [ta.href, tb.href] = [tb.href, ta.href];
   }
   const fb = q('#featuredB'), fa = q('#featured');

@@ -15,7 +15,7 @@
 <script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{var h=+new Intl.DateTimeFormat("es-ES",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}).format(new Date()),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/logo-stage.png" as="image" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=3d88ba8c">
+<link rel="stylesheet" href="styles.css?v=fba95cd1">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -74,8 +74,8 @@
   </div>
   <div class="hero__visual" id="heroVisual">
     <div class="blob"></div>
-    <figure class="hero__photo"><img src="img/burger.jpg" alt="La Puerquita, la burger del mes: doble smash con pulled pork" fetchpriority="high"><a class="hero__tag" href="carta.html#hamburguesas">Burger del mes · La Puerquita</a></figure>
-    <figure class="hero__photo hero__photo--b"><img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha"><a class="hero__tag hero__tag--b" href="desayunos.html">Desayunos · 8:00–12:00</a></figure>
+    <figure class="hero__photo"><img sizes="(max-width: 700px) 92vw, 40vw" src="img/burger.webp" srcset="img/burger-480.webp 480w, img/burger-800.webp 800w, img/burger.webp 1000w" alt="La Puerquita, la burger del mes: doble smash con pulled pork" fetchpriority="high"><a class="hero__tag" href="carta.html#hamburguesas">Burger del mes · La Puerquita</a></figure>
+    <figure class="hero__photo hero__photo--b"><img sizes="(max-width: 700px) 92vw, 40vw" src="img/tostada.webp" srcset="img/tostada-480.webp 480w, img/tostada.webp 816w" alt="Tostada de salmón, aguacate y hummus de remolacha"><a class="hero__tag hero__tag--b" href="desayunos.html">Desayunos · 8:00–12:00</a></figure>
     <svg class="sticker" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#circ" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">HAMBURGUESAS · DESAYUNOS · ALMA · </textPath></text><text x="100" y="118" text-anchor="middle" font-size="62" font-family="Bagel Fat One">✶</text></svg>
   </div>
   <div class="heroline" aria-hidden="true"><div class="walker" aria-hidden="true" style="--w:112px;--t:22s"><div class="walker__x"><div class="walker__flip"><div class="rig " style="--w:112px" aria-hidden="true"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></div></div></div></div>
@@ -88,12 +88,12 @@
     <h2 class="sec__title reveal">Hamburguesas <em>y desayunos</em></h2></div></div>
     <div class="duo">
       <a class="dcard dcard--b reveal" href="carta.html">
-        <img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy">
+        <img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/dishes/la-puerquita.webp" srcset="img/dishes/la-puerquita-480.webp 480w, img/dishes/la-puerquita-800.webp 800w, img/dishes/la-puerquita.webp 1000w" alt="La Puerquita, doble smash con pulled pork" loading="lazy">
         <div class="dcard__in"><span class="dcard__tag">Del mediodía a la noche</span><h3>Hamburguesas</h3>
           <p>Smash burgers de recetas propias, pollo crispy, hot dogs, picoteo y tartas de queso.</p><span class="dcard__go">Ver hamburguesas →</span></div>
       </a>
       <a class="dcard dcard--d reveal" href="desayunos.html">
-        <img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy">
+        <img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/tostada.webp" srcset="img/tostada-480.webp 480w, img/tostada.webp 816w" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy">
         <div class="dcard__in"><span class="dcard__tag">De 8:00 a 12:00</span><h3>Desayunos</h3>
           <p>Tostadas con toppings de verdad, pancakes, bowls, cafés especiales y los matchas del momento.</p><span class="dcard__go">Ver desayunos →</span></div>
       </a>
@@ -104,9 +104,9 @@
 <section class="sec sec--dark hstory" id="historia">
   <div class="wrap hstory__grid">
     <div class="hstory__pics">
-      <figure class="hp hp--1 reveal"><img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure>
-      <figure class="hp hp--2 reveal"><img src="img/dishes/tostada-salmon.jpg" alt="Tostada de salmón con aguacate" loading="lazy"></figure>
-      <figure class="hp hp--3 reveal"><img src="img/dishes/pancakes-ferrero.jpg" alt="Pancakes con crema de Ferrero Rocher" loading="lazy"></figure>
+      <figure class="hp hp--1 reveal"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/dishes/la-puerquita.webp" srcset="img/dishes/la-puerquita-480.webp 480w, img/dishes/la-puerquita-800.webp 800w, img/dishes/la-puerquita.webp 1000w" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure>
+      <figure class="hp hp--2 reveal"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/dishes/tostada-salmon.webp" srcset="img/dishes/tostada-salmon-480.webp 480w, img/dishes/tostada-salmon.webp 789w" alt="Tostada de salmón con aguacate" loading="lazy"></figure>
+      <figure class="hp hp--3 reveal"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/dishes/pancakes-ferrero.webp" srcset="img/dishes/pancakes-ferrero-480.webp 480w, img/dishes/pancakes-ferrero-800.webp 800w, img/dishes/pancakes-ferrero.webp 1000w" alt="Pancakes con crema de Ferrero Rocher" loading="lazy"></figure>
       <svg class="hp__stamp" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="c2" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#c2" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">ALMA · TODO LO QUE SOMOS · EN CADA BOCADO · </textPath></text><text x="100" y="116" text-anchor="middle" font-size="58" font-family="Bagel Fat One">A</text></svg>
     </div>
     <div class="hstory__text">
@@ -145,16 +145,16 @@
     <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">05</span><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div></div></div>
       <a class="btn btn--solid reveal" href="galeria.html#reels">Más en la galería →</a></div>
     <div class="phones phones--rail" tabindex="0" aria-label="Vídeos de ALMA, desliza para ver más"><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/burger-poster.jpg" aria-label="Vídeo desde la cocina de ALMA: una burger con queso fundido"><source src="img/video/burger.mp4" type="video/mp4"></video>
+      <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/burger-poster.webp" aria-label="Vídeo desde la cocina de ALMA: una burger con queso fundido"><source src="img/video/burger.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>Desde la cocina de ALMA</figcaption></figure><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/desayunos-poster.jpg" aria-label="Desayunos con pasión: tostada de salmón, pancakes y matcha"><source src="img/video/desayunos.mp4" type="video/mp4"></video>
+      <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/desayunos-poster.webp" aria-label="Desayunos con pasión: tostada de salmón, pancakes y matcha"><source src="img/video/desayunos.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>Desayunos con pasión</figcaption></figure><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/chocolate-poster.jpg" aria-label="Chocolate caliente servido en una taza de ALMA"><source src="img/video/chocolate.mp4" type="video/mp4"></video>
+      <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/chocolate-poster.webp" aria-label="Chocolate caliente servido en una taza de ALMA"><source src="img/video/chocolate.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>Llega el chocolate caliente</figcaption></figure><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
-      <video class="phone__video" muted loop playsinline preload="none" poster="img/video/croquetas-poster.jpg" aria-label="Croquetas caseras de ALMA, recién abiertas"><source src="img/video/croquetas.mp4" type="video/mp4"></video>
+      <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/croquetas-poster.webp" aria-label="Croquetas caseras de ALMA, recién abiertas"><source src="img/video/croquetas.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>Croquetas caseras</figcaption></figure></div><p class="phones__hint" aria-hidden="true">← Desliza para ver más vídeos →</p>
   </div>
@@ -189,8 +189,8 @@
 
 <section class="sec sec--band">
   <div class="wrap split">
-    <div class="split__pic reveal"><figure class="ph" style="inset:0 8% 8% 0;transform:rotate(-3deg)"><img src="img/burger.jpg" alt="La Puerquita" loading="lazy"></figure>
-      <figure class="ph" style="width:38%;aspect-ratio:1;right:0;bottom:0;transform:rotate(5deg)"><img src="img/cabrona.jpg" alt="Hamburguesa con queso de cabra y patatas" loading="lazy"></figure></div>
+    <div class="split__pic reveal"><figure class="ph" style="inset:0 8% 8% 0;transform:rotate(-3deg)"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/burger.webp" srcset="img/burger-480.webp 480w, img/burger-800.webp 800w, img/burger.webp 1000w" alt="La Puerquita" loading="lazy"></figure>
+      <figure class="ph" style="width:38%;aspect-ratio:1;right:0;bottom:0;transform:rotate(5deg)"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/cabrona.webp" srcset="img/cabrona-480.webp 480w, img/cabrona.webp 850w" alt="Hamburguesa con queso de cabra y patatas" loading="lazy"></figure></div>
     <div>
       <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">08</span><div><p class="kicker reveal">Burger del mes</p>
       <h2 class="sec__title reveal">La <em>Puerquita</em></h2></div></div>
@@ -205,10 +205,10 @@
   <div class="wrap">
     <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">09</span><div><p class="kicker reveal">Descubre</p><h2 class="sec__title reveal">Todo Alma, <em>en un vistazo</em></h2></div></div>
     <div class="tease" style="margin-top:30px">
-      <a class="tz tz--wide reveal" href="carta.html"><img src="img/dishes/la-triplona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Hamburguesas y carta</h3><p>Smash burgers, picoteo, bocadillos, hot dogs y postres.</p></div></a>
-      <a class="tz tz--wide reveal" href="desayunos.html"><img src="img/tostada.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
-      <a class="tz reveal" href="el-alma.html"><img src="img/cabrona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
-      <a class="tz reveal" href="galeria.html"><img src="img/picoteo.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
+      <a class="tz tz--wide reveal" href="carta.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/dishes/la-triplona.webp" srcset="img/dishes/la-triplona-480.webp 480w, img/dishes/la-triplona-800.webp 800w, img/dishes/la-triplona.webp 1000w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Hamburguesas y carta</h3><p>Smash burgers, picoteo, bocadillos, hot dogs y postres.</p></div></a>
+      <a class="tz tz--wide reveal" href="desayunos.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/tostada.webp" srcset="img/tostada-480.webp 480w, img/tostada.webp 816w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
+      <a class="tz reveal" href="el-alma.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/cabrona.webp" srcset="img/cabrona-480.webp 480w, img/cabrona.webp 850w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
+      <a class="tz reveal" href="galeria.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/picoteo.webp" srcset="img/picoteo-480.webp 480w, img/picoteo-800.webp 800w, img/picoteo.webp 1000w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
       <a class="tz tz--plain reveal" href="visitanos.html"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div><div class="rig rig--still" style="--w:110px" aria-hidden="true"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></a>
     </div>
   </div>
@@ -218,7 +218,7 @@
   <div class="wrap">
     <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">10</span><div><p class="kicker reveal">Lo último en Instagram</p><h2 class="sec__title reveal" style="margin:0">Últimas <em>publicaciones</em></h2></div></div></div>
       <div class="btnrow reveal" style="margin:0"><a class="btn btn--solid btn--sm" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram ↗</a><a class="btn btn--sm" href="https://www.tiktok.com/@almaburgerss" target="_blank" rel="noopener">TikTok @almaburgerss ↗</a></div></div>
-    <div class="igposts"><a class="igp reveal" href="https://www.instagram.com/p/DfX4UrsN_nP/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Nueva tarta de queso: Nutella y Chips Ahoy"><img src="img/ig/DfX4UrsN_nP.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Nueva tarta de queso: Nutella y Chips Ahoy</span></a><a class="igp reveal" href="https://www.instagram.com/p/DfPi3rINl86/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Green Tropical, el matcha del momento"><img src="img/ig/DfPi3rINl86.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Green Tropical, el matcha del momento</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfLQlDpNAXW/" target="_blank" rel="noopener" aria-label="Ver en Instagram: This is Halloween en ALMA"><img src="img/ig/DfLQlDpNAXW.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">This is Halloween en ALMA</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfCtUwRN2DU/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Llega el chocolate caliente"><img src="img/ig/DfCtUwRN2DU.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Llega el chocolate caliente</span></a><a class="igp reveal" href="https://www.instagram.com/reel/De-PkAoNSGt/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Blue Paradise, matcha de colores"><img src="img/ig/De-PkAoNSGt.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Blue Paradise, matcha de colores</span></a><a class="igp reveal" href="https://www.instagram.com/p/De9BJPvNCyj/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Halloween: rasca y descubre tu sorpresa"><img src="img/ig/De9BJPvNCyj.jpg" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Halloween: rasca y descubre tu sorpresa</span></a></div>
+    <div class="igposts"><a class="igp reveal" href="https://www.instagram.com/p/DfX4UrsN_nP/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Nueva tarta de queso: Nutella y Chips Ahoy"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfX4UrsN_nP.webp" srcset="img/ig/DfX4UrsN_nP-480.webp 480w, img/ig/DfX4UrsN_nP.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Nueva tarta de queso: Nutella y Chips Ahoy</span></a><a class="igp reveal" href="https://www.instagram.com/p/DfPi3rINl86/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Green Tropical, el matcha del momento"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfPi3rINl86.webp" srcset="img/ig/DfPi3rINl86-480.webp 480w, img/ig/DfPi3rINl86.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Green Tropical, el matcha del momento</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfLQlDpNAXW/" target="_blank" rel="noopener" aria-label="Ver en Instagram: This is Halloween en ALMA"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfLQlDpNAXW.webp" srcset="img/ig/DfLQlDpNAXW-480.webp 480w, img/ig/DfLQlDpNAXW.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">This is Halloween en ALMA</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfCtUwRN2DU/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Llega el chocolate caliente"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfCtUwRN2DU.webp" srcset="img/ig/DfCtUwRN2DU-480.webp 480w, img/ig/DfCtUwRN2DU.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Llega el chocolate caliente</span></a><a class="igp reveal" href="https://www.instagram.com/reel/De-PkAoNSGt/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Blue Paradise, matcha de colores"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/De-PkAoNSGt.webp" srcset="img/ig/De-PkAoNSGt-480.webp 480w, img/ig/De-PkAoNSGt.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Blue Paradise, matcha de colores</span></a><a class="igp reveal" href="https://www.instagram.com/p/De9BJPvNCyj/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Halloween: rasca y descubre tu sorpresa"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/De9BJPvNCyj.webp" srcset="img/ig/De9BJPvNCyj-480.webp 480w, img/ig/De9BJPvNCyj.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Halloween: rasca y descubre tu sorpresa</span></a></div>
   </div>
 </section>
 </main>
@@ -288,6 +288,6 @@
   <a class="bnav__jeat" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
-<script src="app.js?v=3d88ba8c"></script>
+<script src="app.js?v=fba95cd1"></script>
 </body>
 </html>

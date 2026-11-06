@@ -415,7 +415,7 @@ if (mis.length) {
   lb.innerHTML = '<button class="x" aria-label="Cerrar">✕</button><button class="p" aria-label="Anterior">‹</button><img alt="" hidden><button class="n" aria-label="Siguiente">›</button><p></p>';
   document.body.appendChild(lb);
   let cur = 0;
-  const show = k => { cur = (k + mis.length) % mis.length; const im = $('img', mis[cur]); $('img', lb).hidden = false; $('img', lb).src = im.currentSrc || im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = $('figcaption', mis[cur])?.textContent || im.alt; lb.classList.add('on'); };
+  const show = k => { cur = (k + mis.length) % mis.length; const im = $('img', mis[cur]); $('img', lb).hidden = false; $('img', lb).src = im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = $('figcaption', mis[cur])?.textContent || im.alt; lb.classList.add('on'); };
   mis.forEach((m, k) => m.addEventListener('click', () => show(k)));
   lb.addEventListener('click', e => { if (e.target === lb || e.target.matches('.x')) lb.classList.remove('on'); if (e.target.matches('.p')) show(cur - 1); if (e.target.matches('.n')) show(cur + 1); });
   document.addEventListener('keydown', e => { if (!lb.classList.contains('on')) return; if (e.key === 'Escape') lb.classList.remove('on'); if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
@@ -762,8 +762,12 @@ if (stageEl) {
 (() => {
   const figs = $$('.phone--own'); if (!figs.length) return;
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // portadas: se cargan al acercarse al vídeo
+  const setPoster = v => { if (v.dataset.poster && !v.poster) v.poster = v.dataset.poster; };
+  const pio = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const rail = e.target.closest('.phones'); (rail ? rail.querySelectorAll('video') : [e.target]).forEach(v => { setPoster(v); pio.unobserve(v); }); } }), { rootMargin: '600px 600px' }) : null;
   figs.forEach(fig => {
     const v = $('video', fig); let userPaused = false;
+    if (pio) pio.observe(v); else setPoster(v);
     const play = () => { if (userPaused) return; v.preload = 'auto'; const p = v.play(); if (p && p.catch) p.catch(() => {}); };
     const sync = () => fig.classList.toggle('paused', v.paused);
     v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
@@ -780,7 +784,7 @@ if (stageEl) {
   const a = q('.hero__photo:not(.hero__photo--b)'), b = q('.hero__photo--b');
   if (a && b) {
     const ia = a.querySelector('img'), ib = b.querySelector('img'), ta = a.querySelector('a'), tb = b.querySelector('a');
-    [ia.src, ib.src] = [ib.src, ia.src]; [ia.alt, ib.alt] = [ib.alt, ia.alt];
+    [ia.srcset, ib.srcset] = [ib.srcset, ia.srcset]; [ia.src, ib.src] = [ib.src, ia.src]; [ia.alt, ib.alt] = [ib.alt, ia.alt];
     [ta.textContent, tb.textContent] = [tb.textContent, ta.textContent]; [ta.href, tb.href] = [tb.href, ta.href];
   }
   const fb = q('#featuredB'), fa = q('#featured');
