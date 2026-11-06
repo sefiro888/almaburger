@@ -6,16 +6,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Visítanos · Alma Burger</title>
-<meta name="description" content="Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.">
+<meta name="description" content="Kale Nagusia 42, Ordizia. Horario, mapa y contacto.">
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:title" content="Visítanos · Alma Burger">
-<meta property="og:description" content="Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.">
+<meta property="og:description" content="Kale Nagusia 42, Ordizia. Horario, mapa y contacto.">
 <meta property="og:image" content="img/burger.jpg">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{var h=+new Intl.DateTimeFormat("es-ES",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}).format(new Date()),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="styles.css?v=e6504243">
+<link rel="stylesheet" href="styles.css?v=3d88ba8c">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
   <div class="wrap">
     <nav class="crumbs" aria-label="Migas de pan"><a href="index.html">Inicio</a><span>/</span><span>Visítanos</span></nav>
     <h1 class="reveal">Ven a <em>vernos</em></h1>
-    <p class="lead reveal">En pleno centro de Ordizia, con terraza. Reserva mesa, pide por WhatsApp o déjate caer.</p>
+    <p class="lead reveal">En pleno centro de Ordizia, con terraza. Pide online o déjate caer.</p>
     <figure class="phero__ill reveal"><img src="img/ill/visitanos.png" alt="Un perrito caliente abriendo una puerta y saludando"></figure>
   </div>
   
@@ -63,22 +63,16 @@
         <button class="btn btn--solid btn--sm" type="button" data-ext-load>Cargar el mapa</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Alma+Burger+Kale+Nagusia+42+Ordizia" target="_blank" rel="noopener">Abrir en Google Maps ↗</a></div></div>
   </div>
 </section>
-<section class="sec" id="reservar">
+<section class="sec" id="contacto">
   <div class="wrap split">
-    <div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">02</span><div><p class="kicker reveal">Reserva</p><h2 class="sec__title reveal">Guárdanos <em>tu mesa</em></h2></div></div>
-      <p class="reveal" style="font-size:1.1rem;max-width:28em">Rellena los datos y se abrirá WhatsApp con tu solicitud lista para enviar. Te confirmamos lo antes posible.</p></div>
-    <form class="form reveal" id="reserva">
-      <label>Nombre<input name="nombre" required autocomplete="name" placeholder="Tu nombre"></label>
-      <div class="form__row">
-        <label>Personas<select name="personas"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label>
-        <label>Día<input type="date" name="fecha" required></label>
-      </div>
-      <div class="form__row">
-        <label>Hora<input type="time" name="hora" required value="21:00"></label>
-        <label>Terraza o interior<select name="nota"><option value="">Me da igual</option><option>Terraza</option><option>Interior</option></select></label>
-      </div>
-      <button class="btn btn--solid btn--block" type="submit">Enviar solicitud por WhatsApp</button>
-    </form>
+    <div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">02</span><div><p class="kicker reveal">Contacto</p><h2 class="sec__title reveal">¿Tienes alguna <em>duda</em>?</h2></div></div>
+      <p class="reveal" style="font-size:1.1rem;max-width:28em">Si quieres preguntarnos algo sobre la carta, los alérgenos o el horario, llámanos o escríbenos y te respondemos lo antes posible.</p></div>
+    <div class="contact reveal">
+      <a class="contact__it" href="tel:+34747486092"><b>Llámanos</b><span>747 48 60 92</span></a>
+      <a class="contact__it" href="https://wa.me/34747486092" target="_blank" rel="noopener"><b>Escríbenos por WhatsApp</b><span>Para consultas y dudas</span></a>
+      <a class="contact__it" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener"><b>Instagram</b><span>@almaburgers</span></a>
+      <p class="fine" style="opacity:.75">Los pedidos se hacen en «Pedir online» o en Just Eat.</p>
+    </div>
   </div>
 </section>
 </main>
@@ -88,7 +82,6 @@
     <div class="btnrow reveal" style="margin:0">
       <a class="btn btn--je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
-      <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
       <a class="btn" href="carta.html">Hamburguesas</a>
       <a class="btn" href="desayunos.html">Desayunos</a>
     </div>
@@ -147,8 +140,8 @@
   <a href="desayunos.html"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
   <a id="bnavCart" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedir online</span><i id="bnavN" hidden>0</i></a>
   <a class="bnav__jeat" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
-  <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
+  <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
-<script src="app.js?v=e6504243"></script>
+<script src="app.js?v=3d88ba8c"></script>
 </body>
 </html>

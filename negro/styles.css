@@ -1694,6 +1694,13 @@ mark.ph{background:#ffe066;color:#0b0b0b;padding:0 4px;border-radius:4px;font-we
 .foot__legal a,.foot__legal .lnk{color:inherit;text-decoration:underline;font:inherit;background:none;border:0;padding:0;cursor:pointer}
 body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 
+/* ====== contacto (Visítanos) ====== */
+.contact{display:grid;gap:12px;align-content:start}
+.contact__it{display:grid;gap:2px;border:var(--bw) solid var(--ink);border-radius:20px;background:var(--card);padding:16px 20px;box-shadow:5px 5px 0 var(--ink);text-decoration:none;color:inherit;transition:transform .2s}
+.contact__it:hover{transform:translate(-2px,-3px)}
+.contact__it b{font-weight:900;font-size:1.35rem;text-transform:uppercase;line-height:1}
+.contact__it span{font-weight:600;opacity:.8}
+
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{
   --je:#0b0b0b; --je-fg:#fbecd8;

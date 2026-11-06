@@ -47,7 +47,6 @@ CTA = f'''<section class="sec cta" style="padding-bottom:140px;border-top:var(--
     <div class="btnrow reveal" style="margin:0">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
-      <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
       <a class="btn" href="carta.html">Hamburguesas</a>
       <a class="btn" href="desayunos.html">Desayunos</a>
     </div>
@@ -204,7 +203,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
   <a href="desayunos.html"{DESAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
   <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedido</span><i id="bnavN" hidden>0</i></button>
   <a class="bnav__jeat" href="{JE}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
-  <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
+  <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
 <script src="app.js?v={VER}"></script>
 </body>
@@ -287,9 +286,8 @@ def home():
     <div class="hero__cta">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
-      <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
     </div>
-    <p class="hero__alt"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
+    <p class="hero__alt"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
     <ul class="hero__facts"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
@@ -384,7 +382,7 @@ def home():
     <div class="paths">
       <div class="path path--main reveal"><span class="path__tag">A domicilio</span><b>En Just Eat</b><span>La forma habitual de recibir tu pedido en casa. Se abre nuestra página de Just Eat: eliges tus platos y pagas allí.</span><a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a></div>
       <div class="path path--main path--wa reveal"><span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span><button class="btn btn--solid" type="button" data-wa-order>Empezar mi pedido</button></div>
-      <div class="path reveal"><span class="path__tag">Mesa</span><b>Reserva tu mesa</b><span>Elige día, hora y personas y te preparamos el mensaje de WhatsApp.</span><a class="btn btn--line" href="visitanos.html#reservar">Reservar mesa</a></div>
+      <div class="path reveal"><span class="path__tag">Dudas</span><b>Escríbenos</b><span>¿Alguna pregunta sobre la carta, los alérgenos o el horario? Llámanos o mándanos un mensaje.</span><a class="btn btn--line" href="visitanos.html#contacto">Contactar</a></div>
     </div>
     <div class="steps" style="margin-top:52px">
       <div class="step reveal"><h3>1 · Elige tus platos</h3><p>Pulsa <b>+</b> en la carta. Si un plato tiene opciones (salsa, relleno…), te las preguntamos.</p></div>
@@ -579,7 +577,6 @@ def alma():
       <details class="reveal"><summary>¿Tenéis opciones vegetarianas?</summary><p>Sí: la Gordi Deluxe tiene opción vegetariana, además de ensalada con burrata, tortilla de patata y varias tostadas.</p></details>
       <details class="reveal"><summary>¿Y alérgenos?</summary><p>Tenemos carta de alérgenos: pídesela a nuestro equipo y te ayudamos a elegir con tranquilidad.</p></details>
       <details class="reveal"><summary>¿Hacéis entrega a domicilio?</summary><p>Sí. Haz tu pedido en la web, elige «A domicilio» y se enviará por WhatsApp. El local te confirmará si llegamos a tu dirección y el coste del envío. También puedes pedir en Just Eat.</p></details>
-      <details class="reveal"><summary>¿Puedo reservar mesa?</summary><p>Claro. Desde la página <a href="visitanos.html#reserva"><b>Visítanos</b></a> te preparamos el mensaje de WhatsApp en un momento.</p></details>
       <details class="reveal"><summary>¿Hay menú infantil?</summary><p>Sí: pechuga empanada, lomo o hamburguesa con queso, siempre con patatas y croquetas, por 9,00€.</p></details>
       <details class="reveal"><summary>¿Hasta qué hora hay desayunos?</summary><p>Servimos desayunos desde que abrimos hasta las 12:00.</p></details>
     </div>
@@ -703,7 +700,7 @@ def galeria():
 
 
 def visitanos():
-    return phero('Visítanos', 'Ven a <em>vernos</em>', 'En pleno centro de Ordizia, con terraza. Reserva mesa, pide por WhatsApp o déjate caer.', ill='visitanos', ill_alt='Un perrito caliente abriendo una puerta y saludando') + f'''
+    return phero('Visítanos', 'Ven a <em>vernos</em>', 'En pleno centro de Ordizia, con terraza. Pide online o déjate caer.', ill='visitanos', ill_alt='Un perrito caliente abriendo una puerta y saludando') + f'''
 <section class="sec sec--ink">
   <div class="wrap visit__grid">
     <div>
@@ -725,22 +722,16 @@ def visitanos():
         <button class="btn btn--solid btn--sm" type="button" data-ext-load>Cargar el mapa</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Alma+Burger+Kale+Nagusia+42+Ordizia" target="_blank" rel="noopener">Abrir en Google Maps ↗</a></div></div>
   </div>
 </section>
-<section class="sec" id="reservar">
+<section class="sec" id="contacto">
   <div class="wrap split">
-    <div><p class="kicker reveal">Reserva</p><h2 class="sec__title reveal">Guárdanos <em>tu mesa</em></h2>
-      <p class="reveal" style="font-size:1.1rem;max-width:28em">Rellena los datos y se abrirá WhatsApp con tu solicitud lista para enviar. Te confirmamos lo antes posible.</p></div>
-    <form class="form reveal" id="reserva">
-      <label>Nombre<input name="nombre" required autocomplete="name" placeholder="Tu nombre"></label>
-      <div class="form__row">
-        <label>Personas<select name="personas">{''.join(f'<option>{n}</option>' for n in range(1, 13))}</select></label>
-        <label>Día<input type="date" name="fecha" required></label>
-      </div>
-      <div class="form__row">
-        <label>Hora<input type="time" name="hora" required value="21:00"></label>
-        <label>Terraza o interior<select name="nota"><option value="">Me da igual</option><option>Terraza</option><option>Interior</option></select></label>
-      </div>
-      <button class="btn btn--solid btn--block" type="submit">Enviar solicitud por WhatsApp</button>
-    </form>
+    <div><p class="kicker reveal">Contacto</p><h2 class="sec__title reveal">¿Tienes alguna <em>duda</em>?</h2>
+      <p class="reveal" style="font-size:1.1rem;max-width:28em">Si quieres preguntarnos algo sobre la carta, los alérgenos o el horario, llámanos o escríbenos y te respondemos lo antes posible.</p></div>
+    <div class="contact reveal">
+      <a class="contact__it" href="tel:+34747486092"><b>Llámanos</b><span>747 48 60 92</span></a>
+      <a class="contact__it" href="https://wa.me/34747486092" target="_blank" rel="noopener"><b>Escríbenos por WhatsApp</b><span>Para consultas y dudas</span></a>
+      <a class="contact__it" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener"><b>Instagram</b><span>@almaburgers</span></a>
+      <p class="fine" style="opacity:.75">Los pedidos se hacen en «Pedir online» o en Just Eat.</p>
+    </div>
   </div>
 </section>'''
 
@@ -756,9 +747,9 @@ TITLES = {
     'carta': ('Hamburguesas y carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
     'desayunos': ('Desayunos con pasión · Alma Burger', 'Desayunos con pasión de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),
-    'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa, contacto y reserva de mesa por WhatsApp.'),
+    'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa y contacto.'),
     'aviso': ('Aviso legal · Alma Burger', 'Aviso legal y condiciones de uso de la web de ALMA Burger & Breakfast.'),
-    'privacidad': ('Política de privacidad · Alma Burger', 'Cómo trata ALMA Burger & Breakfast tus datos personales en pedidos, reservas y en la web.'),
+    'privacidad': ('Política de privacidad · Alma Burger', 'Cómo trata ALMA Burger & Breakfast tus datos personales en pedidos, consultas y en la web.'),
     'cookies': ('Política de cookies · Alma Burger', 'Qué guarda la web de ALMA Burger & Breakfast en tu navegador y cómo cambiarlo.'),
 }
 def lpage(kind):

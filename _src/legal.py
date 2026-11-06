@@ -24,11 +24,11 @@ def aviso(L):
 <li><b>Teléfono:</b> {tel}</li><li><b>Email:</b> {mail}</li>{reg_li}</ul>
 
 <h2>2. Para qué sirve esta web</h2>
-<p>Esta web informa sobre el restaurante ALMA Burger &amp; Breakfast: su carta, sus desayunos, horarios, ubicación y formas de pedir o reservar. Al navegar por ella aceptas estas condiciones de uso.</p>
+<p>Esta web informa sobre el restaurante ALMA Burger &amp; Breakfast: su carta, sus desayunos, horarios, ubicación y formas de pedir. Al navegar por ella aceptas estas condiciones de uso.</p>
 
 <h2>3. Carta, precios y pedidos</h2>
 <p>Los precios de la carta incluyen el IVA y pueden cambiar sin previo aviso; el precio que vale es el que se confirma en el momento del pedido. Las fotos de los platos son orientativas.</p>
-<p>Los pedidos online se hacen en la plataforma de pedidos del restaurante (Ágora) o en Just Eat. Cada plataforma tiene sus propias condiciones, que aceptas al usarla. Las reservas de mesa se gestionan por WhatsApp o por teléfono y quedan confirmadas cuando el restaurante responde.</p>
+<p>Los pedidos online se hacen en la plataforma de pedidos del restaurante (Ágora) o en Just Eat. Cada plataforma tiene sus propias condiciones, que aceptas al usarla.</p>
 <p><b>Alérgenos:</b> tienes a tu disposición la información sobre alérgenos de cada plato (Reglamento UE 1169/2011). Pídela al personal antes de pedir, o indícalo en tu pedido.</p>
 
 <h2>4. Uso de la web</h2>
@@ -61,7 +61,7 @@ def privacidad(L):
 <div class="legal__tbl"><table>
 <thead><tr><th>Cuándo</th><th>Qué datos</th><th>Para qué</th><th>Base legal</th><th>Cuánto tiempo</th></tr></thead>
 <tbody>
-<tr><td>Reservas y consultas por WhatsApp o teléfono</td><td>Nombre, teléfono, día, hora, número de personas y lo que nos escribas</td><td>Gestionar tu reserva o responderte</td><td>Tu petición y la reserva (art. 6.1.b RGPD)</td><td>Hasta atender tu reserva o consulta; como máximo 12 meses</td></tr>
+<tr><td>Consultas por teléfono o WhatsApp</td><td>Nombre, teléfono y lo que nos escribas</td><td>Responder a tu consulta</td><td>Tu petición (art. 6.1.b RGPD)</td><td>Hasta atenderla; como máximo 12 meses</td></tr>
 <tr><td>Pedidos online (plataforma Ágora)</td><td>Nombre, teléfono, dirección de entrega, pedido y datos del pago</td><td>Preparar y entregar tu pedido y cobrarlo</td><td>El contrato de compra (art. 6.1.b) y obligaciones legales (art. 6.1.c)</td><td>Lo que exija la ley fiscal y mercantil (hasta 6 años para las facturas)</td></tr>
 {'' if L.get('_agora') else '''<tr><td>Pedido por WhatsApp desde la web</td><td>Nombre, teléfono, dirección, alergias y el pedido</td><td>Preparar tu pedido y confirmarte el total</td><td>Tu petición (art. 6.1.b)</td><td>Hasta entregar el pedido, salvo obligaciones legales</td></tr>'''}
 <tr><td>Si nos mandas tu candidatura</td><td>Los datos de tu mensaje o CV</td><td>Valorarte para un puesto</td><td>Tu consentimiento (art. 6.1.a)</td><td>Como máximo 12 meses</td></tr>
@@ -88,7 +88,7 @@ def privacidad(L):
 <p>Los menores de 14 años necesitan el permiso de su padre, madre o tutor para darnos sus datos.</p>
 
 <h2>6. Seguridad</h2>
-<p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos: la web se sirve cifrada (HTTPS) y solo accede a los pedidos y reservas el personal que los necesita.</p>
+<p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos: la web se sirve cifrada (HTTPS) y solo accede a los pedidos y consultas el personal que los necesita.</p>
 ''')
 
 

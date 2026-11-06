@@ -408,20 +408,6 @@ const onScroll = () => { const h = document.documentElement.scrollHeight - inner
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 draw();
 
-/* ---------- Reserva por WhatsApp ---------- */
-const rf = $('#reserva');
-if (rf) {
-  const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-  rf.fecha.min = d.toISOString().slice(0, 10);
-  rf.addEventListener('submit', e => {
-    e.preventDefault();
-    const v = Object.fromEntries(new FormData(rf));
-    const f = new Date(v.fecha + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
-    const msg = `¡Hola Alma Burger! Quisiera reservar mesa:\n• Nombre: ${v.nombre}\n• Personas: ${v.personas}\n• Día: ${f}\n• Hora: ${v.hora}${v.nota ? '\n• Nota: ' + v.nota : ''}\n\n¿Me confirmáis? ¡Gracias!`;
-    window.open('https://wa.me/34747486092?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-  });
-}
-
 /* ---------- Lightbox ---------- */
 const mis = $$('.mi');
 if (mis.length) {
