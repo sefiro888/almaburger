@@ -180,9 +180,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="{tcolor}">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
-<meta property="og:image" content="{og}">
+__OGBLOCK__
 <link rel="icon" type="image/png" href="img/favicon.png">
 <script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{{var h=+new Intl.DateTimeFormat("es-ES",{{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}}).format(new Date()),q=location.search.match(/[?&]hora=(\\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}}catch(e){{}}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -788,6 +786,35 @@ COLORS = {
 }
 
 
+SITE = (CFG.get('site_url') or '').strip()
+if SITE and not SITE.endswith('/'):
+    SITE += '/'
+
+
+def og_block(title, desc, url, img):
+    """Vista previa al compartir (WhatsApp, Instagram, Facebook, Telegram...)."""
+    tags = [
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="ALMA Burger &amp; Breakfast">',
+        '<meta property="og:locale" content="es_ES">',
+        f'<meta property="og:title" content="{title}">',
+        f'<meta property="og:description" content="{desc}">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:image" content="{img}">',
+        f'<meta property="og:image:secure_url" content="{img}">',
+        '<meta property="og:image:type" content="image/jpeg">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="ALMA Burger &amp; Breakfast: hamburguesas y desayunos en Ordizia">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{title}">',
+        f'<meta name="twitter:description" content="{desc}">',
+        f'<meta name="twitter:image" content="{img}">',
+        f'<link rel="canonical" href="{url}">',
+    ]
+    return chr(10).join(tags)
+
+
 def redirect(dest):
     return (f'<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>ALMA Burger &amp; Breakfast</title>'
             f'<script>var c="negro";try{{c=localStorage.getItem("alma-color")||"negro"}}catch(e){{}}location.replace("{dest}".replace("{{c}}",c))</script>'
@@ -826,13 +853,15 @@ def main():
         built['404.html'] = shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor'])
         for name, html in built.items():
             html = html.replace('<html lang="es"', f'<html lang="es" data-theme="{theme}"', 1)
+            m = _re.search(r'<title>(.*?)</title>', html); dm = _re.search(r'<meta name="description" content="([^"]*)">', html)
+            html = html.replace('__OGBLOCK__', og_block(m.group(1), dm.group(1), SITE + theme + '/' + ('' if name == 'index.html' else name), SITE + theme + '/img/share.jpg'), 1)
             html = html.replace('__SWAP__', f'../{t["other"]}/{name}').replace('__SWAPNAME__', t['swap'])
             html = html.replace('<head>', '<head>\n<script>try{localStorage.setItem("alma-color","' + theme + '")}catch(e){}</script>', 1)
             (out / name).write_text(html, encoding='utf-8')
         IMGOPT.build(out, [out / n for n in built], [out / 'app.js'])
         _small_pngs(out)
     # raíz: intro con selector de color + redirecciones de los enlaces antiguos
-    (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8'), encoding='utf-8')
+    (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8').replace('__SITE__', SITE), encoding='utf-8')
     for name in pages:
         if name != 'index.html':
             (ROOT / name).write_text(redirect('{c}/' + name), encoding='utf-8')

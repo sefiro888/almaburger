@@ -1,4 +1,6 @@
 {
+  "site_url": "https://sefiro888.github.io/almaburger/",
+  "_ayuda_site": "Dirección pública de la web (con / al final). Se usa para la vista previa al compartir. Cuando esté en su dominio: https://almaburgers.com/",
   "agora_url": "https://smartmenu.agorapos.com/?id=a5b87j3v&workplaceId=dae15wtg",
   "_ayuda": "Pega aquí el enlace de pedidos de Ágora (Delivery / Take Away) entre las comillas y ejecuta: python _src/build.py. Si está vacío, la web usa WhatsApp y Just Eat como hasta ahora.",
   "legal": {
