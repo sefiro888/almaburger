@@ -30,6 +30,11 @@ def occluder(ink, scale=1200):
     return im, pad / k                                            # imagen y margen en unidades del logo original
 
 
+def save_q(im, path):
+    """PNG con paleta (el logo tiene muy pocos colores): pesa mucho menos y se ve igual."""
+    im.quantize(colors=48, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.NONE).save(path, optimize=True)
+
+
 def tint(path, ink):
     """Pasa un dibujo en negro/crema a tinta/crema conservando la transparencia."""
     im = Image.open(path).convert('RGBA')
@@ -45,10 +50,10 @@ for theme, ink in INKS.items():
     d = OUT / theme / 'img'
     d.mkdir(parents=True, exist_ok=True)
     occ, pad = occluder(ink)
-    occ.save(d / 'logo-stage.png', optimize=True)
+    save_q(occ, d / 'logo-stage.png')
     lg = Image.new('RGBA', alpha.size, ink + (0,)); lg.putalpha(alpha)
-    small = lg.copy(); small.thumbnail((560, 560), Image.LANCZOS); small.save(d / 'logo.png', optimize=True)
-    big = lg.copy(); big.thumbnail((1100, 1100), Image.LANCZOS); big.save(d / 'logo-big.png', optimize=True)
+    small = lg.copy(); small.thumbnail((560, 560), Image.LANCZOS); save_q(small, d / 'logo.png')
+    big = lg.copy(); big.thumbnail((1100, 1100), Image.LANCZOS); save_q(big, d / 'logo-big.png')
     if theme == 'azul':
         for f in ('mascot.png', 'mascot-body.png', 'mascot-legL.png', 'mascot-legR.png', 'favicon.png'):
             tint(IMG / f, ink).save(d / f, optimize=True)
@@ -58,4 +63,4 @@ for theme, ink in INKS.items():
         tint(IMG / 'hotdog.png', ink).save(d / 'hotdog.png', optimize=True)
     print(theme, occ.size, round(pad, 1))
 cr = Image.new('RGBA', alpha.size, CREAM + (0,)); cr.putalpha(alpha); cr.thumbnail((900, 900), Image.LANCZOS)
-cr.save(IMG / 'logo-cream.png', optimize=True)
+save_q(cr, IMG / 'logo-cream.png')

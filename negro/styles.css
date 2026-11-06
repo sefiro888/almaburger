@@ -316,7 +316,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 /* ====== pedido v2 ====== */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .lnk{background:none;border:0;padding:0;text-decoration:underline;font-weight:700;font-size:.85rem;cursor:pointer;color:inherit}
-body{animation:pagein .5s both}
+/* sin fundido general de la página: Chrome no mide bien lo que se pinta invisible */
 @keyframes pagein{from{opacity:0}}
 .progress{position:fixed;left:0;top:0;height:4px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;z-index:150}
 .pedir{position:relative}

@@ -185,6 +185,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 <link rel="icon" type="image/png" href="img/favicon.png">
 <script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{{var h=+new Intl.DateTimeFormat("es-ES",{{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}}).format(new Date()),q=location.search.match(/[?&]hora=(\\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}}catch(e){{}}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
+{'<link rel="preload" href="img/logo-stage.png" as="image" fetchpriority="high">' if active == 'home' else ''}
 <link rel="stylesheet" href="styles.css?v={VER}">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"}},"geo":{{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607}},"sameAs":["https://www.instagram.com/almaburgers/"]}}</script>
 </head>
