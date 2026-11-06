@@ -58,9 +58,9 @@ FOOT = f'''<footer class="foot">
   {walker(96, 30)}
   <img class="foot__word" src="img/logo-cream.png" alt="ALMA Burger &amp; Breakfast">
   <div class="foot__grid">
-    <div><h4>No es solo comida. Es ALMA.</h4><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
-    <div><h4>Explora</h4><ul><li><a href="index.html">Inicio</a></li>{''.join(f'<li><a href="{h}">{t}</a></li>' for h, t, k in PAGES)}</ul></div>
-    <div><h4>Contacto</h4><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
+    <div><h3>No es solo comida. Es ALMA.</h3><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
+    <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li>{''.join(f'<li><a href="{h}">{t}</a></li>' for h, t, k in PAGES)}</ul></div>
+    <div><h3>Contacto</h3><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
       <li><a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a></li>
       <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li>
       <li><a href="{JE}" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
@@ -277,18 +277,18 @@ def home():
     marq = ''.join(f'<span>{t}</span><i>✶</i>' for t in ['Smash burgers', 'Desayunos', 'Picoteo', 'Tostadas', 'Hot dogs', 'Pancakes', 'Tartas de queso', 'Matcha', 'Café de especialidad'])
     return f'''<section class="hero">
   <div class="hero__copy">
-    <p class="eyebrow reveal"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
+    <p class="eyebrow"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
     <h1 class="sr-only">Alma Burger</h1>
-    <div class="stagewrap reveal">{STAGE}<div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
-    <p class="hero__lead reveal m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
-    <p class="hero__lead reveal m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
-    <div class="hero__cta reveal">
+    <div class="stagewrap">{STAGE}<div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
+    <p class="hero__lead m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
+    <p class="hero__lead m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
+    <div class="hero__cta">
       <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
     </div>
-    <p class="hero__alt reveal"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
-    <ul class="hero__facts reveal"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
+    <p class="hero__alt"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
+    <ul class="hero__facts"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
     <div class="blob"></div>

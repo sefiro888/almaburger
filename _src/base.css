@@ -267,7 +267,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 .foot .walker__x{bottom:calc(var(--bw) - 1px)}
 .foot__word{width:min(520px,80%);margin:0 0 36px}
 .foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;max-width:1240px;margin:0 auto 34px}
-.foot h4{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--dark-pop);margin-bottom:10px}
+.foot h3{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--dark-pop);margin-bottom:10px}
 .foot ul{list-style:none;padding:0;display:grid;gap:6px}
 .foot a{text-decoration:none}.foot a:hover{text-decoration:underline}
 .foot__row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.88rem;max-width:1240px;margin:0 auto;border-top:1px solid rgba(255,255,255,.3);padding-top:20px;opacity:.9}

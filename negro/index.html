@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" href="img/favicon.png">
 <script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{var h=+new Intl.DateTimeFormat("es-ES",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}).format(new Date()),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=2da32200">
+<link rel="stylesheet" href="styles.css?v=13f85e79">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -32,9 +32,9 @@
 <main id="contenido">
 <section class="hero">
   <div class="hero__copy">
-    <p class="eyebrow reveal"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
+    <p class="eyebrow"><span class="dot"></span><span id="openStatus">Hamburguesería · Ordizia</span></p>
     <h1 class="sr-only">Alma Burger</h1>
-    <div class="stagewrap reveal"><svg id="stage" class="stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="190 30 640 870" role="img" aria-label="Alma Burger. Logo de ALMA Burger &amp; Breakfast. Una hamburguesa con gafas asoma por detrás del nombre y saluda"><defs>
+    <div class="stagewrap"><svg id="stage" class="stage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="190 30 640 870" role="img" aria-label="Alma Burger. Logo de ALMA Burger &amp; Breakfast. Una hamburguesa con gafas asoma por detrás del nombre y saluda"><defs>
 <image id="source" width="1000" height="1000" href="img/logo-anim.png"/>
 <clipPath id="logo"><rect width="1000" height="492"/></clipPath>
 <clipPath id="glove-l"><rect x="357" y="497" width="58" height="72"/></clipPath>
@@ -62,15 +62,15 @@
 <use xlink:href="#source" clip-path="url(#originalMouth)"/>
 <g id="originalTongueMotion"><use xlink:href="#source" clip-path="url(#originalTongue)"/></g>
 </g></g><image class="stage__logo" href="img/logo-stage.png" x="198" y="48" width="624" height="460"/></svg><div class="stage__dots" id="stageDots" role="group" aria-label="Elegir la entrada de la mascota"></div></div>
-    <p class="hero__lead reveal m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
-    <p class="hero__lead reveal m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
-    <div class="hero__cta reveal">
+    <p class="hero__lead m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
+    <p class="hero__lead m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
+    <div class="hero__cta">
       <a class="btn btn--je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
       <a class="btn" href="visitanos.html#reservar">Reservar mesa</a>
     </div>
-    <p class="hero__alt reveal"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
-    <ul class="hero__facts reveal"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
+    <p class="hero__alt"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="visitanos.html#reservar">Reservar mesa</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
+    <ul class="hero__facts"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
     <div class="blob"></div>
@@ -238,9 +238,9 @@
   <div class="walker" aria-hidden="true" style="--w:96px;--t:30s"><div class="walker__x"><div class="walker__flip"><div class="rig " style="--w:96px" aria-hidden="true"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></div></div></div>
   <img class="foot__word" src="img/logo-cream.png" alt="ALMA Burger &amp; Breakfast">
   <div class="foot__grid">
-    <div><h4>No es solo comida. Es ALMA.</h4><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
-    <div><h4>Explora</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="el-alma.html">El alma</a></li><li><a href="carta.html">Hamburguesas</a></li><li><a href="desayunos.html">Desayunos</a></li><li><a href="galeria.html">Galería</a></li><li><a href="visitanos.html">Visítanos</a></li></ul></div>
-    <div><h4>Contacto</h4><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
+    <div><h3>No es solo comida. Es ALMA.</h3><p>Hamburguesas, desayunos, cafés especiales y postres en el corazón de Ordizia. Todo lo que somos, en cada bocado.</p></div>
+    <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li><li><a href="el-alma.html">El alma</a></li><li><a href="carta.html">Hamburguesas</a></li><li><a href="desayunos.html">Desayunos</a></li><li><a href="galeria.html">Galería</a></li><li><a href="visitanos.html">Visítanos</a></li></ul></div>
+    <div><h3>Contacto</h3><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
       <li><a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a></li>
       <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li>
       <li><a href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
@@ -289,6 +289,6 @@
   <a class="bnav__jeat" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#reservar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Reservar</span></a>
 </nav>
-<script src="app.js?v=2da32200"></script>
+<script src="app.js?v=13f85e79"></script>
 </body>
 </html>

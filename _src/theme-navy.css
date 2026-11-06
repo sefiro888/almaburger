@@ -15,7 +15,7 @@
 .item h3,.pillar__n{color:var(--ink)}
 .chip[aria-pressed=true]{background:var(--cream);color:var(--ink)}
 .tab[aria-selected=true]{box-shadow:0 4px 0 color-mix(in srgb,#fbecd8 45%,#032164)}
-.menu__group,.foot h4{color:var(--cream)}
+.menu__group,.foot h3{color:var(--cream)}
 .hero__facts b,.hero__lead em,.sec__title em,.phero h1 em,.statement span,.dots b,.kicker{color:var(--ink)}
 .sec--dark .sec__title em,.phero--dark h1 em,.sec--dark .kicker,.sec--ink .kicker,.kicker--dark{color:var(--cream)}
 .phero h1 em,.sec__title em,.statement span,.hero__lead em{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.1em;text-decoration-skip-ink:none}
