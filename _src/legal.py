@@ -63,12 +63,12 @@ def privacidad(L):
 <tbody>
 <tr><td>Reservas y consultas por WhatsApp o teléfono</td><td>Nombre, teléfono, día, hora, número de personas y lo que nos escribas</td><td>Gestionar tu reserva o responderte</td><td>Tu petición y la reserva (art. 6.1.b RGPD)</td><td>Hasta atender tu reserva o consulta; como máximo 12 meses</td></tr>
 <tr><td>Pedidos online (plataforma Ágora)</td><td>Nombre, teléfono, dirección de entrega, pedido y datos del pago</td><td>Preparar y entregar tu pedido y cobrarlo</td><td>El contrato de compra (art. 6.1.b) y obligaciones legales (art. 6.1.c)</td><td>Lo que exija la ley fiscal y mercantil (hasta 6 años para las facturas)</td></tr>
-<tr><td>Pedido por WhatsApp desde la web</td><td>Nombre, teléfono, dirección, alergias y el pedido</td><td>Preparar tu pedido y confirmarte el total</td><td>Tu petición (art. 6.1.b)</td><td>Hasta entregar el pedido, salvo obligaciones legales</td></tr>
+{'' if L.get('_agora') else '''<tr><td>Pedido por WhatsApp desde la web</td><td>Nombre, teléfono, dirección, alergias y el pedido</td><td>Preparar tu pedido y confirmarte el total</td><td>Tu petición (art. 6.1.b)</td><td>Hasta entregar el pedido, salvo obligaciones legales</td></tr>'''}
 <tr><td>Si nos mandas tu candidatura</td><td>Los datos de tu mensaje o CV</td><td>Valorarte para un puesto</td><td>Tu consentimiento (art. 6.1.a)</td><td>Como máximo 12 meses</td></tr>
 <tr><td>Al visitar la web</td><td>Dirección IP y datos técnicos del navegador</td><td>Servir la web y protegerla</td><td>Interés legítimo en la seguridad (art. 6.1.f)</td><td>Lo que guarde el proveedor de alojamiento, normalmente pocos días</td></tr>
 </tbody></table></div>
 <p>No usamos tus datos para enviarte publicidad sin tu permiso, no hacemos perfiles y no vendemos tus datos a nadie.</p>
-<p>Los datos de un pedido por WhatsApp hecho desde la web se guardan antes en tu propio navegador (para no tener que escribirlos otra vez). Puedes borrarlos cuando quieras desde la configuración del navegador. Lo explicamos en la <a href="cookies.html">política de cookies</a>.</p>
+{'' if L.get('_agora') else '''<p>Los datos de un pedido por WhatsApp hecho desde la web se guardan antes en tu propio navegador (para no tener que escribirlos otra vez). Puedes borrarlos cuando quieras desde la configuración del navegador. Lo explicamos en la <a href="cookies.html">política de cookies</a>.</p>'''}
 
 <h2>3. Quién más ve tus datos</h2>
 <ul>
@@ -95,7 +95,7 @@ def privacidad(L):
 def cookies(L):
     return _page(f'''
 <p class="legal__date">Última actualización: {_v(L, 'fecha', 'fecha')}</p>
-<p class="legal__lead"><b>Cookies, las justas.</b> Esta web no usa cookies de publicidad ni de análisis, y no te sigue por internet. Solo guarda en tu navegador lo necesario para que funcione, y carga el mapa si tú lo aceptas.</p>
+<p class="legal__lead"><b>Cookies, las justas.</b> Esta web no usa cookies de publicidad ni de análisis, y no te sigue por internet. Solo guarda en tu navegador tus preferencias, y carga el mapa si tú lo aceptas.</p>
 
 <h2>1. Qué son</h2>
 <p>Las cookies y el almacenamiento local son pequeños datos que una web guarda en tu navegador para recordar cosas, como tu pedido o el color con el que prefieres ver la web.</p>
@@ -106,8 +106,8 @@ def cookies(L):
 <thead><tr><th>Nombre</th><th>Tipo</th><th>Para qué</th><th>Duración</th></tr></thead>
 <tbody>
 <tr><td><code>alma-color</code></td><td>Preferencia</td><td>Recordar si ves la web en azul o en negro</td><td>Hasta que lo borres</td></tr>
-<tr><td><code>alma-cart2</code></td><td>Técnica</td><td>Guardar los platos de tu pedido mientras navegas</td><td>Hasta que lo vacíes o lo borres</td></tr>
-<tr><td><code>alma-cust</code></td><td>Técnica</td><td>Recordar tu nombre, teléfono y dirección para tu próximo pedido por WhatsApp</td><td>Hasta que lo borres</td></tr>
+{'' if L.get('_agora') else '''<tr><td><code>alma-cart2</code></td><td>Técnica</td><td>Guardar los platos de tu pedido mientras navegas</td><td>Hasta que lo vacíes o lo borres</td></tr>
+<tr><td><code>alma-cust</code></td><td>Técnica</td><td>Recordar tu nombre, teléfono y dirección para tu próximo pedido por WhatsApp</td><td>Hasta que lo borres</td></tr>'''}
 <tr><td><code>alma-mascota</code></td><td>Preferencia</td><td>Recordar si has silenciado a la mascota</td><td>Hasta que lo borres</td></tr>
 <tr><td><code>alma-consent</code></td><td>Técnica</td><td>Recordar lo que elegiste en el aviso de cookies</td><td>12 meses; luego te lo volvemos a preguntar</td></tr>
 </tbody></table></div>

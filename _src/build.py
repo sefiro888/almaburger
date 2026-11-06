@@ -112,8 +112,8 @@ CFG = json.loads((SRC / 'config.json').read_text(encoding='utf-8')) if (SRC / 'c
 DEMO = os.environ.get('ALMA_DEMO') == '1'
 import importlib.util as _ilu
 _spec = _ilu.spec_from_file_location('legal', SRC / 'legal.py'); LEGAL = _ilu.module_from_spec(_spec); _spec.loader.exec_module(LEGAL)
-LCFG = CFG.get('legal', {})
 AGORA = 'simulacion.html' if DEMO else (CFG.get('agora_url') or '').strip()
+LCFG = dict(CFG.get('legal', {}), _agora=bool(AGORA))
 
 
 def agora(html):
@@ -138,6 +138,7 @@ def agora(html):
         ('Sí. Haz tu pedido en la web, elige «A domicilio» y se enviará por WhatsApp. El local te confirmará si llegamos a tu dirección y el coste del envío. También puedes pedir en Just Eat.',
          'Sí. Pulsa «Pedir online», elige «A domicilio» y pon tu dirección: te dirá si llegamos y el coste del envío. También puedes pedir en Just Eat.'),
     ]
+    rep.append(('Pide por WhatsApp.', 'Pide online.'))
     for a, b in rep:
         html = html.replace(a, b)
     # el acceso «Pedido» de la barra inferior pasa a enlazar con Ágora

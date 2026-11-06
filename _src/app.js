@@ -835,7 +835,7 @@ if (stageEl) {
     const ph = el.querySelector('.extph'); if (ph) ph.remove(); el.appendChild(f);
   });
   const bar = document.createElement('div'); bar.className = 'ckbar'; bar.setAttribute('role', 'dialog'); bar.setAttribute('aria-label', 'Aviso de cookies');
-  bar.innerHTML = '<div class="ckbar__in"><p><b>Cookies, las justas.</b> No usamos cookies de publicidad ni de análisis. Solo guardamos en tu navegador lo necesario (tu pedido, el color elegido). Si aceptas, también cargamos el mapa de OpenStreetMap. <a href="cookies.html">Más información sobre cookies</a></p>'
+  bar.innerHTML = '<div class="ckbar__in"><p><b>Cookies, las justas.</b> No usamos cookies de publicidad ni de análisis. Solo guardamos en tu navegador lo necesario (como el color elegido). Si aceptas, también cargamos el mapa de OpenStreetMap. <a href="cookies.html">Más información sobre cookies</a></p>'
     + '<div class="ckbar__b"><button type="button" class="btn btn--sm" data-ck="0">Rechazar</button><button type="button" class="btn btn--sm" data-ck="1">Aceptar</button></div></div>';
   document.body.appendChild(bar);
   const show = () => { bar.classList.add('on'); const b = bar.querySelector('[data-ck="1"]'); setTimeout(() => b && b.focus({ preventScroll: true }), 50); };
