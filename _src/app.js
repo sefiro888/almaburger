@@ -806,8 +806,10 @@ if (stageEl) {
     if (reduce) return;                       // sin animaciones: se abre directamente
     e.preventDefault(); busy = true; ov.classList.add('on');
     setTimeout(() => {
-      const w = window.open(url, '_blank', 'noopener');
-      if (!w) location.href = url;            // si el navegador bloquea la pestaña nueva, vamos en esta
+      // sin 'noopener' en window.open: con él devuelve siempre null y no se sabe si se abrió
+      const w = window.open(url, '_blank');
+      if (w) { try { w.opener = null; } catch (er) {} }   // misma protección que noopener
+      else location.href = url;               // solo si el navegador bloquea la pestaña nueva
       setTimeout(() => { ov.classList.remove('on'); busy = false; }, 400);
     }, 850);
   });
