@@ -34,7 +34,6 @@ def nav(active):
   <nav class="nav__links" aria-label="Principal">{links}</nav>
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
-    <a class="btn btn--je btn--sm nav__je" href="{JE}" target="_blank" rel="noopener"><span class="long">Pedir en Just Eat</span><span class="short">Just Eat</span> ↗</a>
     <button class="btn btn--solid btn--sm nav__wa" type="button" data-wa-order>Pedir por WhatsApp</button>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -45,7 +44,6 @@ CTA = f'''<section class="sec cta" style="padding-bottom:140px;border-top:var(--
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
     <h2 class="sec__title reveal" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>
     <div class="btnrow reveal" style="margin:0">
-      <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
       <a class="btn" href="carta.html">Hamburguesas</a>
       <a class="btn" href="desayunos.html">Desayunos</a>
@@ -61,8 +59,7 @@ FOOT = f'''<footer class="foot">
     <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li>{''.join(f'<li><a href="{h}">{t}</a></li>' for h, t, k in PAGES)}</ul></div>
     <div><h3>Contacto</h3><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
       <li><a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a></li>
-      <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li>
-      <li><a href="{JE}" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
+      <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li></ul></div>
   </div>
   <div class="foot__row"><p>© <span class="yr"></span> Alma Burger · Consulta nuestra carta de alérgenos al personal</p><p><a href="__SWAP__">__SWAPNAME__</a> · Demo de diseño web</p></div>
   <nav class="foot__legal" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button type="button" class="lnk" data-cookies>Configurar cookies</button></nav>
@@ -93,7 +90,7 @@ CART = f'''<aside class="cart" id="cart" aria-hidden="true" aria-label="Mi pedid
   <div class="cart__foot" id="cartFoot" hidden>
     <div class="cart__total"><span>Total</span><b id="cartTotal">0,00€</b></div>
     <button class="btn btn--solid btn--block" type="submit" form="checkout">Enviar pedido por WhatsApp</button>
-    <div class="cart__alt"><button class="lnk" id="cartClear" type="button">Vaciar pedido</button><span>·</span><a href="{JE}" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a></div>
+    <div class="cart__alt"><button class="lnk" id="cartClear" type="button">Vaciar pedido</button></div>
     <p><b>Pago por Bizum:</b> el local te confirmará el pedido y el total, y te indicará cómo hacer el Bizum. Se abrirá WhatsApp con tu pedido ya escrito.</p>
   </div>
 </aside>
@@ -127,8 +124,7 @@ def agora(html):
     html = _re.sub(r'<button class="lnk"[^>]*data-wa-order[^>]*>.*?</button>', f'<a class="lnk" href="{u}" target="_blank" rel="noopener" style="color:var(--dark-pop);font-size:1rem">Pedir online ↗</a>', html, flags=_re.S)
     rep = [
         ('<span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span>',
-         '<span class="path__tag">Recoger o domicilio</span><b>Pedir online</b><span>Elige tus platos, domicilio o recoger, y paga o confirma el pedido. Llega directo a la cocina.</span>'),
-        ('<span class="path__tag">A domicilio</span><b>En Just Eat</b>', '<span class="path__tag">Alternativa</span><b>En Just Eat</b>'),
+         '<span class="path__tag">Recoger o domicilio</span><b>Pedir online</b><span>Elige tus platos, para recoger o a domicilio. Llega directo a la cocina. De momento, el pago se hace en el local.</span>'),
         ('<h3>3 · Envía y paga por Bizum</h3><p>Se abre WhatsApp con el pedido escrito. Te confirmamos el total, haces el Bizum y lo preparamos.</p>',
          '<h3>3 · Confirma y listo</h3><p>Terminas el pedido en nuestra página de pedidos y llega directo a la cocina.</p>'),
         ('<h3>2 · Completa tus datos</h3><p>Nombre, teléfono, si lo recoges o lo llevamos a casa, y tus alergias. Puedes añadir notas a cada plato.</p>',
@@ -136,7 +132,7 @@ def agora(html):
         ('Pulsa <b>+</b> en la carta. Si un plato tiene opciones (salsa, relleno…), te las preguntamos.', 'Mira la carta y entra en «Pedir online». Allí eliges los platos con sus opciones.'),
         ('<span class="jebar__txt">Recoger o a domicilio · pago por Bizum</span>', '<span class="jebar__txt">Recoger o a domicilio</span>'),
         ('Sí. Haz tu pedido en la web, elige «A domicilio» y se enviará por WhatsApp. El local te confirmará si llegamos a tu dirección y el coste del envío. También puedes pedir en Just Eat.',
-         'Sí. Pulsa «Pedir online», elige «A domicilio» y pon tu dirección: te dirá si llegamos y el coste del envío. También puedes pedir en Just Eat.'),
+         'Sí, por la noche: miércoles, jueves y domingo de 19:30 a 23:00, y viernes y sábado de 19:30 a 23:30. Pulsa «Pedir online», elige «A domicilio» y pon tu dirección. Los desayunos no tienen reparto.'),
     ]
     rep.append(('Pide por WhatsApp.', 'Pide online.'))
     for a, b in rep:
@@ -182,7 +178,7 @@ def _shell(active, title, desc, body, tcolor, og='img/burger.jpg'):
 <meta name="theme-color" content="{tcolor}">
 __OGBLOCK__
 <link rel="icon" type="image/png" href="img/favicon.png">
-<script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{{var h=+new Intl.DateTimeFormat("es-ES",{{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}}).format(new Date()),q=location.search.match(/[?&]hora=(\\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}}catch(e){{}}</script>
+<script>/* momento del día en Ordizia: desayunos hasta las 12:00 (de lunes a viernes desde las 8, fin de semana desde las 9; para probar: ?hora=9) */try{{var d=new Date(new Date().toLocaleString("en-US",{{timeZone:"Europe/Madrid"}})),h=d.getHours(),w=d.getDay(),q=location.search.match(/[?&]hora=(\\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=(w%6?8:9)&&h<12?"desayuno":"burger"}}catch(e){{}}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 {'<link rel="preload" href="img/logo-stage.png" as="image" fetchpriority="high">' if active == 'home' else ''}
 <link rel="stylesheet" href="styles.css?v={VER}">
@@ -201,7 +197,6 @@ __OGBLOCK__
   <a href="carta.html"{CARTAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a8 6 0 0 1 16 0Z"/><path d="M3 15h18"/><path d="M5 19h14a2 2 0 0 0 2-2H3a2 2 0 0 0 2 2Z"/></svg><span>Burgers</span></a>
   <a href="desayunos.html"{DESAA}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
   <button type="button" id="bnavCart"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedido</span><i id="bnavN" hidden>0</i></button>
-  <a class="bnav__jeat" href="{JE}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
 <script src="app.js?v={VER}"></script>
@@ -283,16 +278,16 @@ def home():
     <p class="hero__lead m-bur">No es solo comida. Es <em>ALMA</em>. Hamburguesas de recetas propias y desayunos con personalidad: dos formas de disfrutar el mismo sabor.</p>
     <p class="hero__lead m-des">Buenos días. Es hora de <em>desayunar</em>: tostadas con toppings de verdad, pancakes, matcha y café de especialidad hasta las 12:00. Y a mediodía, hamburguesas con ALMA.</p>
     <div class="hero__cta">
-      <a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button>
+      <a class="btn" href="carta.html">Ver la carta</a>
     </div>
     <p class="hero__alt"><a href="carta.html">Ver hamburguesas</a> · <a href="desayunos.html">Ver desayunos</a> · <a href="tel:+34747486092">747 48 60 92</a></p>
-    <ul class="hero__facts"><li><b>16</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
+    <ul class="hero__facts"><li><b>17</b> hamburguesas</li><li><b>41</b> desayunos y bebidas</li><li><b>8:00</b> abrimos con café</li></ul>
   </div>
   <div class="hero__visual" id="heroVisual">
     <div class="blob"></div>
-    <figure class="hero__photo"><img src="img/burger.jpg" alt="La Puerquita, la burger del mes: doble smash con pulled pork" fetchpriority="high"><a class="hero__tag" href="carta.html#hamburguesas">Burger del mes · La Puerquita</a></figure>
-    <figure class="hero__photo hero__photo--b"><img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha"><a class="hero__tag hero__tag--b" href="desayunos.html">Desayunos · 8:00–12:00</a></figure>
+    <figure class="hero__photo hero__photo--white"><img src="img/dishes/la-reinita.jpg" alt="La Reinita, la burger del mes: smash con panceta y topping de reina pepiada" fetchpriority="high"><a class="hero__tag" href="carta.html#hamburguesas">Burger del mes · La Reinita</a></figure>
+    <figure class="hero__photo hero__photo--b"><img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha"><a class="hero__tag hero__tag--b" href="desayunos.html">Desayunos · hasta las 12:00</a></figure>
     <svg class="sticker" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs><circle cx="100" cy="100" r="96"/><text><textPath href="#circ" font-size="17" font-weight="800" textLength="440" lengthAdjust="spacing">HAMBURGUESAS · DESAYUNOS · ALMA · </textPath></text><text x="100" y="118" text-anchor="middle" font-size="62" font-family="Bagel Fat One">✶</text></svg>
   </div>
   <div class="heroline" aria-hidden="true">{walker(112, 22)}</div>
@@ -311,7 +306,7 @@ def home():
       </a>
       <a class="dcard dcard--d reveal" href="desayunos.html">
         <img src="img/tostada.jpg" alt="Tostada de salmón, aguacate y hummus de remolacha" loading="lazy">
-        <div class="dcard__in"><span class="dcard__tag">De 8:00 a 12:00</span><h3>Desayunos</h3>
+        <div class="dcard__in"><span class="dcard__tag">Hasta las 12:00</span><h3>Desayunos</h3>
           <p>Tostadas con toppings de verdad, pancakes, bowls, cafés especiales y los matchas del momento.</p><span class="dcard__go">Ver desayunos →</span></div>
       </a>
     </div>
@@ -351,7 +346,7 @@ def home():
 
 <section class="sec sec--band">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">Desayunos · de 8:00 a 12:00</p><h2 class="sec__title reveal">Desayunos <em>con pasión</em></h2></div>
+    <div class="sec__head"><div><p class="kicker reveal">Desayunos · hasta las 12:00</p><h2 class="sec__title reveal">Desayunos <em>con pasión</em></h2></div>
       <a class="btn btn--solid reveal" href="desayunos.html">Todos los desayunos →</a></div>
     <div class="rail" id="featuredB"></div>
   </div>
@@ -379,7 +374,6 @@ def home():
   <div class="wrap">
     <p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2>
     <div class="paths">
-      <div class="path path--main reveal"><span class="path__tag">A domicilio</span><b>En Just Eat</b><span>La forma habitual de recibir tu pedido en casa. Se abre nuestra página de Just Eat: eliges tus platos y pagas allí.</span><a class="btn btn--je" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a></div>
       <div class="path path--main path--wa reveal"><span class="path__tag">Recoger o domicilio</span><b>Por WhatsApp</b><span>Arma tu pedido aquí y envíalo en un toque. El local te confirma el total y cómo pagar por Bizum.</span><button class="btn btn--solid" type="button" data-wa-order>Empezar mi pedido</button></div>
       <div class="path reveal"><span class="path__tag">Dudas</span><b>Escríbenos</b><span>¿Alguna pregunta sobre la carta, los alérgenos o el horario? Llámanos o mándanos un mensaje.</span><a class="btn btn--line" href="visitanos.html#contacto">Contactar</a></div>
     </div>
@@ -394,14 +388,17 @@ def home():
 
 <section class="sec sec--band">
   <div class="wrap split">
-    <div class="split__pic reveal"><figure class="ph" style="inset:0 8% 8% 0;transform:rotate(-3deg)"><img src="img/burger.jpg" alt="La Puerquita" loading="lazy"></figure>
-      <figure class="ph" style="width:38%;aspect-ratio:1;right:0;bottom:0;transform:rotate(5deg)"><img src="img/cabrona.jpg" alt="Hamburguesa con queso de cabra y patatas" loading="lazy"></figure></div>
+    <div class="split__pic reveal"><figure class="ph ph--white" style="inset:0 8% 8% 0;transform:rotate(-3deg)"><img src="img/dishes/la-reinita.jpg" alt="La Reinita, smash con panceta y topping de reina pepiada" loading="lazy"></figure>
+      <figure class="ph" style="width:38%;aspect-ratio:1;right:0;bottom:0;transform:rotate(5deg)"><img src="img/dishes/la-puerquita.jpg" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure></div>
     <div>
-      <p class="kicker reveal">Burger del mes</p>
-      <h2 class="sec__title reveal">La <em>Puerquita</em></h2>
-      <p class="reveal" style="font-size:1.15rem;max-width:30em">Doble carne smash con queso cheddar, jugoso pulled pork en su salsa, salsa Emmy en ambas tapas y ensalada de cebolla encurtida. Todo en pan brioche. Potente, cremosa y tremendamente puerquita.</p>
-      <div class="btnrow reveal" style="margin-top:26px"><span class="price" style="font-size:2rem;font-family:var(--display)">18,50€</span>
-        <button class="btn btn--solid" type="button" data-add="hamburguesas|La Puerquita">Añadir a mi pedido +</button></div>
+      <p class="kicker reveal">Burger del mes 👑</p>
+      <h2 class="sec__title reveal">La <em>Reinita</em></h2>
+      <p class="reveal" style="font-size:1.15rem;max-width:30em">Una reina con mucho carácter y sabor venezolano: carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y la auténtica protagonista, el topping de reina pepiada, con pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa irresistible.</p>
+      <p class="reveal" style="font-weight:800;margin-top:10px">La Reinita no viene a participar, viene a reinar.</p>
+      <div class="btnrow reveal" style="margin-top:26px">
+        <button class="btn btn--solid" type="button" data-add="hamburguesas|La Reinita">Añadir a mi pedido +</button>
+        <a class="btn" href="https://www.instagram.com/p/DfaM2nTjbD5/" target="_blank" rel="noopener">Verla en Instagram ↗</a></div>
+      <p class="fine reveal" style="margin-top:12px;opacity:.75">Y La Puerquita se queda en la carta como novedad.</p>
     </div>
   </div>
 </section>
@@ -434,7 +431,7 @@ def alma():
   <a href="#nombre">El nombre</a><a href="#origen">El origen</a><a href="#mas">Más que una hamburguesería</a><a href="#convencional">Salir de lo convencional</a><a href="#detras">Detrás de todo</a><a href="#filosofia">Cómo somos</a>
 </div></nav>
 
-<section class="chap sec sec--navy" id="nombre">
+<section class="chap sec" id="nombre">
   <div class="wrap">
     <div class="chap__head"><span class="chap__n reveal">01</span><div><p class="kicker reveal">El nombre</p>
       <h2 class="sec__title reveal">ALMA no es solo <em>un nombre</em></h2></div></div>
@@ -573,18 +570,18 @@ def alma():
   <div class="wrap">
     <p class="kicker reveal">Preguntas frecuentes</p><h2 class="sec__title reveal">Lo que <em>nos preguntáis</em></h2>
     <div class="faq" style="margin-top:30px">
-      <details class="reveal"><summary>¿Tenéis opciones vegetarianas?</summary><p>Sí: la Gordi Deluxe tiene opción vegetariana, además de ensalada con burrata, tortilla de patata y varias tostadas.</p></details>
+      <details class="reveal"><summary>¿Tenéis opciones vegetarianas?</summary><p>Sí: la Gordi Deluxe tiene opción vegetariana, además de ensalada con burrata, tortilla de patata y varias tostadas. Y cualquier burger se puede adaptar a vegetariana.</p></details>
       <details class="reveal"><summary>¿Y alérgenos?</summary><p>Tenemos carta de alérgenos: pídesela a nuestro equipo y te ayudamos a elegir con tranquilidad.</p></details>
       <details class="reveal"><summary>¿Hacéis entrega a domicilio?</summary><p>Sí. Haz tu pedido en la web, elige «A domicilio» y se enviará por WhatsApp. El local te confirmará si llegamos a tu dirección y el coste del envío. También puedes pedir en Just Eat.</p></details>
       <details class="reveal"><summary>¿Hay menú infantil?</summary><p>Sí: pechuga empanada, lomo o hamburguesa con queso, siempre con patatas y croquetas, por 9,00€.</p></details>
-      <details class="reveal"><summary>¿Hasta qué hora hay desayunos?</summary><p>Servimos desayunos desde que abrimos hasta las 12:00.</p></details>
+      <details class="reveal"><summary>¿Hasta qué hora hay desayunos?</summary><p>Hasta las 12:00: de lunes a viernes desde las 8:00, y sábado y domingo desde las 9:00. Los lunes y martes solo abrimos para desayunos.</p></details>
     </div>
   </div>
 </section>'''
 
 
 JEBANNER = f'''
-<div class="jebar"><div class="wrap jebar__in"><a class="btn btn--je btn--sm" href="{JE}" target="_blank" rel="noopener">Pedir en Just Eat ↗</a><span class="jebar__sep"></span><button class="btn btn--solid btn--sm" type="button" data-wa-order>Pedir por WhatsApp</button><span class="jebar__txt">Recoger o a domicilio · pago por Bizum</span></div></div>'''
+<div class="jebar"><div class="wrap jebar__in"><button class="btn btn--solid btn--sm" type="button" data-wa-order>Pedir por WhatsApp</button><span class="jebar__txt">Recoger o a domicilio · pago por Bizum</span></div></div>'''
 
 
 def carta():
@@ -607,7 +604,7 @@ def carta():
 
 
 def desayunos():
-    return phero('Desayunos', 'Desayunos <em>con pasión</em>', 'De 8:00 a 12:00. Tostadas, pancakes, bowls, cafés especiales y matcha, hechos con las mismas ganas que nuestras hamburguesas.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha', ill='desayunos', ill_alt='La mascota de ALMA sentada en un taburete con un café') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
+    return phero('Desayunos', 'Desayunos <em>con pasión</em>', 'Hasta las 12:00 (de lunes a viernes desde las 8:00; sábado y domingo desde las 9:00). Tostadas, pancakes, bowls, cafés especiales y matcha, hechos con las mismas ganas que nuestras hamburguesas.', 'tostada.jpg', 'Tostada de salmón, aguacate y hummus de remolacha', ill='desayunos', ill_alt='La mascota de ALMA sentada en un taburete con un café') + '''<div class="duo-switch"><div class="wrap"><a href="carta.html">Hamburguesas y carta</a><a href="desayunos.html" aria-current="page">Desayunos</a></div></div>''' + '''
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
@@ -633,20 +630,20 @@ def desayunos():
     <div class="tabs" id="tabs" role="tablist" aria-label="Secciones de desayuno"></div>
     <div class="chips" id="chips" aria-label="Filtros"></div>
     <div id="menu" class="menu" data-mode="desayunos" aria-live="polite"></div>
-    <p class="carta__note">Desayunos de 8:00 a 12:00. Consulta nuestra <b>carta de alérgenos</b> al personal.</p>
+    <p class="carta__note">Desayunos de lunes a viernes de 8:00 a 12:00, y sábado y domingo de 9:00 a 12:00. Consulta nuestra <b>carta de alérgenos</b> al personal.</p>
   </div>
 </section>'''
 
 
 def galeria():
-    ig = [('burger.jpg', 'La Puerquita', 'La Puerquita, burger del mes'), ('picoteo.jpg', 'Picoteo con alma', 'Aros de cebolla, patatas y croquetas'),
+    ig = [('burger.jpg', 'La Puerquita', 'La Puerquita, doble smash con pulled pork'), ('picoteo.jpg', 'Picoteo con alma', 'Aros de cebolla, patatas y croquetas'),
           ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas')]
     des = [('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'),
            ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
            ('desayuno-revuelto.jpg', 'Desayuno con pasión', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
     d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
-    bur = [('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
+    bur = [('la-reinita', 'La Reinita'), ('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
            ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
 
     stk = [('hola', '¡Hola!'), ('marchando', '¡Marchando!'), ('buenos-dias', 'Buenos días'), ('esta-pica', '¡Esta pica!'), ('nam', 'Ñam'), ('gracias', 'Gracias'), ('hambre', 'Tengo hambre'), ('a-comer', '¡A comer!')]
@@ -662,7 +659,7 @@ def galeria():
 </section>
 <section class="sec">
   <div class="wrap">
-    <div class="sec__head"><div><p class="kicker reveal">8:00 a 12:00</p><h2 class="sec__title reveal" style="margin:0">Desayunos <em>en fotos</em></h2></div>
+    <div class="sec__head"><div><p class="kicker reveal">Hasta las 12:00</p><h2 class="sec__title reveal" style="margin:0">Desayunos <em>en fotos</em></h2></div>
       <a class="btn btn--solid reveal" href="desayunos.html">Ver los desayunos →</a></div>
     <div class="photogrid">{d}</div>
   </div>
@@ -711,10 +708,13 @@ def visitanos():
         <a class="btn btn--line" href="tel:+34747486092">747 48 60 92</a>
         <a class="btn btn--line" href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a>
       </div>
-      <h3 class="h reveal">Horario <small id="todayLabel" style="font-weight:500;opacity:.7;font-size:.9rem;margin-left:8px"></small></h3>
+      <h3 class="h reveal" id="horario">Horario <small id="todayLabel" style="font-weight:500;opacity:.7;font-size:.9rem;margin-left:8px"></small></h3>
       <ul class="hours reveal" id="hours"></ul>
-      <p class="fine">Horario orientativo: confirma por teléfono o WhatsApp antes de venir.</p>
-      <div class="delivery reveal"><b>¿Pedir desde casa?</b><button class="lnk" type="button" data-wa-order style="color:var(--dark-pop);font-size:1rem">Por WhatsApp →</button><a href="{JE}" target="_blank" rel="noopener">Just Eat ↗</a></div>
+      <p class="fine">La hora de cierre puede variar según el día. Si vienes tarde, llámanos o escríbenos antes.</p>
+      <h3 class="h reveal" id="reparto">Reparto a domicilio</h3>
+      <ul class="hours reveal"><li><span>Miércoles, jueves y domingo</span><span>19:30 – 23:00</span></li><li><span>Viernes y sábado</span><span>19:30 – 23:30</span></li><li><span>Lunes y martes</span><span>Sin reparto</span></li></ul>
+      <p class="fine">Los desayunos no tienen reparto. De momento, los pedidos online se pagan en el local.</p>
+      <div class="delivery reveal"><b>¿Pedir desde casa?</b><button class="lnk" type="button" data-wa-order style="color:var(--dark-pop);font-size:1rem">Por WhatsApp →</button></div>
     </div>
     <div class="map reveal" data-ext-src="https://www.openstreetmap.org/export/embed.html?bbox=-2.1836%2C43.0515%2C-2.1736%2C43.0565&amp;layer=mapnik&amp;marker=43.054023%2C-2.178607" data-ext-title="Mapa de Alma Burger en Ordizia">
       <div class="extph"><img src="img/ill/visitanos.png" alt="" loading="lazy"><p><b>Kale Nagusia 42, Ordizia</b></p><p class="extph__s">El mapa lo sirve OpenStreetMap. Se carga solo si lo pides.</p>
@@ -729,7 +729,7 @@ def visitanos():
       <a class="contact__it" href="tel:+34747486092"><b>Llámanos</b><span>747 48 60 92</span></a>
       <a class="contact__it" href="https://wa.me/34747486092" target="_blank" rel="noopener"><b>Escríbenos por WhatsApp</b><span>Para consultas y dudas</span></a>
       <a class="contact__it" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener"><b>Instagram</b><span>@almaburgers</span></a>
-      <p class="fine" style="opacity:.75">Los pedidos se hacen en «Pedir online» o en Just Eat.</p>
+      <p class="fine" style="opacity:.75">Los pedidos se hacen en «Pedir online».</p>
     </div>
   </div>
 </section>'''
@@ -743,8 +743,8 @@ def nf():
 TITLES = {
     'index': ('Alma Burger · Hamburguesas y desayunos en Ordizia', 'Hamburguesas y desayunos en Ordizia. No es solo comida. Es ALMA: smash burgers, tostadas, pancakes, matcha, cafés especiales y postres.'),
     'alma': ('El alma · Alma Burger', 'No es solo comida. Es ALMA. La historia de Alma Burger: nuestras raíces, nuestra familia y por qué hacemos hamburguesas y desayunos con identidad propia.'),
-    'carta': ('Hamburguesas y carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide por WhatsApp.'),
-    'desayunos': ('Desayunos con pasión · Alma Burger', 'Desayunos con pasión de 8:00 a 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
+    'carta': ('Hamburguesas y carta · Alma Burger', 'Carta completa de Alma Burger: smash burgers, para compartir, bocadillos, hot dogs, postres y menú infantil. Pide online.'),
+    'desayunos': ('Desayunos con pasión · Alma Burger', 'Desayunos con pasión hasta las 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.'),
     'galeria': ('Galería · Alma Burger', 'Las mejores fotos de los platos de Alma Burger: hamburguesas, picoteo, desayunos y postres.'),
     'visitanos': ('Visítanos · Alma Burger', 'Kale Nagusia 42, Ordizia. Horario, mapa y contacto.'),
     'aviso': ('Aviso legal · Alma Burger', 'Aviso legal y condiciones de uso de la web de ALMA Burger & Breakfast.'),

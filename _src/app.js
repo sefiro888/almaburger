@@ -1,18 +1,19 @@
 (() => {
 'use strict';
 
-/* ---------- Datos (carta oficial de almaburgers.com + fotos de Just Eat / Instagram) ---------- */
+/* ---------- Datos (carta oficial de almaburgers.com + fotos de Instagram) ---------- */
 const P = (n, d, p, t = [], i = '') => ({ n, d, p, t, i });
 const MENU = {
   hamburguesas: { label: 'Hamburguesas', items: [
-    P('La Puerquita', 'Doble carne smash con queso cheddar, jugoso pulled pork en su salsa, salsa Emmy en ambas tapas y ensalada de cebolla encurtida. Todo en pan brioche.', 18.5, ['mes'], 'la-puerquita'),
+    P('La Reinita', 'Carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y topping de reina pepiada: pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa. Sabor venezolano.', null, ['mes'], 'la-reinita'),
+    P('La Puerquita', 'Doble carne smash con queso cheddar, jugoso pulled pork en su salsa, salsa Emmy en ambas tapas y ensalada de cebolla encurtida. Todo en pan brioche.', 18.5, ['nuevo'], 'la-puerquita'),
     P('La Básica', 'Carne smash con queso cheddar y cebolla caramelizada', 10, ['clásica'], 'la-basica'),
     P('Doble Dosis', 'Doble carne smash, cheddar, panceta, cebolla caramelizada y salsa BBQ', 15.5, [], 'doble-dosis'),
     P('La Golosa', 'Smash burger con panceta crujiente, cheddar fundido, cebolla caramelizada y un toque de crema de Lotus', 17.5, ['dulce'], 'la-golosa'),
     P('Dulce y Verde', 'Smash burger con queso edam, cebolla caramelizada, panceta crujiente y crema de pistacho', 17.5, ['dulce'], 'dulce-y-verde'),
     P('Gordi Deluxe', 'Smash burger con lechuga, tomate, panceta, huevo frito y nuestra salsa de pepinillos (opción vegetariana)', 14.5, ['veg'], 'gordi-deluxe'),
     P('Me Derrito', 'Smash burger con queso, panceta, salsa mayonesa, chispas de bacon y MUUUUCHA salsa cheddar', 15.5, [], 'me-derrito'),
-    P('La Matru', 'Smash burger con queso, panceta crujiente, mayonesa de trufa y patatas paja', 14, ['trufa'], 'la-matru'),
+    P('La Matru', 'Smash burger con queso, panceta crujiente, mayonesa de trufa y patatas paja', 14.5, ['trufa'], 'la-matru'),
     P('La Cabrona', 'Doble carne smash, queso de cabra, mermelada de bacon, cebolla caramelizada, mayonesa japonesa y salsa BBQ al whisky', 16.5, [], 'la-cabrona'),
     P('La Dori', 'Doble carne smash, queso cheddar, salsa de Doritos, mermelada de bacon, Doritos crocantes y salsa de queso cheddar', 17.5, [], 'la-dori'),
     P('La Triplona', 'Triple carne smash, queso cheddar, panceta, salsa cheddar, mermelada de bacon y mayonesa de bacon', 19.5, [], 'la-triplona'),
@@ -65,7 +66,7 @@ const MENU = {
     P('Lomo', 'Con patatas y croquetas', 9),
     P('Hamburguesa', 'Con queso, patatas y croquetas', 9)
   ]},
-  desayunos: { label: 'Desayunos', note: 'Desayunos de 8:00 a 12:00.', groups: [
+  desayunos: { label: 'Desayunos', note: 'Desayunos hasta las 12:00 (sábado y domingo desde las 9:00).', groups: [
     { g: 'Cafés y bebidas especiales', items: [
       P('Espresso', '', 1.7), P('Cortado', '', 1.8), P('Con leche', '', 1.9), P('Cola Cao', '', 2.2), P('Infusiones', '', 1.9),
       P('Ice Caramel Latte', '', 3.5), P('Ice Vainilla Latte', '', 3.5),
@@ -115,7 +116,7 @@ const RIG = '<div class="rig rig--still"><img src="img/mascot-legL.png" alt=""><
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const eur = n => n.toFixed(2).replace('.', ',') + '€';
+const eur = n => n == null ? 'Consultar' : n.toFixed(2).replace('.', ',') + '€';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
@@ -196,11 +197,11 @@ if (menuEl) {
   render();
 }
 
-/* ---------- Destacados (los que Just Eat marca como destacados) ---------- */
+/* ---------- Destacados ---------- */
 const feat = $('#featured');
 const featB = $('#featuredB');
 if (featB) featB.innerHTML = ['Salmón y mascarpone', 'Pancakes de Ferrero', 'Pancakes de Nutella', 'Matcha goloso'].map((n, k) => { const it = allItems.find(i => i.n === n && i.cat === 'desayunos'); return it ? card(it, k) : ''; }).join('');
-if (feat) feat.innerHTML = ['Doble Dosis', 'La Puerquita', 'La Dori', 'La Triplona', 'Gordi Deluxe', 'Patatas trufadas']
+if (feat) feat.innerHTML = ['La Reinita', 'La Puerquita', 'Doble Dosis', 'La Dori', 'La Triplona', 'Gordi Deluxe', 'Patatas trufadas']
   .map((n, k) => card(allItems.find(i => i.n === n), k)).join('');
 
 /* ---------- Contadores ---------- */
@@ -209,34 +210,40 @@ $$('[data-stat]').forEach(el => {
   el.textContent = k === 'burgers' ? MENU.hamburguesas.items.length : k === 'desa' ? MENU.desayunos.groups.flatMap(g => g.items).length : k === 'dishes' ? allItems.length : k;
 });
 
-/* ---------- Horario y estado (orientativo, según Toppings & Salads) ---------- */
+/* ---------- Horario (cocina, por tramos) y estado ---------- */
 const DAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-const HOURS = { 0: [9, 23.5], 1: [8, 23], 2: [8, 23], 3: [8, 23], 4: [8, 23], 5: [8, 24], 6: [9, 24] };
+// lunes y martes solo desayunos; el cierre de la noche es orientativo
+const HOURS = { 0: [[9, 15.5], [19.5, 23]], 1: [[8, 12]], 2: [[8, 12]], 3: [[8, 15.5], [19.5, 23]], 4: [[8, 15.5], [19.5, 23]], 5: [[8, 15.5], [19.5, 23.5]], 6: [[9, 15.5], [19.5, 23.5]] };
 const fmt = h => `${String(Math.floor(h) % 24).padStart(2, '0')}:${h % 1 ? '30' : '00'}`;
 const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
 const today = now.getDay(), hr = now.getHours() + now.getMinutes() / 60;
 const hoursEl = $('#hours');
 if (hoursEl) {
-  hoursEl.innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}</span><span>${fmt(HOURS[d][0])} – ${fmt(HOURS[d][1])}</span></li>`).join('');
+  hoursEl.innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}${d === 1 || d === 2 ? ' <small>(solo desayunos)</small>' : ''}</span><span>${HOURS[d].map(([o, c]) => `${fmt(o)} – ${fmt(c)}`).join(' · ')}</span></li>`).join('');
   $('#todayLabel').textContent = 'hoy, ' + DAYS[today].toLowerCase();
 }
+const curSlot = HOURS[today].find(([o, c]) => hr >= o && hr < c);
+const nextOpenTxt = (() => {
+  const later = HOURS[today].find(([o]) => hr < o);
+  if (later) return `hoy a las ${fmt(later[0])}`;
+  return `mañana a las ${fmt(HOURS[(today + 1) % 7][0][0])}`;
+})();
 const st = $('#openStatus');
 if (st) {
-  const [o, c] = HOURS[today], open = hr >= o && hr < c;
-  st.textContent = open ? `Abierto ahora · hasta las ${fmt(c)}` : `Cerrado ahora · abrimos ${hr < o ? 'hoy' : 'mañana'} a las ${fmt(hr < o ? o : HOURS[(today + 1) % 7][0])}`;
-  st.previousElementSibling.classList.toggle('on', open);
+  st.textContent = curSlot ? `Abierto ahora · hasta las ${fmt(curSlot[1])}` : `Cerrado ahora · abrimos ${nextOpenTxt}`;
+  st.previousElementSibling.classList.toggle('on', !!curSlot);
 }
 $$('.yr').forEach(e => e.textContent = new Date().getFullYear());
 
 /* ---------- Pedido por WhatsApp ---------- */
 const WA = '34747486092';
-const openNow = (() => { const [o, c] = HOURS[today]; return hr >= o && hr < c; })();
-const nextOpen = (() => { const [o] = HOURS[today]; return hr < o ? `hoy a las ${fmt(o)}` : `mañana a las ${fmt(HOURS[(today + 1) % 7][0])}`; })();
+const openNow = !!curSlot;
+const nextOpen = nextOpenTxt;
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem('alma-cart2') || '[]'); } catch (e) { cart = []; }
 cart = Array.isArray(cart) ? cart.filter(l => byId(l.id)) : [];
 const persist = () => { try { localStorage.setItem('alma-cart2', JSON.stringify(cart)); } catch (e) {} };
-const lineTotal = l => byId(l.id).p * l.qty;
+const lineTotal = l => (byId(l.id).p || 0) * l.qty;
 const total = () => cart.reduce((s, l) => s + lineTotal(l), 0);
 const count = () => cart.reduce((s, l) => s + l.qty, 0);
 const countOf = id => cart.filter(l => l.id === id).reduce((s, l) => s + l.qty, 0);
@@ -376,7 +383,7 @@ sm.innerHTML = `<div class="modal__box modal__box--wide" role="dialog" aria-moda
 document.body.appendChild(sm);
 const rnd = a => a[Math.floor(Math.random() * a.length)];
 let picks = [], spinning = false;
-const pools = [['Burger', MENU.hamburguesas.items], ['Para compartir', MENU.compartir.items], ['Postre', MENU.postres.items]];
+const pools = [['Burger', MENU.hamburguesas.items.filter(i => i.p != null)], ['Para compartir', MENU.compartir.items], ['Postre', MENU.postres.items]];
 function spin() {
   if (spinning) return; spinning = true;
   picks = pools.map(([l, p]) => { const it = rnd(p); return { it, opt: it.o ? rnd(it.o) : '' }; });
@@ -441,7 +448,6 @@ if (hv && matchMedia('(hover:hover)').matches && !matchMedia('(prefers-reduced-m
 }
 
 /* ---------- Ficha del plato (ventana con la foto completa) ---------- */
-const JE = 'https://www.just-eat.es/restaurants-alma-burger-ordizia/menu';
 const AI_SLUGS = new Set(['la-basica', 'la-golosa', 'la-diabla', 'tequenos', 'alitas', 'ensalada', 'panceta', 'hot-clasica', 'hot-gordita', 'hot-quesuda', 'hot-picantona', 'tarta-pistacha', 'tarta-ferrero', 'coulant', 'crepe']);
 const dm = document.createElement('div'); dm.className = 'modal dish'; dm.id = 'dishModal';
 dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labelledby="dishT">
@@ -454,7 +460,7 @@ dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labe
     <div class="choices" id="dishOpts"></div>
     <div class="dish__foot"><div class="dish__buy"><span class="price" id="dishPrice"></span><div class="stepper"><button type="button" data-q="-1" aria-label="Menos">−</button><span id="dishQ">1</span><button type="button" data-q="1" aria-label="Más">+</button></div></div>
     <button class="btn btn--solid btn--block" type="button" id="dishAdd"></button><a class="btn btn--solid btn--block dish__agora" id="dishAgora" target="_blank" rel="noopener">Pedir online ↗</a></div>
-    <p class="dish__fine" id="dishFine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local. <a href="${JE}" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
+    <p class="dish__fine" id="dishFine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
 document.body.appendChild(dm);
 const D = { list: [], k: 0, qty: 1, from: null };
 const dq = s => $(s, dm);
@@ -482,8 +488,8 @@ function renderDish(dir) {
   box.scrollTop = 0; dq('.dish__info').scrollTop = 0;
   [1, -1].forEach(d => { const o = byId(D.list[(D.k + d + D.list.length) % D.list.length]); if (o && o.i) new Image().src = `img/dishes/${o.i}.jpg`; });
 }
-if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = 'Pide online para recoger o a domicilio. <a href="' + JE + '" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a><br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'; }
-const dishBtn = (done) => { const it = byId(D.list[D.k]); dq('#dishAdd').textContent = done ? 'Añadido ✓' : `Añadir al pedido · ${eur(it.p * D.qty)}`; };
+if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = 'Pide online para recoger o a domicilio (reparto solo por la noche, de miércoles a domingo). De momento, el pago se hace en el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'; }
+const dishBtn = (done) => { const it = byId(D.list[D.k]); dq('#dishAdd').textContent = done ? 'Añadido ✓' : it.p == null ? 'Añadir al pedido' : `Añadir al pedido · ${eur(it.p * D.qty)}`; };
 function openDish(id, from) {
   const vis = $$('.item[data-open]').filter(e => e.offsetParent !== null).map(e => e.dataset.open);
   D.list = vis.includes(id) ? [...new Set(vis)] : [id]; D.k = D.list.indexOf(id); D.from = from || null;
@@ -602,7 +608,8 @@ if (stageEl) {
   const hasItems = !!document.querySelector('[data-open], #menu, #featured, #featuredB');
   if (!hasItems && !['index', 'visitanos'].includes(page)) return;
   const BY_NAME = {
-    'La Puerquita': ['Pulled pork y salsa Emmy. Potente.', '¡La burger del mes!'],
+    'La Reinita': ['¡La burger del mes! Viene a reinar.', 'Reina pepiada con sabor venezolano.'],
+    'La Puerquita': ['Pulled pork y salsa Emmy. Potente.', '¡Novedad en la carta!'],
     'La Triplona': ['Tres carnes. Ven con hambre.'],
     'La Dori': ['Con Doritos. Sí, con Doritos.'],
     'La Cabrona': ['Queso de cabra, ¿te atreves?'],
@@ -709,7 +716,8 @@ if (stageEl) {
     'La Diabla': [2, 'original', 2, 'pollo', 'Pícaro y con chispa. Un poco travieso.'],
     'Furia de Pollo': [3, 'queso', 0, 'pollo', 'Hambre con carácter y mucho crujiente.'],
     'La Picosita': [2, 'dulce', 1, 'pollo', 'Dulce y picante a la vez. No te decides y está bien.'],
-    'La Puerquita': [3, 'original', 0, 'carne', 'La estrella del mes. Potente y cremosa.']
+    'La Puerquita': [3, 'original', 0, 'carne', 'Nueva en la carta. Potente y cremosa.'],
+    'La Reinita': [2, 'original', 0, 'carne', 'Una reina con carácter. No vienes a participar, vienes a reinar.']
   };
   const burgers = () => MENU.hamburguesas.items.filter(i => PR[i.n]);
   let step = 0, ans = [];
@@ -737,7 +745,7 @@ if (stageEl) {
     const [, , , , line] = PR[top.n]; const agora = !!window.ALMA_AGORA;
     body.innerHTML = `<p class="qn">Tu resultado</p><div class="qres">
       ${top.i ? `<img src="img/dishes/s/${top.i}.jpg" alt="${esc(top.n)}">` : ''}
-      <div><h3 id="qT">Eres <em>${esc(top.n)}</em></h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${eur(top.p)}${veg ? ' · con versión vegetariana' : ''}</p>
+      <div><h3 id="qT">Eres <em>${esc(top.n)}</em></h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${top.p == null ? 'Burger del mes' : eur(top.p)}${veg ? ' · con versión vegetariana' : ''}</p>
       <div class="btnrow" style="margin:12px 0 0">${agora ? `<a class="btn btn--solid" href="${esc(window.ALMA_AGORA)}" target="_blank" rel="noopener">Pedir online ↗</a>` : `<button type="button" class="btn btn--solid" data-qadd="${esc(top.id)}">Añadir al pedido</button>`}<button type="button" class="btn" data-qview="${esc(top.id)}">Ver la ficha</button></div></div></div>
       ${others.length ? `<p class="qn" style="margin-top:18px">También te pegan</p><div class="qchips">${others.map(o => `<button type="button" class="chip" data-qview="${esc(o.id)}">${esc(o.n)}</button>`).join('')}</div>` : ''}
       <div class="btnrow" style="margin-top:16px"><a class="btn btn--sm" id="qShare" target="_blank" rel="noopener">Compartir mi resultado</a><button type="button" class="btn btn--sm btn--ghost" data-qrestart>Repetir el test</button></div>`;
@@ -777,7 +785,7 @@ if (stageEl) {
 })();
 })();
 
-/* ---------- De 8:00 a 12:00 la portada pone delante los desayunos ---------- */
+/* ---------- Hasta las 12:00 la portada pone delante los desayunos ---------- */
 (() => {
   if (document.documentElement.dataset.momento !== 'desayuno') return;
   const q = s => document.querySelector(s);

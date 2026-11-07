@@ -1385,3 +1385,12 @@ body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 .contact__it:hover{transform:translate(-2px,-3px)}
 .contact__it b{font-weight:900;font-size:1.35rem;text-transform:uppercase;line-height:1}
 .contact__it span{font-weight:600;opacity:.8}
+
+/* ====== sin Just Eat: barra inferior de 4 y «Pedir online» destacado ====== */
+@media (max-width:980px){
+  .bnav{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:1fr}
+  .bnav #bnavCart{background:var(--je);color:var(--je-fg);box-shadow:inset 0 0 0 2.5px var(--ink)}
+}
+/* fotos con fondo blanco (La Reinita) */
+.hero__photo--white,.ph--white{background:#fff}
+.hours small{font-size:.8em;opacity:.7;font-weight:500}

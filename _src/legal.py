@@ -28,7 +28,7 @@ def aviso(L):
 
 <h2>3. Carta, precios y pedidos</h2>
 <p>Los precios de la carta incluyen el IVA y pueden cambiar sin previo aviso; el precio que vale es el que se confirma en el momento del pedido. Las fotos de los platos son orientativas.</p>
-<p>Los pedidos online se hacen en la plataforma de pedidos del restaurante (Ágora) o en Just Eat. Cada plataforma tiene sus propias condiciones, que aceptas al usarla.</p>
+<p>Los pedidos online se hacen en la plataforma de pedidos del restaurante (Ágora), que tiene sus propias condiciones, que aceptas al usarla. De momento, el pago se hace en el local.</p>
 <p><b>Alérgenos:</b> tienes a tu disposición la información sobre alérgenos de cada plato (Reglamento UE 1169/2011). Pídela al personal antes de pedir, o indícalo en tu pedido.</p>
 
 <h2>4. Uso de la web</h2>
@@ -38,7 +38,7 @@ def aviso(L):
 <p>Los textos, fotografías, vídeos, el logotipo de ALMA, la mascota, las ilustraciones y el diseño de esta web pertenecen a su titular o se usan con permiso. No puedes copiarlos, distribuirlos ni modificarlos con fines comerciales sin autorización. Los stickers de la mascota se ofrecen para uso personal (por ejemplo, en WhatsApp).</p>
 
 <h2>6. Enlaces a otras webs</h2>
-<p>La web enlaza con servicios de terceros (Ágora, Just Eat, WhatsApp, Instagram, TikTok, OpenStreetMap y Google Maps). No controlamos esos servicios ni respondemos de sus contenidos o de cómo tratan tus datos; consulta sus condiciones y políticas.</p>
+<p>La web enlaza con servicios de terceros (Ágora, WhatsApp, Instagram, TikTok, OpenStreetMap y Google Maps). No controlamos esos servicios ni respondemos de sus contenidos o de cómo tratan tus datos; consulta sus condiciones y políticas.</p>
 
 <h2>7. Responsabilidad</h2>
 <p>Cuidamos que la información sea correcta y esté al día, pero puede haber errores o cambios de última hora (horarios, platos fuera de carta, precios). Ante cualquier duda, llámanos o escríbenos antes de venir.</p>
@@ -73,7 +73,6 @@ def privacidad(L):
 <h2>3. Quién más ve tus datos</h2>
 <ul>
 <li><b>Plataforma de pedidos Ágora:</b> trata los datos de los pedidos online por cuenta del restaurante, como encargado del tratamiento.</li>
-<li><b>Just Eat:</b> si pides allí, Just Eat es responsable de tus datos según su propia política de privacidad.</li>
 <li><b>WhatsApp (Meta):</b> si nos escribes por WhatsApp, el servicio lo presta WhatsApp Ireland Ltd. con su propia política de privacidad.</li>
 <li><b>Instagram y TikTok:</b> si visitas o interactúas con nuestros perfiles, se aplican las políticas de esas redes.</li>
 <li><b>Alojamiento de la web:</b> <mark class="ph">[proveedor de alojamiento definitivo]</mark>. Si el proveedor está fuera de la UE, la transferencia se ampara en el Marco de Privacidad de Datos UE-EE. UU. o en cláusulas contractuales tipo.</li>
@@ -119,7 +118,7 @@ def cookies(L):
 <tr><td>Mapa de OpenStreetMap (OpenStreetMap Foundation)</td><td>Mostrar dónde estamos en la página Visítanos</td><td>Solo si aceptas en el aviso, o si pulsas «Cargar el mapa»</td></tr>
 </tbody></table></div>
 <p>La tipografía, las fotos y los vídeos se sirven desde esta misma web: no conectamos con Google Fonts ni con Instagram mientras navegas.</p>
-<p>Los botones de Ágora, Just Eat, WhatsApp, Instagram, TikTok y Google Maps son enlaces normales: no cargan nada hasta que los pulsas. Al pulsarlos sales de esta web y se aplican las cookies de ese servicio.</p>
+<p>Los botones de Ágora, WhatsApp, Instagram, TikTok y Google Maps son enlaces normales: no cargan nada hasta que los pulsas. Al pulsarlos sales de esta web y se aplican las cookies de ese servicio.</p>
 
 <h2>4. Cambiar de opinión</h2>
 <p>Puedes cambiar lo que elegiste cuando quieras:</p>

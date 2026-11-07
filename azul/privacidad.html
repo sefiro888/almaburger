@@ -26,10 +26,10 @@
 <meta name="twitter:image" content="https://sefiro888.github.io/almaburger/azul/img/share.jpg">
 <link rel="canonical" href="https://sefiro888.github.io/almaburger/azul/privacidad.html">
 <link rel="icon" type="image/png" href="img/favicon.png">
-<script>/* momento del día en Ordizia: de 8:00 a 12:00 manda el desayuno (para probar: ?hora=9) */try{var h=+new Intl.DateTimeFormat("es-ES",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/Madrid"}).format(new Date()),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=8&&h<12?"desayuno":"burger"}catch(e){}</script>
+<script>/* momento del día en Ordizia: desayunos hasta las 12:00 (de lunes a viernes desde las 8, fin de semana desde las 9; para probar: ?hora=9) */try{var d=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Madrid"})),h=d.getHours(),w=d.getDay(),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=(w%6?8:9)&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="styles.css?v=a2714b1b">
+<link rel="stylesheet" href="styles.css?v=5d9b567c">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -39,7 +39,6 @@
   <nav class="nav__links" aria-label="Principal"><a href="el-alma.html">El alma</a><a href="carta.html">Hamburguesas</a><a href="desayunos.html">Desayunos</a><a href="galeria.html">Galería</a><a href="visitanos.html">Visítanos</a></nav>
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
-    <a class="btn btn--je btn--sm nav__je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><span class="long">Pedir en Just Eat</span><span class="short">Just Eat</span> ↗</a>
     <a class="btn btn--solid btn--sm nav__wa" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -78,7 +77,6 @@
 <h2>3. Quién más ve tus datos</h2>
 <ul>
 <li><b>Plataforma de pedidos Ágora:</b> trata los datos de los pedidos online por cuenta del restaurante, como encargado del tratamiento.</li>
-<li><b>Just Eat:</b> si pides allí, Just Eat es responsable de tus datos según su propia política de privacidad.</li>
 <li><b>WhatsApp (Meta):</b> si nos escribes por WhatsApp, el servicio lo presta WhatsApp Ireland Ltd. con su propia política de privacidad.</li>
 <li><b>Instagram y TikTok:</b> si visitas o interactúas con nuestros perfiles, se aplican las políticas de esas redes.</li>
 <li><b>Alojamiento de la web:</b> <mark class="ph">[proveedor de alojamiento definitivo]</mark>. Si el proveedor está fuera de la UE, la transferencia se ampara en el Marco de Privacidad de Datos UE-EE. UU. o en cláusulas contractuales tipo.</li>
@@ -100,7 +98,6 @@
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
     <h2 class="sec__title reveal" data-nonum="1" style="margin:0">¿Desayuno o <em>hamburguesa</em>?</h2>
     <div class="btnrow reveal" style="margin:0">
-      <a class="btn btn--je" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Pedir en Just Eat ↗</a>
       <a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
       <a class="btn" href="carta.html">Hamburguesas</a>
       <a class="btn" href="desayunos.html">Desayunos</a>
@@ -115,8 +112,7 @@
     <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li><li><a href="el-alma.html">El alma</a></li><li><a href="carta.html">Hamburguesas</a></li><li><a href="desayunos.html">Desayunos</a></li><li><a href="galeria.html">Galería</a></li><li><a href="visitanos.html">Visítanos</a></li></ul></div>
     <div><h3>Contacto</h3><ul><li>Kale Nagusia 42, 20240 Ordizia</li><li><a href="tel:+34747486092">747 48 60 92</a></li>
       <li><a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a></li>
-      <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li>
-      <li><a href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">Just Eat</a></li></ul></div>
+      <li><a href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram @almaburgers</a></li></ul></div>
   </div>
   <div class="foot__row"><p>© <span class="yr"></span> Alma Burger · Consulta nuestra carta de alérgenos al personal</p><p><a href="../negro/privacidad.html">Ver la web en negro</a> · Demo de diseño web</p></div>
   <nav class="foot__legal" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button type="button" class="lnk" data-cookies>Configurar cookies</button></nav>
@@ -146,7 +142,7 @@
   <div class="cart__foot" id="cartFoot" hidden>
     <div class="cart__total"><span>Total</span><b id="cartTotal">0,00€</b></div>
     <button class="btn btn--solid btn--block" type="submit" form="checkout">Enviar pedido por WhatsApp</button>
-    <div class="cart__alt"><button class="lnk" id="cartClear" type="button">Vaciar pedido</button><span>·</span><a href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener">¿Prefieres Just Eat? ↗</a></div>
+    <div class="cart__alt"><button class="lnk" id="cartClear" type="button">Vaciar pedido</button></div>
     <p><b>Pago por Bizum:</b> el local te confirmará el pedido y el total, y te indicará cómo hacer el Bizum. Se abrirá WhatsApp con tu pedido ya escrito.</p>
   </div>
 </aside>
@@ -159,9 +155,8 @@
   <a href="carta.html"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a8 6 0 0 1 16 0Z"/><path d="M3 15h18"/><path d="M5 19h14a2 2 0 0 0 2-2H3a2 2 0 0 0 2 2Z"/></svg><span>Burgers</span></a>
   <a href="desayunos.html"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg><span>Desayunos</span></a>
   <a id="bnavCart" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedir online</span><i id="bnavN" hidden>0</i></a>
-  <a class="bnav__jeat" href="https://www.just-eat.es/restaurants-alma-burger-ordizia/menu" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h10l2-5h4"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/></svg><span>Just Eat</span></a>
   <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
-<script src="app.js?v=a2714b1b"></script>
+<script src="app.js?v=5d9b567c"></script>
 </body>
 </html>
