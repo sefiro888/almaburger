@@ -72,6 +72,9 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
 @keyframes up{to{opacity:1;transform:none}}
 .choose h1{font-weight:900;font-size:clamp(1.6rem,5vw,2.4rem);text-transform:uppercase;letter-spacing:.01em;margin-bottom:12px}
 .opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.ilang{position:fixed;top:14px;left:14px;z-index:5;display:flex;border:3px solid #0b0b0b;border-radius:999px;overflow:hidden;background:#fbecd8}
+.ilang button{font:inherit;font-weight:900;font-size:.95rem;letter-spacing:.04em;border:0;background:transparent;color:#0b0b0b;padding:8px 14px;cursor:pointer;min-width:48px;min-height:40px}
+.ilang button[aria-pressed=true]{background:#0b0b0b;color:#fbecd8}
 .opt{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;border:3px solid var(--ink);border-radius:999px;padding:10px 22px 10px 12px;background:#fff8ee;box-shadow:0 5px 0 var(--ink);font-weight:900;font-size:1.25rem;text-transform:uppercase;transition:transform .15s}
 .opt:hover{transform:translateY(-3px)}
 .opt:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
@@ -92,7 +95,8 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
 </head>
 <body>
 <main class="intro" id="intro">
-  <button class="skip" type="button" id="skip">Saltar</button>
+  <button class="skip" type="button" id="skip" data-es="Saltar" data-eu="Saltatu">Saltar</button>
+  <div class="ilang" role="group" aria-label="Idioma / Hizkuntza"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="eu" aria-pressed="false" lang="eu">EU</button></div>
   <div class="stage">
       <img class="logo wob" src="negro/img/logo-big.png" alt="ALMA Burger &amp; Breakfast" width="1100" height="799">
       <div class="crew">
@@ -106,12 +110,12 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
       </div></div>
     </div>
     <div class="choose">
-      <h1>¿Cómo quieres ver la web?</h1>
+      <h1 data-es="¿Cómo quieres ver la web?" data-eu="Nola ikusi nahi duzu webgunea?">¿Cómo quieres ver la web?</h1>
       <div class="opts">
-        <a class="opt opt--azul" href="azul/index.html" data-c="azul" style="--c:#032164"><i></i>Azul y crema</a>
-        <a class="opt" href="negro/index.html" data-c="negro" style="--c:#0b0b0b"><i></i>Negro y crema</a>
+        <a class="opt opt--azul" href="azul/index.html" data-c="azul" style="--c:#032164"><i></i><span data-es="Azul y crema" data-eu="Urdina eta krema">Azul y crema</span></a>
+        <a class="opt" href="negro/index.html" data-c="negro" style="--c:#0b0b0b"><i></i><span data-es="Negro y crema" data-eu="Beltza eta krema">Negro y crema</span></a>
       </div>
-      <p class="note">Podrás cambiarlo cuando quieras desde el pie de la web.</p>
+      <p class="note" data-es="Podrás cambiarlo cuando quieras desde el pie de la web." data-eu="Nahi duzunean alda dezakezu, webgunearen oinean.">Podrás cambiarlo cuando quieras desde el pie de la web.</p>
       <p class="legalmini"><a href="negro/aviso-legal.html">Aviso legal</a> · <a href="negro/privacidad.html">Privacidad</a> · <a href="negro/cookies.html">Cookies</a></p>
     </div>
   </div>
@@ -120,7 +124,16 @@ body{background:var(--cream);color:var(--ink);font-family:'Big Shoulders Display
 (function(){
   var root=document.getElementById('intro');
   document.getElementById('skip').addEventListener('click',function(){root.classList.add('done')});
-  var last=null;try{last=localStorage.getItem('alma-color')}catch(e){}
+  var last=null,lang='es';try{last=localStorage.getItem('alma-color');lang=localStorage.getItem('alma-lang')==='eu'?'eu':'es'}catch(e){}
+  function setLang(l){
+    lang=l;try{localStorage.setItem('alma-lang',l)}catch(e){}
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-es]').forEach(function(el){el.textContent=el.dataset[l]});
+    document.querySelectorAll('.opt').forEach(function(a){a.href=a.dataset.c+'/index'+(l==='eu'?'.eu':'')+'.html'});
+    document.querySelectorAll('.ilang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.l===l))});
+  }
+  document.querySelectorAll('.ilang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.l)})});
+  if(lang==='eu')setLang('eu');
   document.querySelectorAll('.opt').forEach(function(a){
     if(a.dataset.c===last)a.classList.add('last');
     a.addEventListener('click',function(){try{localStorage.setItem('alma-color',a.dataset.c)}catch(e){}});

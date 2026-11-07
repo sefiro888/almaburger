@@ -1710,6 +1710,14 @@ body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 .hero__photo--white,.ph--white{background:#fff}
 .hours small{font-size:.8em;opacity:.7;font-weight:500}
 
+/* ====== botón de idioma (castellano / euskera), siempre visible arriba ====== */
+.langbtn{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 14px;border:var(--bw) solid var(--ink);border-radius:999px;background:var(--cream);color:var(--ink);font-weight:900;font-size:.95rem;letter-spacing:.04em;text-decoration:none;white-space:nowrap;transition:transform .2s}
+.langbtn span{opacity:.45;font-weight:700}
+.langbtn span::after{content:'/';margin-left:6px;opacity:.8}
+.langbtn:hover{transform:rotate(-4deg) scale(1.05)}
+@media (max-width:700px){.langbtn{height:42px;padding:0 11px;font-size:.88rem}}
+.foot__legal span{opacity:.7;font-weight:500}
+
 /* Opción 2 · Fiel al logo: solo negro y crema (más el blanco del contorno del logo). Sin ningún otro color. */
 :root{
   --je:#0b0b0b; --je-fg:#fbecd8;

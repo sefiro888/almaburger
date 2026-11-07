@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es" data-theme="azul" data-font="shoulders" data-all="on">
 <head>
-<script>try{localStorage.setItem("alma-color","azul")}catch(e){}</script>
+<script>try{localStorage.setItem("alma-color","azul");localStorage.setItem("alma-lang","es")}catch(e){}</script>
 <script>window.ALMA_AGORA="https://smartmenu.agorapos.com/?id=a5b87j3v&workplaceId=dae15wtg";document.documentElement.dataset.agora="on"</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,11 +25,13 @@
 <meta name="twitter:description" content="Desayunos con pasión hasta las 12:00 en Ordizia: tostadas con toppings de verdad, pancakes, bowls, cafés especiales, zumos y matcha.">
 <meta name="twitter:image" content="https://sefiro888.github.io/almaburger/azul/img/share.jpg">
 <link rel="canonical" href="https://sefiro888.github.io/almaburger/azul/desayunos.html">
+<link rel="alternate" hreflang="es" href="https://sefiro888.github.io/almaburger/azul/desayunos.html">
+<link rel="alternate" hreflang="eu" href="https://sefiro888.github.io/almaburger/azul/desayunos.eu.html">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <script>/* momento del día en Ordizia: desayunos hasta las 12:00 (de lunes a viernes desde las 8, fin de semana desde las 9; para probar: ?hora=9) */try{var d=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Madrid"})),h=d.getHours(),w=d.getDay(),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=(w%6?8:9)&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="styles.css?v=5d9b567c">
+<link rel="stylesheet" href="styles.css?v=9efe3eb3">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -40,6 +42,7 @@
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
     <a class="btn btn--solid btn--sm nav__wa" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a>
+    <a class="langbtn" href="desayunos.eu.html" hreflang="eu" lang="eu" aria-label="Euskaraz" title="Euskaraz"><span aria-hidden="true">ES</span><b>EU</b></a>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
@@ -147,6 +150,6 @@
   <a id="bnavCart" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedir online</span><i id="bnavN" hidden>0</i></a>
   <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
-<script src="app.js?v=5d9b567c"></script>
+<script src="app.js?v=9efe3eb3"></script>
 </body>
 </html>

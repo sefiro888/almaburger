@@ -35,6 +35,7 @@ def nav(active):
   <div class="nav__actions">
     <button class="cartbtn" id="cartOpen" aria-label="Abrir mi pedido "><span class="cartbtn__t">Pedido</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbtn__n" id="cartCount">0</span></button>
     <button class="btn btn--solid btn--sm nav__wa" type="button" data-wa-order>Pedir por WhatsApp</button>
+    <a class="langbtn" href="__LANGHREF__" hreflang="__LANGCODE__" lang="__LANGCODE__" aria-label="__LANGLABEL__" title="__LANGLABEL__"><span aria-hidden="true">__LANGFROM__</span><b>__LANGTXT__</b></a>
     <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>'''
@@ -109,6 +110,7 @@ DEMO = os.environ.get('ALMA_DEMO') == '1'
 import importlib.util as _ilu
 _spec = _ilu.spec_from_file_location('legal', SRC / 'legal.py'); LEGAL = _ilu.module_from_spec(_spec); _spec.loader.exec_module(LEGAL)
 AGORA = 'simulacion.html' if DEMO else (CFG.get('agora_url') or '').strip()
+_spec3 = _ilu.spec_from_file_location('i18n_eu', SRC / 'i18n_eu.py'); EUD = _ilu.module_from_spec(_spec3); _spec3.loader.exec_module(EUD)
 _spec2 = _ilu.spec_from_file_location('imgopt', SRC / 'imgopt.py'); IMGOPT = _ilu.module_from_spec(_spec2); _spec2.loader.exec_module(IMGOPT)
 LCFG = dict(CFG.get('legal', {}), _agora=bool(AGORA))
 
@@ -815,9 +817,40 @@ def og_block(title, desc, url, img):
     return chr(10).join(tags)
 
 
+EU_PAGES = ['index.html', 'el-alma.html', 'carta.html', 'desayunos.html', 'galeria.html', 'visitanos.html', '404.html']
+
+
+def eu_name(name):
+    return name[:-5] + '.eu.html'
+
+
+def to_eu(html):
+    """Página en euskera a partir de la página en castellano ya generada."""
+    for a, b in EUD.RAW:
+        html = html.replace(a, b)
+    for k in sorted(EUD.TXT, key=len, reverse=True):
+        html = html.replace('>' + k + '<', '>' + EUD.TXT[k] + '<')
+    q = lambda x: x.replace('&', '&amp;').replace('"', '&quot;')
+    plain = {k: v for k, v in EUD.TXT.items() if '<' not in k}
+    plain.update(EUD.ATTR)
+    for k in sorted(plain, key=len, reverse=True):
+        for a in ('alt', 'aria-label', 'placeholder', 'title', 'content', 'data-ext-title'):
+            html = html.replace(f'{a}="{q(k)}"', f'{a}="{q(plain[k])}"')
+    for pre, tr in EUD.ATTR_PREFIX.items():
+        html = _re.sub(r'(alt|aria-label)="' + _re.escape(q(pre)) + r'([^"]*)"',
+                       lambda m: f'{m.group(1)}="{q(tr)}' + q(plain.get(m.group(2).replace('&amp;', '&').replace('&quot;', '"'), m.group(2))) + '"', html)
+    # enlaces entre páginas: a la versión en euskera (las páginas legales siguen en castellano)
+    html = _re.sub(r'href="(' + '|'.join(_re.escape(n[:-5]) for n in EU_PAGES) + r')\.html', r'href="\1.eu.html', html)
+    html = html.replace('<html lang="es"', '<html lang="eu"', 1).replace('content="es_ES"', 'content="eu_ES"')
+    html = html.replace('<script src="app.js', '<script src="eu.js?v=' + VER + '"></script>\n<script src="app.js', 1)
+    html = html.replace('>Aviso legal</a>', '>Lege oharra</a>').replace('>Privacidad</a>', '>Pribatutasuna</a>')
+    html = html.replace('<nav class="foot__legal" aria-label="Lege-informazioa">', '<nav class="foot__legal" aria-label="Lege-informazioa"><span>(gaztelaniaz)</span>')
+    return html
+
+
 def redirect(dest):
     return (f'<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>ALMA Burger &amp; Breakfast</title>'
-            f'<script>var c="negro";try{{c=localStorage.getItem("alma-color")||"negro"}}catch(e){{}}location.replace("{dest}".replace("{{c}}",c))</script>'
+            f'<script>var c="negro",l="";try{{c=localStorage.getItem("alma-color")||"negro";l=localStorage.getItem("alma-lang")==="eu"?".eu":""}}catch(e){{}}var d="{dest}".replace("{{c}}",c);if(l&&/(index|el-alma|carta|desayunos|galeria|visitanos|404)\\.html$/.test(d))d=d.replace(/\\.html$/,".eu.html");location.replace(d)</script>'
             f'<meta http-equiv="refresh" content="1;url={dest.replace("{c}", "negro")}"><a href="{dest.replace("{c}", "negro")}">Entrar en ALMA</a>')
 
 
@@ -851,14 +884,33 @@ def main():
             active = {'index': 'home', 'alma': 'alma', 'carta': 'carta', 'desayunos': 'desayunos', 'galeria': 'galeria', 'visitanos': 'visitanos'}.get(k, '')
             built[FILES[k]] = shell(active, title, desc, fn(), t['tcolor'])
         built['404.html'] = shell('', 'Página no encontrada · Alma Burger', 'Página no encontrada', nf(), t['tcolor'])
-        for name, html in built.items():
-            html = html.replace('<html lang="es"', f'<html lang="es" data-theme="{theme}"', 1)
-            m = _re.search(r'<title>(.*?)</title>', html); dm = _re.search(r'<meta name="description" content="([^"]*)">', html)
-            html = html.replace('__OGBLOCK__', og_block(m.group(1), dm.group(1), SITE + theme + '/' + ('' if name == 'index.html' else name), SITE + theme + '/img/share.jpg'), 1)
-            html = html.replace('__SWAP__', f'../{t["other"]}/{name}').replace('__SWAPNAME__', t['swap'])
-            html = html.replace('<head>', '<head>\n<script>try{localStorage.setItem("alma-color","' + theme + '")}catch(e){}</script>', 1)
-            (out / name).write_text(html, encoding='utf-8')
-        IMGOPT.build(out, [out / n for n in built], [out / 'app.js'])
+        written = []
+        for name, html0 in built.items():
+            for lang in ('es', 'eu'):
+                if lang == 'eu' and name not in EU_PAGES:
+                    continue
+                fname = name if lang == 'es' else eu_name(name)
+                html = html0.replace('<html lang="es"', f'<html lang="es" data-theme="{theme}"', 1)
+                html = html.replace('__SWAP__', f'../{t["other"]}/{fname}').replace('__SWAPNAME__', t['swap'])
+                alt = (eu_name(name) if name in EU_PAGES else 'index.eu.html') if lang == 'es' else './' + name  # './' para que no se cambie a .eu
+                html = (html.replace('__LANGHREF__', alt).replace('__LANGCODE__', 'eu' if lang == 'es' else 'es')
+                        .replace('__LANGLABEL__', 'Euskaraz' if lang == 'es' else 'En castellano')
+                        .replace('__LANGFROM__', 'ES' if lang == 'es' else 'EU').replace('__LANGTXT__', 'EU' if lang == 'es' else 'ES'))
+                if lang == 'eu':
+                    html = to_eu(html)
+                m = _re.search(r'<title>(.*?)</title>', html); dm = _re.search(r'<meta name="description" content="([^"]*)">', html)
+                url = SITE + theme + '/' + ('' if fname == 'index.html' else fname)
+                og = og_block(m.group(1), dm.group(1), url, SITE + theme + '/img/share.jpg')
+                if lang == 'eu':
+                    og = og.replace('content="es_ES"', 'content="eu_ES"').replace('hamburguesas y desayunos en Ordizia', 'hanburgesak eta gosariak Ordizian')
+                if name in EU_PAGES:
+                    og += chr(10) + f'<link rel="alternate" hreflang="es" href="{SITE + theme + "/" + name}">' + chr(10) + f'<link rel="alternate" hreflang="eu" href="{SITE + theme + "/" + eu_name(name)}">'
+                html = html.replace('__OGBLOCK__', og, 1)
+                html = html.replace('<head>', '<head>\n<script>try{localStorage.setItem("alma-color","' + theme + '");localStorage.setItem("alma-lang","' + lang + '")}catch(e){}</script>', 1)
+                (out / fname).write_text(html, encoding='utf-8')
+                written.append(fname)
+        (out / 'eu.js').write_text('window.ALMA_EU=' + json.dumps(EUD.JS, ensure_ascii=False) + ';' + chr(10), encoding='utf-8')
+        IMGOPT.build(out, [out / n for n in written], [out / 'app.js'])
         _small_pngs(out)
     # raíz: intro con selector de color + redirecciones de los enlaces antiguos
     (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8').replace('__SITE__', SITE), encoding='utf-8')

@@ -1,8 +1,21 @@
+/* ---------- Idioma: las páginas en euskera cargan eu.js (window.ALMA_EU) antes que este archivo ---------- */
+const EU_ON = document.documentElement.lang === 'eu' && !!window.ALMA_EU;
+const T_ = s => (EU_ON && typeof s === 'string' && window.ALMA_EU[s]) || s;
+const TRH = h => {
+  if (!EU_ON) return h;
+  Object.keys(window.ALMA_EU).sort((a, b) => b.length - a.length).forEach(k => {
+    const v = window.ALMA_EU[k];
+    h = h.split('>' + k + '<').join('>' + v + '<').split('="' + k + '"').join('="' + v + '"');
+  });
+  return h;
+};
+const PG = p => EU_ON ? p.replace(/^([a-z0-9-]+)\.html/, '$1.eu.html') : p;
+
 (() => {
 'use strict';
 
 /* ---------- Datos (carta oficial de almaburgers.com + fotos de Instagram) ---------- */
-const P = (n, d, p, t = [], i = '') => ({ n, d, p, t, i });
+const P = (n, d, p, t = [], i = '') => ({ n, dn: T_(n), d: T_(d), p, t, i });
 const MENU = {
   hamburguesas: { label: 'Hamburguesas', items: [
     P('La Reinita', 'Carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y topping de reina pepiada: pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa. Sabor venezolano.', null, ['mes'], 'la-reinita'),
@@ -110,13 +123,13 @@ const MENU = {
     ]}
   ]}
 };
-const TAGLABEL = { pollo: 'Pollo', picante: 'Picante', dulce: 'Dulce', veg: 'Vegetariano', trufa: 'Trufa', nuevo: 'Nuevo', mes: 'Burger del mes', 'clásica': 'Clásica' };
+const TAGLABEL = Object.fromEntries(Object.entries({ pollo: 'Pollo', picante: 'Picante', dulce: 'Dulce', veg: 'Vegetariano', trufa: 'Trufa', nuevo: 'Nuevo', mes: 'Burger del mes', 'clásica': 'Clásica' }).map(([k, v]) => [k, T_(v)]));
 const FILTERS = ['pollo', 'picante', 'dulce', 'veg', 'trufa'];
 const RIG = '<div class="rig rig--still"><img src="img/mascot-legL.png" alt=""><img src="img/mascot-legR.png" alt=""><img src="img/mascot-body.png" alt=""></div>';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const eur = n => n == null ? 'Consultar' : n.toFixed(2).replace('.', ',') + '€';
+const eur = n => n == null ? T_('Consultar') : n.toFixed(2).replace('.', ',') + '€';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
@@ -141,11 +154,12 @@ function card(i, idx) {
   const flags = flag.length ? `<div class="flags">${flag.map(t => `<span class="flag ${t === 'mes' || t === 'nuevo' ? 'flag--hot' : ''}">${TAGLABEL[t]}</span>`).join('')}</div>` : '';
   const btn = `<button class="add" data-add="${esc(i.id)}" aria-label="Añadir ${esc(i.n)} al pedido">+<span class="add__n"></span></button>`;
   const delay = `style="animation-delay:${Math.min(idx, 10) * 35}ms"`;
-  if (i.i) return `<article class="item" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
-    <div class="item__img"><img src="img/dishes/s/${i.i}.webp" alt="${esc(i.n)}" loading="lazy" width="640" height="640">${flags}<span class="pill">${eur(i.p)}</span>${btn}</div>
-    <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}</div></article>`;
-  return `<article class="item item--row" data-open="${esc(i.id)}" tabindex="0" aria-label="Ver ${esc(i.n)}" ${delay}>
-    <div class="item__body"><h3>${esc(i.n)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}${flags}</div><span class="price">${eur(i.p)}</span>${btn}</article>`;
+  const see = `${T_('Ver')} ${esc(i.dn)}`;
+  if (i.i) return `<article class="item" data-open="${esc(i.id)}" tabindex="0" aria-label="${see}" ${delay}>
+    <div class="item__img"><img src="img/dishes/s/${i.i}.webp" alt="${esc(i.dn)}" loading="lazy" width="640" height="640">${flags}<span class="pill">${eur(i.p)}</span>${btn}</div>
+    <div class="item__body"><h3>${esc(i.dn)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}</div></article>`;
+  return `<article class="item item--row" data-open="${esc(i.id)}" tabindex="0" aria-label="${see}" ${delay}>
+    <div class="item__body"><h3>${esc(i.dn)}</h3>${i.d ? `<p>${esc(i.d)}</p>` : ''}${flags}</div><span class="price">${eur(i.p)}</span>${btn}</article>`;
 }
 
 /* ---------- Carta / desayunos ---------- */
@@ -160,11 +174,11 @@ if (menuEl) {
   if (mode !== 'desayunos' && MENU[hash]) state.tab = hash;
 
   const tabList = mode === 'desayunos'
-    ? [['todo', 'Todo'], ...groups.map((g, k) => ['g' + k, g.g])]
-    : Object.entries(MENU).filter(([k]) => k !== 'desayunos').map(([k, c]) => [k, c.label]);
+    ? [['todo', T_('Todo')], ...groups.map((g, k) => ['g' + k, T_(g.g)])]
+    : Object.entries(MENU).filter(([k]) => k !== 'desayunos').map(([k, c]) => [k, T_(c.label)]);
   const matches = i => {
     if (state.filters.size && ![...state.filters].every(f => i.t.includes(f))) return false;
-    return state.q ? norm(i.n + ' ' + i.d + ' ' + i.t.join(' ')).includes(norm(state.q)) : true;
+    return state.q ? norm(i.n + ' ' + i.dn + ' ' + i.d + ' ' + i.t.join(' ') + ' ' + i.t.map(t => TAGLABEL[t] || '').join(' ')).includes(norm(state.q)) : true;
   };
   const filters = mode === 'desayunos' ? ['dulce', 'veg'] : FILTERS;
   const render = () => {
@@ -173,20 +187,20 @@ if (menuEl) {
     let html = '', n = 0;
     if (state.q) {
       const res = pool.filter(matches);
-      html = res.length ? res.map((i, k) => card(i, k)).join('') : `<div class="empty">Nada por aquí con “${esc(state.q)}”. Prueba con otra palabra.</div>`;
+      html = res.length ? res.map((i, k) => card(i, k)).join('') : `<div class="empty">${T_('Nada por aquí con “{q}”. Prueba con otra palabra.').replace('{q}', esc(state.q))}</div>`;
     } else if (mode === 'desayunos') {
       groups.forEach((g, k) => {
         if (state.tab !== 'todo' && state.tab !== 'g' + k) return;
         const its = g.items.filter(matches); if (!its.length) return;
-        html += `<h3 class="menu__group">${g.g}</h3>` + its.map(i => card(i, n++)).join('');
-        if (g.note) html += `<div class="menu__note">${esc(g.note)}</div>`;
+        html += `<h3 class="menu__group">${esc(T_(g.g))}</h3>` + its.map(i => card(i, n++)).join('');
+        if (g.note) html += `<div class="menu__note">${esc(T_(g.note))}</div>`;
       });
-      if (!n) html = `<div class="empty">Nada con esos filtros.</div>`;
+      if (!n) html = `<div class="empty">${T_('Nada con esos filtros.')}</div>`;
     } else {
       const c = MENU[state.tab];
-      if (c.note) html += `<div class="menu__note">${esc(c.note)}</div>`;
+      if (c.note) html += `<div class="menu__note">${esc(T_(c.note))}</div>`;
       const its = c.items.filter(matches);
-      html += its.length ? its.map((i, k) => card(i, k)).join('') : `<div class="empty">Ningún plato de esta sección cumple los filtros.</div>`;
+      html += its.length ? its.map((i, k) => card(i, k)).join('') : `<div class="empty">${T_('Ningún plato de esta sección cumple los filtros.')}</div>`;
     }
     menuEl.innerHTML = html; dispatchEvent(new Event('menu-render'));
   };
@@ -211,7 +225,7 @@ $$('[data-stat]').forEach(el => {
 });
 
 /* ---------- Horario (cocina, por tramos) y estado ---------- */
-const DAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+const DAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'].map(T_);
 // lunes y martes solo desayunos; el cierre de la noche es orientativo
 const HOURS = { 0: [[9, 15.5], [19.5, 23]], 1: [[8, 12]], 2: [[8, 12]], 3: [[8, 15.5], [19.5, 23]], 4: [[8, 15.5], [19.5, 23]], 5: [[8, 15.5], [19.5, 23.5]], 6: [[9, 15.5], [19.5, 23.5]] };
 const fmt = h => `${String(Math.floor(h) % 24).padStart(2, '0')}:${h % 1 ? '30' : '00'}`;
@@ -219,18 +233,18 @@ const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madr
 const today = now.getDay(), hr = now.getHours() + now.getMinutes() / 60;
 const hoursEl = $('#hours');
 if (hoursEl) {
-  hoursEl.innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}${d === 1 || d === 2 ? ' <small>(solo desayunos)</small>' : ''}</span><span>${HOURS[d].map(([o, c]) => `${fmt(o)} – ${fmt(c)}`).join(' · ')}</span></li>`).join('');
-  $('#todayLabel').textContent = 'hoy, ' + DAYS[today].toLowerCase();
+  hoursEl.innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}${d === 1 || d === 2 ? ` <small>${T_('(solo desayunos)')}</small>` : ''}</span><span>${HOURS[d].map(([o, c]) => `${fmt(o)} – ${fmt(c)}`).join(' · ')}</span></li>`).join('');
+  $('#todayLabel').textContent = T_('hoy, ') + DAYS[today].toLowerCase();
 }
 const curSlot = HOURS[today].find(([o, c]) => hr >= o && hr < c);
 const nextOpenTxt = (() => {
   const later = HOURS[today].find(([o]) => hr < o);
-  if (later) return `hoy a las ${fmt(later[0])}`;
-  return `mañana a las ${fmt(HOURS[(today + 1) % 7][0][0])}`;
+  if (later) return T_('hoy a las {h}').replace('{h}', fmt(later[0]));
+  return T_('mañana a las {h}').replace('{h}', fmt(HOURS[(today + 1) % 7][0][0]));
 })();
 const st = $('#openStatus');
 if (st) {
-  st.textContent = curSlot ? `Abierto ahora · hasta las ${fmt(curSlot[1])}` : `Cerrado ahora · abrimos ${nextOpenTxt}`;
+  st.textContent = curSlot ? T_('Abierto ahora · hasta las {h}').replace('{h}', fmt(curSlot[1])) : T_('Cerrado ahora · abrimos {x}').replace('{x}', nextOpenTxt);
   st.previousElementSibling.classList.toggle('on', !!curSlot);
 }
 $$('.yr').forEach(e => e.textContent = new Date().getFullYear());
@@ -370,7 +384,7 @@ const goOrder = () => {
   pm && pm.classList.remove('on');
   if (count()) return openCart(true);
   if (menuEl && menuEl.dataset.mode === 'all') { menuEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); toast('Pulsa <b>+</b> en los platos que quieras'); }
-  else location.href = 'carta.html#pedir';
+  else location.href = PG('carta.html') + '#pedir';
 };
 document.addEventListener('click', e => { if (e.target.closest('[data-wa-order]')) { e.preventDefault(); goOrder(); } });
 if (location.hash === '#pedir' && menuEl) setTimeout(() => toast('Pulsa <b>+</b> en los platos que quieras'), 600);
@@ -418,8 +432,8 @@ draw();
 /* ---------- Lightbox ---------- */
 const mis = $$('.mi');
 if (mis.length) {
-  const lb = document.createElement('div'); lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-label', 'Foto ampliada');
-  lb.innerHTML = '<button class="x" aria-label="Cerrar">✕</button><button class="p" aria-label="Anterior">‹</button><img alt="" hidden><button class="n" aria-label="Siguiente">›</button><p></p>';
+  const lb = document.createElement('div'); lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-label', T_('Foto ampliada'));
+  lb.innerHTML = TRH('<button class="x" aria-label="Cerrar">✕</button><button class="p" aria-label="Anterior">‹</button><img alt="" hidden><button class="n" aria-label="Siguiente">›</button><p></p>');
   document.body.appendChild(lb);
   let cur = 0;
   const show = k => { cur = (k + mis.length) % mis.length; const im = $('img', mis[cur]); $('img', lb).hidden = false; $('img', lb).src = im.src; $('img', lb).alt = im.alt; $('p', lb).textContent = $('figcaption', mis[cur])?.textContent || im.alt; lb.classList.add('on'); };
@@ -450,7 +464,7 @@ if (hv && matchMedia('(hover:hover)').matches && !matchMedia('(prefers-reduced-m
 /* ---------- Ficha del plato (ventana con la foto completa) ---------- */
 const AI_SLUGS = new Set(['la-basica', 'la-golosa', 'la-diabla', 'tequenos', 'alitas', 'ensalada', 'panceta', 'hot-clasica', 'hot-gordita', 'hot-quesuda', 'hot-picantona', 'tarta-pistacha', 'tarta-ferrero', 'coulant', 'crepe']);
 const dm = document.createElement('div'); dm.className = 'modal dish'; dm.id = 'dishModal';
-dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labelledby="dishT">
+dm.innerHTML = TRH(`<div class="dish__box" role="dialog" aria-modal="true" aria-labelledby="dishT">
   <button class="modal__x" type="button" aria-label="Cerrar">✕</button>
   <div class="dish__media" id="dishMedia"><div class="dish__bg" id="dishBg"></div><img id="dishImg" alt="" decoding="async" hidden><div class="dish__none" id="dishNone"></div>
     <span class="dish__ai" id="dishAi" hidden>Imagen orientativa generada por IA</span>
@@ -460,7 +474,7 @@ dm.innerHTML = `<div class="dish__box" role="dialog" aria-modal="true" aria-labe
     <div class="choices" id="dishOpts"></div>
     <div class="dish__foot"><div class="dish__buy"><span class="price" id="dishPrice"></span><div class="stepper"><button type="button" data-q="-1" aria-label="Menos">−</button><span id="dishQ">1</span><button type="button" data-q="1" aria-label="Más">+</button></div></div>
     <button class="btn btn--solid btn--block" type="button" id="dishAdd"></button><a class="btn btn--solid btn--block dish__agora" id="dishAgora" target="_blank" rel="noopener">Pedir online ↗</a></div>
-    <p class="dish__fine" id="dishFine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`;
+    <p class="dish__fine" id="dishFine">Pedido por WhatsApp, para recoger o a domicilio. Pago por Bizum, que confirma el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.</p></div></div>`);
 document.body.appendChild(dm);
 const D = { list: [], k: 0, qty: 1, from: null };
 const dq = s => $(s, dm);
@@ -471,15 +485,15 @@ function renderDish(dir) {
   m.classList.remove('swap-l', 'swap-r'); void m.offsetWidth; if (dir) m.classList.add(dir > 0 ? 'swap-r' : 'swap-l');
   const img = dq('#dishImg'), bg = dq('#dishBg'), none = dq('#dishNone');
   if (it.i) {
-    img.hidden = false; none.hidden = true; img.alt = it.n;
+    img.hidden = false; none.hidden = true; img.alt = it.dn;
     bg.style.backgroundImage = `url(img/dishes/s/${it.i}.webp)`;
     img.src = `img/dishes/${it.i}.webp`;
   } else { img.hidden = true; none.hidden = false; none.innerHTML = RIG; bg.style.backgroundImage = 'none'; }
   dq('#dishAi').hidden = !(it.i && AI_SLUGS.has(it.i));
-  dq('#dishCat').textContent = MENU[it.cat].label;
-  dq('#dishT').textContent = it.n;
+  dq('#dishCat').textContent = T_(MENU[it.cat].label);
+  dq('#dishT').textContent = it.dn;
   dq('#dishTags').innerHTML = it.t.map(t => `<span class="tag ${t === 'nuevo' || t === 'mes' ? 'tag--new' : ''}">${TAGLABEL[t]}</span>`).join('');
-  dq('#dishDesc').textContent = it.d || 'Sin descripción. Pregúntanos en el local si tienes dudas.';
+  dq('#dishDesc').textContent = it.d || T_('Sin descripción. Pregúntanos en el local si tienes dudas.');
   dq('#dishOpts').innerHTML = it.o ? `<p class="choices__t">Elige una opción</p>` + it.o.map((c, k) => `<label class="choice"><input type="radio" name="dopt" value="${esc(c)}" ${k ? '' : 'checked'}><span>${esc(c)}</span></label>`).join('') : '';
   dq('#dishPrice').textContent = eur(it.p);
   D.qty = 1; dq('#dishQ').textContent = 1; dishBtn();
@@ -488,7 +502,7 @@ function renderDish(dir) {
   box.scrollTop = 0; dq('.dish__info').scrollTop = 0;
   [1, -1].forEach(d => { const o = byId(D.list[(D.k + d + D.list.length) % D.list.length]); if (o && o.i) new Image().src = `img/dishes/${o.i}.webp`; });
 }
-if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = 'Pide online para recoger o a domicilio (reparto solo por la noche, de miércoles a domingo). De momento, el pago se hace en el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'; }
+if (window.ALMA_AGORA) { const da = document.querySelector('#dishAgora'); if (da) da.href = window.ALMA_AGORA; const df = document.querySelector('#dishFine'); if (df) df.innerHTML = T_('Pide online para recoger o a domicilio (reparto solo por la noche, de miércoles a domingo). De momento, el pago se hace en el local.<br>Consulta nuestra carta de alérgenos al personal. Las imágenes son orientativas.'); }
 const dishBtn = (done) => { const it = byId(D.list[D.k]); dq('#dishAdd').textContent = done ? 'Añadido ✓' : it.p == null ? 'Añadir al pedido' : `Añadir al pedido · ${eur(it.p * D.qty)}`; };
 function openDish(id, from) {
   const vis = $$('.item[data-open]').filter(e => e.offsetParent !== null).map(e => e.dataset.open);
@@ -527,14 +541,14 @@ dm.addEventListener('click', e => {
 })();
 
 const hb = $('#hmoreBtn');
-if (hb) hb.addEventListener('click', () => { const o = $('#hmore').classList.toggle('open'); hb.setAttribute('aria-expanded', o); hb.textContent = o ? 'Leer menos ↑' : 'Seguir leyendo ↓'; });
+if (hb) hb.addEventListener('click', () => { const o = $('#hmore').classList.toggle('open'); hb.setAttribute('aria-expanded', o); hb.textContent = T_(o ? 'Leer menos ↑' : 'Seguir leyendo ↓'); });
 
 /* ---------- Mascota del hero: cinco entradas por detrás del logo ---------- */
 const stageEl = $('#stage');
 if (stageEl) {
   const get = id => document.getElementById(id), set = (id, n, v) => get(id).setAttribute(n, v);
   const smooth = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }, mix = (a, b, u) => a + (b - a) * u;
-  const TITLES = ['Salto sorpresa', 'Desde la izquierda', 'Giro desde la derecha', 'Tres rebotes', 'Arco y reverencia'];
+  const TITLES = ['Salto sorpresa', 'Desde la izquierda', 'Giro desde la derecha', 'Tres rebotes', 'Arco y reverencia'].map(T_);
   let mode = 0, time = 0, previous = null, auto = true, paused = false;
   function limbs(v) {
     const { lx = 386, ly = 567, rx = 624, ry = 652, leftAngle = 0, rightAngle = 0, flx = 474, fly = 762, frx = 539, fry = 762, footAngleL = 0, footAngleR = 0, knee = 9 } = v;
@@ -571,7 +585,7 @@ if (stageEl) {
     limbs({ lx: 386 + raise * 20 + hello * 11, ly: 567 - raise * 45 - Math.abs(hello) * 5, rx: 624 + raise * 25, ry: 652 - raise * 100, leftAngle: hello * 16 - raise * 14, rightAngle: -raise * 35, flx: 474 - bend * 10, frx: 539 + bend * 10, fly: 762, fry: 762, knee: 9 + bend * 20 });
   }
   const dots = $('#stageDots');
-  if (dots) dots.innerHTML = TITLES.map((t, k) => `<button type="button" data-m="${k}" aria-label="Entrada ${k + 1}: ${t}" title="${t}"></button>`).join('');
+  if (dots) dots.innerHTML = TITLES.map((t, k) => `<button type="button" data-m="${k}" aria-label="${T_('Entrada {n}: {t}').replace('{n}', k + 1).replace('{t}', t)}" title="${t}"></button>`).join('');
   const mark = () => $$('#stageDots button').forEach((b, k) => b.setAttribute('aria-pressed', String(k === mode)));
   const choose = (n, manual) => { mode = n; time = 0; if (manual) auto = false; mark(); pose(0); };
   if (dots) dots.addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (b) choose(+b.dataset.m, true); });
@@ -604,7 +618,7 @@ if (stageEl) {
 
 /* ---------- La mascota comenta la carta ---------- */
 (() => {
-  const page = location.pathname.split('/').pop().replace('.html', '') || 'index';
+  const page = location.pathname.split('/').pop().replace(/(\.eu)?\.html$/, '') || 'index';
   const hasItems = !!document.querySelector('[data-open], #menu, #featured, #featuredB');
   if (!hasItems && !['index', 'visitanos'].includes(page)) return;
   const BY_NAME = {
@@ -640,13 +654,14 @@ if (stageEl) {
   };
   let muted = false; try { muted = localStorage.getItem('alma-mascota') === 'off'; } catch (e) {}
   const el = document.createElement('div'); el.className = 'mtalk' + (muted ? ' off' : '');
-  el.innerHTML = `<div class="mtalk__b" id="mtalkB" role="status" aria-live="polite"><span id="mtalkT"></span><button type="button" class="mtalk__x" aria-label="Callar a la mascota">Callar</button></div>
-    <button type="button" class="mtalk__m" aria-label="Mascota: activar o silenciar los comentarios" title="Mascota">${RIG}</button>`;
+  el.innerHTML = TRH(`<div class="mtalk__b" id="mtalkB" role="status" aria-live="polite"><span id="mtalkT"></span><button type="button" class="mtalk__x" aria-label="Callar a la mascota">Callar</button></div>
+    <button type="button" class="mtalk__m" aria-label="Mascota: activar o silenciar los comentarios" title="Mascota">${RIG}</button>`);
   document.body.appendChild(el);
   const rig = $('.rig', el), bub = $('#mtalkB', el), txt = $('#mtalkT', el);
   let hideT, cool = 0, firstT;
   const say = (msg, ms = 3400, force) => {
     if (muted && !force) return;
+    msg = T_(msg);
     if (document.documentElement.classList.contains('lock') || $('#cart.open')) return;
     const n = Date.now(); if (!force && n - cool < 3600) return; cool = n; last = msg;
     txt.textContent = msg; el.classList.add('on'); rig.classList.remove('rig--still');
@@ -681,7 +696,7 @@ if (stageEl) {
 (() => {
   const links = $$('[data-ig]'); if (!links.length) return;
   const rm = document.createElement('div'); rm.className = 'modal'; rm.id = 'reelModal';
-  rm.innerHTML = `<div class="modal__box modal__box--reel" role="dialog" aria-modal="true" aria-label="Vídeo de Instagram"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div class="reelbox" id="reelBox"></div><p class="reelfoot"><a id="reelOpen" target="_blank" rel="noopener">Abrir en Instagram ↗</a></p></div>`;
+  rm.innerHTML = TRH(`<div class="modal__box modal__box--reel" role="dialog" aria-modal="true" aria-label="Vídeo de Instagram"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div class="reelbox" id="reelBox"></div><p class="reelfoot"><a id="reelOpen" target="_blank" rel="noopener">Abrir en Instagram ↗</a></p></div>`);
   document.body.appendChild(rm);
   links.forEach(a => a.addEventListener('click', e => {
     e.preventDefault(); const p = a.dataset.ig;
@@ -722,7 +737,7 @@ if (stageEl) {
   const burgers = () => MENU.hamburguesas.items.filter(i => PR[i.n]);
   let step = 0, ans = [];
   const m = document.createElement('div'); m.className = 'modal'; m.id = 'quizModal';
-  m.innerHTML = `<div class="modal__box modal__box--wide quiz" role="dialog" aria-modal="true" aria-labelledby="qT"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div id="qBody"></div></div>`;
+  m.innerHTML = TRH(`<div class="modal__box modal__box--wide quiz" role="dialog" aria-modal="true" aria-labelledby="qT"><button class="modal__x" type="button" aria-label="Cerrar">✕</button><div id="qBody"></div></div>`);
   document.body.appendChild(m);
   const body = $('#qBody', m);
   function score(it) {
@@ -735,22 +750,22 @@ if (stageEl) {
   }
   function ask() {
     const q = Q[step];
-    body.innerHTML = `<div class="qprog"><i style="width:${(step / Q.length) * 100}%"></i></div><p class="qn">Pregunta ${step + 1} de ${Q.length}</p><h3 id="qT">${esc(q.q)}</h3>
-      <div class="qopts">${q.o.map((o, k) => `<button type="button" class="qopt" data-k="${k}">${esc(o[0])}</button>`).join('')}</div>
-      ${step ? '<button type="button" class="lnk qback">← Volver</button>' : ''}`;
+    body.innerHTML = `<div class="qprog"><i style="width:${(step / Q.length) * 100}%"></i></div><p class="qn">${T_('Pregunta {n} de {t}').replace('{n}', step + 1).replace('{t}', Q.length)}</p><h3 id="qT">${esc(T_(q.q))}</h3>
+      <div class="qopts">${q.o.map((o, k) => `<button type="button" class="qopt" data-k="${k}">${esc(T_(o[0]))}</button>`).join('')}</div>
+      ${step ? `<button type="button" class="lnk qback">${T_('← Volver')}</button>` : ''}`;
   }
   function result() {
     const ranked = burgers().map(it => ({ it, s: score(it) + Math.random() * .01 })).sort((a, b) => b.s - a.s);
     const top = ranked[0].it, others = ranked.slice(1, 3).map(r => r.it); const veg = (Object.assign({}, ...ans).meat) === 'veg';
-    const [, , , , line] = PR[top.n]; const agora = !!window.ALMA_AGORA;
-    body.innerHTML = `<p class="qn">Tu resultado</p><div class="qres">
-      ${top.i ? `<img src="img/dishes/s/${top.i}.webp" alt="${esc(top.n)}">` : ''}
-      <div><h3 id="qT">Eres <em>${esc(top.n)}</em></h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${top.p == null ? 'Burger del mes' : eur(top.p)}${veg ? ' · con versión vegetariana' : ''}</p>
-      <div class="btnrow" style="margin:12px 0 0">${agora ? `<a class="btn btn--solid" href="${esc(window.ALMA_AGORA)}" target="_blank" rel="noopener">Pedir online ↗</a>` : `<button type="button" class="btn btn--solid" data-qadd="${esc(top.id)}">Añadir al pedido</button>`}<button type="button" class="btn" data-qview="${esc(top.id)}">Ver la ficha</button></div></div></div>
-      ${others.length ? `<p class="qn" style="margin-top:18px">También te pegan</p><div class="qchips">${others.map(o => `<button type="button" class="chip" data-qview="${esc(o.id)}">${esc(o.n)}</button>`).join('')}</div>` : ''}
-      <div class="btnrow" style="margin-top:16px"><a class="btn btn--sm" id="qShare" target="_blank" rel="noopener">Compartir mi resultado</a><button type="button" class="btn btn--sm btn--ghost" data-qrestart>Repetir el test</button></div>`;
-    const base = new URL('carta.html', location.href).href.split('#')[0] + '#test';
-    $('#qShare', m).href = 'https://wa.me/?text=' + encodeURIComponent(`¡Soy ${top.n}! ${line}\n¿Y tú, qué burger eres? Haz el test de Alma Burger: ${base}`);
+    const line = T_(PR[top.n][4]); const agora = !!window.ALMA_AGORA;
+    body.innerHTML = TRH(`<p class="qn">Tu resultado</p>`) + `<div class="qres">
+      ${top.i ? `<img src="img/dishes/s/${top.i}.webp" alt="${esc(top.dn)}">` : ''}
+      <div><h3 id="qT">${T_('Eres <em>{x}</em>').replace('{x}', esc(top.dn))}</h3><p class="qline">${esc(line)}</p><p class="qdesc">${esc(top.d)}</p><p class="qprice">${top.p == null ? T_('Burger del mes') : eur(top.p)}${veg ? T_(' · con versión vegetariana') : ''}</p>
+      <div class="btnrow" style="margin:12px 0 0">${agora ? `<a class="btn btn--solid" href="${esc(window.ALMA_AGORA)}" target="_blank" rel="noopener">${T_('Pedir online ↗')}</a>` : `<button type="button" class="btn btn--solid" data-qadd="${esc(top.id)}">Añadir al pedido</button>`}<button type="button" class="btn" data-qview="${esc(top.id)}">${T_('Ver la ficha')}</button></div></div></div>
+      ${others.length ? `<p class="qn" style="margin-top:18px">${T_('También te pegan')}</p><div class="qchips">${others.map(o => `<button type="button" class="chip" data-qview="${esc(o.id)}">${esc(o.dn)}</button>`).join('')}</div>` : ''}
+      <div class="btnrow" style="margin-top:16px"><a class="btn btn--sm" id="qShare" target="_blank" rel="noopener">${T_('Compartir mi resultado')}</a><button type="button" class="btn btn--sm btn--ghost" data-qrestart>${T_('Repetir el test')}</button></div>`;
+    const base = new URL(PG('carta.html'), location.href).href.split('#')[0] + '#test';
+    $('#qShare', m).href = 'https://wa.me/?text=' + encodeURIComponent(T_('¡Soy {x}! {l}\n¿Y tú, qué burger eres? Haz el test de Alma Burger: {u}').replace('{x}', top.dn).replace('{l}', line).replace('{u}', base));
     m._top = top; m._veg = veg;
   }
   const open = () => { step = 0; ans = []; ask(); m.classList.add('on'); lock(true); };
@@ -806,6 +821,7 @@ if (stageEl) {
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const ov = document.createElement('div'); ov.className = 'goorder'; ov.setAttribute('role', 'status'); ov.setAttribute('aria-live', 'polite');
   ov.innerHTML = '<div class="goorder__in"><div class="goorder__rig" aria-hidden="true"><div class="rig" style="--w:150px"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></div><p class="goorder__t">¡Marchando!</p><p class="goorder__s">Abriendo la página de pedidos…</p></div>';
+  ov.innerHTML = TRH(ov.innerHTML);
   document.body.appendChild(ov);
   let busy = false;
   document.addEventListener('click', e => {
@@ -834,9 +850,10 @@ if (stageEl) {
     const f = document.createElement('iframe'); f.src = el.dataset.extSrc; f.title = el.dataset.extTitle || ''; f.loading = 'lazy'; f.referrerPolicy = 'no-referrer';
     const ph = el.querySelector('.extph'); if (ph) ph.remove(); el.appendChild(f);
   });
-  const bar = document.createElement('div'); bar.className = 'ckbar'; bar.setAttribute('role', 'dialog'); bar.setAttribute('aria-label', 'Aviso de cookies');
+  const bar = document.createElement('div'); bar.className = 'ckbar'; bar.setAttribute('role', 'dialog'); bar.setAttribute('aria-label', T_('Aviso de cookies'));
   bar.innerHTML = '<div class="ckbar__in"><p><b>Cookies, las justas.</b> No usamos cookies de publicidad ni de análisis. Solo guardamos en tu navegador lo necesario (como el color elegido). Si aceptas, también cargamos el mapa de OpenStreetMap. <a href="cookies.html">Más información sobre cookies</a></p>'
     + '<div class="ckbar__b"><button type="button" class="btn btn--sm" data-ck="0">Rechazar</button><button type="button" class="btn btn--sm" data-ck="1">Aceptar</button></div></div>';
+  bar.innerHTML = TRH(bar.innerHTML);
   document.body.appendChild(bar);
   const show = () => { bar.classList.add('on'); const b = bar.querySelector('[data-ck="1"]'); setTimeout(() => b && b.focus({ preventScroll: true }), 50); };
   const save = ext => {
