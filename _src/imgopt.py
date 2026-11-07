@@ -15,10 +15,14 @@ WIDTHS = (480, 800)
 Q = 82
 
 
+DIMS = {}
+
+
 def _variants(f, rel):
     key = hashlib.md5(f.read_bytes()).hexdigest()[:10]
     with Image.open(f) as im0:
         W = im0.width
+        DIMS[rel] = im0.size
     ws = [w for w in WIDTHS if w < W * 0.9] + [W]
     res, im = [], None
     for w in ws:
@@ -52,6 +56,11 @@ def build(out_dir, html_files, js_files):
             return tag
         ss = ', '.join(f'img/{n} {w}w' for w, n, _ in vs)
         tag = tag.replace(f'src="img/{rel}"', f'src="img/{vs[-1][1]}" srcset="{ss}"')
+        # sizes="auto" hace que Chrome reserve 300x150 si el <img> no trae width/height
+        # (la foto salía aplastada): siempre ponemos las medidas reales
+        if ' width=' not in tag and rel in DIMS:
+            w, h = DIMS[rel]
+            tag = tag.replace('<img ', f'<img width="{w}" height="{h}" ', 1)
         if 'sizes=' not in tag:
             sizes = '(max-width: 700px) 92vw, 40vw'
             if 'loading="lazy"' in tag:
