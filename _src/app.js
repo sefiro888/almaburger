@@ -224,34 +224,45 @@ $$('[data-stat]').forEach(el => {
   el.textContent = k === 'burgers' ? MENU.hamburguesas.items.length : k === 'desa' ? MENU.desayunos.groups.flatMap(g => g.items).length : k === 'dishes' ? allItems.length : k;
 });
 
-/* ---------- Horario (cocina, por tramos) y estado ---------- */
+/* ---------- Horario del local (abierto / cerrado) y de cocina (por tramos) ---------- */
 const DAYS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'].map(T_);
-// lunes y martes solo desayunos; el cierre de la noche es orientativo
+// horario del local: es el que decide si está abierto o cerrado
+const LOCAL = { 0: [9, 23.5], 1: [8, 23], 2: [8, 23], 3: [8, 23], 4: [8, 23], 5: [8, 24], 6: [9, 24] };
+// cocina: lunes y martes solo desayunos; el cierre de la noche es orientativo
 const HOURS = { 0: [[9, 15.5], [19.5, 23]], 1: [[8, 12]], 2: [[8, 12]], 3: [[8, 15.5], [19.5, 23]], 4: [[8, 15.5], [19.5, 23]], 5: [[8, 15.5], [19.5, 23.5]], 6: [[9, 15.5], [19.5, 23.5]] };
 const fmt = h => `${String(Math.floor(h) % 24).padStart(2, '0')}:${h % 1 ? '30' : '00'}`;
 const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
 const today = now.getDay(), hr = now.getHours() + now.getMinutes() / 60;
+const ORDER = [1, 2, 3, 4, 5, 6, 0];
 const hoursEl = $('#hours');
 if (hoursEl) {
-  hoursEl.innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}${d === 1 || d === 2 ? ` <small>${T_('(solo desayunos)')}</small>` : ''}</span><span>${HOURS[d].map(([o, c]) => `${fmt(o)} – ${fmt(c)}`).join(' · ')}</span></li>`).join('');
+  hoursEl.innerHTML = ORDER.map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}</span><span>${fmt(LOCAL[d][0])} – ${fmt(LOCAL[d][1])}</span></li>`).join('');
   $('#todayLabel').textContent = T_('hoy, ') + DAYS[today].toLowerCase();
 }
+const kitEl = $('#kitchen');
+if (kitEl) kitEl.innerHTML = ORDER.map(d => `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}${d === 1 || d === 2 ? ` <small>${T_('(solo desayunos)')}</small>` : ''}</span><span>${HOURS[d].map(([o, c]) => `${fmt(o)} – ${fmt(c)}`).join(' · ')}</span></li>`).join('');
+const [lo, lc] = LOCAL[today];
+const localOpen = hr >= lo && hr < lc;
 const curSlot = HOURS[today].find(([o, c]) => hr >= o && hr < c);
-const nextOpenTxt = (() => {
-  const later = HOURS[today].find(([o]) => hr < o);
-  if (later) return T_('hoy a las {h}').replace('{h}', fmt(later[0]));
-  return T_('mañana a las {h}').replace('{h}', fmt(HOURS[(today + 1) % 7][0][0]));
-})();
+const laterSlot = HOURS[today].find(([o]) => hr < o);
+const nextOpenTxt = hr < lo ? T_('hoy a las {h}').replace('{h}', fmt(lo)) : T_('mañana a las {h}').replace('{h}', fmt(LOCAL[(today + 1) % 7][0]));
 const st = $('#openStatus');
 if (st) {
-  st.textContent = curSlot ? T_('Abierto ahora · hasta las {h}').replace('{h}', fmt(curSlot[1])) : T_('Cerrado ahora · abrimos {x}').replace('{x}', nextOpenTxt);
-  st.previousElementSibling.classList.toggle('on', !!curSlot);
+  const pill = st.parentElement;
+  let sub = '';
+  if (localOpen && !curSlot) sub = laterSlot ? T_('Cocina desde las {h}').replace('{h}', fmt(laterSlot[0])) : T_('Cocina cerrada por hoy');
+  st.innerHTML = localOpen
+    ? `<b class="st__big">${T_('¡Abierto!')}</b><span class="st__txt">${T_('hasta las {h}').replace('{h}', fmt(lc))}${sub ? ` · ${sub}` : ''}</span>`
+    : `<b class="st__big">${T_('Cerrado')}</b><span class="st__txt">${T_('abrimos {x}').replace('{x}', nextOpenTxt)}</span>`;
+  pill.classList.add('status', localOpen ? 'is-open' : 'is-closed');
+  pill.insertAdjacentHTML('beforeend', `<span class="st__emo" aria-hidden="true">${localOpen ? '🍔' : '😴'}</span>`);
+  st.previousElementSibling.classList.toggle('on', localOpen);
 }
 $$('.yr').forEach(e => e.textContent = new Date().getFullYear());
 
 /* ---------- Pedido por WhatsApp ---------- */
 const WA = '34747486092';
-const openNow = !!curSlot;
+const openNow = localOpen;
 const nextOpen = nextOpenTxt;
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem('alma-cart2') || '[]'); } catch (e) { cart = []; }

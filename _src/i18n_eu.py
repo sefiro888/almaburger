@@ -321,6 +321,7 @@ TXT = {
     'La hora de cierre puede variar según el día. Si vienes tarde, llámanos o escríbenos antes.':
         'Itxiera-ordua egunaren arabera alda daiteke. Berandu etortzekotan, deitu edo idatzi lehenago.',
     'Reparto a domicilio': 'Etxera banaketa',
+    'Horario de cocina': 'Sukaldearen ordutegia',
     'Miércoles, jueves y domingo': 'Asteazkena, osteguna eta igandea',
     'Viernes y sábado': 'Ostirala eta larunbata',
     'Lunes y martes': 'Astelehena eta asteartea',
@@ -412,7 +413,7 @@ RAW = [
     ('>¿Quieres trabajar con nosotros? Escríbenos por <a ', '>Gurekin lan egin nahi duzu? Idatzi iezaguzu <a '),
     ('>WhatsApp</a> o pásate por el local.</p>', '>WhatsAppez</a> edo pasa zaitez lokaletik.</p>'),
     ('>¿No sabes qué pedir? <', '>Ez dakizu zer eskatu? <'),
-    ('>Horario <small id="todayLabel"', '>Ordutegia <small id="todayLabel"'),
+    ('>Horario del local <small id="todayLabel"', '>Lokalaren ordutegia <small id="todayLabel"'),
     ('>HAMBURGUESAS · DESAYUNOS · ALMA · <', '>HANBURGESAK · GOSARIAK · ALMA · <'),
     ('>ALMA · TODO LO QUE SOMOS · EN CADA BOCADO · <', '>ALMA · GAREN GUZTIA · AHOKADA BAKOITZEAN · <'),
     ('>Pulsa <b>+</b> en cualquier plato de la carta.<', '>Sakatu <b>+</b> kartako edozein plateretan.<'),
@@ -533,6 +534,8 @@ JS.update({
     '(solo desayunos)': '(gosariak bakarrik)', 'hoy, ': 'gaur, ',
     'Abierto ahora · hasta las {h}': 'Irekita orain · {h} arte', 'Cerrado ahora · abrimos {x}': 'Itxita orain · irekiera: {x}',
     'hoy a las {h}': 'gaur, {h}', 'mañana a las {h}': 'bihar, {h}',
+    '¡Abierto!': 'Irekita!', 'Cerrado': 'Itxita', 'hasta las {h}': '{h} arte', 'abrimos {x}': 'irekiera: {x}',
+    'Cocina desde las {h}': 'Sukaldea {h}etik aurrera', 'Cocina cerrada por hoy': 'Sukaldea itxita gaur',
     # ficha del plato
     'Imagen orientativa generada por IA': 'AAk sortutako irudi orientagarria', 'Plato anterior': 'Aurreko platera', 'Plato siguiente': 'Hurrengo platera',
     'Cerrar': 'Itxi', 'Menos': 'Gutxiago', 'Más': 'Gehiago',

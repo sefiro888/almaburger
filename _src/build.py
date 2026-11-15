@@ -710,9 +710,11 @@ def visitanos():
         <a class="btn btn--line" href="tel:+34747486092">747 48 60 92</a>
         <a class="btn btn--line" href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a>
       </div>
-      <h3 class="h reveal" id="horario">Horario <small id="todayLabel" style="font-weight:500;opacity:.7;font-size:.9rem;margin-left:8px"></small></h3>
+      <h3 class="h reveal" id="horario">Horario del local <small id="todayLabel" style="font-weight:500;opacity:.7;font-size:.9rem;margin-left:8px"></small></h3>
       <ul class="hours reveal" id="hours"></ul>
       <p class="fine">La hora de cierre puede variar según el día. Si vienes tarde, llámanos o escríbenos antes.</p>
+      <h3 class="h reveal" id="cocina">Horario de cocina</h3>
+      <ul class="hours reveal" id="kitchen"></ul>
       <h3 class="h reveal" id="reparto">Reparto a domicilio</h3>
       <ul class="hours reveal"><li><span>Miércoles, jueves y domingo</span><span>19:30 – 23:00</span></li><li><span>Viernes y sábado</span><span>19:30 – 23:30</span></li><li><span>Lunes y martes</span><span>Sin reparto</span></li></ul>
       <p class="fine">Los desayunos no tienen reparto. De momento, los pedidos online se pagan en el local.</p>
