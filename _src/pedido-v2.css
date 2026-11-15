@@ -1416,7 +1416,7 @@ body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 .status.is-closed .dot{background:#ff8f7a}
 .status .st__mascot{position:absolute;right:-26px;bottom:-5px;width:64px;height:auto;transform-origin:50% 95%;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2))}
 .status.is-open .st__mascot{animation:stHop 2.6s ease-in-out infinite}
-.status.is-closed .st__mascot{opacity:.8;transform:rotate(8deg)}
+.status.is-closed .st__mascot{width:56px;transform:rotate(4deg)}
 .status.is-closed::after{content:'z z z';position:absolute;right:-32px;top:-22px;font-weight:900;font-size:.8rem;letter-spacing:2px;color:var(--ink);animation:stZz 3s ease-in-out infinite}
 @keyframes stRing{0%{transform:scale(.55);opacity:.9}100%{transform:scale(1.7);opacity:0}}
 @keyframes stHop{0%,100%{transform:rotate(-3deg)}8%{transform:translateY(-8px) rotate(4deg)}16%{transform:rotate(-3deg)}24%{transform:translateY(-5px) rotate(2deg)}32%,100%{transform:rotate(-3deg)}}
