@@ -255,7 +255,7 @@ if (st) {
     ? `<b class="st__big">${T_('¡Abierto!')}</b><span class="st__txt">${T_('hasta las {h}').replace('{h}', fmt(lc))}${sub ? ` · ${sub}` : ''}</span>`
     : `<b class="st__big">${T_('Cerrado')}</b><span class="st__txt">${T_('abrimos {x}').replace('{x}', nextOpenTxt)}</span>`;
   pill.classList.add('status', localOpen ? 'is-open' : 'is-closed');
-  pill.insertAdjacentHTML('beforeend', `<span class="st__emo" aria-hidden="true">${localOpen ? '🍔' : '😴'}</span>`);
+  pill.insertAdjacentHTML('beforeend', `<img class="st__mascot" src="img/${localOpen ? 'mascot.png' : 'mascot-sleep.png'}" onerror="this.onerror=null;this.src='img/mascot.png'" alt="" width="399" height="343">`);
   st.previousElementSibling.classList.toggle('on', localOpen);
 }
 $$('.yr').forEach(e => e.textContent = new Date().getFullYear());
