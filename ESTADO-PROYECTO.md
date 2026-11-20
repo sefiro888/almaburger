@@ -69,7 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
-| (este) | **Material nuevo de la clienta (20/11)**: La Matru 15,50 €, La Reinita 18,00 €; precios nuevos de tostadas (6, 7, 9 y 11) y matchas; bebidas nuevas con ube y matcha azul; sección **Fuera de carta** con tres minibrioches (15,50 €); Alitas teriyaki y Ensalada de salmón y aguacate (sin precio todavía); fotos reales de muchos platos y bebidas; **equipo real** en El alma (Abrahan, Lidia, Maddi, Jefferson y Jesús, con su plato favorito); galería ampliada. En desayunos, dentro de cada grupo salen primero los platos con foto. |
+| `8fe93e1` | **Material nuevo de la clienta (20/11)**: La Matru 15,50 €, La Reinita 18,00 €; precios nuevos de tostadas (6, 7, 9 y 11) y matchas; bebidas nuevas con ube y matcha azul; sección **Fuera de carta** con tres minibrioches (15,50 €); Alitas teriyaki y Ensalada de salmón y aguacate (sin precio todavía); fotos reales de muchos platos y bebidas; **equipo real** en El alma (Abrahan, Lidia, Maddi, Jefferson y Jesús, con su plato favorito); galería ampliada. En desayunos, dentro de cada grupo salen primero los platos con foto. |
 | `d55f797` | **Menú superior con más gracia**: subrayado de rotulador que se dibuja al pasar el ratón, inclinación tipo pegatina, la página actual rodeada con un círculo a boli, y un **mini-dibujo por sección** que asoma por encima al pasar el ratón (corazón en El alma, burger en Hamburguesas, taza con humo en Desayunos, cámara con flash en Galería, pin que bota en Visítanos). SVG en `build.py` (`NAV_DOODLES`), CSS al final de `pedido-v2.css`. Ocultos en el menú del móvil. |
 | `8a0f5cd` | Mascota dormida (`mascot-sleep.png`) para el cartel de cerrado. Generada con IA por el usuario, limpiada y recoloreada para cada tema. |
 | `303bd21` | **Cartel abierto/cerrado** rediseñado: píldora crema con borde de tinta (antes era toda verde y chillona); solo el puntito es verde (abierto) o coral (cerrado); la mascota asoma por la derecha saludando, y dormida con «z z z» cuando está cerrado. |
@@ -81,17 +81,11 @@ Historial completo con `git log --oneline`.
 
 ## 6. Pendiente (por dónde seguir)
 
-1. Todo lo de la tabla anterior está **publicado** (subido el 20/11/2026). Para publicar cambios nuevos: commit y `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse.
-2. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
-3. **Dudas del material del 20/11** (preguntadas al usuario; mientras tanto se dejó así):
-   - Jesús y Jefferson: el texto de la clienta dice «Jesús: plancha» y «Jefferson: jefe de cocina», pero los nombres de las fotos dicen lo contrario («jefe de cocina jesus», «plancha jefferson»). Se ha seguido el texto. Para cambiarlo: sección `id="equipo"` en `build.py`, función `alma()`.
-   - Matcha de Mango: la carta dice 5,20 €, pero la foto se llamaba «Matcha mango con crema de mango 6,00€». Se ha puesto 5,20 €.
-   - Alitas teriyaki y Ensalada de salmón y aguacate: sin precio (salen como «Consultar»). La descripción de la ensalada se sacó de la foto. Las alitas teriyaki se añadieron sin quitar las Alitas picantes.
-   - Maddi: falta su plato favorito (de momento su tarjeta no lo muestra). Abrahan y Lidia siguen con ilustración porque no hay foto suya.
-   - Ice Ube Latte, Blue Matcha Latte y Blue Paradise: sin descripción ni foto.
-   - La elección de matcha verde o azul se ha puesto en Ube Matcha Latte, Matcha de Mango, Matcha Berry y Matcha goloso.
-4. **Horario del local**: confirmar con la dueña que el local abre todo el día y que lo partido es solo la cocina. Los horarios están en `app.js`: `LOCAL` (decide abierto/cerrado; las horas de cierre son orientativas porque la dueña dice que «depende») y `HOURS` (cocina por tramos; lunes y martes solo desayunos).
-5. **Datos legales** en `config.json` → `legal`: faltan titular, NIF, email y registro. Mientras estén vacíos salen marcados en amarillo en Aviso legal y Privacidad.
+1. **Publicar**: hay commits en local sin subir (el del material nuevo del 20/11 y los que vengan detrás). Para publicar: `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse. Para ver qué falta por subir: `git status -sb`.
+2. **Preguntas para Alma Burger**: ver el apartado 8. Cuando llegue cada respuesta, aplicarla y tacharla de la lista.
+3. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
+4. Abrahan y Lidia siguen con ilustración en El equipo porque no hay foto suya. Ice Ube Latte, Blue Matcha Latte y Blue Paradise no tienen foto (ninguna bebida trae descripción en la carta de la clienta).
+5. La elección de matcha verde o azul se ha puesto en Ube Matcha Latte, Matcha de Mango, Matcha Berry y Matcha goloso.
 6. **Euskera**: la traducción la hizo una IA; falta que la revise alguien nativo.
 7. **Dominio**: cuando `almaburgers.com` esté activo, cambiar `site_url` en `config.json` y volver a generar (lo usan las vistas previas al compartir).
 8. Ideas comentadas y **no hechas** para el menú: letras que botan al pasar el ratón; la mascota paseando por el menú hasta la página actual; en el menú del móvil, que los enlaces entren escalonados con un botecito.
@@ -104,3 +98,13 @@ Historial completo con `git log --oneline`.
 - Cuando dice «en local» o «enséñame cómo quedaría», se monta y se enseña **sin commitear**; se commitea cuando da el visto bueno.
 - Commits en castellano, que describan el cambio como lo vería la clienta. No hacer `git push` sin que lo pida.
 - Si trae varios cambios de una reunión y dice que irá añadiendo más, se apuntan y se aplican todos juntos en un solo commit cuando lo pida.
+
+## 8. Preguntas para Alma Burger
+
+Lista de dudas que el usuario tiene que preguntar a la dueña. Entre paréntesis, cómo está la web mientras tanto.
+
+1. **Matcha de Mango**: en la carta pone 5,20 €, pero la foto se llamaba «Matcha mango con crema de mango 6,00€». ¿Es otra bebida distinta (con crema de mango) o el Matcha de Mango ha subido a 6,00 €? (En la web: 5,20 €.)
+2. **Alitas teriyaki**: ¿qué precio tienen? ¿Sustituyen a las Alitas picantes con salsa Buffalo o están las dos en la carta? (En la web: salen las dos; las teriyaki como «Consultar».)
+3. **Ensalada de salmón y aguacate**: ¿qué precio tiene y qué lleva exactamente? (En la web: «Consultar», y de descripción «Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces», sacada de la foto.)
+4. **Horario del local**: ¿el local abre todo el día y lo partido es solo la cocina? (En la web: abierto todo el día, con la cocina por tramos.)
+5. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)

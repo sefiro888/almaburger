@@ -142,6 +142,7 @@ TXT = {
     'Su burger favorita: <b>La Cabrona</b>': 'Burger gogokoena: <b>La Cabrona</b>',
     'Su burger favorita: <b>Doble Dosis</b>': 'Burger gogokoena: <b>Doble Dosis</b>',
     'Su hot dog favorito: <b>Hot Gordita</b>': 'Hot dog gogokoena: <b>Hot Gordita</b>',
+    'Su matcha favorito: <b>Blue Paradise</b>': 'Matcha gogokoena: <b>Blue Paradise</b>',
     'Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b>': 'Gosari gogokoena: <b>urdaiazpiko iberiko, ahuakate eta tomate txigorkia</b>',
     'Jefa de sala y encargada': 'Jangela-burua eta arduraduna', 'Jefe de cocina': 'Sukaldeburua', 'Plancha': 'Plantxa',
     # galería: fotos nuevas
