@@ -1,0 +1,99 @@
+# Alma Burger · estado del proyecto
+
+> Documento de traspaso: cómo está la web **a 20 de noviembre de 2026** y por dónde seguir.
+> Si eres una IA (u otra persona) que retoma el proyecto, léelo entero antes de tocar nada.
+
+## 1. Qué es
+
+Web estática de **ALMA Burger & Breakfast**, hamburguesería y desayunos en Kale Nagusia 42, Ordizia (Gipuzkoa).
+El usuario hace de intermediario con la clienta (la dueña del local): le enseña capturas, recoge sus cambios y los trae.
+
+- Repositorio: `https://github.com/sefiro888/almaburger` (rama `main`).
+- Publicada con GitHub Pages en `https://sefiro888.github.io/almaburger/`. El dominio previsto es `almaburgers.com` (aún no activo).
+- Dos versiones de color, mismo contenido: **negro** (negro y crema del logo) y **azul** (azul marino y crema).
+- Dos idiomas: castellano y **euskera** (`*.eu.html`); las páginas legales solo en castellano.
+- Páginas: Inicio · El alma · Hamburguesas (carta) · Desayunos · Galería · Visítanos · 404 · Aviso legal · Privacidad · Cookies.
+- La raíz (`index.html`) es una intro que deja elegir color e idioma; el resto de HTML de la raíz son redirecciones.
+
+## 2. Regla de oro: se edita `_src/`, nunca lo generado
+
+Todo lo que hay en `negro/`, `azul/`, `opcion-1-color/`, `opcion-2-fiel-logo/` y los `.html` de la raíz **lo genera el build** y se borra y se rehace cada vez.
+
+```
+python _src/build.py
+```
+
+Imprime `ok` al terminar. Después hay que commitear tanto `_src/` como las carpetas generadas (GitHub Pages sirve lo generado).
+
+### Qué hay en `_src/`
+
+| Fichero | Para qué |
+|---|---|
+| `build.py` | Genera todas las páginas. Cada página es una función (`home()`, `alma()`, `carta()`, `desayunos()`, `galeria()`, `visitanos()`, `nf()`, `lpage()`). Menú superior en `nav()` y `NAV_DOODLES`. |
+| `app.js` | Todo el JavaScript: la carta (`const MENU`, al principio), filtros, destacados, horario y cartel abierto/cerrado («Horario del local»), pedido, test «¿Qué burger eres?», comentarios de la mascota, Instagram… |
+| `base.css` | Estilos base. |
+| `pedido-v2.css` | Estilos añadidos después; lo más reciente está al **final** del fichero. |
+| `theme-fiel.css` / `theme-navy.css` | Colores del tema negro / azul. |
+| `i18n_eu.py` | Traducciones al euskera (`TXT`, `ATTR`, `RAW`, `JS`). **Todo texto nuevo en castellano necesita su traducción aquí**, o saldrá en castellano en la versión `.eu`. |
+| `config.json` | Enlace de pedidos de Ágora (`agora_url`), URL pública (`site_url`) y datos legales del titular. |
+| `intro.html` | La intro de la raíz (elegir color e idioma). |
+| `img/` | Imágenes comunes. `themes/azul/img/` sobrescribe las que cambian de color en la versión azul (mascota, logos…). |
+| `imgopt.py` | Lo llama el build: genera los WebP y pone ancho y alto en los `<img>`. Usa `_cache/`. |
+| `make_share.py`, `make_theme_assets.py`, `legal.py`, `update_instagram.py` | Utilidades: imagen para compartir, recolorear para el tema azul, textos legales, actualizar `data/instagram.json`. |
+
+El CSS final de cada tema es `fonts.css + base.css + pedido-v2.css + tema`, en ese orden.
+
+### Colores
+
+Usar siempre las variables, nunca colores fijos: `--ink` (tinta: negro o azul marino), `--cream`, `--card` (crema claro de tarjetas), `--accent` / `--accent-fg`. Así todo funciona solo en los dos temas.
+Las únicas excepciones aceptadas son el verde `#2fd16b` y el coral `#ff8f7a` del puntito del cartel abierto/cerrado.
+
+## 3. Cómo verlo en local
+
+Desde la raíz del proyecto:
+
+```
+python -m http.server 5180
+```
+
+y abrir `http://localhost:5180/negro/index.html` (o `/azul/…`, o `/negro/index.eu.html`).
+El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los efectos del menú solo se ven en pantallas de más de 980 px de ancho.
+
+## 4. Estilo y personalidad
+
+- Estética de pegatina: bordes de tinta gruesos, sombras duras desplazadas, ligeras rotaciones, tipografía Big Shoulders Display en mayúsculas.
+- **La mascota**: una hamburguesa con gafas de sol redondas, brazos y piernas de goma, guantes blancos y zapatillas, en estilo de dibujo animado de los años 30 («rubber hose»), solo trazo de tinta y relleno crema. Archivos: `mascot.png`, `mascot-body/legL/legR.png` (versión animada que anda), `mascot-sleep.png` (dormida, abrazada a una almohada), `stickers/`, `ill/` (ilustraciones de cabecera de cada página).
+- Cuando hace falta una imagen nueva, se le da al usuario un **prompt en inglés** para que la genere él con su herramienta, pidiéndole que adjunte `negro/img/mascot.png` como referencia. Luego se limpia el fondo y se recolorea a los dos temas con Python y Pillow (ver el último apartado del historial).
+
+## 5. Últimos cambios (los más recientes primero)
+
+| Commit | Cambio |
+|---|---|
+| `d55f797` | **Menú superior con más gracia**: subrayado de rotulador que se dibuja al pasar el ratón, inclinación tipo pegatina, la página actual rodeada con un círculo a boli, y un **mini-dibujo por sección** que asoma por encima al pasar el ratón (corazón en El alma, burger en Hamburguesas, taza con humo en Desayunos, cámara con flash en Galería, pin que bota en Visítanos). SVG en `build.py` (`NAV_DOODLES`), CSS al final de `pedido-v2.css`. Ocultos en el menú del móvil. |
+| `8a0f5cd` | Mascota dormida (`mascot-sleep.png`) para el cartel de cerrado. Generada con IA por el usuario, limpiada y recoloreada para cada tema. |
+| `303bd21` | **Cartel abierto/cerrado** rediseñado: píldora crema con borde de tinta (antes era toda verde y chillona); solo el puntito es verde (abierto) o coral (cerrado); la mascota asoma por la derecha saludando, y dormida con «z z z» cuando está cerrado. |
+| `d1264f2` | Abierto/cerrado calculado según el horario del local (hora de Madrid); la cocina tiene su horario aparte. |
+| `4bf3818` | Web en euskera. |
+| `29f6393` | Cambios de la reunión con la clienta del 6/11: fuera Just Eat, horarios de cocina por tramos y de reparto, La Reinita burger del mes, La Puerquita como novedad, La Matru a 14,50 €, opción vegetariana, pago en el local, tarjetas ALMA con el color de la web. |
+
+Historial completo con `git log --oneline`.
+
+## 6. Pendiente (por dónde seguir)
+
+1. **Publicar**: los commits `303bd21`, `8a0f5cd` y `d55f797` están en local pero **no se han subido** (`git push`). La web pública aún no tiene el cartel nuevo ni el menú nuevo. Subirlo solo cuando el usuario lo diga.
+2. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
+3. **Precio de La Reinita**: está sin precio (`null` en `MENU`, `app.js`). El usuario se lo preguntará a la dueña.
+4. **Horario del local**: confirmar con la dueña que el local abre todo el día y que lo partido es solo la cocina. Los horarios están en `app.js`: `LOCAL` (decide abierto/cerrado; las horas de cierre son orientativas porque la dueña dice que «depende») y `HOURS` (cocina por tramos; lunes y martes solo desayunos).
+5. **Datos legales** en `config.json` → `legal`: faltan titular, NIF, email y registro. Mientras estén vacíos salen marcados en amarillo en Aviso legal y Privacidad.
+6. **Euskera**: la traducción la hizo una IA; falta que la revise alguien nativo.
+7. **Dominio**: cuando `almaburgers.com` esté activo, cambiar `site_url` en `config.json` y volver a generar (lo usan las vistas previas al compartir).
+8. Ideas comentadas y **no hechas** para el menú: letras que botan al pasar el ratón; la mascota paseando por el menú hasta la página actual; en el menú del móvil, que los enlaces entren escalonados con un botecito.
+9. Si a la clienta no le convence la mascota dormida (la cara es algo más redonda que la original), regenerarla con un modelo de **edición** de imagen a partir de `mascot.png` («ciérrale los ojos y ponle una almohada sin cambiar nada más»).
+
+## 7. Forma de trabajar con el usuario
+
+- Habla en **castellano** y conviene responderle en castellano, con frases claras y sin jerga.
+- Suele pedir **capturas** para enseñárselas a la clienta: hacerlas con buena resolución, sin el aviso de cookies delante, y mostrando el estado concreto (por ejemplo, simular «cerrado» desde la consola del navegador si el local está abierto).
+- Cuando dice «en local» o «enséñame cómo quedaría», se monta y se enseña **sin commitear**; se commitea cuando da el visto bueno.
+- Commits en castellano, que describan el cambio como lo vería la clienta. No hacer `git push` sin que lo pida.
+- Si trae varios cambios de una reunión y dice que irá añadiendo más, se apuntan y se aplican todos juntos en un solo commit cuando lo pida.

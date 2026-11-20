@@ -2,12 +2,14 @@
 
 Web estática de Alma Burger (Kale Nagusia 42, Ordizia). Colores del logo (negro y crema) y tipografía Big Shoulders Display.
 
+> **Estado actual del proyecto, pendientes y cómo seguir: [ESTADO-PROYECTO.md](ESTADO-PROYECTO.md).**
+
 ## Páginas
 Inicio · El alma · Carta · Desayunos · Galería · Visítanos (+ 404)
 
 ## Pedidos
-- Mientras no haya enlace de Ágora: pedido por WhatsApp (recoger o domicilio, pago por Bizum) y Just Eat como alternativa. Reservas por WhatsApp.
-- Cuando haya enlace de Ágora: se pega en `_src/config.json` (`agora_url`) y los botones pasan a «Pedir online».
+- Pedidos online con Ágora (Delivery / Take Away), de momento con pago en el local. El enlace está en `_src/config.json` (`agora_url`).
+- WhatsApp queda para consultas. Just Eat ya no aparece en la web.
 
 ## Regenerar la web
 El código fuente está en `_src/`. Para regenerar las páginas:
