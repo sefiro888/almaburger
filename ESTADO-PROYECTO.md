@@ -69,7 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
-| (siguiente) | Respuestas de la clienta: Alitas teriyaki 14,00 €, Ensalada de salmón y aguacate 14,50 €, y un segundo matcha de mango, **Matcha de Mango con crema** a 6,00 € (se lleva la foto); el normal sigue a 5,20 €. |
+| `c7f9410` | Respuestas de la clienta: Alitas teriyaki 14,00 €, Ensalada de salmón y aguacate 14,50 €, y un segundo matcha de mango, **Matcha de Mango con crema** a 6,00 € (se lleva la foto); el normal sigue a 5,20 €. |
 | `dbe7b7a` | Equipo: las fotos de Jesús y Jefferson estaban cambiadas. Jesús (Plancha, Doble Dosis) es el de la foto en la plancha y Jefferson (Jefe de cocina, Hot Gordita) el que corta cebolla. Ojo: los nombres de esas fotos en `material-nuevo/` estaban al revés. |
 | `a6fc685` | Ficha de un producto **sin foto**: tarjeta crema con puntitos, la mascota entera dando saltitos, el nombre en pegatina y «Foto en camino». Antes salía la mascota desmontada sobre rayas grises. |
 | `8fe93e1` | **Material nuevo de la clienta (20/11)**: La Matru 15,50 €, La Reinita 18,00 €; precios nuevos de tostadas (6, 7, 9 y 11) y matchas; bebidas nuevas con ube y matcha azul; sección **Fuera de carta** con tres minibrioches (15,50 €); Alitas teriyaki y Ensalada de salmón y aguacate (sin precio todavía); fotos reales de muchos platos y bebidas; **equipo real** en El alma (Abrahan, Lidia, Maddi, Jefferson y Jesús, con su plato favorito); galería ampliada. En desayunos, dentro de cada grupo salen primero los platos con foto. |
