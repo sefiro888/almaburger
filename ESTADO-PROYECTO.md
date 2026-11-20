@@ -81,7 +81,7 @@ Historial completo con `git log --oneline`.
 
 ## 6. Pendiente (por dónde seguir)
 
-1. **Publicar**: hay commits en local sin subir (el del material nuevo del 20/11 y los que vengan detrás). Para publicar: `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse. Para ver qué falta por subir: `git status -sb`.
+1. **Publicar**: todo lo de la tabla anterior está publicado (último envío el 20/11/2026, con el material nuevo). Para publicar cambios nuevos: `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse. Para ver qué falta por subir: `git status -sb`.
 2. **Preguntas para Alma Burger**: ver el apartado 8. Cuando llegue cada respuesta, aplicarla y tacharla de la lista.
 3. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
 4. Abrahan y Lidia siguen con ilustración en El equipo porque no hay foto suya. Ice Ube Latte, Blue Matcha Latte y Blue Paradise no tienen foto (ninguna bebida trae descripción en la carta de la clienta).
