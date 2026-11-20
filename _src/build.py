@@ -527,13 +527,14 @@ def alma():
 <section class="sec team" id="equipo">
   <div class="wrap">
     <div class="sec__head"><div><p class="kicker reveal">Las caras de ALMA</p><h2 class="sec__title reveal" style="margin:0">El <em>equipo</em></h2></div>
-      <span class="team__demo reveal">Ejemplo · pendiente de fotos y datos reales</span></div>
-    <p class="chap__p reveal" style="max-width:40em">Quién está detrás de cada burger y cada café. Aquí irán las fotos del equipo, su puesto y su plato favorito de la carta.</p>
+    </div>
+    <p class="chap__p reveal" style="max-width:40em">Quién está detrás de cada burger y cada café, y qué se pide cuando le toca sentarse a comer.</p>
     <div class="team__grid">
-      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/carta.png" alt="" loading="lazy"></figure><h3>Abrahan</h3><p class="tm__role">Cofundador · cocina</p><p class="tm__fav">Su favorita: <b>por confirmar</b></p></article>
-      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/desayunos.png" alt="" loading="lazy"></figure><h3>Lidia</h3><p class="tm__role">Cofundadora · desayunos y sala</p><p class="tm__fav">Su favorito: <b>por confirmar</b></p></article>
-      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/galeria.png" alt="" loading="lazy"></figure><h3>Nombre</h3><p class="tm__role">Plancha y smash burgers</p><p class="tm__fav">Su favorita: <b>por confirmar</b></p></article>
-      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/visitanos.png" alt="" loading="lazy"></figure><h3>Nombre</h3><p class="tm__role">Barra, cafés y matcha</p><p class="tm__fav">Su favorito: <b>por confirmar</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/carta.png" alt="" loading="lazy"></figure><h3>Abrahan</h3><p class="tm__role">Cofundador · cocina</p><p class="tm__fav">Su burger favorita: <b>La Cabrona</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/desayunos.png" alt="" loading="lazy"></figure><h3>Lidia</h3><p class="tm__role">Cofundadora · desayunos y sala</p><p class="tm__fav">Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/maddi.jpg" alt="Maddi en la barra de ALMA con un café con hielo" loading="lazy" width="720" height="720"></figure><h3>Maddi</h3><p class="tm__role">Jefa de sala y encargada</p></article>
+      <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/jefferson.jpg" alt="Jefferson trabajando en la plancha de la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jefferson</h3><p class="tm__role">Jefe de cocina</p><p class="tm__fav">Su hot dog favorito: <b>Hot Gordita</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/jesus.jpg" alt="Jesús cortando cebolla en la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jesús</h3><p class="tm__role">Plancha</p><p class="tm__fav">Su burger favorita: <b>Doble Dosis</b></p></article>
     </div>
     <p class="fine reveal" style="opacity:.7;margin-top:18px">¿Quieres trabajar con nosotros? Escríbenos por <a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a> o pásate por el local.</p>
   </div>
@@ -622,11 +623,11 @@ def desayunos():
 <section class="sec">
   <div class="wrap split">
     <div class="split__pic"><figure class="ph ph--1 reveal"><img src="img/desayuno-capricho.jpg" alt="Pancakes de nutella con fresas" loading="lazy"></figure>
-      <figure class="ph ph--2 reveal"><img src="img/matcha-2.jpg" alt="Matcha con leche" loading="lazy"></figure>
+      <figure class="ph ph--2 reveal"><img src="img/dishes/ube-matcha-latte.jpg" alt="Ube Matcha Latte, nuestra bebida nueva" loading="lazy"></figure>
       <figure class="ph ph--3 reveal"><img src="img/pancake.jpg" alt="Pancakes de Ferrero Rocher" loading="lazy"></figure></div>
     <div><p class="kicker reveal">Para empezar bien el día</p><h2 class="sec__title reveal">Tostadas, pancakes <em>y matcha</em></h2>
       <p class="reveal">Tostadas con toppings de verdad, pancakes golosos, bowls, zumos, smoothies y unos matchas que no vas a poder dejar de pedir.</p>
-      <ul class="dots reveal"><li><span>Espresso</span><i></i><b>1,70€</b></li><li><span>Tostada de salmón y mascarpone</span><i></i><b>7,50€</b></li><li><span>Pancakes de Ferrero</span><i></i><b>6,30€</b></li><li><span>Matcha de mango</span><i></i><b>4,00€</b></li></ul>
+      <ul class="dots reveal"><li><span>Espresso</span><i></i><b>1,70€</b></li><li><span>Tostada de salmón y mascarpone</span><i></i><b>9,00€</b></li><li><span>Pancakes de Ferrero</span><i></i><b>6,30€</b></li><li><span>Matcha de mango</span><i></i><b>5,20€</b></li><li><span>Ube Matcha Latte</span><i></i><b>6,00€</b></li></ul>
     </div>
   </div>
 </section>
@@ -651,14 +652,26 @@ def desayunos():
 
 def galeria():
     ig = [('burger.jpg', 'La Puerquita', 'La Puerquita, doble smash con pulled pork'), ('picoteo.jpg', 'Picoteo con alma', 'Aros de cebolla, patatas y croquetas'),
-          ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas')]
-    des = [('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('tostada.jpg', 'Tostada de salmón', 'Tostada de salmón, aguacate y hummus de remolacha'),
-           ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
+          ('cabrona.jpg', 'Queso de cabra', 'Hamburguesa con queso de cabra y patatas'), ('trufadas.jpg', 'Patatas trufadas', 'Patatas trufadas'),
+          ('dishes/minibrioches.jpg', 'Minibrioches fuera de carta', 'Tres minibrioches rellenos: cochinita tropical, japo crunchy y chipotle hot'),
+          ('dishes/la-picosita-2.jpg', 'La Picosita', 'La Picosita, pollo crispy con miel picante y pepinillo'),
+          ('dishes/alitas-teriyaki.jpg', 'Alitas teriyaki', 'Alitas de pollo en salsa teriyaki con sésamo'),
+          ('dishes/totopos.jpg', 'Totopos', 'Totopos con carne picada, panceta y guacamole'),
+          ('dishes/ensalada-salmon.jpg', 'Ensalada de salmón y aguacate', 'Ensalada de salmón, aguacate, rúcula y nueces'),
+          ('dishes/croquetas.jpg', 'Croquetas caseras', 'Croqueta casera abierta por la mitad')]
+    des = [('dishes/ube-matcha-latte.jpg', 'Ube Matcha Latte', 'Ube Matcha Latte con matcha verde'), ('dishes/tostada-salmon.jpg', 'Tostada de salmón', 'Tostada de salmón y mascarpone con rúcula y hummus de remolacha'),
+           ('dishes/ube-mango-latte.jpg', 'Ube Mango Latte', 'Ube Mango Latte en vaso de cristal'), ('dishes/tostada-hummus.jpg', 'Hummus, aguacate y huevo', 'Tostada de hummus de remolacha, aguacate y huevo a baja temperatura'),
+           ('dishes/ube-matcha-azul.jpg', 'Ube Matcha Latte con matcha azul', 'Ube Matcha Latte con matcha azul'),
+           ('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('dishes/tostada-burrata-jamon.jpg', 'Burrata y jamón ibérico', 'Tostada de burrata, jamón ibérico y tomate seco'),
+           ('dishes/matcha-mango.jpg', 'Matcha de Mango', 'Matcha de mango con naranja deshidratada'), ('dishes/tostada-hongos.jpg', 'Hongos y huevo poché', 'Tostada de hongos, tomate y huevo poché'),
+           ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'),
+           ('dishes/tostada-jamon-aguacate.jpg', 'Jamón ibérico y aguacate', 'Tostada de jamón ibérico, aguacate y tomate'), ('dishes/ice-caramel-latte.jpg', 'Ice Caramel Latte', 'Ice Caramel Latte en vaso de ALMA'),
+           ('dishes/tostada-cacahuete.jpg', 'Cacahuete y plátano', 'Tostada de crema de cacahuete y plátano con sirope de chocolate'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
            ('desayuno-revuelto.jpg', 'Desayuno con pasión', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
     d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
     bur = [('la-reinita', 'La Reinita'), ('la-dori', 'La Dori'), ('la-triplona', 'La Triplona'), ('furia-de-pollo', 'Furia de Pollo'), ('la-matru', 'La Matru'),
-           ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa')]
+           ('la-cabrona', 'La Cabrona'), ('me-derrito', 'Me Derrito'), ('tarta-lotus', 'La Lotus'), ('doble-dosis', 'Doble Dosis'), ('dulce-y-verde', 'Dulce y Verde'), ('gordi-deluxe', 'Gordi Deluxe'), ('picantona', 'Picantona'), ('chickenesa', 'Chickenesa'), ('la-picosita', 'La Picosita')]
 
     stk = [('hola', '¡Hola!'), ('marchando', '¡Marchando!'), ('buenos-dias', 'Buenos días'), ('esta-pica', '¡Esta pica!'), ('nam', 'Ñam'), ('gracias', 'Gracias'), ('hambre', 'Tengo hambre'), ('a-comer', '¡A comer!')]
     sk = ''.join(f'<figure class="sk reveal"><img src="img/stickers/{n}.png" alt="Sticker de la mascota: {t}" loading="lazy" width="256" height="256"><figcaption>{t}</figcaption><span><a href="img/stickers/{n}.png" download>PNG</a> · <a href="img/stickers/{n}.webp" download>WEBP</a></span></figure>' for n, t in stk)

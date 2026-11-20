@@ -18,7 +18,7 @@ const PG = p => EU_ON ? p.replace(/^([a-z0-9-]+)\.html/, '$1.eu.html') : p;
 const P = (n, d, p, t = [], i = '') => ({ n, dn: T_(n), d: T_(d), p, t, i });
 const MENU = {
   hamburguesas: { label: 'Hamburguesas', items: [
-    P('La Reinita', 'Carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y topping de reina pepiada: pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa. Sabor venezolano.', null, ['mes'], 'la-reinita'),
+    P('La Reinita', 'Carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y topping de reina pepiada: pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa. Sabor venezolano.', 18, ['mes'], 'la-reinita'),
     P('La Puerquita', 'Doble carne smash con queso cheddar, jugoso pulled pork en su salsa, salsa Emmy en ambas tapas y ensalada de cebolla encurtida. Todo en pan brioche.', 18.5, ['nuevo'], 'la-puerquita'),
     P('La Básica', 'Carne smash con queso cheddar y cebolla caramelizada', 10, ['clásica'], 'la-basica'),
     P('Doble Dosis', 'Doble carne smash, cheddar, panceta, cebolla caramelizada y salsa BBQ', 15.5, [], 'doble-dosis'),
@@ -26,7 +26,7 @@ const MENU = {
     P('Dulce y Verde', 'Smash burger con queso edam, cebolla caramelizada, panceta crujiente y crema de pistacho', 17.5, ['dulce'], 'dulce-y-verde'),
     P('Gordi Deluxe', 'Smash burger con lechuga, tomate, panceta, huevo frito y nuestra salsa de pepinillos (opción vegetariana)', 14.5, ['veg'], 'gordi-deluxe'),
     P('Me Derrito', 'Smash burger con queso, panceta, salsa mayonesa, chispas de bacon y MUUUUCHA salsa cheddar', 15.5, [], 'me-derrito'),
-    P('La Matru', 'Smash burger con queso, panceta crujiente, mayonesa de trufa y patatas paja', 14.5, ['trufa'], 'la-matru'),
+    P('La Matru', 'Smash burger con queso, panceta crujiente, mayonesa de trufa y patatas paja', 15.5, ['trufa'], 'la-matru'),
     P('La Cabrona', 'Doble carne smash, queso de cabra, mermelada de bacon, cebolla caramelizada, mayonesa japonesa y salsa BBQ al whisky', 16.5, [], 'la-cabrona'),
     P('La Dori', 'Doble carne smash, queso cheddar, salsa de Doritos, mermelada de bacon, Doritos crocantes y salsa de queso cheddar', 17.5, [], 'la-dori'),
     P('La Triplona', 'Triple carne smash, queso cheddar, panceta, salsa cheddar, mermelada de bacon y mayonesa de bacon', 19.5, [], 'la-triplona'),
@@ -34,10 +34,15 @@ const MENU = {
     P('Chickenesa', 'Pechuga de pollo, lechuga, cebolla morada y nuestra salsa ajonesa', 15.5, ['pollo'], 'chickenesa'),
     P('La Diabla', 'Pechuga de pollo con miel y mostaza, cebolla caramelizada, bits picantes y nuestra salsa secreta picante', 16.5, ['pollo', 'picante'], 'la-diabla'),
     P('Furia de Pollo', 'Doble pechuga de pollo con lechuga iceberg, mayonesa, mermelada de bacon, aros de cebolla y salsa BBQ a la miel', 17, ['pollo'], 'furia-de-pollo'),
-    P('La Picosita', 'Pollo crispy bañado en miel con un toque picante, acompañado de una ensalada coleslaw y pepinillo', 17, ['pollo', 'picante', 'nuevo'])
+    P('La Picosita', 'Pollo crispy bañado en miel con un toque picante, acompañado de una ensalada coleslaw y pepinillo', 17, ['pollo', 'picante', 'nuevo'], 'la-picosita')
+  ]},
+  fueracarta: { label: 'Fuera de carta', note: 'Novedades que merecen un hueco en tu mesa: minibrioches rellenos, 4 unidades por ración.', items: [
+    P('Japo Crunchy', 'Mini brioche relleno de jugoso pulled pork, mayonesa japonesa, cebolla crunchy y cebollino fresco (4 unidades)', 15.5, ['nuevo'], 'mini-japo'),
+    P('Chipotle Hot', 'Mini brioche relleno de pulled pork, salsa chipotle con un toque picante y cebolla encurtida (4 unidades)', 15.5, ['nuevo', 'picante'], 'mini-chipotle'),
+    P('Cochinita Tropical', 'Mini pan brioche relleno de cochinita pibil, mayonesa kimchi y un fresco pico de gallo caribeño (4 unidades)', 15.5, ['nuevo'], 'mini-cochinita')
   ]},
   compartir: { label: 'Para compartir', items: [
-    P('Totopos', 'Con guacamole o salsa cheddar, panceta y carne picada', 13.8),
+    P('Totopos', 'Con guacamole o salsa cheddar, panceta y carne picada', 13.8, [], 'totopos'),
     P('Patatas', 'Con queso cheddar y panceta', 8.8, [], 'patatas'),
     P('Patatas trufadas', 'Con mayonesa de trufa y parmesano', 9.5, ['trufa'], 'patatas-trufadas'),
     P('Patatas bravas', 'A elegir alioli o brava', 8.5, [], 'patatas-bravas'),
@@ -45,8 +50,10 @@ const MENU = {
     P('Aros de cebolla', 'Con salsa ajonesa', 5.5, [], 'aros'),
     P('Croquetas', 'Chipirones (4 uds.) o de queso azul con cebolla caramelizada (6 uds.)', 6, [], 'croquetas'),
     P('Alitas picantes', 'Crujientes rebozadas con salsa Buffalo', 12, ['picante', 'pollo'], 'alitas'),
+    P('Alitas teriyaki', 'Alitas de pollo glaseadas en salsa teriyaki con sésamo', null, ['pollo', 'nuevo'], 'alitas-teriyaki'),
     P('Fingers de pollo', 'Picantes con salsa de miel y mostaza', 9.5, ['pollo', 'picante'], 'fingers'),
     P('Ensalada', 'De tomate, rúcula, burrata, pesto y mermelada de tomate', 13.5, ['veg'], 'ensalada'),
+    P('Ensalada de salmón y aguacate', 'Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces', null, ['nuevo'], 'ensalada-salmon'),
     P('Chopitos', 'Acompañado de alioli y limón', 9.5)
   ]},
   bocadillos: { label: 'Bocadillos', note: 'Tortillas rellenas a elegir: chistorra y queso · panceta y queso · txaka · alioli con jamón · salsa cheddar y panceta.', items: [
@@ -82,8 +89,12 @@ const MENU = {
   desayunos: { label: 'Desayunos', note: 'Desayunos hasta las 12:00 (sábado y domingo desde las 9:00).', groups: [
     { g: 'Cafés y bebidas especiales', items: [
       P('Espresso', '', 1.7), P('Cortado', '', 1.8), P('Con leche', '', 1.9), P('Cola Cao', '', 2.2), P('Infusiones', '', 1.9),
-      P('Ice Caramel Latte', '', 3.5), P('Ice Vainilla Latte', '', 3.5),
-      P('Matcha de Mango', '', 4), P('Matcha Berry', '', 4), P('Matcha goloso', '', 4, [], 'matcha-2')
+      P('Ice Ube Latte', '', 5, ['nuevo']), P('Ube Mango Latte', '', 5.4, ['nuevo'], 'ube-mango-latte'),
+      P('Ube Matcha Latte', 'Con matcha verde o azul, a elegir', 6, ['nuevo'], 'ube-matcha-latte'),
+      P('Blue Matcha Latte', '', 5.6, ['nuevo']), P('Blue Paradise', '', 6, ['nuevo']),
+      P('Ice Caramel Latte', '', 3.5, [], 'ice-caramel-latte'), P('Ice Vainilla Latte', '', 3.5),
+      P('Matcha de Mango', 'Con matcha verde o azul, a elegir', 5.2, [], 'matcha-mango'), P('Matcha Berry', 'Con matcha verde o azul, a elegir', 5.2),
+      P('Matcha goloso', 'Con matcha verde o azul, a elegir', 5.4, [], 'matcha-2')
     ]},
     { g: 'Bollería', items: [
       P('Croissant', '', 3), P('Croissant relleno de pistacho', '', 3.5, ['dulce']), P('Croissant relleno de nutella', '', 3.5, ['dulce']),
@@ -95,12 +106,12 @@ const MENU = {
       P('Tomate, jamón ibérico y AOVE', '', 4.3),
       P('Burrata, pesto y tomate cherry', 'Acompañado de rúcula, germinados y sésamo', 7.3, ['veg']),
       P('Queso mascarpone, nueces y miel', '', 5.3, ['veg']),
-      P('Jamón ibérico, aguacate y tomate', 'Acompañado de rúcula, germinados y sésamo', 5.9),
-      P('Crema de cacahuete y plátano', 'Acompañado de pepitas y sirope de chocolate', 4.5, ['dulce']),
-      P('Hummus, aguacate y huevo a baja temperatura', 'Hummus de remolacha, sésamo y cebollino', 6.5),
-      P('Burrata, jamón ibérico y tomate seco', 'Acompañado de rúcula, germinados y sésamo', 7.9),
-      P('Hongos, tomate y huevo poché', 'Acompañado de rúcula, germinados y sésamo', 7.2),
-      P('Salmón y mascarpone', 'Con rúcula, hummus de remolacha, germinados y sésamo', 7.5, [], 'tostada-salmon')
+      P('Jamón ibérico, aguacate y tomate', 'Acompañado de rúcula, germinados y sésamo', 6.5, [], 'tostada-jamon-aguacate'),
+      P('Crema de cacahuete y plátano', 'Acompañado de pepitas y sirope de chocolate', 4.8, ['dulce'], 'tostada-cacahuete'),
+      P('Hummus, aguacate y huevo a baja temperatura', 'Hummus de remolacha, sésamo y cebollino', 6.5, [], 'tostada-hummus'),
+      P('Burrata, jamón ibérico y tomate seco', 'Acompañado de rúcula, germinados y sésamo', 8.5, [], 'tostada-burrata-jamon'),
+      P('Hongos, tomate y huevo poché', 'Acompañado de rúcula, germinados y sésamo', 7.2, [], 'tostada-hongos'),
+      P('Salmón y mascarpone', 'Con rúcula, hummus de remolacha, germinados y sésamo', 9, [], 'tostada-salmon')
     ], note: 'Suplementos: huevo 1,70€ · jamón 2,30€ · aguacate 2,00€ · salmón 2,10€ · burrata 3,50€.' },
     { g: 'Pancakes', items: [
       P('Pancakes de Nutella', 'Acompañado de plátano', 6, ['dulce'], 'pancakes-nutella'),
@@ -139,7 +150,11 @@ const OPTS = {
   'compartir|Croquetas': ['Chipirones (4 uds.)', 'Queso azul y cebolla caramelizada (6 uds.)'],
   'bocadillos|Tortilla': ['De patata', 'Rellena de chistorra y queso', 'Rellena de panceta y queso', 'Rellena de txaka', 'Rellena de alioli con jamón', 'Rellena de salsa cheddar y panceta'],
   'postres|Helado': ['De turrón', 'De caramelo'],
-  'hamburguesas|Gordi Deluxe': ['Normal', 'Versión vegetariana']
+  'hamburguesas|Gordi Deluxe': ['Normal', 'Versión vegetariana'],
+  'desayunos|Ube Matcha Latte': ['Con matcha verde', 'Con matcha azul'],
+  'desayunos|Matcha de Mango': ['Con matcha verde', 'Con matcha azul'],
+  'desayunos|Matcha Berry': ['Con matcha verde', 'Con matcha azul'],
+  'desayunos|Matcha goloso': ['Con matcha verde', 'Con matcha azul']
 };
 const allItems = [];
 const catPhotos = {}, catCount = {};
@@ -191,7 +206,7 @@ if (menuEl) {
     } else if (mode === 'desayunos') {
       groups.forEach((g, k) => {
         if (state.tab !== 'todo' && state.tab !== 'g' + k) return;
-        const its = g.items.filter(matches); if (!its.length) return;
+        const its = g.items.filter(matches).sort((a, b) => !!b.i - !!a.i); if (!its.length) return;
         html += `<h3 class="menu__group">${esc(T_(g.g))}</h3>` + its.map(i => card(i, n++)).join('');
         if (g.note) html += `<div class="menu__note">${esc(T_(g.note))}</div>`;
       });
@@ -649,12 +664,17 @@ if (stageEl) {
     'Pancakes de Nutella': ['Con fresas, que son fruta.'],
     'Matcha goloso': ['Verde que te quiero verde.'],
     'Matcha de Mango': ['Matcha con mango. Atrévete.'],
+    'Ube Matcha Latte': ['Morado y verde… o morado y azul. Tú eliges.'],
+    'Ube Mango Latte': ['Ube y mango. Esto es un atardecer en vaso.'],
+    'Japo Crunchy': ['Cuatro minibrioches. Compartir es opcional.'],
+    'Cochinita Tropical': ['Cochinita pibil con pico de gallo. Viajecito.'],
+    'La Picosita': ['Miel y picante. Equilibrio perfecto.'],
     'Espresso': ['Para despertar.'],
     'Patatas trufadas': ['Huelen a trufa desde aquí.']
   };
   const BY_TAG = [['mes', ['¡La burger del mes! Pídela antes de que se acabe.']], ['nuevo', ['¡Novedad!']], ['picante', ['¡Esta pica!', 'Ojo, que pica. Ten agua cerca.']], ['trufa', ['Huele a trufa desde aquí.']],
     ['dulce', ['Para los golosos.', 'Uy, qué dulce pinta.']], ['pollo', ['Crujiente por fuera, jugoso por dentro.']], ['veg', ['Esta también es para ti.']]];
-  const BY_CAT = { hamburguesas: ['¡Buena elección!', 'Esta tiene buena pinta.'], compartir: ['Para compartir. O no.'], bocadillos: ['Clásico y siempre acierta.'], hotdogs: ['Un hot dog con alma.'], postres: ['Siempre hay hueco para el postre.'], infantil: ['Para los peques.'], desayunos: ['Buenos días con ganas.', 'Así sí empieza el día.'] };
+  const BY_CAT = { hamburguesas: ['¡Buena elección!', 'Esta tiene buena pinta.'], fueracarta: ['Fuera de carta, dentro de tu mesa.'], compartir: ['Para compartir. O no.'], bocadillos: ['Clásico y siempre acierta.'], hotdogs: ['Un hot dog con alma.'], postres: ['Siempre hay hueco para el postre.'], infantil: ['Para los peques.'], desayunos: ['Buenos días con ganas.', 'Así sí empieza el día.'] };
   const pick = a => a[Math.floor(Math.random() * a.length)];
   let last = '';
   const lineFor = it => {
