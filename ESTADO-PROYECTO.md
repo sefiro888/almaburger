@@ -80,7 +80,7 @@ Historial completo con `git log --oneline`.
 
 ## 6. Pendiente (por dónde seguir)
 
-1. **Publicar**: los commits `303bd21`, `8a0f5cd` y `d55f797` están en local pero **no se han subido** (`git push`). La web pública aún no tiene el cartel nuevo ni el menú nuevo. Subirlo solo cuando el usuario lo diga.
+1. Todo lo de la tabla anterior está **publicado** (subido el 20/11/2026). Para publicar cambios nuevos: commit y `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse.
 2. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
 3. **Precio de La Reinita**: está sin precio (`null` en `MENU`, `app.js`). El usuario se lo preguntará a la dueña.
 4. **Horario del local**: confirmar con la dueña que el local abre todo el día y que lo partido es solo la cocina. Los horarios están en `app.js`: `LOCAL` (decide abierto/cerrado; las horas de cierre son orientativas porque la dueña dice que «depende») y `HOURS` (cocina por tramos; lunes y martes solo desayunos).
