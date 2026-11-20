@@ -27,8 +27,20 @@ def walker(w=100, t=26):
             f'<div class="walker__flip">{rig(w)}</div></div></div>')
 
 
+# mini-dibujos del menú: trazo currentColor y relleno crema, como la mascota
+_ND_SVG = '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{}</svg>'
+NAV_DOODLES = {
+    'alma': _ND_SVG.format('<path d="M16 27C7 20 4.5 14.5 7 10.5c2.2-3.6 7-3.3 9 .5 2-3.8 6.8-4.1 9-.5 2.5 4 0 9.5-9 16.5Z" fill="var(--card)"/>'),
+    'carta': _ND_SVG.format('<path d="M6 15c0-5 4.5-8 10-8s10 3 10 8z" fill="var(--card)"/><path d="M6 18.5q2.5-2.5 5 0t5 0 5 0 5 0"/><rect x="6" y="21.5" width="20" height="5.5" rx="2.75" fill="var(--card)"/>'),
+    'desayunos': _ND_SVG.format('<path class="nd__steam" d="M13 3q-1.8 2.5 0 5M19 3q-1.8 2.5 0 5"/><path d="M8 12h16v7a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7Z" fill="var(--card)"/><path d="M24 14h2a3.5 3.5 0 0 1 0 7h-2.5"/>'),
+    'galeria': _ND_SVG.format('<path class="nd__flash" d="M27 7l2.5-2.5M28.5 11h3.5M24.5 5.5V2"/><path d="M11 13v-2.5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2V13" fill="var(--card)"/><rect x="4" y="12.5" width="24" height="14.5" rx="4" fill="var(--card)"/><circle cx="16" cy="19.5" r="5" fill="var(--card)"/><circle cx="16" cy="19.5" r="1.6"/>'),
+    'visitanos': _ND_SVG.format('<path d="M16 29c-6.5-7-9.5-11.5-9.5-16a9.5 9.5 0 0 1 19 0c0 4.5-3 9-9.5 16Z" fill="var(--card)"/><circle cx="16" cy="12.5" r="3.5" fill="var(--card)"/>'),
+}
+
+
 def nav(active):
-    links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if k == active else ""}>{t}</a>' for h, t, k in PAGES)
+    links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if k == active else ""}>{t}'
+                    f'<span class="nd nd--{k}" aria-hidden="true">{NAV_DOODLES[k]}</span></a>' for h, t, k in PAGES)
     return f'''<header class="nav" id="nav">
   <a class="nav__logo" href="index.html" aria-label="ALMA Burger &amp; Breakfast, inicio">{rig(46, 'rig--still')}<img class="nav__logoimg" src="img/logo.png" alt="ALMA Burger &amp; Breakfast" width="112" height="81"></a>
   <nav class="nav__links" aria-label="Principal">{links}</nav>
