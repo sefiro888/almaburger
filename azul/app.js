@@ -91,7 +91,7 @@ const MENU = {
       P('Espresso', '', 1.7), P('Cortado', '', 1.8), P('Con leche', '', 1.9), P('Cola Cao', '', 2.2), P('Infusiones', '', 1.9),
       P('Ice Ube Latte', '', 5, ['nuevo']), P('Ube Mango Latte', '', 5.4, ['nuevo'], 'ube-mango-latte'),
       P('Ube Matcha Latte', 'Con matcha verde o azul, a elegir', 6, ['nuevo'], 'ube-matcha-latte'),
-      P('Blue Matcha Latte', '', 5.6, ['nuevo']), P('Blue Paradise', '', 6, ['nuevo']),
+      P('Blue Matcha Latte', '', 5.6, ['nuevo']), P('Blue Paradise', '', 6, ['nuevo'], 'blue-paradise'),
       P('Ice Caramel Latte', '', 3.5, [], 'ice-caramel-latte'), P('Ice Vainilla Latte', '', 3.5),
       P('Matcha de Mango', 'Con matcha verde o azul, a elegir', 5.2),
       P('Matcha de Mango con crema', 'Con crema de mango por encima. Matcha verde o azul, a elegir', 6, [], 'matcha-mango'), P('Matcha Berry', 'Con matcha verde o azul, a elegir', 5.2),

@@ -144,7 +144,7 @@ TXT = {
     'Su hot dog favorito: <b>Hot Gordita</b>': 'Hot dog gogokoena: <b>Hot Gordita</b>',
     'Su matcha favorito: <b>Blue Paradise</b>': 'Matcha gogokoena: <b>Blue Paradise</b>',
     'Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b>': 'Gosari gogokoena: <b>urdaiazpiko iberiko, ahuakate eta tomate txigorkia</b>',
-    'Jefa de sala y encargada': 'Jangela-burua eta arduraduna', 'Jefe de cocina': 'Sukaldeburua', 'Plancha': 'Plantxa',
+    'Jefa de sala y encargada': 'Jangela-burua eta arduraduna', 'Jefe de cocina': 'Sukaldeburua', 'Plancha': 'Plantxa', 'Plancha y encargado': 'Plantxa eta arduraduna',
     # galería: fotos nuevas
     'Minibrioches fuera de carta': 'Kartaz kanpoko brioche txikiak', 'Alitas teriyaki': 'Teriyaki hegaltxoak',
     'Ensalada de salmón y aguacate': 'Izokin eta ahuakate entsalada', 'Hummus, aguacate y huevo': 'Hummusa, ahuakatea eta arrautza',
@@ -383,6 +383,7 @@ ATTR = {
     'Ice Caramel Latte en vaso de ALMA': 'Ice Caramel Latte ALMAko edalontzian',
     'Tostada de crema de cacahuete y plátano con sirope de chocolate': 'Kakahuete-krema eta platano txigorkia, txokolate-siroparekin',
     'Ube Matcha Latte, nuestra bebida nueva': 'Ube Matcha Latte, gure edari berria',
+    'Blue Paradise con espuma de frutos rojos': 'Blue Paradise, fruitu gorrien aparrarekin',
     'Abrir menú': 'Ireki menua',
     'Migas de pan': 'Ogi-apurrak',
     'Información legal': 'Lege-informazioa',

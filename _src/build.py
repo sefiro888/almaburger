@@ -534,7 +534,7 @@ def alma():
       <article class="tm reveal"><figure class="tm__pic"><img src="img/ill/desayunos.png" alt="" loading="lazy"></figure><h3>Lidia</h3><p class="tm__role">Cofundadora · desayunos y sala</p><p class="tm__fav">Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b></p></article>
       <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/maddi.jpg" alt="Maddi en la barra de ALMA con un café con hielo" loading="lazy" width="720" height="720"></figure><h3>Maddi</h3><p class="tm__role">Jefa de sala y encargada</p><p class="tm__fav">Su matcha favorito: <b>Blue Paradise</b></p></article>
       <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/jefferson.jpg" alt="Jefferson cortando cebolla en la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jefferson</h3><p class="tm__role">Jefe de cocina</p><p class="tm__fav">Su hot dog favorito: <b>Hot Gordita</b></p></article>
-      <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/jesus.jpg" alt="Jesús trabajando en la plancha de la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jesús</h3><p class="tm__role">Plancha</p><p class="tm__fav">Su burger favorita: <b>Doble Dosis</b></p></article>
+      <article class="tm reveal"><figure class="tm__pic tm__pic--photo"><img src="img/team/jesus.jpg" alt="Jesús trabajando en la plancha de la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jesús</h3><p class="tm__role">Plancha y encargado</p><p class="tm__fav">Su burger favorita: <b>Doble Dosis</b></p></article>
     </div>
     <p class="fine reveal" style="opacity:.7;margin-top:18px">¿Quieres trabajar con nosotros? Escríbenos por <a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a> o pásate por el local.</p>
   </div>
@@ -661,12 +661,12 @@ def galeria():
           ('dishes/croquetas.jpg', 'Croquetas caseras', 'Croqueta casera abierta por la mitad')]
     des = [('dishes/ube-matcha-latte.jpg', 'Ube Matcha Latte', 'Ube Matcha Latte con matcha verde'), ('dishes/tostada-salmon.jpg', 'Tostada de salmón', 'Tostada de salmón y mascarpone con rúcula y hummus de remolacha'),
            ('dishes/ube-mango-latte.jpg', 'Ube Mango Latte', 'Ube Mango Latte en vaso de cristal'), ('dishes/tostada-hummus.jpg', 'Hummus, aguacate y huevo', 'Tostada de hummus de remolacha, aguacate y huevo a baja temperatura'),
-           ('dishes/ube-matcha-azul.jpg', 'Ube Matcha Latte con matcha azul', 'Ube Matcha Latte con matcha azul'),
+           ('dishes/ube-matcha-azul.jpg', 'Ube Matcha Latte con matcha azul', 'Ube Matcha Latte con matcha azul'), ('dishes/blue-paradise.jpg', 'Blue Paradise', 'Blue Paradise con espuma de frutos rojos'),
            ('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('dishes/tostada-burrata-jamon.jpg', 'Burrata y jamón ibérico', 'Tostada de burrata, jamón ibérico y tomate seco'),
            ('dishes/matcha-mango.jpg', 'Matcha de Mango con crema', 'Matcha de mango con crema de mango y naranja deshidratada'), ('dishes/tostada-hongos.jpg', 'Hongos y huevo poché', 'Tostada de hongos, tomate y huevo poché'),
            ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'),
            ('dishes/tostada-jamon-aguacate.jpg', 'Jamón ibérico y aguacate', 'Tostada de jamón ibérico, aguacate y tomate'), ('dishes/ice-caramel-latte.jpg', 'Ice Caramel Latte', 'Ice Caramel Latte en vaso de ALMA'),
-           ('dishes/tostada-cacahuete.jpg', 'Cacahuete y plátano', 'Tostada de crema de cacahuete y plátano con sirope de chocolate'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),
+           ('dishes/tostada-cacahuete.jpg', 'Cacahuete y plátano', 'Tostada de crema de cacahuete y plátano con sirope de chocolate'),
            ('desayuno-revuelto.jpg', 'Desayuno con pasión', 'Huevos revueltos con tomate, tostada y hummus de remolacha')]
     d = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in des)
     a = ''.join(f'<figure class="mi reveal"><img src="img/{f}" alt="{alt}" loading="lazy"><figcaption>{c}</figcaption></figure>' for f, c, alt in ig)
