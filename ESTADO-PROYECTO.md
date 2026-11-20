@@ -69,6 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
+| (siguiente) | Respuestas de la clienta: Alitas teriyaki 14,00 €, Ensalada de salmón y aguacate 14,50 €, y un segundo matcha de mango, **Matcha de Mango con crema** a 6,00 € (se lleva la foto); el normal sigue a 5,20 €. |
 | `dbe7b7a` | Equipo: las fotos de Jesús y Jefferson estaban cambiadas. Jesús (Plancha, Doble Dosis) es el de la foto en la plancha y Jefferson (Jefe de cocina, Hot Gordita) el que corta cebolla. Ojo: los nombres de esas fotos en `material-nuevo/` estaban al revés. |
 | `a6fc685` | Ficha de un producto **sin foto**: tarjeta crema con puntitos, la mascota entera dando saltitos, el nombre en pegatina y «Foto en camino». Antes salía la mascota desmontada sobre rayas grises. |
 | `8fe93e1` | **Material nuevo de la clienta (20/11)**: La Matru 15,50 €, La Reinita 18,00 €; precios nuevos de tostadas (6, 7, 9 y 11) y matchas; bebidas nuevas con ube y matcha azul; sección **Fuera de carta** con tres minibrioches (15,50 €); Alitas teriyaki y Ensalada de salmón y aguacate (sin precio todavía); fotos reales de muchos platos y bebidas; **equipo real** en El alma (Abrahan, Lidia, Maddi, Jefferson y Jesús, con su plato favorito); galería ampliada. En desayunos, dentro de cada grupo salen primero los platos con foto. |
@@ -86,7 +87,7 @@ Historial completo con `git log --oneline`.
 1. **Publicar**: todo lo de la tabla anterior está publicado (último envío el 20/11/2026, con el material nuevo). Para publicar cambios nuevos: `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse. Para ver qué falta por subir: `git status -sb`.
 2. **Preguntas para Alma Burger**: ver el apartado 8. Cuando llegue cada respuesta, aplicarla y tacharla de la lista.
 3. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
-4. Abrahan y Lidia siguen con ilustración en El equipo porque no hay foto suya. Ice Ube Latte, Blue Matcha Latte y Blue Paradise no tienen foto (ninguna bebida trae descripción en la carta de la clienta).
+4. Abrahan y Lidia siguen con ilustración en El equipo porque no hay foto suya. Ice Ube Latte, Blue Matcha Latte y Blue Paradise no tienen foto (ninguna bebida trae descripción en la carta de la clienta). Del **Blue Paradise** el usuario tiene foto: falta que la deje en `material-nuevo/`.
 5. La elección de matcha verde o azul se ha puesto en Ube Matcha Latte, Matcha de Mango, Matcha Berry y Matcha goloso.
 6. **Euskera**: la traducción la hizo una IA; falta que la revise alguien nativo.
 7. **Dominio**: cuando `almaburgers.com` esté activo, cambiar `site_url` en `config.json` y volver a generar (lo usan las vistas previas al compartir).
@@ -105,9 +106,7 @@ Historial completo con `git log --oneline`.
 
 Lista de dudas que el usuario tiene que preguntar a la dueña. Entre paréntesis, cómo está la web mientras tanto.
 
-Ya resuelto: el **horario** está confirmado. El local abre todo el día y lo que va por tramos es solo la cocina, tal como está en la web (`LOCAL` y `HOURS` en `app.js`).
+Ya resuelto (20/11): el **horario** (local abierto todo el día, cocina por tramos); las **alitas teriyaki** (14,00 €, son otro tipo de alitas y conviven con las picantes); el precio de la **ensalada de salmón** (14,50 €); y el **matcha de mango**, que son dos: el normal a 5,20 € y el «con crema» a 6,00 € (la foto es la del de crema).
 
-1. **Matcha de Mango**: en la carta pone 5,20 €, pero la foto se llamaba «Matcha mango con crema de mango 6,00€». ¿Es otra bebida distinta (con crema de mango) o el Matcha de Mango ha subido a 6,00 €? (En la web: 5,20 €.)
-2. **Alitas teriyaki**: ¿qué precio tienen? ¿Sustituyen a las Alitas picantes con salsa Buffalo o están las dos en la carta? (En la web: salen las dos; las teriyaki como «Consultar».)
-3. **Ensalada de salmón y aguacate**: ¿qué precio tiene y qué lleva exactamente? (En la web: «Consultar», y de descripción «Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces», sacada de la foto.)
-4. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)
+1. **Ensalada de salmón y aguacate**: ¿qué lleva exactamente? (En la web: «Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces», sacado de la foto.)
+2. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)

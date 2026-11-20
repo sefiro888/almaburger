@@ -663,7 +663,7 @@ def galeria():
            ('dishes/ube-mango-latte.jpg', 'Ube Mango Latte', 'Ube Mango Latte en vaso de cristal'), ('dishes/tostada-hummus.jpg', 'Hummus, aguacate y huevo', 'Tostada de hummus de remolacha, aguacate y huevo a baja temperatura'),
            ('dishes/ube-matcha-azul.jpg', 'Ube Matcha Latte con matcha azul', 'Ube Matcha Latte con matcha azul'),
            ('desayuno-capricho.jpg', 'Pancakes de Nutella', 'Pancakes de nutella con fresas'), ('dishes/tostada-burrata-jamon.jpg', 'Burrata y jamón ibérico', 'Tostada de burrata, jamón ibérico y tomate seco'),
-           ('dishes/matcha-mango.jpg', 'Matcha de Mango', 'Matcha de mango con naranja deshidratada'), ('dishes/tostada-hongos.jpg', 'Hongos y huevo poché', 'Tostada de hongos, tomate y huevo poché'),
+           ('dishes/matcha-mango.jpg', 'Matcha de Mango con crema', 'Matcha de mango con crema de mango y naranja deshidratada'), ('dishes/tostada-hongos.jpg', 'Hongos y huevo poché', 'Tostada de hongos, tomate y huevo poché'),
            ('pancake.jpg', 'Pancakes de Ferrero', 'Pancakes con crema de Ferrero Rocher'),
            ('dishes/tostada-jamon-aguacate.jpg', 'Jamón ibérico y aguacate', 'Tostada de jamón ibérico, aguacate y tomate'), ('dishes/ice-caramel-latte.jpg', 'Ice Caramel Latte', 'Ice Caramel Latte en vaso de ALMA'),
            ('dishes/tostada-cacahuete.jpg', 'Cacahuete y plátano', 'Tostada de crema de cacahuete y plátano con sirope de chocolate'), ('matcha-2.jpg', 'Matcha goloso', 'Matcha con leche en vaso'),

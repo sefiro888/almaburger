@@ -50,10 +50,10 @@ const MENU = {
     P('Aros de cebolla', 'Con salsa ajonesa', 5.5, [], 'aros'),
     P('Croquetas', 'Chipirones (4 uds.) o de queso azul con cebolla caramelizada (6 uds.)', 6, [], 'croquetas'),
     P('Alitas picantes', 'Crujientes rebozadas con salsa Buffalo', 12, ['picante', 'pollo'], 'alitas'),
-    P('Alitas teriyaki', 'Alitas de pollo glaseadas en salsa teriyaki con sésamo', null, ['pollo', 'nuevo'], 'alitas-teriyaki'),
+    P('Alitas teriyaki', 'Alitas de pollo glaseadas en salsa teriyaki con sésamo', 14, ['pollo', 'nuevo'], 'alitas-teriyaki'),
     P('Fingers de pollo', 'Picantes con salsa de miel y mostaza', 9.5, ['pollo', 'picante'], 'fingers'),
     P('Ensalada', 'De tomate, rúcula, burrata, pesto y mermelada de tomate', 13.5, ['veg'], 'ensalada'),
-    P('Ensalada de salmón y aguacate', 'Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces', null, ['nuevo'], 'ensalada-salmon'),
+    P('Ensalada de salmón y aguacate', 'Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces', 14.5, ['nuevo'], 'ensalada-salmon'),
     P('Chopitos', 'Acompañado de alioli y limón', 9.5)
   ]},
   bocadillos: { label: 'Bocadillos', note: 'Tortillas rellenas a elegir: chistorra y queso · panceta y queso · txaka · alioli con jamón · salsa cheddar y panceta.', items: [
@@ -93,7 +93,8 @@ const MENU = {
       P('Ube Matcha Latte', 'Con matcha verde o azul, a elegir', 6, ['nuevo'], 'ube-matcha-latte'),
       P('Blue Matcha Latte', '', 5.6, ['nuevo']), P('Blue Paradise', '', 6, ['nuevo']),
       P('Ice Caramel Latte', '', 3.5, [], 'ice-caramel-latte'), P('Ice Vainilla Latte', '', 3.5),
-      P('Matcha de Mango', 'Con matcha verde o azul, a elegir', 5.2, [], 'matcha-mango'), P('Matcha Berry', 'Con matcha verde o azul, a elegir', 5.2),
+      P('Matcha de Mango', 'Con matcha verde o azul, a elegir', 5.2),
+      P('Matcha de Mango con crema', 'Con crema de mango por encima. Matcha verde o azul, a elegir', 6, [], 'matcha-mango'), P('Matcha Berry', 'Con matcha verde o azul, a elegir', 5.2),
       P('Matcha goloso', 'Con matcha verde o azul, a elegir', 5.4, [], 'matcha-2')
     ]},
     { g: 'Bollería', items: [
@@ -153,6 +154,7 @@ const OPTS = {
   'hamburguesas|Gordi Deluxe': ['Normal', 'Versión vegetariana'],
   'desayunos|Ube Matcha Latte': ['Con matcha verde', 'Con matcha azul'],
   'desayunos|Matcha de Mango': ['Con matcha verde', 'Con matcha azul'],
+  'desayunos|Matcha de Mango con crema': ['Con matcha verde', 'Con matcha azul'],
   'desayunos|Matcha Berry': ['Con matcha verde', 'Con matcha azul'],
   'desayunos|Matcha goloso': ['Con matcha verde', 'Con matcha azul']
 };
