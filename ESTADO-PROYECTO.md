@@ -69,6 +69,8 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
+| (siguiente) | Equipo: las fotos de Jesús y Jefferson estaban cambiadas. Jesús (Plancha, Doble Dosis) es el de la foto en la plancha y Jefferson (Jefe de cocina, Hot Gordita) el que corta cebolla. Ojo: los nombres de esas fotos en `material-nuevo/` estaban al revés. |
+| `a6fc685` | Ficha de un producto **sin foto**: tarjeta crema con puntitos, la mascota entera dando saltitos, el nombre en pegatina y «Foto en camino». Antes salía la mascota desmontada sobre rayas grises. |
 | `8fe93e1` | **Material nuevo de la clienta (20/11)**: La Matru 15,50 €, La Reinita 18,00 €; precios nuevos de tostadas (6, 7, 9 y 11) y matchas; bebidas nuevas con ube y matcha azul; sección **Fuera de carta** con tres minibrioches (15,50 €); Alitas teriyaki y Ensalada de salmón y aguacate (sin precio todavía); fotos reales de muchos platos y bebidas; **equipo real** en El alma (Abrahan, Lidia, Maddi, Jefferson y Jesús, con su plato favorito); galería ampliada. En desayunos, dentro de cada grupo salen primero los platos con foto. |
 | `d55f797` | **Menú superior con más gracia**: subrayado de rotulador que se dibuja al pasar el ratón, inclinación tipo pegatina, la página actual rodeada con un círculo a boli, y un **mini-dibujo por sección** que asoma por encima al pasar el ratón (corazón en El alma, burger en Hamburguesas, taza con humo en Desayunos, cámara con flash en Galería, pin que bota en Visítanos). SVG en `build.py` (`NAV_DOODLES`), CSS al final de `pedido-v2.css`. Ocultos en el menú del móvil. |
 | `8a0f5cd` | Mascota dormida (`mascot-sleep.png`) para el cartel de cerrado. Generada con IA por el usuario, limpiada y recoloreada para cada tema. |
