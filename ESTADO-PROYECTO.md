@@ -103,8 +103,9 @@ Historial completo con `git log --oneline`.
 
 Lista de dudas que el usuario tiene que preguntar a la dueña. Entre paréntesis, cómo está la web mientras tanto.
 
+Ya resuelto: el **horario** está confirmado. El local abre todo el día y lo que va por tramos es solo la cocina, tal como está en la web (`LOCAL` y `HOURS` en `app.js`).
+
 1. **Matcha de Mango**: en la carta pone 5,20 €, pero la foto se llamaba «Matcha mango con crema de mango 6,00€». ¿Es otra bebida distinta (con crema de mango) o el Matcha de Mango ha subido a 6,00 €? (En la web: 5,20 €.)
 2. **Alitas teriyaki**: ¿qué precio tienen? ¿Sustituyen a las Alitas picantes con salsa Buffalo o están las dos en la carta? (En la web: salen las dos; las teriyaki como «Consultar».)
 3. **Ensalada de salmón y aguacate**: ¿qué precio tiene y qué lleva exactamente? (En la web: «Consultar», y de descripción «Rúcula, salmón, aguacate, tomate cherry, cebolla morada y nueces», sacada de la foto.)
-4. **Horario del local**: ¿el local abre todo el día y lo partido es solo la cocina? (En la web: abierto todo el día, con la cocina por tramos.)
-5. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)
+4. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)
