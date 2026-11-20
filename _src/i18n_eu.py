@@ -578,6 +578,7 @@ JS.update({
     'Cuatro minibrioches. Compartir es opcional.': 'Lau brioche txiki. Partekatzea aukerakoa da.',
     'Cochinita pibil con pico de gallo. Viajecito.': 'Cochinita pibila pico de galloarekin. Bidaiatxoa.',
     'Miel y picante. Equilibrio perfecto.': 'Eztia eta pikantea. Oreka perfektua.',
+    'Foto en camino': 'Argazkia bidean',
     # etiquetas y carta
     'Pollo': 'Oilaskoa', 'Picante': 'Pikantea', 'Dulce': 'Gozoa', 'Vegetariano': 'Begetarianoa', 'Trufa': 'Trufa', 'Nuevo': 'Berria',
     'Burger del mes': 'Hilabeteko burgerra', 'Clásica': 'Klasikoa', 'Consultar': 'Galdetu', 'Ver': 'Ikusi', 'Todo': 'Dena',

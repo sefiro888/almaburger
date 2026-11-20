@@ -514,7 +514,7 @@ function renderDish(dir) {
     img.hidden = false; none.hidden = true; img.alt = it.dn;
     bg.style.backgroundImage = `url(img/dishes/s/${it.i}.jpg)`;
     img.src = `img/dishes/${it.i}.jpg`;
-  } else { img.hidden = true; none.hidden = false; none.innerHTML = RIG; bg.style.backgroundImage = 'none'; }
+  } else { img.hidden = true; none.hidden = false; none.innerHTML = `<img class="dish__mascot" src="img/mascot.png" alt="" width="399" height="343"><b class="dish__label">${esc(it.dn)}</b><span class="dish__soon">${T_('Foto en camino')}</span>`; bg.style.backgroundImage = 'none'; }
   dq('#dishAi').hidden = !(it.i && AI_SLUGS.has(it.i));
   dq('#dishCat').textContent = T_(MENU[it.cat].label);
   dq('#dishT').textContent = it.dn;
