@@ -1460,3 +1460,22 @@ body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 .dish__soon{font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
 @keyframes dishBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
 @media (prefers-reduced-motion:reduce){.dish__none img.dish__mascot{animation:none}}
+
+/* ====== equipo: cada tarjeta abre su ficha con la foto completa y su favorito ====== */
+.tm[data-full]{cursor:pointer}
+.tm[data-full]:focus-visible{outline:3px solid var(--ink);outline-offset:5px}
+.tm[data-full] .tm__pic{position:relative}
+.tm[data-full] .tm__pic::after{content:'+';position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--cream);font-weight:900;font-size:1.3rem;line-height:1;transition:transform .25s cubic-bezier(.2,1.6,.4,1)}
+.tm[data-full]:hover .tm__pic::after{transform:rotate(90deg) scale(1.12)}
+.tmodal .dish__media.is-ill{background:radial-gradient(color-mix(in srgb,var(--ink) 16%,transparent) 1.4px,transparent 1.6px) 0 0/18px 18px,var(--cream)}
+.tmodal .dish__media.is-ill img{width:min(78%,460px);height:auto}
+.tmodal .dish__info h3{font-size:clamp(2.2rem,5vw,3.4rem)}
+.tmodal__role{font-weight:800;font-size:1.25rem;margin-top:-4px}
+.tmodal__favt{margin-top:14px;font-weight:800;font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;opacity:.7}
+.tmodal__fav{display:flex;align-items:center;gap:14px;width:100%;padding:12px;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:var(--bw) solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .2s}
+.tmodal__fav:hover{transform:translate(-2px,-2px) rotate(-1deg)}
+.tmodal__fav img{flex:none;width:96px;height:96px;object-fit:cover;border-radius:14px;border:2px solid var(--ink)}
+.tmodal__fav span{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tmodal__fav b{font-weight:900;font-size:1.25rem;line-height:1.05;text-transform:uppercase}
+.tmodal__fav small{font-size:.9rem;opacity:.8}
+.tmodal__fav em{font-style:normal;font-weight:800;font-size:.9rem}

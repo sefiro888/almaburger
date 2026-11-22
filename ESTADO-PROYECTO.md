@@ -69,6 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
+| (siguiente) | **Ficha de cada persona del equipo**: al pulsar una tarjeta en El alma se abre una ventana como la de los platos, con la foto completa (o la ilustración), nombre, puesto y su favorito, que se puede pulsar para abrir la ficha de ese plato o bebida. Flechas y deslizar para pasar de persona. Datos en los atributos `data-full`, `data-ill` y `data-fav` de cada tarjeta (`build.py`); fotos completas en `img/team/*-full.jpg`. |
 | `2871748` | Equipo: entra **Leticia**, camarera de barra (su bebida favorita, el Ice Caramel Latte). Con seis personas, la rejilla pasa a dos filas de tres en el ordenador. |
 | `bb3834d` | Foto del **Blue Paradise** (carta y galería de desayunos, que sigue en 15 fotos: sale la antigua del Matcha goloso). **Jesús** pasa a «Plancha y encargado». |
 | `c7f9410` | Respuestas de la clienta: Alitas teriyaki 14,00 €, Ensalada de salmón y aguacate 14,50 €, y un segundo matcha de mango, **Matcha de Mango con crema** a 6,00 € (se lleva la foto); el normal sigue a 5,20 €. |

@@ -584,6 +584,8 @@ JS.update({
     'Cochinita pibil con pico de gallo. Viajecito.': 'Cochinita pibila pico de galloarekin. Bidaiatxoa.',
     'Miel y picante. Equilibrio perfecto.': 'Eztia eta pikantea. Oreka perfektua.',
     'Foto en camino': 'Argazkia bidean',
+    'El equipo de ALMA': 'ALMAko taldea', 'Ver en la carta': 'Ikusi kartan', 'Ver a {n}': 'Ikusi: {n}',
+    'Persona anterior': 'Aurreko pertsona', 'Persona siguiente': 'Hurrengo pertsona',
     'Matcha de Mango con crema': 'Mango matcha kremarekin',
     'Con crema de mango por encima. Matcha verde o azul, a elegir': 'Mango-krema gainean. Matcha berdea edo urdina, aukeran',
     # etiquetas y carta

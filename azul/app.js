@@ -568,6 +568,54 @@ dm.addEventListener('click', e => {
   m.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4 && D.list.length > 1) stepDish(dx < 0 ? 1 : -1); }, { passive: true });
 })();
 
+/* ---------- Ficha de cada persona del equipo (El alma) ---------- */
+const tms = $$('.tm[data-full]');
+if (tms.length) {
+  const tmm = document.createElement('div'); tmm.className = 'modal dish tmodal'; tmm.id = 'tmModal';
+  tmm.innerHTML = TRH(`<div class="dish__box" role="dialog" aria-modal="true" aria-labelledby="tmT">
+  <button class="modal__x" type="button" aria-label="Cerrar">✕</button>
+  <div class="dish__media" id="tmMedia"><div class="dish__bg" id="tmBg"></div><img id="tmImg" alt="" decoding="async">
+    <button class="dish__nav dish__nav--p" type="button" aria-label="Persona anterior">‹</button><button class="dish__nav dish__nav--n" type="button" aria-label="Persona siguiente">›</button>
+    <span class="dish__count" id="tmCount"></span></div>
+  <div class="dish__info"><span class="dish__cat">El equipo de ALMA</span><h3 id="tmT"></h3><p class="tmodal__role" id="tmRole"></p><div id="tmFav"></div></div></div>`);
+  document.body.appendChild(tmm);
+  const tq = s => $(s, tmm);
+  let cur = 0, from = null;
+  const show = (k, dir) => {
+    cur = (k + tms.length) % tms.length; const t = tms[cur];
+    const media = tq('#tmMedia'); media.classList.remove('swap-l', 'swap-r'); void media.offsetWidth; if (dir) media.classList.add(dir > 0 ? 'swap-r' : 'swap-l');
+    const ill = t.dataset.ill === '1', name = $('h3', t).textContent;
+    media.classList.toggle('is-ill', ill);
+    const img = tq('#tmImg'); img.src = t.dataset.full; img.alt = ill ? '' : ($('img', t).alt || name);
+    tq('#tmBg').style.backgroundImage = ill ? 'none' : `url(${t.dataset.full})`;
+    tq('#tmT').textContent = name;
+    tq('#tmRole').textContent = $('.tm__role', t).textContent;
+    const it = byId(t.dataset.fav), fav = $('.tm__fav', t);
+    const label = fav ? fav.firstChild.textContent.trim().replace(/:$/, '') : '';
+    tq('#tmFav').innerHTML = it ? `<p class="tmodal__favt">${esc(label)}</p><button type="button" class="tmodal__fav" data-dish="${esc(it.id)}">${it.i ? `<img src="img/dishes/s/${it.i}.webp" alt="" width="96" height="96">` : ''}<span><b>${esc(it.dn)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}<em>${eur(it.p)} · ${T_('Ver en la carta')} →</em></span></button>` : '';
+    tq('#tmCount').textContent = `${cur + 1} / ${tms.length}`;
+    [1, -1].forEach(d => { new Image().src = tms[(cur + d + tms.length) % tms.length].dataset.full; });
+  };
+  const open = t => { from = t; show(tms.indexOf(t)); tmm.classList.add('on'); lock(true); setTimeout(() => tq('.modal__x').focus(), 60); };
+  tms.forEach(t => { t.tabIndex = 0; t.setAttribute('role', 'button'); t.setAttribute('aria-label', T_('Ver a {n}').replace('{n}', $('h3', t).textContent)); });
+  document.addEventListener('click', e => { const t = e.target.closest('.tm[data-full]'); if (t) open(t); });
+  document.addEventListener('keydown', e => {
+    if (e.target.matches && e.target.matches('.tm[data-full]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(e.target); }
+    if (!tmm.classList.contains('on')) return;
+    if (e.key === 'ArrowLeft') show(cur - 1, -1);
+    if (e.key === 'ArrowRight') show(cur + 1, 1);
+  });
+  tmm.addEventListener('click', e => {
+    if (e.target === tmm || e.target.closest('.modal__x')) { closeModals(); if (from) from.focus({ preventScroll: true }); return; }
+    if (e.target.closest('.dish__nav--p')) show(cur - 1, -1);
+    if (e.target.closest('.dish__nav--n')) show(cur + 1, 1);
+    const f = e.target.closest('[data-dish]'); if (f) { tmm.classList.remove('on'); openDish(f.dataset.dish); }
+  });
+  const sm = tq('#tmMedia'); let x0 = null, y0 = 0;
+  sm.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  sm.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) show(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); }, { passive: true });
+}
+
 const hb = $('#hmoreBtn');
 if (hb) hb.addEventListener('click', () => { const o = $('#hmore').classList.toggle('open'); hb.setAttribute('aria-expanded', o); hb.textContent = T_(o ? 'Leer menos ↑' : 'Seguir leyendo ↓'); });
 
