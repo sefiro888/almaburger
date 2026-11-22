@@ -143,6 +143,8 @@ TXT = {
     'Su burger favorita: <b>Doble Dosis</b>': 'Burger gogokoena: <b>Doble Dosis</b>',
     'Su hot dog favorito: <b>Hot Gordita</b>': 'Hot dog gogokoena: <b>Hot Gordita</b>',
     'Su matcha favorito: <b>Blue Paradise</b>': 'Matcha gogokoena: <b>Blue Paradise</b>',
+    'Su bebida favorita: <b>Ice Caramel Latte</b>': 'Edari gogokoena: <b>Ice Caramel Latte</b>',
+    'Camarera de barra': 'Barrako zerbitzaria',
     'Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b>': 'Gosari gogokoena: <b>urdaiazpiko iberiko, ahuakate eta tomate txigorkia</b>',
     'Jefa de sala y encargada': 'Jangela-burua eta arduraduna', 'Jefe de cocina': 'Sukaldeburua', 'Plancha': 'Plantxa', 'Plancha y encargado': 'Plantxa eta arduraduna',
     # galería: fotos nuevas
@@ -366,6 +368,7 @@ ATTR = {
     'Maddi en la barra de ALMA con un café con hielo': 'Maddi ALMAko barran, izotzdun kafe batekin',
     'Jefferson cortando cebolla en la cocina de ALMA': 'Jefferson tipula mozten ALMAko sukaldean',
     'Jesús trabajando en la plancha de la cocina de ALMA': 'Jesus ALMAko sukaldeko plantxan lanean',
+    'Leticia en la barra de ALMA sirviendo una copa de vino': 'Leticia ALMAko barran, ardo-kopa bat zerbitzatzen',
     'Tres minibrioches rellenos: cochinita tropical, japo crunchy y chipotle hot': 'Hiru brioche txiki bete: cochinita tropical, japo crunchy eta chipotle hot',
     'La Picosita, pollo crispy con miel picante y pepinillo': 'La Picosita, oilasko crispya ezti pikantearekin eta pepinilloarekin',
     'Alitas de pollo en salsa teriyaki con sésamo': 'Oilasko-hegaltxoak teriyaki saltsan, sesamoarekin',

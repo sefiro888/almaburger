@@ -1,6 +1,6 @@
 # Alma Burger · estado del proyecto
 
-> Documento de traspaso: cómo está la web **a 20 de noviembre de 2026** y por dónde seguir.
+> Documento de traspaso: cómo está la web **a 22 de noviembre de 2026** y por dónde seguir.
 > Si eres una IA (u otra persona) que retoma el proyecto, léelo entero antes de tocar nada.
 
 ## 1. Qué es
@@ -69,6 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
+| (siguiente) | Equipo: entra **Leticia**, camarera de barra (su bebida favorita, el Ice Caramel Latte). Con seis personas, la rejilla pasa a dos filas de tres en el ordenador. |
 | `bb3834d` | Foto del **Blue Paradise** (carta y galería de desayunos, que sigue en 15 fotos: sale la antigua del Matcha goloso). **Jesús** pasa a «Plancha y encargado». |
 | `c7f9410` | Respuestas de la clienta: Alitas teriyaki 14,00 €, Ensalada de salmón y aguacate 14,50 €, y un segundo matcha de mango, **Matcha de Mango con crema** a 6,00 € (se lleva la foto); el normal sigue a 5,20 €. |
 | `dbe7b7a` | Equipo: las fotos de Jesús y Jefferson estaban cambiadas. Jesús (Plancha, Doble Dosis) es el de la foto en la plancha y Jefferson (Jefe de cocina, Hot Gordita) el que corta cebolla. Ojo: los nombres de esas fotos en `material-nuevo/` estaban al revés. |
