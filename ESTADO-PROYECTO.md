@@ -69,7 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
-| (siguiente) | Equipo: **Abrahan y Lidia** juntos en una tarjeta como **propietarios**, con su foto y los dos favoritos; entra **Eduardo** (barra y sala, aún sin foto ni favorito: sale con ilustración). Las fichas muestran la **frase** de cada persona si la hay (párrafo oculto `tm__quote` en la tarjeta): de momento propietarios, Leticia y Eduardo. Una tarjeta puede tener varios favoritos (`data-fav` separados por `;`). |
+| `7fb87ab` | Equipo: **Abrahan y Lidia** juntos en una tarjeta como **propietarios**, con su foto y los dos favoritos; entra **Eduardo** (barra y sala, aún sin foto ni favorito: sale con ilustración). Las fichas muestran la **frase** de cada persona si la hay (párrafo oculto `tm__quote` en la tarjeta): de momento propietarios, Leticia y Eduardo. Una tarjeta puede tener varios favoritos (`data-fav` separados por `;`). |
 | `d04b321` | **Ficha de cada persona del equipo**: al pulsar una tarjeta en El alma se abre una ventana como la de los platos, con la foto completa (o la ilustración), nombre, puesto y su favorito, que se puede pulsar para abrir la ficha de ese plato o bebida. Flechas y deslizar para pasar de persona. Datos en los atributos `data-full`, `data-ill` y `data-fav` de cada tarjeta (`build.py`); fotos completas en `img/team/*-full.jpg`. |
 | `2871748` | Equipo: entra **Leticia**, camarera de barra (su bebida favorita, el Ice Caramel Latte). Con seis personas, la rejilla pasa a dos filas de tres en el ordenador. |
 | `bb3834d` | Foto del **Blue Paradise** (carta y galería de desayunos, que sigue en 15 fotos: sale la antigua del Matcha goloso). **Jesús** pasa a «Plancha y encargado». |
