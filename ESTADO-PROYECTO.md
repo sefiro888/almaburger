@@ -1,6 +1,6 @@
 # Alma Burger · estado del proyecto
 
-> Documento de traspaso: cómo está la web **a 22 de noviembre de 2026** y por dónde seguir.
+> Documento de traspaso: cómo está la web **a 25 de noviembre de 2026** y por dónde seguir.
 > Si eres una IA (u otra persona) que retoma el proyecto, léelo entero antes de tocar nada.
 
 ## 1. Qué es
@@ -69,6 +69,7 @@ El puerto 5173 lo suele tener ocupado otra sesión; por eso se usa el 5180. Los 
 
 | Commit | Cambio |
 |---|---|
+| (siguiente) | Equipo: **Abrahan y Lidia** juntos en una tarjeta como **propietarios**, con su foto y los dos favoritos; entra **Eduardo** (barra y sala, aún sin foto ni favorito: sale con ilustración). Las fichas muestran la **frase** de cada persona si la hay (párrafo oculto `tm__quote` en la tarjeta): de momento propietarios, Leticia y Eduardo. Una tarjeta puede tener varios favoritos (`data-fav` separados por `;`). |
 | `d04b321` | **Ficha de cada persona del equipo**: al pulsar una tarjeta en El alma se abre una ventana como la de los platos, con la foto completa (o la ilustración), nombre, puesto y su favorito, que se puede pulsar para abrir la ficha de ese plato o bebida. Flechas y deslizar para pasar de persona. Datos en los atributos `data-full`, `data-ill` y `data-fav` de cada tarjeta (`build.py`); fotos completas en `img/team/*-full.jpg`. |
 | `2871748` | Equipo: entra **Leticia**, camarera de barra (su bebida favorita, el Ice Caramel Latte). Con seis personas, la rejilla pasa a dos filas de tres en el ordenador. |
 | `bb3834d` | Foto del **Blue Paradise** (carta y galería de desayunos, que sigue en 15 fotos: sale la antigua del Matcha goloso). **Jesús** pasa a «Plancha y encargado». |
@@ -90,7 +91,7 @@ Historial completo con `git log --oneline`.
 1. **Publicar**: todo lo de la tabla anterior está publicado (último envío el 20/11/2026, con el material nuevo). Para publicar cambios nuevos: `git push`, solo cuando el usuario lo diga; GitHub Pages tarda uno o dos minutos en actualizarse. Para ver qué falta por subir: `git status -sb`.
 2. **Preguntas para Alma Burger**: ver el apartado 8. Cuando llegue cada respuesta, aplicarla y tacharla de la lista.
 3. **Probar en un navegador ancho los mini-dibujos del menú** al pasar el ratón: los dibujos se han comprobado, pero el efecto completo a ancho de escritorio no se vio en la vista previa. Mirar que no tapen texto ni choquen con el borde superior.
-4. Abrahan y Lidia siguen con ilustración en El equipo porque no hay foto suya. Ice Ube Latte y Blue Matcha Latte no tienen foto (ninguna bebida trae descripción en la carta de la clienta).
+4. Eduardo sale con ilustración en El equipo porque no hay foto suya. Ice Ube Latte y Blue Matcha Latte no tienen foto (ninguna bebida trae descripción en la carta de la clienta).
 5. La elección de matcha verde o azul se ha puesto en Ube Matcha Latte, Matcha de Mango, Matcha Berry y Matcha goloso.
 6. **Euskera**: la traducción la hizo una IA; falta que la revise alguien nativo.
 7. **Dominio**: cuando `almaburgers.com` esté activo, cambiar `site_url` en `config.json` y volver a generar (lo usan las vistas previas al compartir).
@@ -112,3 +113,5 @@ Lista de dudas que el usuario tiene que preguntar a la dueña. Entre paréntesis
 Ya resuelto (20/11): el **horario** (local abierto todo el día, cocina por tramos); las **alitas teriyaki** (14,00 €, son otro tipo de alitas y conviven con las picantes); el precio de la **ensalada de salmón** (14,50 €); el **matcha de mango**, que son dos: el normal a 5,20 € y el «con crema» a 6,00 € (la foto es la del de crema); y la descripción de la ensalada, que se queda como está.
 
 1. **Datos legales** para el Aviso legal y la Privacidad: titular, NIF, email y datos del registro. (En la web: marcados en amarillo como pendientes.)
+2. **Eduardo**: una foto suya y su plato o bebida favorita. (En la web: ilustración y sin favorito.)
+3. **Frases de Maddi, Jefferson y Jesús** para su ficha del equipo. (En la web: su ficha sale sin frase.)

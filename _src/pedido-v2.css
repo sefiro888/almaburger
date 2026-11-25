@@ -1479,3 +1479,6 @@ body:has(.ckbar.on) .mtalk{opacity:0;visibility:hidden}
 .tmodal__fav b{font-weight:900;font-size:1.25rem;line-height:1.05;text-transform:uppercase}
 .tmodal__fav small{font-size:.9rem;opacity:.8}
 .tmodal__fav em{font-style:normal;font-weight:800;font-size:.9rem}
+.tmodal__quote{margin:8px 0 4px;padding:14px 18px;border-left:5px solid var(--ink);background:var(--card);border-radius:0 16px 16px 0;font-size:1.15rem;line-height:1.4;font-weight:600}
+.tmodal__quote[hidden]{display:none}
+.tm__quote[hidden]{display:none}

@@ -145,6 +145,12 @@ TXT = {
     'Su matcha favorito: <b>Blue Paradise</b>': 'Matcha gogokoena: <b>Blue Paradise</b>',
     'Su bebida favorita: <b>Ice Caramel Latte</b>': 'Edari gogokoena: <b>Ice Caramel Latte</b>',
     'Camarera de barra': 'Barrako zerbitzaria',
+    'Abrahan y Lidia': 'Abrahan eta Lidia', 'Propietarios': 'Jabeak', 'Barra y sala': 'Barra eta jangela',
+    'Lidia: <b>la tostada de jamón ibérico, aguacate y tomate</b>': 'Lidia: <b>urdaiazpiko iberiko, ahuakate eta tomate txigorkia</b>',
+    'Antes de que ALMA tuviera nombre, ya era ese sueño del que hablábamos los dos. Hoy nos hace ilusión presentaros a quienes estamos detrás.':
+        'ALMAk izenik izan aurretik ere, biok hitz egiten genuen amets hura zen jada. Gaur ilusioa egiten digu atzean gaudenok aurkezteak.',
+    'Detrás de cada café, una sonrisa; detrás de cada sonrisa, un poquito de Alma.': 'Kafe bakoitzaren atzean, irribarre bat; irribarre bakoitzaren atzean, Alma pixka bat.',
+    'Me gusta servir las cosas y tratar a la clientela como me gustaría que lo hicieran conmigo.': 'Gauzak zerbitzatzea eta bezeroak tratatzea gustatzen zait, nirekin egitea nahiko nukeen bezala.',
     'Su desayuno favorito: <b>la tostada de jamón ibérico, aguacate y tomate</b>': 'Gosari gogokoena: <b>urdaiazpiko iberiko, ahuakate eta tomate txigorkia</b>',
     'Jefa de sala y encargada': 'Jangela-burua eta arduraduna', 'Jefe de cocina': 'Sukaldeburua', 'Plancha': 'Plantxa', 'Plancha y encargado': 'Plantxa eta arduraduna',
     # galería: fotos nuevas
@@ -369,6 +375,7 @@ ATTR = {
     'Jefferson cortando cebolla en la cocina de ALMA': 'Jefferson tipula mozten ALMAko sukaldean',
     'Jesús trabajando en la plancha de la cocina de ALMA': 'Jesus ALMAko sukaldeko plantxan lanean',
     'Leticia en la barra de ALMA sirviendo una copa de vino': 'Leticia ALMAko barran, ardo-kopa bat zerbitzatzen',
+    'Abrahan y Lidia, propietarios de ALMA, en la barra con un Blue Paradise': 'Abrahan eta Lidia, ALMAko jabeak, barran Blue Paradise batekin',
     'Tres minibrioches rellenos: cochinita tropical, japo crunchy y chipotle hot': 'Hiru brioche txiki bete: cochinita tropical, japo crunchy eta chipotle hot',
     'La Picosita, pollo crispy con miel picante y pepinillo': 'La Picosita, oilasko crispya ezti pikantearekin eta pepinilloarekin',
     'Alitas de pollo en salsa teriyaki con sésamo': 'Oilasko-hegaltxoak teriyaki saltsan, sesamoarekin',

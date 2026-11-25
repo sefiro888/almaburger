@@ -577,7 +577,7 @@ if (tms.length) {
   <div class="dish__media" id="tmMedia"><div class="dish__bg" id="tmBg"></div><img id="tmImg" alt="" decoding="async">
     <button class="dish__nav dish__nav--p" type="button" aria-label="Persona anterior">‹</button><button class="dish__nav dish__nav--n" type="button" aria-label="Persona siguiente">›</button>
     <span class="dish__count" id="tmCount"></span></div>
-  <div class="dish__info"><span class="dish__cat">El equipo de ALMA</span><h3 id="tmT"></h3><p class="tmodal__role" id="tmRole"></p><div id="tmFav"></div></div></div>`);
+  <div class="dish__info"><span class="dish__cat">El equipo de ALMA</span><h3 id="tmT"></h3><p class="tmodal__role" id="tmRole"></p><blockquote class="tmodal__quote" id="tmQuote" hidden></blockquote><div id="tmFav"></div></div></div>`);
   document.body.appendChild(tmm);
   const tq = s => $(s, tmm);
   let cur = 0, from = null;
@@ -590,9 +590,14 @@ if (tms.length) {
     tq('#tmBg').style.backgroundImage = ill ? 'none' : `url(${t.dataset.full})`;
     tq('#tmT').textContent = name;
     tq('#tmRole').textContent = $('.tm__role', t).textContent;
-    const it = byId(t.dataset.fav), fav = $('.tm__fav', t);
-    const label = fav ? fav.firstChild.textContent.trim().replace(/:$/, '') : '';
-    tq('#tmFav').innerHTML = it ? `<p class="tmodal__favt">${esc(label)}</p><button type="button" class="tmodal__fav" data-dish="${esc(it.id)}">${it.i ? `<img src="img/dishes/s/${it.i}.jpg" alt="" width="96" height="96">` : ''}<span><b>${esc(it.dn)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}<em>${eur(it.p)} · ${T_('Ver en la carta')} →</em></span></button>` : '';
+    const q = $('.tm__quote', t), qe = tq('#tmQuote');
+    qe.hidden = !q; qe.textContent = q ? `«${q.textContent.trim()}»` : '';
+    const labels = $$('.tm__fav', t);
+    tq('#tmFav').innerHTML = (t.dataset.fav || '').split(';').filter(Boolean).map((id, k) => {
+      const it = byId(id); if (!it) return '';
+      const label = labels[k] ? labels[k].firstChild.textContent.trim().replace(/:$/, '') : '';
+      return `<p class="tmodal__favt">${esc(label)}</p><button type="button" class="tmodal__fav" data-dish="${esc(it.id)}">${it.i ? `<img src="img/dishes/s/${it.i}.jpg" alt="" width="96" height="96">` : ''}<span><b>${esc(it.dn)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}<em>${eur(it.p)} · ${T_('Ver en la carta')} →</em></span></button>`;
+    }).join('');
     tq('#tmCount').textContent = `${cur + 1} / ${tms.length}`;
     [1, -1].forEach(d => { new Image().src = tms[(cur + d + tms.length) % tms.length].dataset.full; });
   };
