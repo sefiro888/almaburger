@@ -423,7 +423,7 @@ def home():
     <div class="tease" style="margin-top:30px">
       <a class="tz tz--wide reveal" href="carta.html"><img src="img/dishes/la-triplona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Hamburguesas y carta</h3><p>Smash burgers, picoteo, bocadillos, hot dogs y postres.</p></div></a>
       <a class="tz tz--wide reveal" href="desayunos.html"><img src="img/tostada.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
-      <a class="tz reveal" href="el-alma.html"><img src="img/cabrona.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
+      <a class="tz reveal" href="el-alma.html"><img src="img/alma-propietarios.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
       <a class="tz reveal" href="galeria.html"><img src="img/picoteo.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
       <a class="tz tz--plain reveal" href="visitanos.html"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div>{rig(110, 'rig--still')}</a>
     </div>
