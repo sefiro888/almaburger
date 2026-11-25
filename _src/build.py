@@ -941,7 +941,13 @@ def main():
         IMGOPT.build(out, [out / n for n in written], [out / 'app.js'])
         _small_pngs(out)
     # raíz: intro con selector de color + redirecciones de los enlaces antiguos
-    (ROOT / 'index.html').write_text((SRC / 'intro.html').read_text(encoding='utf-8').replace('__SITE__', SITE), encoding='utf-8')
+    # La web se ve siempre en negro y crema: quien entra por la raíz pasa directo (en su idioma, si ya eligió euskera).
+    # La intro se queda debajo solo como respaldo (sin JavaScript) y para que las vistas previas al compartir sigan saliendo.
+    intro = (SRC / 'intro.html').read_text(encoding='utf-8').replace('__SITE__', SITE)
+    skip = ('<script>var l="";try{l=localStorage.getItem("alma-lang")==="eu"?".eu":""}catch(e){}'
+            'location.replace("negro/index"+l+".html")</script>')
+    intro = intro.replace('<head>', '<head>\n' + skip, 1)
+    (ROOT / 'index.html').write_text(intro, encoding='utf-8')
     for name in pages:
         if name != 'index.html':
             (ROOT / name).write_text(redirect('{c}/' + name), encoding='utf-8')
