@@ -256,12 +256,15 @@ VIDEOS = [  # (archivo, descripción accesible, pie)
 ]
 
 
-def phones(n=None):
-    def one(f, label, cap):
+def phone_one(f, label, cap):
         return (f'''<figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
       <video class="phone__video" muted loop playsinline preload="none" poster="img/video/{f}-poster.jpg" aria-label="{label}"><source src="img/video/{f}.mp4" type="video/mp4"></video>
       <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
       <figcaption>{cap}</figcaption></figure>''')
+
+
+def phones(n=None):
+    one = phone_one
     vs = VIDEOS[:n] if n else VIDEOS
     return (f'<div class="phones phones--rail" tabindex="0" aria-label="Vídeos de ALMA, desliza para ver más">{"".join(one(*v) for v in vs)}</div>'
             '<p class="phones__hint" aria-hidden="true">← Desliza para ver más vídeos →</p>')
@@ -366,6 +369,15 @@ def home():
   </div>
 </section>
 
+<section class="sec" id="como-se-prepara">
+  <div class="wrap split">
+    <div><p class="kicker reveal">A domicilio o para recoger</p><h2 class="sec__title reveal">Así se prepara <em>tu pedido</em></h2>
+      <p class="reveal" style="font-size:1.1rem;max-width:28em">Cada pedido sale de nuestra cocina preparado al momento y a mano. Mira cómo lo dejamos listo para entregártelo, calentito y bien cuidado.</p>
+      <div class="btnrow reveal" style="margin-top:20px"><button class="btn btn--solid" type="button" data-wa-order>Pedir por WhatsApp</button><a class="btn" href="visitanos.html#reparto">Horario de reparto</a></div></div>
+    <div class="reveal" style="display:flex;justify-content:center">{phone_one('pedido', 'Vídeo: así se prepara un pedido en la cocina de ALMA, desde la plancha hasta la caja lista para entregar', 'Así preparamos tu pedido')}</div>
+  </div>
+</section>
+
 <section class="sec sec--band" id="videos">
   <div class="wrap">
     <div class="sec__head"><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div>
@@ -425,7 +437,7 @@ def home():
       <a class="tz tz--wide reveal" href="desayunos.html"><img src="img/tostada.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
       <a class="tz reveal" href="el-alma.html"><img src="img/alma-propietarios.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
       <a class="tz reveal" href="galeria.html"><img src="img/picoteo.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
-      <a class="tz tz--plain reveal" href="visitanos.html"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div>{rig(110, 'rig--still')}</a>
+      <a class="tz reveal" href="visitanos.html"><img src="img/local-terraza.jpg" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div></a>
     </div>
   </div>
 </section>
@@ -534,8 +546,9 @@ def alma():
       <article class="tm reveal" data-full="img/team/maddi-full.jpg" data-fav="desayunos|Blue Paradise"><figure class="tm__pic tm__pic--photo"><img src="img/team/maddi.jpg" alt="Maddi en la barra de ALMA con un café con hielo" loading="lazy" width="720" height="720"></figure><h3>Maddi</h3><p class="tm__role">Jefa de sala y encargada</p><p class="tm__fav">Su matcha favorito: <b>Blue Paradise</b></p></article>
       <article class="tm reveal" data-full="img/team/jefferson-full.jpg" data-fav="hotdogs|Hot Gordita"><figure class="tm__pic tm__pic--photo"><img src="img/team/jefferson.jpg" alt="Jefferson cortando cebolla en la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jefferson</h3><p class="tm__role">Jefe de cocina</p><p class="tm__fav">Su hot dog favorito: <b>Hot Gordita</b></p></article>
       <article class="tm reveal" data-full="img/team/jesus-full.jpg" data-fav="hamburguesas|Doble Dosis"><figure class="tm__pic tm__pic--photo"><img src="img/team/jesus.jpg" alt="Jesús trabajando en la plancha de la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Jesús</h3><p class="tm__role">Plancha y encargado</p><p class="tm__fav">Su burger favorita: <b>Doble Dosis</b></p></article>
+      <article class="tm reveal" data-full="img/team/yani-full.jpg" data-fav="compartir|Chopitos"><figure class="tm__pic tm__pic--photo"><img src="img/team/yani.jpg" alt="Yani sonriendo en la cocina de ALMA" loading="lazy" width="720" height="720"></figure><h3>Yani</h3><p class="tm__role">Ayudante de cocina</p><p class="tm__fav">Su plato favorito: <b>Chopitos</b></p></article>
       <article class="tm reveal" data-full="img/team/leticia-full.jpg" data-fav="desayunos|Ice Caramel Latte"><figure class="tm__pic tm__pic--photo"><img src="img/team/leticia.jpg" alt="Leticia en la barra de ALMA sirviendo una copa de vino" loading="lazy" width="720" height="720"></figure><h3>Leticia</h3><p class="tm__role">Camarera de barra</p><p class="tm__fav">Su bebida favorita: <b>Ice Caramel Latte</b></p><p class="tm__quote" hidden>Detrás de cada café, una sonrisa; detrás de cada sonrisa, un poquito de Alma.</p></article>
-      <article class="tm reveal" data-full="img/ill/desayunos.png" data-ill="1"><figure class="tm__pic"><img src="img/ill/desayunos.png" alt="" loading="lazy"></figure><h3>Eduardo</h3><p class="tm__role">Barra y sala</p><p class="tm__quote" hidden>Me gusta servir las cosas y tratar a la clientela como me gustaría que lo hicieran conmigo.</p></article>
+      <article class="tm reveal" data-full="img/team/eduardo-full.jpg" data-fav="hamburguesas|La Puerquita"><figure class="tm__pic tm__pic--photo"><img src="img/team/eduardo.jpg" alt="Eduardo en la barra de ALMA, con la sudadera del local" loading="lazy" width="720" height="720"></figure><h3>Eduardo</h3><p class="tm__role">Barista y sala</p><p class="tm__fav">Su burger favorita: <b>La Puerquita</b></p><p class="tm__quote" hidden>Me gusta servir las cosas y tratar a la clientela como me gustaría que lo hicieran conmigo.</p></article>
     </div>
     <p class="fine reveal" style="opacity:.7;margin-top:18px">¿Quieres trabajar con nosotros? Escríbenos por <a href="https://wa.me/34747486092" target="_blank" rel="noopener">WhatsApp</a> o pásate por el local.</p>
   </div>
@@ -659,7 +672,8 @@ def galeria():
           ('dishes/alitas-teriyaki.jpg', 'Alitas teriyaki', 'Alitas de pollo en salsa teriyaki con sésamo'),
           ('dishes/totopos.jpg', 'Totopos', 'Totopos con carne picada, panceta y guacamole'),
           ('dishes/ensalada-salmon.jpg', 'Ensalada de salmón y aguacate', 'Ensalada de salmón, aguacate, rúcula y nueces'),
-          ('dishes/croquetas.jpg', 'Croquetas caseras', 'Croqueta casera abierta por la mitad')]
+          ('dishes/croquetas.jpg', 'Croquetas caseras', 'Croqueta casera abierta por la mitad'),
+          ('local-terraza.jpg', 'Nuestra terraza', 'Fachada de ALMA con terraza, al anochecer')]
     des = [('dishes/ube-matcha-latte.jpg', 'Ube Matcha Latte', 'Ube Matcha Latte con matcha verde'), ('dishes/tostada-salmon.jpg', 'Tostada de salmón', 'Tostada de salmón y mascarpone con rúcula y hummus de remolacha'),
            ('dishes/ube-mango-latte.jpg', 'Ube Mango Latte', 'Ube Mango Latte en vaso de cristal'), ('dishes/tostada-hummus.jpg', 'Hummus, aguacate y huevo', 'Tostada de hummus de remolacha, aguacate y huevo a baja temperatura'),
            ('dishes/ube-matcha-azul.jpg', 'Ube Matcha Latte con matcha azul', 'Ube Matcha Latte con matcha azul'), ('dishes/blue-paradise.jpg', 'Blue Paradise', 'Blue Paradise con espuma de frutos rojos'),
@@ -746,9 +760,10 @@ def visitanos():
       <p class="fine">Los desayunos no tienen reparto. De momento, los pedidos online se pagan en el local.</p>
       <div class="delivery reveal"><b>¿Pedir desde casa?</b><button class="lnk" type="button" data-wa-order style="color:var(--dark-pop);font-size:1rem">Por WhatsApp →</button></div>
     </div>
-    <div class="map reveal" data-ext-src="https://www.openstreetmap.org/export/embed.html?bbox=-2.1836%2C43.0515%2C-2.1736%2C43.0565&amp;layer=mapnik&amp;marker=43.054023%2C-2.178607" data-ext-title="Mapa de Alma Burger en Ordizia">
+    <div class="visit__side"><div class="map reveal" data-ext-src="https://www.openstreetmap.org/export/embed.html?bbox=-2.1836%2C43.0515%2C-2.1736%2C43.0565&amp;layer=mapnik&amp;marker=43.054023%2C-2.178607" data-ext-title="Mapa de Alma Burger en Ordizia">
       <div class="extph"><img src="img/ill/visitanos.png" alt="" loading="lazy"><p><b>Kale Nagusia 42, Ordizia</b></p><p class="extph__s">El mapa lo sirve OpenStreetMap. Se carga solo si lo pides.</p>
         <button class="btn btn--solid btn--sm" type="button" data-ext-load>Cargar el mapa</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Alma+Burger+Kale+Nagusia+42+Ordizia" target="_blank" rel="noopener">Abrir en Google Maps ↗</a></div></div>
+    <figure class="visit__photo reveal"><img src="img/local-interior.jpg" alt="El comedor de ALMA: pared de ladrillo blanco, mesas de madera y el rótulo Alma Burger con la mascota" loading="lazy" width="1600" height="1200"><figcaption>Así es el local por dentro</figcaption></figure></div>
   </div>
 </section>
 <section class="sec" id="contacto">

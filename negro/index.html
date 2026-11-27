@@ -31,7 +31,7 @@
 <script>/* momento del día en Ordizia: desayunos hasta las 12:00 (de lunes a viernes desde las 8, fin de semana desde las 9; para probar: ?hora=9) */try{var d=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Madrid"})),h=d.getHours(),w=d.getDay(),q=location.search.match(/[?&]hora=(\d+)/);if(q)h=+q[1];document.documentElement.dataset.momento=h>=(w%6?8:9)&&h<12?"desayuno":"burger"}catch(e){}</script>
 <link rel="preload" href="fonts/bigshoulders-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/logo-stage.png" as="image" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=ded96fb3">
+<link rel="stylesheet" href="styles.css?v=10a099fc">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Alma Burger","url":"https://almaburgers.com","telephone":"+34747486092","servesCuisine":["Hamburguesas","Desayunos","Postres"],"priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"Kale Nagusia 42","postalCode":"20240","addressLocality":"Ordizia","addressRegion":"Gipuzkoa","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":43.054023,"longitude":-2.178607},"sameAs":["https://www.instagram.com/almaburgers/"]}</script>
 </head>
 <body>
@@ -156,9 +156,21 @@
   </div>
 </section>
 
+<section class="sec" id="como-se-prepara">
+  <div class="wrap split">
+    <div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">05</span><div><p class="kicker reveal">A domicilio o para recoger</p><h2 class="sec__title reveal">Así se prepara <em>tu pedido</em></h2></div></div>
+      <p class="reveal" style="font-size:1.1rem;max-width:28em">Cada pedido sale de nuestra cocina preparado al momento y a mano. Mira cómo lo dejamos listo para entregártelo, calentito y bien cuidado.</p>
+      <div class="btnrow reveal" style="margin-top:20px"><a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a><a class="btn" href="visitanos.html#reparto">Horario de reparto</a></div></div>
+    <div class="reveal" style="display:flex;justify-content:center"><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
+      <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/pedido-poster.webp" aria-label="Vídeo: así se prepara un pedido en la cocina de ALMA, desde la plancha hasta la caja lista para entregar"><source src="img/video/pedido.mp4" type="video/mp4"></video>
+      <span class="phone__play" aria-hidden="true">▶</span></div><span class="phone__bar" aria-hidden="true"></span></div>
+      <figcaption>Así preparamos tu pedido</figcaption></figure></div>
+  </div>
+</section>
+
 <section class="sec sec--band" id="videos">
   <div class="wrap">
-    <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">05</span><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div></div></div>
+    <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">06</span><div><p class="kicker reveal">Instagram</p><h2 class="sec__title reveal" style="margin:0">ALMA <em>en vídeo</em></h2></div></div></div>
       <a class="btn btn--solid reveal" href="galeria.html#reels">Más en la galería →</a></div>
     <div class="phones phones--rail" tabindex="0" aria-label="Vídeos de ALMA, desliza para ver más"><figure class="phone phone--own reveal"><div class="phone__bezel"><span class="phone__notch" aria-hidden="true"></span><div class="phone__screen">
       <video class="phone__video" muted loop playsinline preload="none" data-poster="img/video/burger-poster.webp" aria-label="Vídeo desde la cocina de ALMA: una burger con queso fundido"><source src="img/video/burger.mp4" type="video/mp4"></video>
@@ -178,7 +190,7 @@
 
 <section class="sec quizband" id="test">
   <div class="wrap quizband__in">
-    <div class="quizband__txt"><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">06</span><div><p class="kicker reveal">Test de 30 segundos</p>
+    <div class="quizband__txt"><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">07</span><div><p class="kicker reveal">Test de 30 segundos</p>
       <h2 class="sec__title reveal">¿Qué burger <em>eres</em>?</h2></div></div>
       <p class="reveal">Contesta cinco preguntas y te decimos cuál pedir. Puedes mandarle el resultado a quien quieras.</p>
       <div class="btnrow reveal" style="margin-top:20px"><button class="btn btn--solid" type="button" data-quiz>Hacer el test</button><a class="btn" href="carta.html">Ver todas las burgers</a></div></div>
@@ -188,7 +200,7 @@
 
 <section class="sec sec--ink" id="como-pedir">
   <div class="wrap">
-    <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">07</span><div><p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2></div></div>
+    <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">08</span><div><p class="kicker kicker--dark reveal">Pedir es fácil</p><h2 class="sec__title reveal">Elige cómo <em>quieres pedir</em></h2></div></div>
     <div class="paths">
       <div class="path path--main path--wa reveal"><span class="path__tag">Recoger o domicilio</span><b>Pedir online</b><span>Elige tus platos, para recoger o a domicilio. Llega directo a la cocina. De momento, el pago se hace en el local.</span><a class="btn btn--solid" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener">Pedir online ↗</a></div>
       <div class="path reveal"><span class="path__tag">Dudas</span><b>Escríbenos</b><span>¿Alguna pregunta sobre la carta, los alérgenos o el horario? Llámanos o mándanos un mensaje.</span><a class="btn btn--line" href="visitanos.html#contacto">Contactar</a></div>
@@ -207,7 +219,7 @@
     <div class="split__pic reveal"><figure class="ph ph--white" style="inset:0 8% 8% 0;transform:rotate(-3deg)"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="694" height="452" src="img/dishes/la-reinita.webp" srcset="img/dishes/la-reinita-480.webp 480w, img/dishes/la-reinita.webp 694w" alt="La Reinita, smash con panceta y topping de reina pepiada" loading="lazy"></figure>
       <figure class="ph" style="width:38%;aspect-ratio:1;right:0;bottom:0;transform:rotate(5deg)"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="1000" height="1333" src="img/dishes/la-puerquita.webp" srcset="img/dishes/la-puerquita-480.webp 480w, img/dishes/la-puerquita-800.webp 800w, img/dishes/la-puerquita.webp 1000w" alt="La Puerquita, doble smash con pulled pork" loading="lazy"></figure></div>
     <div>
-      <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">08</span><div><p class="kicker reveal">Burger del mes 👑</p>
+      <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">09</span><div><p class="kicker reveal">Burger del mes 👑</p>
       <h2 class="sec__title reveal">La <em>Reinita</em></h2></div></div>
       <p class="reveal" style="font-size:1.15rem;max-width:30em">Una reina con mucho carácter y sabor venezolano: carne smash jugosa, cheddar bien fundido, panceta crujiente, nuestra salsa ajonesa y la auténtica protagonista, el topping de reina pepiada, con pollo deshilachado, aguacate, cebolla morada, cilantro y una mezcla cremosa irresistible.</p>
       <p class="reveal" style="font-weight:800;margin-top:10px">La Reinita no viene a participar, viene a reinar.</p>
@@ -221,20 +233,20 @@
 
 <section class="sec">
   <div class="wrap">
-    <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">09</span><div><p class="kicker reveal">Descubre</p><h2 class="sec__title reveal">Todo Alma, <em>en un vistazo</em></h2></div></div>
+    <div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">10</span><div><p class="kicker reveal">Descubre</p><h2 class="sec__title reveal">Todo Alma, <em>en un vistazo</em></h2></div></div>
     <div class="tease" style="margin-top:30px">
       <a class="tz tz--wide reveal" href="carta.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="1000" height="750" src="img/dishes/la-triplona.webp" srcset="img/dishes/la-triplona-480.webp 480w, img/dishes/la-triplona-800.webp 800w, img/dishes/la-triplona.webp 1000w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Hamburguesas y carta</h3><p>Smash burgers, picoteo, bocadillos, hot dogs y postres.</p></div></a>
       <a class="tz tz--wide reveal" href="desayunos.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="816" height="1448" src="img/tostada.webp" srcset="img/tostada-480.webp 480w, img/tostada.webp 816w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Desayunos</h3><p>Tostadas, pancakes, bowls y matcha hasta las 12:00.</p></div></a>
       <a class="tz reveal" href="el-alma.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="1000" height="750" src="img/alma-propietarios.webp" srcset="img/alma-propietarios-480.webp 480w, img/alma-propietarios-800.webp 800w, img/alma-propietarios.webp 1000w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>El alma</h3><p>Nuestra historia.</p></div></a>
       <a class="tz reveal" href="galeria.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="1000" height="750" src="img/picoteo.webp" srcset="img/picoteo-480.webp 480w, img/picoteo-800.webp 800w, img/picoteo.webp 1000w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Galería</h3><p>Mejor verlo que contarlo.</p></div></a>
-      <a class="tz tz--plain reveal" href="visitanos.html"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div><div class="rig rig--still" style="--w:110px" aria-hidden="true"><div class="bob"><img class="legL" src="img/mascot-legL.png" alt=""><img class="legR" src="img/mascot-legR.png" alt=""><img class="body" src="img/mascot-body.png" alt=""></div></div></a>
+      <a class="tz reveal" href="visitanos.html"><img sizes="auto, (max-width: 700px) 92vw, 40vw" width="1448" height="1086" src="img/local-terraza.webp" srcset="img/local-terraza-480.webp 480w, img/local-terraza-800.webp 800w, img/local-terraza.webp 1448w" alt="" loading="lazy"><span class="tz__go">→</span><div class="tz__in"><h3>Visítanos</h3><p>Kale Nagusia 42, Ordizia.</p></div></a>
     </div>
   </div>
 </section>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">10</span><div><p class="kicker reveal">Lo último en Instagram</p><h2 class="sec__title reveal" style="margin:0">Últimas <em>publicaciones</em></h2></div></div></div>
+    <div class="sec__head"><div><div class="chap__head chap__head--auto"><span class="chap__n reveal" aria-hidden="true">11</span><div><p class="kicker reveal">Lo último en Instagram</p><h2 class="sec__title reveal" style="margin:0">Últimas <em>publicaciones</em></h2></div></div></div>
       <div class="btnrow reveal" style="margin:0"><a class="btn btn--solid btn--sm" href="https://www.instagram.com/almaburgers/" target="_blank" rel="noopener">Instagram ↗</a><a class="btn btn--sm" href="https://www.tiktok.com/@almaburgerss" target="_blank" rel="noopener">TikTok @almaburgerss ↗</a></div></div>
     <div class="igposts"><a class="igp reveal" href="https://www.instagram.com/p/DfX4UrsN_nP/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Nueva tarta de queso: Nutella y Chips Ahoy"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfX4UrsN_nP.webp" srcset="img/ig/DfX4UrsN_nP-480.webp 480w, img/ig/DfX4UrsN_nP.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Nueva tarta de queso: Nutella y Chips Ahoy</span></a><a class="igp reveal" href="https://www.instagram.com/p/DfPi3rINl86/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Green Tropical, el matcha del momento"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfPi3rINl86.webp" srcset="img/ig/DfPi3rINl86-480.webp 480w, img/ig/DfPi3rINl86.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Green Tropical, el matcha del momento</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfLQlDpNAXW/" target="_blank" rel="noopener" aria-label="Ver en Instagram: This is Halloween en ALMA"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfLQlDpNAXW.webp" srcset="img/ig/DfLQlDpNAXW-480.webp 480w, img/ig/DfLQlDpNAXW.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">This is Halloween en ALMA</span></a><a class="igp reveal" href="https://www.instagram.com/reel/DfCtUwRN2DU/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Llega el chocolate caliente"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/DfCtUwRN2DU.webp" srcset="img/ig/DfCtUwRN2DU-480.webp 480w, img/ig/DfCtUwRN2DU.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Llega el chocolate caliente</span></a><a class="igp reveal" href="https://www.instagram.com/reel/De-PkAoNSGt/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Blue Paradise, matcha de colores"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/De-PkAoNSGt.webp" srcset="img/ig/De-PkAoNSGt-480.webp 480w, img/ig/De-PkAoNSGt.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__k">▶ Reel</span><span class="igp__t">Blue Paradise, matcha de colores</span></a><a class="igp reveal" href="https://www.instagram.com/p/De9BJPvNCyj/" target="_blank" rel="noopener" aria-label="Ver en Instagram: Halloween: rasca y descubre tu sorpresa"><img sizes="auto, (max-width: 700px) 92vw, 40vw" src="img/ig/De9BJPvNCyj.webp" srcset="img/ig/De9BJPvNCyj-480.webp 480w, img/ig/De9BJPvNCyj.webp 540w" alt="" loading="lazy" width="540" height="675"><span class="igp__t">Halloween: rasca y descubre tu sorpresa</span></a></div>
   </div>
@@ -303,6 +315,6 @@
   <a id="bnavCart" href="https://smartmenu.agorapos.com/?id=a5b87j3v&amp;workplaceId=dae15wtg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="bnavT">Pedir online</span><i id="bnavN" hidden>0</i></a>
   <a href="visitanos.html#contacto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>Contacto</span></a>
 </nav>
-<script src="app.js?v=ded96fb3"></script>
+<script src="app.js?v=10a099fc"></script>
 </body>
 </html>
